@@ -1,3 +1,4 @@
+#pragma once
 #include "NaiveInstrument.h"
 
 class Constant : public NaiveInstrument<double> {

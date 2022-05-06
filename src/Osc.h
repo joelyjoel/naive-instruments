@@ -1,21 +1,19 @@
-#include "Constant.h"
 #include "NaiveInstrument.h"
+#include "Socket.h"
 
 class Sawtooth : public NaiveInstrument<double> {
   double phase;
-  NaiveInstrument *frequency;
+  Socket<double> frequency;
 
 public:
-  Sawtooth(double f = 440) {
+  Sawtooth(double f = 440) : frequency(this) {
     phase = 0;
-    frequency = new Constant(f);
+    frequency = f;
   }
-
-  double f() { return frequency->tickUntil(internalClock); }
 
 public:
   double tick() {
-    phase += f() / sampleRate;
+    phase += frequency() / sampleRate;
     while (phase > 1)
       phase -= 1;
     return phase * 2 - 1;

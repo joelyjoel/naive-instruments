@@ -6,22 +6,31 @@
 #define CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE 69
 
 /**
+ * This class just exists so that sockets don't have to know the SignalFrame
+ * type of their owners.
+ */
+class UntypedInstrument {
+public:
+  int internalClock = 0;
+};
+
+/**
  * I think its intuitive to think of audio processes like little machines.
  */
-template <typename SignalFrame> class NaiveInstrument {
+template <typename SignalFrame>
+class NaiveInstrument : public UntypedInstrument {
 protected:
-  int internalClock;
-  SignalFrame y;
+  SignalFrame latestFrame;
 
 public:
   SignalFrame tickUntil(int time) {
     while (internalClock < time) {
       ++internalClock;
-      y = tick();
+      latestFrame = tick();
     }
     if (time > internalClock)
       throw CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE;
-    return y;
+    return latestFrame;
   }
 
   /**
@@ -32,5 +41,8 @@ public:
     throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
   }
 
-  double operator[](int index) { return tickUntil(index); }
+  SignalFrame operator[](int index) { return tickUntil(index); }
+
+  SignalFrame next() { return tickUntil(internalClock + 1); }
+  SignalFrame operator++() { return next(); }
 };
