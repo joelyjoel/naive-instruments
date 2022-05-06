@@ -1,0 +1,22 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++20",
+      "src/main.cpp"
+    ],
+    "directory": "/Users/joelle/code/naive-instruments",
+    "file": "/Users/joelle/code/naive-instruments/src/main.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++20",
+      "src/makeASawToothWave.cpp"
+    ],
+    "directory": "/Users/joelle/code/naive-instruments",
+    "file": "/Users/joelle/code/naive-instruments/src/makeASawToothWave.cpp"
+  }
+]
