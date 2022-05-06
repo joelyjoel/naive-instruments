@@ -31,5 +31,9 @@ public:
     connect(instrument);
   }
 
+  void operator=(NaiveInstrument<SignalFrame> &instrument) {
+    connect(&instrument);
+  }
+
   void operator=(double k) { setConstant(k); }
 };
