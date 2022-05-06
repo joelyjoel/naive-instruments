@@ -1,2 +1,2 @@
 default:
-	g++ -std=c++14 src/*.cpp
+	g++ -std=c++20 src/*.cpp
