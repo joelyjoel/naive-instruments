@@ -1,22 +1,17 @@
 #include "./makeASawToothWave.h"
 #include "Add.h"
+#include "Osc.h"
 #include "WavWriter.h"
 #include "Waveforms.h"
 #include "Wavetable.h"
 #include <iostream>
 #include <ostream>
 
+const int numberOfFrames = sampleRate * 1;
+
 int main() {
 
-  UnsignedSaw spinner;
-  spinner.frequency = 440.0;
-
-  Wavetable signal;
-  signal.phase = spinner;
-
-  const int numberOfFrames = sampleRate * 1;
-
-  MonoBuffer &squareWave = Waveforms::square();
+  Osc signal(200, Waveforms::sine());
 
   WavWriter recorder("output.wav", numberOfFrames);
 

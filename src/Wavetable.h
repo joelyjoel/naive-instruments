@@ -7,6 +7,7 @@
 
 class Wavetable : public NaiveInstrument<double> {
   int bufferLength;
+
   MonoBuffer *waveform;
 
 public:
@@ -17,4 +18,7 @@ public:
   double tick() {
     return waveform->atIndex(phase() * waveform->numberOfSamples);
   }
+
+  void setWaveform(MonoBuffer *buffer) { waveform = buffer; }
+  void setWaveform(MonoBuffer &buffer) { waveform = &buffer; }
 };
