@@ -3,12 +3,11 @@
 #include "Socket.h"
 
 class Add : public NaiveInstrument<double> {
-  Socket<double> a;
-  Socket<double> b;
+  Socket<double> &a = addSocket<double>();
+  Socket<double> &b = addSocket<double>();
 
 public:
-  template <typename T, typename U>
-  Add(T leftOperand, U rightOperand) : a(this), b(this) {
+  template <typename T, typename U> Add(T leftOperand, U rightOperand) {
     a = leftOperand;
     b = rightOperand;
   }

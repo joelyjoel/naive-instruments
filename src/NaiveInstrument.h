@@ -5,6 +5,8 @@
 #define YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE 420
 #define CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE 69
 
+template <typename SignalFrame> class Socket;
+
 /**
  * This class just exists so that sockets don't have to know the SignalFrame
  * type of their owners.
@@ -12,6 +14,11 @@
 class UntypedInstrument {
 public:
   int internalClock = 0;
+
+  template <typename SignalFrame> Socket<SignalFrame> &addSocket() {
+    auto socket = new Socket<SignalFrame>(this);
+    return *socket;
+  }
 };
 
 /**

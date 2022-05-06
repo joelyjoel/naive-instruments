@@ -3,10 +3,10 @@
 
 class Sawtooth : public NaiveInstrument<double> {
   double phase;
-  Socket<double> frequency;
+  Socket<double> &frequency = addSocket<double>();
 
 public:
-  Sawtooth(double f = 440) : frequency(this) {
+  Sawtooth(double f = 440) {
     phase = 0;
     frequency = f;
   }
