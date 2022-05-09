@@ -10,6 +10,7 @@ class Osc : public NaiveInstrument<double> {
   UnsignedSaw phase;
   Wavetable wavetable;
 
+public:
   Socket<double> &frequency = phase.frequency;
 
 public:

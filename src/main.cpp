@@ -1,5 +1,6 @@
 #include "./makeASawToothWave.h"
 #include "Add.h"
+#include "BreakpointEnvelope.h"
 #include "Osc.h"
 #include "WavWriter.h"
 #include "Waveforms.h"
@@ -7,12 +8,27 @@
 #include <iostream>
 #include <ostream>
 
-const int numberOfFrames = sampleRate * 1;
-
 int main() {
 
-  Osc signal(200, Waveforms::sine());
+  BreakpointEnvelope envelope;
+  for (int i = 0; i < 4; ++i) {
+    envelope.addSection(22000, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(3200, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(400, 0, .3);
+    envelope.addSection(400, 0, .3);
+    envelope.addSection(400, 0, .2);
+  }
 
+  Osc signal(200, Waveforms::sine());
+  signal.frequency = envelope;
+
+  const int numberOfFrames = sampleRate * envelope.duration();
   WavWriter recorder("output.wav", numberOfFrames);
 
   std::cout << "Recording...\n";
