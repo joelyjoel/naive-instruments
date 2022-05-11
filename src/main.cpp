@@ -12,11 +12,11 @@ int main() {
 
   BreakpointEnvelope envelope;
   for (int i = 0; i < 4; ++i) {
-    envelope.addSection(22000, 0, .1);
     envelope.addSection(400, 0, .1);
     envelope.addSection(400, 0, .1);
     envelope.addSection(400, 0, .1);
-    envelope.addSection(3200, 0, .1);
+    envelope.addSection(400, 0, .1);
+    envelope.addSection(400, 0, .1);
     envelope.addSection(400, 0, .1);
     envelope.addSection(400, 0, .1);
     envelope.addSection(400, 0, .1);
