@@ -2,6 +2,7 @@
 
 #include "NaiveInstrument.h"
 #include "Socket.h"
+#include <string>
 
 template <typename SignalFrame>
 class Patch : public NaiveInstrument<SignalFrame> {
@@ -17,4 +18,6 @@ protected:
   template <typename T> Socket<T> &exposeSocket(Socket<T> &socket) {
     return socket;
   }
+
+  std::string label() { return "Patch"; }
 };

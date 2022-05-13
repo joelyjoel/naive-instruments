@@ -2,6 +2,7 @@
 #include "Socket.h"
 #include <assert.h>
 #include <iostream>
+#include <string>
 #include <vector>
 
 class BreakpointEnvelope : public NaiveInstrument<double> {
@@ -13,6 +14,8 @@ class BreakpointEnvelope : public NaiveInstrument<double> {
   }
 
 public:
+  std::string label() { return "BreakpointEnvelope"; }
+
   BreakpointEnvelope() {
     progress = 1;
     nowPlayingSectionIndex = -1;

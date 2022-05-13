@@ -1,4 +1,5 @@
 #pragma once
+
 #include "NaiveInstrument.h"
 #include "Patch.h"
 #include "Socket.h"
@@ -6,6 +7,7 @@
 #include "Waveforms.h"
 #include "Wavetable.h"
 #include <iostream>
+#include <string>
 
 class Osc : public Patch<double> {
   UnsignedSaw phase;
@@ -23,4 +25,6 @@ public:
 
     std::cout << "created osc\n";
   }
+
+  std::string label() { return "Osc"; }
 };

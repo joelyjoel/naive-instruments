@@ -4,6 +4,7 @@
 #include "NaiveInstrument.h"
 #include "Socket.h"
 #include "Waveforms.h"
+#include <string>
 
 class Wavetable : public NaiveInstrument<double> {
   int bufferLength;
@@ -11,6 +12,8 @@ class Wavetable : public NaiveInstrument<double> {
   MonoBuffer *waveform;
 
 public:
+  std::string label() { return "Wavetable"; }
+
   Socket<double> &phase = addSocket<double>();
 
   Wavetable(MonoBuffer &waveform = Waveforms::sine()) : waveform(&waveform) {}

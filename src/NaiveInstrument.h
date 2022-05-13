@@ -1,6 +1,8 @@
 #pragma once
 
 #include "constants.h"
+#include <iostream>
+#include <string>
 
 #define YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE 420
 #define CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE 69
@@ -18,6 +20,12 @@ public:
   template <typename SignalFrame> Socket<SignalFrame> &addSocket() {
     auto socket = new Socket<SignalFrame>(this);
     return *socket;
+  }
+
+public:
+  virtual std::string label() { return "NaiveInstrument"; }
+  std::string summary() {
+    return label() + "@" + std::to_string(internalClock);
   }
 };
 

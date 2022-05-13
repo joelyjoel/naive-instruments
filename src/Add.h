@@ -1,6 +1,9 @@
 #pragma once
+
 #include "NaiveInstrument.h"
 #include "Socket.h"
+#include <iostream>
+#include <string>
 
 class Add : public NaiveInstrument<double> {
   Socket<double> &a = addSocket<double>();
@@ -12,4 +15,6 @@ public:
     b = rightOperand;
   }
   double tick() { return a() + b(); }
+
+  std::string label() { return "Add"; }
 };

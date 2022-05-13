@@ -1,6 +1,7 @@
 #include "NaiveInstrument.h"
 #include "Socket.h"
 #include "constants.h"
+#include <string>
 
 class UnsignedSaw : public NaiveInstrument<double> {
 public:
@@ -15,4 +16,6 @@ public:
       ++phase;
     return phase;
   }
+
+  std::string label() { return "UnsignedSaw"; }
 };
