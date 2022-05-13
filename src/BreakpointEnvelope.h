@@ -1,3 +1,5 @@
+#pragma once
+
 #include "NaiveInstrument.h"
 #include "Socket.h"
 #include <assert.h>
