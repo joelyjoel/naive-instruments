@@ -6,10 +6,10 @@
 #include <string>
 
 class Add : public NaiveInstrument<double> {
+public:
   Socket<double> &a = addSocket<double>();
   Socket<double> &b = addSocket<double>();
 
-public:
   template <typename T, typename U> Add(T leftOperand, U rightOperand) {
     a = leftOperand;
     b = rightOperand;
