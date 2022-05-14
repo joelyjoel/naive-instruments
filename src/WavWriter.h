@@ -60,4 +60,7 @@ public:
     // return 0;
     return INT16_MAX * val * .5;
   }
+
+public:
+  void operator<<(double signalPoint) { write(signalPoint); }
 };

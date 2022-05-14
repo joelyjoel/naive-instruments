@@ -5,6 +5,7 @@
 #include "WavWriter.h"
 #include "Waveforms.h"
 #include "Wavetable.h"
+#include "record.h"
 #include <iostream>
 #include <ostream>
 
@@ -28,15 +29,7 @@ int main() {
   Osc signal(200, Waveforms::sine());
   signal.frequency = envelope;
 
-  const int numberOfFrames = sampleRate * envelope.duration();
-  WavWriter recorder("output.wav", numberOfFrames);
-
-  std::cout << "Recording...\n";
-  for (int i = 0; i < numberOfFrames; ++i) {
-    double y = ++signal;
-    recorder.write(y * .5);
-  }
-  std::cout << "Finished recording.\n";
+  record("output.wav", signal, 2);
 
   return 0;
 }
