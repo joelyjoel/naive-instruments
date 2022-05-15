@@ -79,5 +79,21 @@ int main() {
     AudioSnapshotTest("octave discrete vibrato", carrier, 5);
   }
 
+  {
+    Ramp ramp;
+    Triangle source;
+    Multiply attenuator;
+
+    source.frequency << 60;
+    ramp.start << 1.0;
+    ramp.end << 0.0;
+    ramp.duration << .5;
+
+    attenuator.a << source;
+    attenuator.b << ramp;
+
+    AudioSnapshotTest("boop", attenuator);
+  }
+
   return 0;
 }

@@ -16,5 +16,6 @@
 #include "instruments/Multiply.h"
 #include "instruments/Osc.h"
 #include "instruments/Pitch.h"
+#include "instruments/Ramp.h"
 #include "instruments/UnsignedSaw.h"
 #include "instruments/Wavetable.h"

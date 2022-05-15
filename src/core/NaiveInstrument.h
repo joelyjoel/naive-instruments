@@ -23,7 +23,8 @@ private:
   std::vector<AbstractSocket *> sockets;
 
 protected:
-  template <typename SignalFrame> Socket<SignalFrame> &addSocket() {
+  template <typename SignalFrame>
+  Socket<SignalFrame> &addSocket(double initValue = 0) {
     auto socket = new Socket<SignalFrame>(this);
     sockets.push_back(socket);
     return *socket;
