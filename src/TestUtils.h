@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Color.h"
 #include "NaiveInstrument.h"
 #include "WavReader.h"
 #include "record.h"
@@ -53,19 +54,26 @@ private:
 private:
   void recordSnapshot() {
     record(snapshotPath, signal, duration);
-    std::cout << "Recorded snapshot for test '" << testName << "' into '"
-              << snapshotPath << "'. Please audition it before committing.\n";
+    std::cout << TextColor::yellow() << "\u2610 Recorded snapshot for test '"
+              << testName << "' into '" << snapshotPath
+              << "'. Please audition it before committing.\n"
+              << TextColor::reset();
   }
 
 private:
   bool snapshotExists() { return std::filesystem::exists(snapshotPath); }
 
 private:
-  void pass() { std::cout << "Test Passed: " << testName << "\n"; }
+  void pass() {
+    std::cout << TextColor::green() << "\u2713 Test Passed: " << testName
+              << "\n"
+              << TextColor::reset();
+  }
 
 private:
   void fail() {
-    std::cout << "Test failed: " << testName << "\n";
+    std::cerr << TextColor::red() << "\u2717 Test failed: " << testName << "\n"
+              << TextColor::reset();
     throw 1;
   }
 
@@ -77,9 +85,11 @@ private:
     WavReader expectedWav(expectedWavPath);
 
     if (actualWav.numberOfFrames() != expectedWav.numberOfFrames()) {
-      std::cout << "Audio file durations don't match: expected "
+      std::cout << TextColor::red()
+                << "Audio file durations don't match: expected "
                 << expectedWav.numberOfFrames() << ", got "
-                << actualWav.numberOfFrames() << ".\n";
+                << actualWav.numberOfFrames() << ".\n"
+                << TextColor::reset();
       return false;
     }
 
@@ -92,7 +102,9 @@ private:
       if (aFrame.left == bFrame.left && aFrame.right == bFrame.right)
         continue;
       else {
-        std::cout << "Audio files don't match at frame " << frameIndex << "\n";
+        std::cout << TextColor::red() << "Audio files don't match at frame ["
+                  << frameIndex << " / " << numberOfFrames << "]\n"
+                  << TextColor::reset();
         return false;
       }
     }
