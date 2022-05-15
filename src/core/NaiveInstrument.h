@@ -3,10 +3,12 @@
 #include "constants.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 #define YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE 420
 #define CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE 69
 
+class AbstractSocket;
 template <typename SignalFrame> class Socket;
 
 /**
@@ -17,8 +19,13 @@ class UntypedInstrument {
 public:
   int internalClock = 0;
 
+private:
+  std::vector<AbstractSocket *> sockets;
+
+protected:
   template <typename SignalFrame> Socket<SignalFrame> &addSocket() {
     auto socket = new Socket<SignalFrame>(this);
+    sockets.push_back(socket);
     return *socket;
   }
 

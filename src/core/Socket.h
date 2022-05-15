@@ -2,18 +2,25 @@
 
 #include "NaiveInstrument.h"
 
+class AbstractSocket {
+protected:
+  UntypedInstrument *owner;
+
+public:
+  AbstractSocket(UntypedInstrument *owner) : owner(owner){};
+};
+
 /**
  * Abstraction for the inputs to a NaiveInstrument
  */
-template <typename SignalFrame> class Socket {
-  UntypedInstrument *owner;
+template <typename SignalFrame> class Socket : public AbstractSocket {
 
   NaiveInstrument<SignalFrame> *plugged;
   SignalFrame constant;
 
 public:
   Socket(UntypedInstrument *owner)
-      : owner(owner), constant(0), plugged(nullptr) {}
+      : AbstractSocket(owner), constant(0), plugged(nullptr) {}
 
   /**
    * Synchronise the plugged instrument with the owner
