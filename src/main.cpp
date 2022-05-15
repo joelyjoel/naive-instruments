@@ -33,7 +33,7 @@ int main() {
     modulator.frequency << 3;
     modulator.depth << .2;
     modulator.center << .5;
-    waverer.a << carrier;
+    waverer << carrier;
     waverer.b << modulator;
 
     AudioSnapshotTest test4("a wavering sine wave", waverer, 5);
@@ -43,7 +43,7 @@ int main() {
     Pitch frequency;
     Sine osc;
 
-    frequency.pitch << 60;
+    frequency << 60;
     osc.frequency << frequency;
 
     AudioSnapshotTest("middle c", osc);

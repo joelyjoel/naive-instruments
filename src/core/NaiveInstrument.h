@@ -19,7 +19,7 @@ class UntypedInstrument {
 public:
   int internalClock = 0;
 
-private:
+protected:
   std::vector<AbstractSocket *> sockets;
 
 protected:
@@ -68,4 +68,11 @@ public:
 
   SignalFrame next() { return tickUntil(internalClock + 1); }
   SignalFrame operator++() { return next(); }
+
+  template <typename InputSignalFrame>
+  void operator<<(NaiveInstrument<InputSignalFrame> &signal) {
+    sockets[0]->connect(&signal);
+  }
+
+  void operator<<(double k) { sockets[0]->setConstant(k); }
 };

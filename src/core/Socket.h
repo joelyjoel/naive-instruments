@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NaiveInstrument.h"
+#include <iostream>
 
 class AbstractSocket {
 protected:
@@ -8,6 +9,17 @@ protected:
 
 public:
   AbstractSocket(UntypedInstrument *owner) : owner(owner){};
+
+  virtual void connect(NaiveInstrument<double> *signal) {
+    std::cerr << "No override for "
+                 "AbstractSocket::connect(NaiveInstrument<double>*) method\n";
+    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
+  }
+
+  virtual void setConstant(double k) {
+    std::cerr << "No override for AbstractSocket::setConstant(double) method\n";
+    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
+  }
 };
 
 /**
