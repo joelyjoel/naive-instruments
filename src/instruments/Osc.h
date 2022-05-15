@@ -33,3 +33,8 @@ class Saw : public Osc {
 public:
   Saw(double f) : Osc(f, Waveforms::saw()) {}
 };
+
+class Sine : public Osc {
+public:
+  Sine(double f = 440) : Osc(f, Waveforms::sine()) {}
+};

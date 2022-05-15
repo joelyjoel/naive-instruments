@@ -9,7 +9,8 @@ public:
   Socket<double> &a = addSocket<double>();
   Socket<double> &b = addSocket<double>();
 
-  template <typename T, typename U> Add(T leftOperand, U rightOperand) {
+  Add() : Add(0, 0) {}
+  template <typename T, typename U> Add(T leftOperand = 0, U rightOperand = 0) {
     a = leftOperand;
     b = rightOperand;
   }

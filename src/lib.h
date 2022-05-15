@@ -12,6 +12,7 @@
 #include "instruments/BreakpointEnvelope.h"
 #include "instruments/Constant.h"
 #include "instruments/FixedPipe.h"
+#include "instruments/LFO.h"
 #include "instruments/Multiply.h"
 #include "instruments/Osc.h"
 #include "instruments/UnsignedSaw.h"
