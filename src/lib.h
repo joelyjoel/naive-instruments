@@ -10,7 +10,6 @@
 // Instruments
 #include "instruments/Add.h"
 #include "instruments/BreakpointEnvelope.h"
-#include "instruments/Constant.h"
 #include "instruments/FixedPipe.h"
 #include "instruments/Floor.h"
 #include "instruments/LFO.h"

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../instruments/Constant.h"
 #include "NaiveInstrument.h"
 
 /**
@@ -10,14 +9,21 @@ template <typename SignalFrame> class Socket {
   UntypedInstrument *owner;
 
   NaiveInstrument<SignalFrame> *plugged;
+  SignalFrame constant;
 
 public:
-  Socket(UntypedInstrument *owner) : owner(owner) {}
+  Socket(UntypedInstrument *owner)
+      : owner(owner), constant(0), plugged(nullptr) {}
 
   /**
    * Synchronise the plugged instrument with the owner
    */
-  SignalFrame sync() { return plugged->tickUntil(owner->internalClock); }
+  SignalFrame sync() {
+    if (plugged)
+      return plugged->tickUntil(owner->internalClock);
+    else
+      return constant;
+  }
 
   SignalFrame operator()() { return sync(); }
 
@@ -25,7 +31,12 @@ public:
     plugged = instrument;
   }
 
-  void setConstant(double k) { connect(new Constant(k)); }
+  void disconnect() { plugged = nullptr; }
+
+  void setConstant(double k) {
+    disconnect();
+    constant = k;
+  }
 
   void operator=(NaiveInstrument<SignalFrame> *instrument) {
     connect(instrument);
