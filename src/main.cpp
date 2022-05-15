@@ -3,9 +3,10 @@
 
 int main() {
 
-  AudioSnapshotTest test1("a sine wave", new Sine(440));
-  AudioSnapshotTest test2("a square wave", new Square(100));
-  AudioSnapshotTest test3("a sawtooth wave", new Saw(100));
+  { AudioSnapshotTest("a sine wave", new Sine(440)); }
+  { AudioSnapshotTest("a triangle wave", new Triangle(100)); }
+  { AudioSnapshotTest("a square wave", new Square(100)); }
+  { AudioSnapshotTest("a sawtooth wave", new Saw(100)); }
 
   {
     Sine carrier(200);
@@ -27,6 +28,14 @@ int main() {
     Pitch f(lfo);
     Sine carrier(f);
     AudioSnapshotTest("octave vibrato", carrier, 5);
+  }
+
+  {
+    LFO lfo(.1, 12, 60);
+    Floor steps(lfo);
+    Pitch f(steps);
+    Triangle carrier(f);
+    AudioSnapshotTest("octave discrete vibrato", carrier, 5);
   }
 
   return 0;

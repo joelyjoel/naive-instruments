@@ -25,4 +25,13 @@ public:
       buffer.data[i] = float(i) / float(buffer.numberOfSamples) * 2 - 1;
     return buffer;
   }
+
+  static MonoBuffer &triangle() {
+    MonoBuffer &buffer = *(new MonoBuffer(44100));
+    for (int i = 0; i < buffer.numberOfSamples; ++i) {
+      double saw = float(i) / float(buffer.numberOfSamples) * 2 - 1;
+      buffer.data[i] = abs(saw) * 2 - 1;
+    }
+    return buffer;
+  }
 };

@@ -44,3 +44,9 @@ public:
   Sine(double f = 440) : Osc(f, Waveforms::sine()) {}
   Sine(NaiveInstrument<double> &f) : Osc(f, Waveforms::sine()) {}
 };
+
+class Triangle : public Osc {
+public:
+  Triangle(double f = 440) : Osc(f, Waveforms::triangle()) {}
+  Triangle(NaiveInstrument<double> &f) : Osc(f, Waveforms::triangle()) {}
+};
