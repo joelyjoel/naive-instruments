@@ -20,6 +20,11 @@ public:
     wavetable.phase = phase;
     wavetable.setWaveform(waveform);
   }
+  Osc(NaiveInstrument &f, MonoBuffer &waveform) : Patch(wavetable) {
+    frequency = f;
+    wavetable.phase = phase;
+    wavetable.setWaveform(waveform);
+  }
 
   std::string label() { return "Osc"; }
 };
@@ -37,4 +42,5 @@ public:
 class Sine : public Osc {
 public:
   Sine(double f = 440) : Osc(f, Waveforms::sine()) {}
+  Sine(NaiveInstrument<double> &f) : Osc(f, Waveforms::sine()) {}
 };

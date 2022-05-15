@@ -16,5 +16,18 @@ int main() {
     AudioSnapshotTest test4("a wavering sine wave", waverer, 5);
   }
 
+  {
+    Pitch frequency(60);
+    Sine osc(frequency);
+    AudioSnapshotTest("middle c", osc);
+  }
+
+  {
+    LFO lfo(1, 12, 60);
+    Pitch f(lfo);
+    Sine carrier(f);
+    AudioSnapshotTest("octave vibrato", carrier, 5);
+  }
+
   return 0;
 }
