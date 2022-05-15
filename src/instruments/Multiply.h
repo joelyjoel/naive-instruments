@@ -9,8 +9,8 @@ public:
 
   Multiply() : Multiply(1, 1) {}
   template <typename T, typename U> Multiply(T leftOperand, U rightOperand) {
-    a = leftOperand;
-    b = rightOperand;
+    a << leftOperand;
+    b << rightOperand;
   }
   double tick() { return a() * b(); }
 };

@@ -15,11 +15,11 @@ public:
   LFO(double modulationFrequency = 1, double modulationDepth = 1,
       double mainValue = 0)
       : Patch(sum) {
-    osc.frequency = modulationFrequency;
-    modulation.a = osc;
-    modulation.b = modulationDepth;
-    sum.a = mainValue;
-    sum.b = modulation;
+    osc.frequency << modulationFrequency;
+    modulation.a << osc;
+    modulation.b << modulationDepth;
+    sum.a << mainValue;
+    sum.b << modulation;
   }
 
   Socket<double> &frequency = exposeSocket(osc.frequency);

@@ -16,13 +16,13 @@ public:
 
 public:
   Osc(double f, MonoBuffer &waveform = Waveforms::sine()) : Patch(wavetable) {
-    frequency = f;
-    wavetable.phase = phase;
+    frequency << f;
+    wavetable.phase << phase;
     wavetable.setWaveform(waveform);
   }
   Osc(NaiveInstrument &f, MonoBuffer &waveform) : Patch(wavetable) {
-    frequency = f;
-    wavetable.phase = phase;
+    frequency << f;
+    wavetable.phase << phase;
     wavetable.setWaveform(waveform);
   }
 

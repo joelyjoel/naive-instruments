@@ -11,8 +11,8 @@ public:
 
   Add() : Add(0, 0) {}
   template <typename T, typename U> Add(T leftOperand = 0, U rightOperand = 0) {
-    a = leftOperand;
-    b = rightOperand;
+    a << leftOperand;
+    b << rightOperand;
   }
   double tick() { return a() + b(); }
 
