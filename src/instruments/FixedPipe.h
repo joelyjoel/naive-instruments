@@ -13,7 +13,7 @@ public:
   FixedPipe(double duration) : bufferSize(duration * sampleRate) {
     buffer = new double[bufferSize];
   }
-  //~FixedPipe() { delete buffer; }
+  ~FixedPipe() { delete buffer; }
 
   double tick() {
     buffer[tapeHeadIndex] = input();

@@ -15,13 +15,7 @@ public:
   Socket<double> &frequency = exposeSocket(phase.frequency);
 
 public:
-  Osc(double f, MonoBuffer &waveform = Waveforms::sine()) : Patch(wavetable) {
-    frequency << f;
-    wavetable.phase << phase;
-    wavetable.setWaveform(waveform);
-  }
-  Osc(NaiveInstrument &f, MonoBuffer &waveform) : Patch(wavetable) {
-    frequency << f;
+  Osc(MonoBuffer &waveform) : Patch(wavetable) {
     wavetable.phase << phase;
     wavetable.setWaveform(waveform);
   }
@@ -31,22 +25,20 @@ public:
 
 class Square : public Osc {
 public:
-  Square(double f) : Osc(f, Waveforms::square()) {}
+  Square() : Osc(Waveforms::square()) {}
 };
 
 class Saw : public Osc {
 public:
-  Saw(double f) : Osc(f, Waveforms::saw()) {}
+  Saw() : Osc(Waveforms::saw()) {}
 };
 
 class Sine : public Osc {
 public:
-  Sine(double f = 440) : Osc(f, Waveforms::sine()) {}
-  Sine(NaiveInstrument<double> &f) : Osc(f, Waveforms::sine()) {}
+  Sine() : Osc(Waveforms::sine()) {}
 };
 
 class Triangle : public Osc {
 public:
-  Triangle(double f = 440) : Osc(f, Waveforms::triangle()) {}
-  Triangle(NaiveInstrument<double> &f) : Osc(f, Waveforms::triangle()) {}
+  Triangle() : Osc(Waveforms::triangle()) {}
 };

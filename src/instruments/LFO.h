@@ -12,13 +12,8 @@ private:
   Add sum;
 
 public:
-  LFO(double modulationFrequency = 1, double modulationDepth = 1,
-      double mainValue = 0)
-      : Patch(sum) {
-    osc.frequency << modulationFrequency;
+  LFO() : Patch(sum) {
     modulation.a << osc;
-    modulation.b << modulationDepth;
-    sum.a << mainValue;
     sum.b << modulation;
   }
 

@@ -9,9 +9,6 @@ public:
 
 class Pitch : public NaiveInstrument<double> {
 public:
-  Pitch(double midiNumber) { pitch << midiNumber; }
-  Pitch(NaiveInstrument<double> &midiNumber) { pitch << midiNumber; }
-
   Socket<double> &pitch = addSocket<double>();
 
   double tick() { return 440 * pow(2.0, ((pitch() - 69) / 12.0)); }
