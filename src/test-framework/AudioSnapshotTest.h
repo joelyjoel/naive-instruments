@@ -36,8 +36,6 @@ public:
     createDirectoriesIfDontExist();
     if (snapshotExists()) {
       recordTestTone();
-      std::cout << "Comparing " << testOutputPath << " to " << snapshotPath
-                << "\n";
       if (compareAudioFiles(testOutputPath, snapshotPath))
         pass();
       else
