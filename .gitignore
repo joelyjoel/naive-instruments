@@ -1,3 +1,5 @@
 output.wav
+test-outputs
 .cache
 a.out
+.DS_Store
