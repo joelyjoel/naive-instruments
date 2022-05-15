@@ -107,5 +107,46 @@ int main() {
     AudioSnapshotTest("AHD attenuated sine", attenuator, 3);
   }
 
+  {
+    Triangle osc;
+    Pitch pitchConverter;
+    BreakpointEnvelope pitchEnvelope, amplitudeEnvelope;
+    Multiply attenuator;
+
+    amplitudeEnvelope.addSection(1, 1, .5);
+    amplitudeEnvelope.addSection(1, 0, .75);
+
+    pitchEnvelope.addSection(70, 30, .1);
+    pitchEnvelope.addSection(30, -10, .9);
+
+    attenuator.a << osc << pitchConverter << pitchEnvelope;
+    attenuator.b << amplitudeEnvelope;
+
+    AudioSnapshotTest("Shit kick", attenuator, 2);
+  }
+
+  {
+    Triangle osc;
+    Pitch pitchConverter;
+    BreakpointEnvelope pitchEnvelope, amplitudeEnvelope;
+    Multiply attenuator;
+
+    amplitudeEnvelope.addSection(1, 1, .5);
+    amplitudeEnvelope.addSection(1, 0, .75);
+
+    pitchEnvelope.addSection(70, 30, .1);
+    pitchEnvelope.addSection(30, -10, .9);
+
+    attenuator.a << osc << pitchConverter << pitchEnvelope;
+    attenuator.b << amplitudeEnvelope;
+
+    Sine sin;
+    Multiply ring;
+    ring.a << attenuator;
+    ring.b << sin << 35;
+
+    AudioSnapshotTest("Bassey kick", ring, 2);
+  }
+
   return 0;
 }

@@ -76,8 +76,8 @@ private:
 
   double restValue;
   void playRestSection() {
-    startValue = 0;
-    endValue = 0;
+    startValue = lastEndValue();
+    endValue = lastEndValue();
     progress = 0;
     progressPerSample = 0;
   }
