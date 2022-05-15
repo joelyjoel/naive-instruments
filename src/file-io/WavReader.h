@@ -40,5 +40,7 @@ private:
   double int16ToDouble(int16_t x) { return double(x) / (INT16_MAX * .5); }
 
 public:
+  int sampleRate() { return header.SamplesPerSec; }
   int numberOfFrames() { return header.Subchunk2Size / (2 * sizeof(int16_t)); }
+  float duration() { return float(numberOfFrames()) / float(sampleRate()); }
 };
