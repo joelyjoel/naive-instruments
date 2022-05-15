@@ -18,6 +18,7 @@ public:
 
 protected:
   template <typename T> Socket<T> &exposeSocket(Socket<T> &socket) {
+    NaiveInstrument<SignalFrame>::sockets.push_back(&socket);
     return socket;
   }
 

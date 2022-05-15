@@ -69,10 +69,19 @@ public:
   SignalFrame next() { return tickUntil(internalClock + 1); }
   SignalFrame operator++() { return next(); }
 
-  template <typename InputSignalFrame>
-  void operator<<(NaiveInstrument<InputSignalFrame> &signal) {
-    sockets[0]->connect(&signal);
+  AbstractSocket &defaultSocket() {
+    if (sockets.size() > 0)
+      return *sockets[0];
+    else {
+      std::cerr << "There is no socket!\n";
+      throw 1;
+    }
   }
 
-  void operator<<(double k) { sockets[0]->setConstant(k); }
+  template <typename InputSignalFrame>
+  void operator<<(NaiveInstrument<InputSignalFrame> &signal) {
+    defaultSocket().connect(&signal);
+  }
+
+  void operator<<(double k) { defaultSocket().setConstant(k); }
 };

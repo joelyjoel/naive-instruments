@@ -16,6 +16,7 @@ public:
     throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
   }
 
+public:
   virtual void setConstant(double k) {
     std::cerr << "No override for AbstractSocket::setConstant(double) method\n";
     throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
@@ -52,6 +53,7 @@ public:
 
   void disconnect() { plugged = nullptr; }
 
+public:
   void setConstant(double k) {
     disconnect();
     constant = k;
