@@ -59,12 +59,16 @@ public:
     constant = k;
   }
 
-  void operator<<(NaiveInstrument<SignalFrame> *instrument) {
+  NaiveInstrument<SignalFrame> &
+  operator<<(NaiveInstrument<SignalFrame> *instrument) {
     connect(instrument);
+    return *instrument;
   }
 
-  void operator<<(NaiveInstrument<SignalFrame> &instrument) {
+  NaiveInstrument<SignalFrame> &
+  operator<<(NaiveInstrument<SignalFrame> &instrument) {
     connect(&instrument);
+    return instrument;
   }
 
   void operator<<(double k) { setConstant(k); }

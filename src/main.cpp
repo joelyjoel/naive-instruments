@@ -30,11 +30,10 @@ int main() {
     LFO modulator;
     Multiply waverer;
 
-    carrier << 200;
     modulator.frequency << 3;
     modulator.depth << .2;
     modulator.center << .5;
-    waverer.a << carrier;
+    waverer.a << carrier << 200;
     waverer.b << modulator;
 
     AudioSnapshotTest test4("a wavering sine wave", waverer, 5);
@@ -44,8 +43,7 @@ int main() {
     Pitch pitchToFrequency;
     Sine osc;
 
-    pitchToFrequency << 60;
-    osc << pitchToFrequency;
+    osc << pitchToFrequency << 60;
 
     AudioSnapshotTest("middle c", osc);
   }
@@ -58,8 +56,8 @@ int main() {
     lfo.frequency << 1;
     lfo.depth << 12;
     lfo.center << 60;
-    f << lfo;
-    carrier << f;
+
+    carrier << f << lfo;
 
     AudioSnapshotTest("octave vibrato", carrier, 5);
   }
@@ -67,15 +65,14 @@ int main() {
   {
     LFO lfo;
     Triangle carrier;
-    Pitch f;
-    Floor steps;
+    Pitch pitchToFrequency;
+    Floor floor;
 
     lfo.frequency << .1;
     lfo.depth << 12;
     lfo.center << 60;
-    steps << lfo;
-    f << steps;
-    carrier << f;
+
+    carrier << pitchToFrequency << floor << lfo;
 
     AudioSnapshotTest("octave discrete vibrato", carrier, 5);
   }

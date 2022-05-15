@@ -79,8 +79,10 @@ public:
   }
 
   template <typename InputSignalFrame>
-  void operator<<(NaiveInstrument<InputSignalFrame> &signal) {
+  NaiveInstrument<InputSignalFrame> &
+  operator<<(NaiveInstrument<InputSignalFrame> &signal) {
     defaultSocket().connect(&signal);
+    return signal;
   }
 
   void operator<<(double k) { defaultSocket().setConstant(k); }
