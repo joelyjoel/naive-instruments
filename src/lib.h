@@ -8,6 +8,7 @@
 #include "file-io/record.h"
 
 // Instruments
+#include "instruments/AHD.h"
 #include "instruments/Add.h"
 #include "instruments/BreakpointEnvelope.h"
 #include "instruments/FixedPipe.h"

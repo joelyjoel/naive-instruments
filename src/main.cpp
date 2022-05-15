@@ -93,5 +93,19 @@ int main() {
     AudioSnapshotTest("boop", attenuator);
   }
 
+  {
+    Sine sine;
+    Multiply attenuator;
+    AHD ahd;
+
+    ahd.attack << .4;
+    ahd.hold << .5;
+    ahd.decay << 2;
+    attenuator.a << ahd;
+    attenuator.b << sine << 60;
+
+    AudioSnapshotTest("AHD attenuated sine", attenuator, 3);
+  }
+
   return 0;
 }
