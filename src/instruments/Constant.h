@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NaiveInstrument.h"
+#include "../core.h"
 
 class Constant : public NaiveInstrument<double> {
 

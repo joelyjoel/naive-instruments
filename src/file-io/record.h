@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NaiveInstrument.h"
+#include "../core/NaiveInstrument.h"
 #include "WavWriter.h"
 #include <string>
 

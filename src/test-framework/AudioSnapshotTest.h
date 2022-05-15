@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../core.h"
+#include "../file-io/WavReader.h"
+#include "../file-io/record.h"
 #include "Color.h"
-#include "NaiveInstrument.h"
-#include "WavReader.h"
-#include "record.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>

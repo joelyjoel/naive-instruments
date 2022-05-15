@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Constant.h"
+#include "../instruments/Constant.h"
 #include "NaiveInstrument.h"
 
 /**

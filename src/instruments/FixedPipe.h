@@ -1,9 +1,6 @@
 #pragma once
 
-#include "NaiveInstrument.h"
-#include "Socket.h"
-#include <iostream>
-#include <string>
+#include "../core.h"
 
 class FixedPipe : public NaiveInstrument<double> {
   double *buffer;

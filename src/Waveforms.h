@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MonoBuffer.h"
+#include "core.h"
 #include <math.h>
 
 class Waveforms {

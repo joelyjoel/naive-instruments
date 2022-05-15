@@ -1,10 +1,8 @@
 #pragma once
 
-#include "NaiveInstrument.h"
-#include "Patch.h"
-#include "Socket.h"
+#include "../Waveforms.h"
+#include "../core.h"
 #include "UnsignedSaw.h"
-#include "Waveforms.h"
 #include "Wavetable.h"
 #include <iostream>
 #include <string>

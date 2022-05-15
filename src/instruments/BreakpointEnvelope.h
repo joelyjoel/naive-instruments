@@ -1,8 +1,6 @@
 #pragma once
 
-#include "NaiveInstrument.h"
-#include "Socket.h"
-#include <assert.h>
+#include "../core.h"
 #include <iostream>
 #include <string>
 #include <vector>

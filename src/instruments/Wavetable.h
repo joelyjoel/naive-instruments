@@ -1,9 +1,7 @@
 #pragma once
 
-#include "MonoBuffer.h"
-#include "NaiveInstrument.h"
-#include "Socket.h"
-#include "Waveforms.h"
+#include "../Waveforms.h"
+#include "../core.h"
 #include <string>
 
 class Wavetable : public NaiveInstrument<double> {

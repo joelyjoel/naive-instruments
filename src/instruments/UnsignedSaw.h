@@ -1,8 +1,6 @@
 #pragma once
 
-#include "NaiveInstrument.h"
-#include "Socket.h"
-#include "constants.h"
+#include "../core.h"
 #include <string>
 
 class UnsignedSaw : public NaiveInstrument<double> {
