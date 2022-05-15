@@ -17,14 +17,21 @@ public:
   Socket<double> &frequency = exposeSocket(phase.frequency);
 
 public:
-  Osc(double f = 440, MonoBuffer &waveform = Waveforms::sine())
-      : Patch(wavetable) {
+  Osc(double f, MonoBuffer &waveform = Waveforms::sine()) : Patch(wavetable) {
     frequency = f;
     wavetable.phase = phase;
     wavetable.setWaveform(waveform);
-
-    std::cout << "created osc\n";
   }
 
   std::string label() { return "Osc"; }
+};
+
+class Square : public Osc {
+public:
+  Square(double f) : Osc(f, Waveforms::square()) {}
+};
+
+class Saw : public Osc {
+public:
+  Saw(double f) : Osc(f, Waveforms::saw()) {}
 };
