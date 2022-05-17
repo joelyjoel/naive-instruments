@@ -13,8 +13,8 @@ public:
 
   ~MonoBuffer() { delete data; }
 
-  double atIndex(int index) { return data[index % numberOfSamples]; }
-  double operator[](int index) { return atIndex(index); }
+  double &atIndex(int index) { return data[index % numberOfSamples]; }
+  double &operator[](int index) { return atIndex(index); }
   double operator[](double index) { return interpolate(index); }
 
   double interpolate(double index) {

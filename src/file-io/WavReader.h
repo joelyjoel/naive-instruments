@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 
+#include "../core.h"
+
 typedef struct {
   double left;
   double right;
@@ -43,4 +45,14 @@ public:
   int sampleRate() { return header.SamplesPerSec; }
   int numberOfFrames() { return header.Subchunk2Size / (2 * sizeof(int16_t)); }
   float duration() { return float(numberOfFrames()) / float(sampleRate()); }
+
+  static MonoBuffer *readMonoFile(const std::string &filePath) {
+    WavReader file(filePath);
+    int numberOfFrames = file.numberOfFrames();
+    MonoBuffer &buffer = *(new MonoBuffer(numberOfFrames));
+    for (int i = 0; i < numberOfFrames; ++i)
+      buffer[i] = file.readNextFrame().left;
+
+    return &buffer;
+  }
 };
