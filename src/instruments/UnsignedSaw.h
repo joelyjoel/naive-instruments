@@ -11,9 +11,9 @@ public:
   double tick() {
     phase += frequency() / sampleRate;
     while (phase > 1)
-      --phase;
+      phase -= 1.0;
     while (phase < 0)
-      ++phase;
+      phase -= 1.0;
     return phase;
   }
 

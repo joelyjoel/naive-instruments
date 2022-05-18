@@ -94,7 +94,7 @@ private:
       return false;
     }
 
-    int numberOfFrames = actualWav.numberOfFrames();
+    int numberOfFrames = expectedWav.numberOfFrames();
 
     for (int frameIndex = 0; frameIndex < numberOfFrames; ++frameIndex) {
       auto aFrame = actualWav.readNextFrame();

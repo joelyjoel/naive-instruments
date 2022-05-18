@@ -148,5 +148,30 @@ int main() {
     AudioSnapshotTest("Bassey kick", ring, 2);
   }
 
+  {
+    Osc osc(Waveforms::Malcolm01());
+
+    osc << 60;
+    AudioSnapshotTest("Malcolm tone", osc);
+  }
+
+  {
+    Osc osc(Waveforms::Malcolm01());
+    Pitch pitchConverter;
+    BreakpointEnvelope pitchEnvelope, amplitudeEnvelope;
+    Multiply attenuator;
+
+    amplitudeEnvelope.addSection(1, 1, .3);
+    amplitudeEnvelope.addSection(1, 0, .2);
+
+    pitchEnvelope.addSection(70, 30, .1);
+    pitchEnvelope.addSection(30, -10, .3);
+
+    attenuator.a << osc << pitchConverter << pitchEnvelope;
+    attenuator.b << amplitudeEnvelope;
+
+    AudioSnapshotTest("Malcolm kick", attenuator, .5);
+  }
+
   return 0;
 }

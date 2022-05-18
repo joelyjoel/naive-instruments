@@ -5,6 +5,7 @@
 class MonoBuffer {
 public:
   const int numberOfSamples;
+  int numberOfFrames() { return numberOfSamples; }
   double *data;
 
   MonoBuffer(int numberOfSamples) : numberOfSamples(numberOfSamples) {
