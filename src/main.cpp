@@ -173,5 +173,10 @@ int main() {
     AudioSnapshotTest("Malcolm kick", attenuator, .5);
   }
 
+  {
+    Sampler pianoNote("audio-source-files/piano.wav");
+    AudioSnapshotTest("SamplePlayer simple piano note", pianoNote, 5);
+  }
+
   return 0;
 }

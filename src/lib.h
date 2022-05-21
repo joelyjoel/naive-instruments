@@ -18,5 +18,6 @@
 #include "instruments/Osc.h"
 #include "instruments/Pitch.h"
 #include "instruments/Ramp.h"
+#include "instruments/Sampler.h"
 #include "instruments/UnsignedSaw.h"
 #include "instruments/Wavetable.h"
