@@ -12,7 +12,7 @@ zx-dicer:
 	rm -rf junk-output
 	mkdir junk-output
 	g++ -std=c++20 src/apps/zx-dicer.cpp -o bin/zx-dicer
-	bin/zx-dicer
+	bin/zx-dicer audio-source-files/piano.wav -o junk-output
 
 
 

@@ -1,3 +1,4 @@
+#include "../cli/CommandLineArguments.h"
 #include "../lib.h"
 #include <iostream>
 #include <string>
@@ -71,16 +72,20 @@ private:
     resetCurrentBuffer();
   }
 
-public:
-  void main() {
-    for (int i = 0; i < sampler.numberOfFrames(); ++i) {
+private:
+  void go() {
+    for (int i = 0; i < sampler.numberOfFrames(); ++i)
       tick();
-    }
+  }
+
+public:
+  static int main(int argc, char **argv) {
+    CommandLineArguments args(argc, argv);
+    std::cout << args["o"] << "\n";
+
+    ZXDicer dicer(args[0], args["o"]);
+    dicer.go();
+
+    return 0;
   }
 };
-
-int main(int argc, char **argv) {
-  ZXDicer dicer("audio-source-files/piano.wav", "junk-output");
-  dicer.main();
-  return 0;
-}
