@@ -23,4 +23,7 @@ public:
     else
       return 0;
   }
+
+public:
+  int numberOfFrames() { return buffer->numberOfFrames(); }
 };

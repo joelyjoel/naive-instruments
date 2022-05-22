@@ -21,3 +21,4 @@
 #include "instruments/Sampler.h"
 #include "instruments/UnsignedSaw.h"
 #include "instruments/Wavetable.h"
+#include "instruments/ZeroCrossingDetector.h"

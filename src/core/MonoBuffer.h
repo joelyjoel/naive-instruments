@@ -29,4 +29,22 @@ public:
   double duration() { return float(numberOfSamples) / float(sampleRate); }
   double atTime(double time) { return atIndex(time * sampleRate); }
   double operator()(double time) { return atTime(time); };
+
+  double peak(int from = 0, int until = 0) {
+    if (until <= 0)
+      until = numberOfSamples - until;
+    double max = 0;
+    for (int i = from; i < until; ++i)
+      if (abs(data[i]) > max)
+        max = abs(data[i]);
+    return max;
+  }
+
+  void scale(double scaleFactor) {
+    for (int i = 0; i < numberOfSamples; ++i)
+      data[i] *= scaleFactor;
+  }
+
+  void operator*=(double scaleFactor) { scale(scaleFactor); }
+  void operator/=(double scaleFactor) { scale(1.0 / scaleFactor); }
 };

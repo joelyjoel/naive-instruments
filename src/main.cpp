@@ -1,3 +1,4 @@
+#include "instruments/ZeroCrossingDetector.h"
 #include "lib.h"
 #include "test-framework.h"
 #include <iostream>

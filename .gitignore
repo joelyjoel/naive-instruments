@@ -1,4 +1,6 @@
 output.wav
+bin
+junk-output
 test-outputs
 .cache
 a.out
