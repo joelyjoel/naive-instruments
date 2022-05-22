@@ -22,7 +22,7 @@ public:
     int i0 = int(index);
     int i1 = (i0 + 1);
     float progress = index - float(i0);
-    return atIndex(i0) * (1 - progress) + progress * data[i1];
+    return atIndex(i0) * (1 - progress) + progress * atIndex(i1);
   }
 
   const float sampleRate = 44100;
