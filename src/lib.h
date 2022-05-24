@@ -23,3 +23,6 @@
 #include "instruments/UnsignedSaw.h"
 #include "instruments/Wavetable.h"
 #include "instruments/ZeroCrossingDetector.h"
+
+// Analysis
+#include "analysis/BangAwaiter.h"
