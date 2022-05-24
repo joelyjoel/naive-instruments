@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../analysis/RMSTracker.h"
 #include "../core.h"
 #include "../file-io/WavReader.h"
 #include "../file-io/record.h"
@@ -45,8 +44,6 @@ public:
     } else {
       recordSnapshot();
     }
-
-    testOutputWaveform();
   }
 
 private:
@@ -118,18 +115,5 @@ private:
       std::filesystem::create_directory(snapshotsDirectory);
     if (!std::filesystem::exists(testOutputDirectory))
       std::filesystem::create_directory(testOutputDirectory);
-  }
-
-  void testOutputWaveform() {
-    WavReader wav(testOutputPath);
-    int numberOfFrames = wav.numberOfFrames();
-    RMSTracker analyser(wav.duration() / 78);
-    for (int i = 0; i < numberOfFrames; ++i)
-      analyser << 2 * wav.readNextFrame().left;
-
-    std::cout << "  ";
-    analyser.waveform(std::cout);
-
-    std::cout << "\n\n";
   }
 };
