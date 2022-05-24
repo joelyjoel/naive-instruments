@@ -11,6 +11,7 @@
 #include "instruments/AHD.h"
 #include "instruments/Add.h"
 #include "instruments/BreakpointEnvelope.h"
+#include "instruments/BufferWriter.h"
 #include "instruments/FixedPipe.h"
 #include "instruments/Floor.h"
 #include "instruments/LFO.h"
