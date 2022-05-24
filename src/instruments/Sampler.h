@@ -17,12 +17,14 @@ public:
   ~Sampler() { delete buffer; }
 
 public:
-  double tick() {
+  double tick() override {
     if (playhead < buffer->numberOfFrames())
       return (*buffer)[++playhead];
     else
       return 0;
   }
+
+  void reset() override { playhead = 0; }
 
 public:
   int numberOfFrames() { return buffer->numberOfFrames(); }

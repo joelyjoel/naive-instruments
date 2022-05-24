@@ -64,6 +64,12 @@ public:
     throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
   }
 
+public:
+  virtual void reset() {
+    std::cerr << label() << " cannot reset";
+    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
+  }
+
   SignalFrame operator[](int index) { return tickUntil(index); }
 
   SignalFrame next() { return tickUntil(internalClock + 1); }
