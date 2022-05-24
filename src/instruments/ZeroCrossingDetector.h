@@ -24,4 +24,6 @@ public:
 
     return result;
   }
+
+  void reset() { previous = 0; }
 };

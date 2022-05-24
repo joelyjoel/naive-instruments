@@ -8,6 +8,8 @@ private:
   ZeroCrossingDetector detector;
   BangAwaiter waiter;
 
+  NaiveInstrument<double> *input;
+
   void assemble() { waiter << detector << bufferer; }
 
 public:
@@ -27,7 +29,15 @@ private:
     bufferer.reset();
   }
 
+  void reset() {
+    bufferer.reset();
+    detector.reset();
+    input->reset();
+  }
+
   void skipTo(int destinationIndex) {
+    if (destinationIndex < index)
+      reset();
     while (index < destinationIndex)
       skipNextWaveform();
   }
@@ -38,7 +48,10 @@ public:
     return copyNextWaveform();
   }
 
+  MonoBuffer *operator[](int waveformIndex) { return select(waveformIndex); }
+
   NaiveInstrument<double> &operator<<(NaiveInstrument<double> &inputSignal) {
+    input = &inputSignal;
     return bufferer << inputSignal;
   }
 };
