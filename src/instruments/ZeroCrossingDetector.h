@@ -24,4 +24,9 @@ public:
 
     return result;
   }
+
+  void advanceToNextZeroCrossing(int limit) {
+    while (!next() && --limit)
+      continue;
+  }
 };

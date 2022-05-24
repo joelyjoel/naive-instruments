@@ -4,19 +4,37 @@
 #include <string>
 
 // TODO: Refactor as class
+const int maxWaveformLength = 4096;
+
+class ZXWaveformBufferer {
+private:
+  Sampler sampler;
+  ZeroCrossingDetector detector;
+  Bufferer bufferer;
+
+public:
+  ZXWaveformBufferer(const std::string &inputPath)
+      : sampler(inputPath), bufferer(maxWaveformLength) {
+    detector << bufferer << sampler;
+  }
+
+public:
+  void next() { detector.advanceToNextZeroCrossing(maxWaveformLength); }
+
+  MonoBuffer *copyBuffer() { return bufferer.copyBuffer(); }
+};
 
 class ZXDicer {
 private:
-  const std::string &inputFilePath;
   const std::string &outputPath;
-  Sampler sampler;
-  ZeroCrossingDetector detector;
+  ZXWaveformBufferer bufferer;
 
-  const int maxWaveformLength = 4096;
   int currentWaveformLength;
   void resetCurrentBuffer() { currentWaveformLength = 0; }
   MonoBuffer buffer;
-  double currentWaveformPeak() { return buffer.peak(0, currentWaveformLength); }
+  double currentWaveformPeak() {
+    return buffer.view(0, currentWaveformLength).peak();
+  }
   void normaliseCurrentWaveform() {
     double peak = currentWaveformPeak();
     buffer /= peak;
@@ -45,7 +63,7 @@ public:
 
 private:
   int internalClock = -1;
-  void tick() {
+  void nextFrame() {
     ++internalClock;
     double signal = sampler[internalClock];
 
@@ -75,7 +93,7 @@ private:
 private:
   void go() {
     for (int i = 0; i < sampler.numberOfFrames(); ++i)
-      tick();
+      nextFrame();
   }
 
 public:
@@ -89,3 +107,5 @@ public:
     return 0;
   }
 };
+
+int main(int argc, char **argv) { ZXDicer::main(argc, argv); }
