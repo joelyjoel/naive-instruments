@@ -11,6 +11,9 @@ public:
   MonoBuffer(int numberOfSamples) : numberOfSamples(numberOfSamples) {
     data = new double[numberOfSamples];
   }
+  MonoBuffer(double *dataPtr, int length) : numberOfSamples(length) {
+    data = dataPtr;
+  }
 
   ~MonoBuffer() { delete data; }
 
@@ -30,11 +33,9 @@ public:
   double atTime(double time) { return atIndex(time * sampleRate); }
   double operator()(double time) { return atTime(time); };
 
-  double peak(int from = 0, int until = 0) {
-    if (until <= 0)
-      until = numberOfSamples - until;
+  double peak() {
     double max = 0;
-    for (int i = from; i < until; ++i)
+    for (int i = 0; i < numberOfSamples; ++i)
       if (abs(data[i]) > max)
         max = abs(data[i]);
     return max;
@@ -47,4 +48,22 @@ public:
 
   void operator*=(double scaleFactor) { scale(scaleFactor); }
   void operator/=(double scaleFactor) { scale(1.0 / scaleFactor); }
+
+  MonoBuffer view(int from = 0, int until = 0) {
+    if (until <= 0)
+      until = numberOfSamples - until;
+    return MonoBuffer(data + from, until - from);
+  }
+
+  MonoBuffer *slice(int from = 0, int until = 0) {
+    return view(from, until).copy();
+  }
+  MonoBuffer *copy() {
+    MonoBuffer *newbuffer = new MonoBuffer(numberOfSamples);
+    for (int i = 0; i < numberOfSamples; ++i)
+      newbuffer->data[i] = data[i];
+    return newbuffer;
+  }
+
+  void normalise() { scale(1.0 / peak()); }
 };

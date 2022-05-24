@@ -16,7 +16,9 @@ private:
   int currentWaveformLength;
   void resetCurrentBuffer() { currentWaveformLength = 0; }
   MonoBuffer buffer;
-  double currentWaveformPeak() { return buffer.peak(0, currentWaveformLength); }
+  double currentWaveformPeak() {
+    return buffer.view(0, currentWaveformLength).peak();
+  }
   void normaliseCurrentWaveform() {
     double peak = currentWaveformPeak();
     buffer /= peak;
