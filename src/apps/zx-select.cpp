@@ -8,6 +8,8 @@ int main(int argc, char **argv) {
   CommandLineArguments args(argc, argv);
   const std::string &inputFilePath = args[0];
   const std::string &outputPath = args["o"];
+  bool normalize = args.boolean("normalize");
+  std::cerr << "Normalize: " << normalize << "\n";
 
   Sampler sampler(inputFilePath);
   WaveformBufferer bufferer;
@@ -18,6 +20,9 @@ int main(int argc, char **argv) {
   auto indexToSelect = args.requireInt("index");
 
   MonoBuffer *waveform = bufferer[indexToSelect];
+
+  if (normalize)
+    waveform->normalise();
 
   WavWriter::write(outputPath, *waveform);
   std::cout << outputPath;

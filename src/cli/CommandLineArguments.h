@@ -158,6 +158,8 @@ public:
       return fallback;
   }
 
+  bool boolean(const std::string &key) { return exists(key); }
+
   const std::string string(const std::string &key,
                            const std::string &fallback) {
     if (exists(key))
