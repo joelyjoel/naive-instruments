@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../core.h"
 #include "WAV_HEADER.h"
 #include <cstdint>
 #include <fstream>
@@ -45,4 +46,12 @@ public:
 
 public:
   void operator<<(double signalPoint) { write(signalPoint); }
+
+  static void write(const std::string &outputFilePath, MonoBuffer &buffer) {
+    double attenuation = .9;
+    int numberOfFrames = buffer.numberOfFrames();
+    WavWriter recorder(outputFilePath, numberOfFrames);
+    for (int i = 0; i < numberOfFrames; ++i)
+      recorder << buffer[i] * attenuation;
+  }
 };

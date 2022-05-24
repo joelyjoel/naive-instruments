@@ -14,5 +14,7 @@ zx-dicer:
 	g++ -std=c++20 src/apps/zx-dicer.cpp -o bin/zx-dicer
 	bin/zx-dicer audio-source-files/piano.wav -o junk-output
 
-
+zx-select:
+	mkdir -p bin
+	g++ -std=c++20 src/apps/zx-select.cpp -o bin/zx-select
 

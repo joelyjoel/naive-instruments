@@ -1,5 +1,7 @@
 #pragma once
 
+#include <exception>
+#include <iostream>
 #include <math.h>
 
 class MonoBuffer {
@@ -10,12 +12,30 @@ public:
 
   MonoBuffer(int numberOfSamples) : numberOfSamples(numberOfSamples) {
     data = new double[numberOfSamples];
+    isAView = false;
   }
+
+  /**
+   * Construct as a view
+   */
   MonoBuffer(double *dataPtr, int length) : numberOfSamples(length) {
+    isAView = true;
     data = dataPtr;
   }
 
-  ~MonoBuffer() { delete data; }
+private:
+  /**
+   * A view is a MonoBuffer instance that points at a sub section of another
+   * monobuffer's data. Views must be careful not to release their buffer's from
+   * the heap!
+   */
+  bool isAView;
+
+public:
+  ~MonoBuffer() {
+    if (isAView)
+      delete data;
+  }
 
   double &atIndex(int index) { return data[index % numberOfSamples]; }
   double &operator[](int index) { return atIndex(index); }

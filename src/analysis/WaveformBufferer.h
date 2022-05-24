@@ -15,18 +15,26 @@ private:
 public:
   WaveformBufferer() : bufferer(4096) { assemble(); }
 
+public:
+  int minNumberOfFrames = 0;
+
 private:
-  int index = 0;
+  int index = -1;
   MonoBuffer *copyNextWaveform() {
+    do {
+      bufferer.reset();
+      waiter.next();
+    } while (bufferer.currentSize() < minNumberOfFrames);
     ++index;
-    waiter.next();
-    return bufferer.copyAndReset();
+    return bufferer.copyBuffer();
   }
 
   void skipNextWaveform() {
+    do {
+      bufferer.reset();
+      waiter.next();
+    } while (bufferer.currentSize() < minNumberOfFrames);
     ++index;
-    waiter.next();
-    bufferer.reset();
   }
 
   void reset() {

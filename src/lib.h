@@ -1,3 +1,5 @@
+#pragma once
+
 #include "core/MonoBuffer.h"
 #include "core/NaiveInstrument.h"
 #include "core/Patch.h"

@@ -11,7 +11,11 @@ private:
 
 public:
   BufferWriter(int bufferSize) { buffer = new MonoBuffer(bufferSize); }
-  ~BufferWriter() { delete buffer; }
+  ~BufferWriter() {
+    if (buffer != nullptr)
+      delete buffer;
+    buffer = nullptr;
+  }
 
 private:
   int writeHead = 0;
@@ -25,7 +29,8 @@ public:
     return signal;
   }
 
-  MonoBuffer *copyBuffer() { return buffer->slice(0, writeHead); }
+  int currentSize() { return writeHead; }
+  MonoBuffer *copyBuffer() { return buffer->slice(0, currentSize()); }
 
   void reset() { writeHead = 0; }
 

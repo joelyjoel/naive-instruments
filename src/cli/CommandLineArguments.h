@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+const int MISSING_ARGUMENT = 98;
+
 class KeyValue {
 public:
   const std::string &key;
@@ -126,11 +128,61 @@ public:
     parseArgs();
   }
 
-  const std::string &operator[](int index) {
-    return positionalArguments[index];
+  const std::string operator[](int index) {
+    if (index < positionalArguments.size())
+      return positionalArguments[index];
+    else {
+      std::cerr << "Missing positional argument at index " << index << "\n";
+      throw MISSING_ARGUMENT;
+    }
   }
-  const std::string &operator[](const std::string &key) {
+  const std::string operator[](const std::string &key) {
     return namedArgs[key];
+  }
+
+  bool exists(const std::string &key) { return namedArgs.contains(key); }
+  bool exists(int index) { return index < positionalArguments.size(); }
+
+  const int integer(const std::string &key, int fallback) {
+    if (exists(key)) {
+      auto str = require(key);
+      int val;
+      try {
+        val = std::stoi(str);
+      } catch (int err) {
+        std::cerr << "Argument \"" << key << "\" must be an integer\n";
+        throw MISSING_ARGUMENT;
+      }
+      return val;
+    } else
+      return fallback;
+  }
+
+  const std::string string(const std::string &key,
+                           const std::string &fallback) {
+    if (exists(key))
+      return namedArgs[key];
+    else
+      return fallback;
+  }
+
+  const std::string require(const std::string &key) {
+    if (namedArgs.contains(key))
+      return namedArgs[key];
+    else {
+      std::cerr << "Missing argument \"" << key << "\"\n";
+      throw MISSING_ARGUMENT;
+    }
+  }
+
+  const int requireInt(const std::string &key) {
+    try {
+      auto str = require(key);
+      return std::stoi(str);
+    } catch (int err) {
+      std::cerr << "Argument \"" << key << "\" must be an integer\n";
+      throw MISSING_ARGUMENT;
+    }
   }
 
   friend std::ostream &operator<<(std::ostream &os,
