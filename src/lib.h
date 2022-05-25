@@ -9,6 +9,8 @@
 #include "file-io/WavWriter.h"
 #include "file-io/record.h"
 
+#include "cli/CommandLineArguments.h"
+
 // Instruments
 #include "instruments/AHD.h"
 #include "instruments/Add.h"
@@ -28,3 +30,4 @@
 
 // Analysis
 #include "analysis/BangAwaiter.h"
+#include "analysis/RmsAsciGraph.h"

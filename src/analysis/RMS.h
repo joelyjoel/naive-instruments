@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core.h"
+#include <iostream>
 
 class RMS {
 private:
@@ -20,6 +21,7 @@ public:
     sampleSize = 0;
     for (int i = 0; i < windowSize; ++i)
       readNextFrame();
+
     return rms();
   }
 

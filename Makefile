@@ -18,3 +18,6 @@ zx-select:
 	mkdir -p bin
 	g++ -std=c++20 src/apps/zx-select.cpp -o bin/zx-select
 
+rms-graph:
+	mkdir -p bin
+	g++ -std=c++20 src/apps/rms-graph.cpp -o bin/rms-graph
