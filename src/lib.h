@@ -30,4 +30,4 @@
 
 // Analysis
 #include "analysis/BangAwaiter.h"
-#include "analysis/RmsAsciGraph.h"
+#include "analysis/RmsAsciGrapher.h"

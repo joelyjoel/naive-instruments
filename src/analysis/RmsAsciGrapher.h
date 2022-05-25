@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-class RmsAsciGrapher {
+class RmsAsciGraph {
   const std::string charsInAscendingOrderOfLoudness = " -~sS#%!";
 
 public:
