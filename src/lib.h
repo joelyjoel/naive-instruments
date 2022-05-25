@@ -10,6 +10,11 @@
 #include "file-io/record.h"
 
 #include "cli/CommandLineArguments.h"
+#include "cli/LineTool.h"
+#include "cli/RectangleBuffer.h"
+#include "cli/RectangularLineTool.h"
+#include "cli/TextTool.h"
+#include "cli/WindowDimensions.h"
 
 // Instruments
 #include "instruments/AHD.h"

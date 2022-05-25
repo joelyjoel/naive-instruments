@@ -3,9 +3,15 @@
 
 int main(int argc, char **argv) {
   CommandLineArguments args(argc, argv);
-  auto inputFile = args[0];
 
-  RmsAsciGrapher grapher;
+  for (int i = 0; i < args.numberOfPositionalArgs(); ++i) {
+    auto inputFile = args[i];
 
-  grapher.fromFile(std::cout, inputFile);
+    RmsAsciGrapher grapher;
+
+    grapher.width = args.integer("width", grapher.width);
+    grapher.height = args.integer("height", 9);
+
+    grapher.fromFile(std::cout, inputFile);
+  }
 }

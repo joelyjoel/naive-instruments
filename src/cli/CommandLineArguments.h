@@ -187,6 +187,8 @@ public:
     }
   }
 
+  const int numberOfPositionalArgs() { return positionalArguments.size(); }
+
   friend std::ostream &operator<<(std::ostream &os,
                                   const CommandLineArguments &args);
 };

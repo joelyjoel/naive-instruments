@@ -1,11 +1,12 @@
 coreCPPFiles="src/file-io/record.cpp"
 
-default:
+default: rms-graph build-and-run-tests
+
+build-and-run-tests:
 	git clean -fd -- snapshots
 	g++ -std=c++20 src/file-io/record.cpp src/main.cpp
 	./a.out
 
-	./audition-new-files.sh
 
 zx-dicer:
 	mkdir -p bin
