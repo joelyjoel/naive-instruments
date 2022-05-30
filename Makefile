@@ -22,3 +22,7 @@ zx-select:
 rms-graph:
 	mkdir -p bin
 	g++ -std=c++20 src/apps/rms-graph.cpp -o bin/rms-graph
+
+getch-log:
+	mkdir -p bin
+	g++ -std=c++20 -lncurses src/apps/getch-log.cpp -o bin/getch-log
