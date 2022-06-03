@@ -1,5 +1,6 @@
 #include "../lib.h"
 #include <iostream>
+#include <string>
 
 int main(int argc, char **argv) {
   CommandLineArguments args(argc, argv);
@@ -9,9 +10,13 @@ int main(int argc, char **argv) {
 
     RmsAsciGrapher grapher;
 
-    grapher.width = args.integer("width", grapher.width);
-    grapher.height = args.integer("height", 9);
+    int width = args.integer("width", 80);
+    int height = args.integer("height", 9);
 
-    grapher.fromFile(std::cout, inputFile);
+    RectangleBuffer<std::string> canvas(width, height);
+
+    grapher.fromFile(canvas, inputFile);
+
+    canvas.stream(std::cout);
   }
 }
