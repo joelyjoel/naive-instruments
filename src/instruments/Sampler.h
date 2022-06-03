@@ -18,13 +18,18 @@ public:
 
 public:
   double tick() override {
-    if (playhead < buffer->numberOfFrames())
+    if (playhead < 0) {
+      ++playhead;
+      return 0;
+    } else if (playhead < buffer->numberOfFrames())
       return (*buffer)[++playhead];
     else
       return 0;
   }
 
   void reset() override { playhead = 0; }
+
+  void skipTo(int frame) { playhead = frame; }
 
 public:
   int numberOfFrames() { return buffer->numberOfFrames(); }

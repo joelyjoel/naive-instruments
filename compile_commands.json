@@ -4,6 +4,29 @@
       "/usr/bin/g++",
       "-c",
       "-std=c++20",
+      "-o",
+      "bin/rms-graph",
+      "src/apps/rms-graph.cpp"
+    ],
+    "directory": "/Users/joelle/code/naive-instruments",
+    "file": "/Users/joelle/code/naive-instruments/src/apps/rms-graph.cpp",
+    "output": "/Users/joelle/code/naive-instruments/bin/rms-graph"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++20",
+      "src/file-io/record.cpp"
+    ],
+    "directory": "/Users/joelle/code/naive-instruments",
+    "file": "/Users/joelle/code/naive-instruments/src/file-io/record.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++20",
       "src/main.cpp"
     ],
     "directory": "/Users/joelle/code/naive-instruments",
@@ -14,9 +37,13 @@
       "/usr/bin/g++",
       "-c",
       "-std=c++20",
-      "src/makeASawToothWave.cpp"
+      "-D_XOPEN_SOURCE_EXTENDED",
+      "-o",
+      "bin/getch-log",
+      "src/apps/getch-log.cpp"
     ],
     "directory": "/Users/joelle/code/naive-instruments",
-    "file": "/Users/joelle/code/naive-instruments/src/makeASawToothWave.cpp"
+    "file": "/Users/joelle/code/naive-instruments/src/apps/getch-log.cpp",
+    "output": "/Users/joelle/code/naive-instruments/bin/getch-log"
   }
 ]

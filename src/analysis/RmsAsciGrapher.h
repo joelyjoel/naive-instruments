@@ -6,19 +6,25 @@
 #include <string>
 
 class RmsAsciGrapher {
-  const std::string charsInAscendingOrderOfLoudness = " -~sS#%!";
 
 public:
-  int width = WindowDimensions::width();
-  int height = WindowDimensions::height();
-
-public:
-  void fromFile(std::ostream &out, const std::string &filePath) {
+  static void fromFile(RectangleBuffer<std::string> &canvas,
+                       const std::string &filePath, double from = 0,
+                       double to = 0) {
     WavReader file(filePath);
+    int width = canvas.width;
+    int height = canvas.height;
+
+    if (to == 0)
+      to = file.duration();
+    int fromSample = from * sampleRate;
+    int toSample = to * sampleRate;
+
     Sampler sampler(filePath);
+    sampler.skipTo(fromSample);
 
     RMS loudness;
-    loudness.windowSize = file.numberOfFrames() / width;
+    loudness.windowSize = (toSample - fromSample) / width;
     if (loudness.windowSize < 1) {
       std::cerr << "Too short\n";
       throw 66;
@@ -26,7 +32,6 @@ public:
 
     loudness << sampler;
 
-    RectangleBuffer<std::string> canvas(width, height);
     canvas.fill(" ");
 
     RectangularLineTool pen1(canvas);
@@ -36,19 +41,10 @@ public:
     for (int window = 0; window < width; ++window) {
       double rms = loudness.nextWindow();
 
-      int index = int(rms * float(charsInAscendingOrderOfLoudness.length()));
-      char c = charsInAscendingOrderOfLoudness[c];
-
       float y = rms * float(canvas.height);
       float x = float(canvas.width) * window / width;
 
       pen1.lineTo(x, canvas.height - y);
     }
-
-    TextTool labeller(canvas);
-    labeller.moveTo(0, 0);
-    labeller.write(filePath);
-
-    out << canvas;
   }
 };

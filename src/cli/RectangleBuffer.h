@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <ncurses.h>
 #include <ostream>
 
 using std::ostream;
@@ -40,6 +41,7 @@ public:
       cell(i) = value;
   };
 
+public:
   void stream(ostream &out) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x)
