@@ -26,3 +26,12 @@ rms-graph:
 getch-log:
 	mkdir -p bin
 	g++ -std=c++20 -D_XOPEN_SOURCE_EXTENDED -lncurses src/apps/getch-log.cpp -o bin/getch-log
+
+ruler:
+	mkdir -p bin
+	g++ -std=c++20 -D_XOPEN_SOURCE_EXTENDED -lncurses src/apps/ruler.cpp -o bin/ruler
+
+ncurses-window-demo:
+	mkdir -p bin
+	g++ -std=c++20 -D_XOPEN_SOURCE_EXTENDED -lncurses src/apps/ncurses-window-demo.cpp -o bin/ncurses-window-demo
+
