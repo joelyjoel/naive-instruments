@@ -38,3 +38,6 @@
 // Analysis
 #include "analysis/BangAwaiter.h"
 #include "analysis/RmsAsciGrapher.h"
+
+// Playback
+#include "playback/BufferedPlayback.h"
