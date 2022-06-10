@@ -86,4 +86,27 @@ public:
   }
 
   void normalise() { scale(1.0 / peak()); }
+
+  void fadeIn(double fadeInDuration) {
+    int n = fadeInDuration * sampleRate;
+    double scale = 0;
+    double rate = 1 / float(n);
+    for (int i = 0; i < n; ++i) {
+      data[i] *= scale;
+      scale += rate;
+    }
+  }
+  void fadeOut(double fadeInDuration) {
+    int n = fadeInDuration * sampleRate;
+    double scale = 0;
+    double rate = 1 / float(n);
+    for (int i = 0; i < n; ++i) {
+      data[numberOfSamples - i] *= scale;
+      scale += rate;
+    }
+  }
+  void fadeBoth(double fadeInDuration = 0.1, double fadeOutDuration = 0.1) {
+    fadeIn(fadeInDuration);
+    fadeOut(fadeOutDuration);
+  }
 };
