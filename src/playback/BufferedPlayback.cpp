@@ -15,43 +15,33 @@ static int audioCallback(const void *inputBuffer, void *outputBuffer,
 
   (void)inputBuffer; /* Prevent unused variable warning. */
 
+  double rms = 0;
+  for (int i = 0; i < framesPerBuffer; ++i)
+    rms += out[i] * out[i];
+  rms = sqrt(rms / framesPerBuffer);
+
+  std::cerr << "audioCallback (" << framesPerBuffer << ") rms: " << rms << "\n";
+
   return 0;
 }
 
 void BufferedPlayback::start() {
-  PaError err;
 
   // Initialise Portaudio
   std::cout << "Initialising port audio\n";
   err = Pa_Initialize();
-  assertNotError(err);
+  assertNotError();
 
   std::cout << "Creating PA stream\n";
-  PaStream *stream;
   int numberOfInputChannels = 0;
   int numberOfOutputChannels = 1;
   int sampleRate = 44100;
-  int framesPerBuffer = 2048;
+  int framesPerBuffer = 256;
   err = Pa_OpenDefaultStream(&stream, numberOfInputChannels,
                              numberOfOutputChannels, paFloat32, sampleRate,
                              framesPerBuffer, audioCallback, this);
-  assertNotError(err);
+  assertNotError();
 
   err = Pa_StartStream(stream);
-  assertNotError(err);
-
-  // TODO: Remove this
-  std::cout << "Sleeping\n";
-  Pa_Sleep(5000);
-  std::cout << "Done!\n";
-
-  std::cout << "Stopping stream\n";
-  err = Pa_StopStream(stream);
-  assertNotError(err);
-
-  std::cout << "Terminating port audio\n";
-  err = Pa_Terminate();
-  assertNotError(err);
-
-  std::cout << "All seems to have gone well!\n";
+  assertNotError();
 }
