@@ -10,11 +10,21 @@ private:
   int playhead = 0;
 
 public:
+  bool deleteBufferOnDestruct = false;
   Sampler(const std::string &filePath) {
     buffer = WavReader::readMonoFile(filePath);
+    deleteBufferOnDestruct = true;
   }
 
-  ~Sampler() { delete buffer; }
+  Sampler(MonoBuffer &_buffer) {
+    buffer = &_buffer;
+    deleteBufferOnDestruct = false;
+  }
+
+  ~Sampler() {
+    if (deleteBufferOnDestruct)
+      delete buffer;
+  }
 
 public:
   double tick() override {

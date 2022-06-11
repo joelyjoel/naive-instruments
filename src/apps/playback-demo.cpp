@@ -6,7 +6,11 @@ int main() {
   std::cout << "Playing...\n";
 
   Sine signal;
-  signal << 100;
+  LFO lfo;
+  lfo.center << 100;
+  lfo.depth << 40;
+  lfo.frequency << .1;
+  signal << lfo;
 
   BufferedPlayback::play(signal);
 }

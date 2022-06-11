@@ -20,8 +20,6 @@ static int audioCallback(const void *inputBuffer, void *outputBuffer,
     rms += out[i] * out[i];
   rms = sqrt(rms / framesPerBuffer);
 
-  std::cerr << "audioCallback (" << framesPerBuffer << ") rms: " << rms << "\n";
-
   return 0;
 }
 

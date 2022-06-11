@@ -4,6 +4,7 @@
 
 #include "../core.h"
 
+#include "../instruments/Sampler.h"
 #include "./CircularBuffer.h"
 
 static int audioCallback(const void *inputBuffer, void *outputBuffer,
@@ -57,7 +58,12 @@ public:
     playback.start();
     while (true) {
       playback.topUpBuffer(signal);
-      Pa_Sleep(playback.idealTopUpInterval() * 1000 * .5);
+      Pa_Sleep(playback.idealTopUpInterval() * 1000 * .25);
     }
+  }
+
+  static void play(MonoBuffer &audio) {
+    Sampler sampler(audio);
+    play(sampler);
   }
 };
