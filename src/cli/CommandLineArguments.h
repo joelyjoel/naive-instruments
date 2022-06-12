@@ -158,6 +158,24 @@ public:
       return fallback;
   }
 
+  /**
+   * Get floating point input from a named command line argument
+   */
+  const float number(const std::string &key, float fallback) {
+    if (exists(key)) {
+      auto str = require(key);
+      float val;
+      try {
+        val = std::stof(str);
+      } catch (int err) {
+        std::cerr << "Argument \"" << key << "\" must be an number\n";
+        throw MISSING_ARGUMENT;
+      }
+      return val;
+    } else
+      return fallback;
+  }
+
   bool boolean(const std::string &key) { return exists(key); }
 
   const std::string string(const std::string &key,
