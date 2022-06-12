@@ -78,6 +78,12 @@ public:
   MonoBuffer *slice(int from = 0, int until = 0) {
     return view(from, until).copy();
   }
+  MonoBuffer *slice(float from = 0, float to = 0) {
+    int fromInt = from * sampleRate;
+    int toInt = to * sampleRate;
+    return slice(fromInt, toInt);
+  }
+
   MonoBuffer *copy() {
     MonoBuffer *newbuffer = new MonoBuffer(numberOfSamples);
     for (int i = 0; i < numberOfSamples; ++i)
