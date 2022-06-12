@@ -4,6 +4,7 @@
 #include <iostream>
 #include <math.h>
 
+// TODO: Generalise to any number of channels and sample types
 class MonoBuffer {
 public:
   const int numberOfSamples;

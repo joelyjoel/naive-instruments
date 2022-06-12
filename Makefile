@@ -25,7 +25,9 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: all
-all: rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo
+all: rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo slice
+
+#TODO: A big utility for namespacing all other utilities
 
 build-and-run-tests:
 	git clean -fd -- snapshots
@@ -60,4 +62,18 @@ playback-demo:
 		src/apps/playback-demo.cpp \
 		src/playback/BufferedPlayback.cpp \
 		-o bin/playback-demo
+
+slice:
+	mkdir -p bin
+	g++ \
+		${FLAGS} \
+		src/apps/slice.cpp \
+		src/playback/BufferedPlayback.cpp \
+		-o bin/slice
+
+#TODO: concat - join samples together with crossfades
+#TODO: mix - mix samples together
+#TODO: osc - create wavetable tones
+#TODO: envelope - create flexible control signals
+#TODO: AHD - simple Attack Hold Decay envelopes
 
