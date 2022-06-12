@@ -33,7 +33,7 @@ private:
 
 public:
   ~MonoBuffer() {
-    if (isAView)
+    if (!isAView)
       delete data;
   }
 
