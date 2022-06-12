@@ -10,21 +10,15 @@ private:
   int playhead = 0;
 
 public:
-  bool deleteBufferOnDestruct = false;
+  /**
+   * deprecated
+   * TODO: Remove and replace with static method.
+   */
   Sampler(const std::string &filePath) {
     buffer = WavReader::readMonoFile(filePath);
-    deleteBufferOnDestruct = true;
   }
 
-  Sampler(MonoBuffer &_buffer) {
-    buffer = &_buffer;
-    deleteBufferOnDestruct = false;
-  }
-
-  ~Sampler() {
-    if (deleteBufferOnDestruct)
-      delete buffer;
-  }
+  Sampler(MonoBuffer &sharedBuffer) { buffer = &sharedBuffer; }
 
 public:
   double tick() override {
