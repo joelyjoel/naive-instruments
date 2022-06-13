@@ -4,8 +4,11 @@
 #include <iostream>
 #include <math.h>
 
-// TODO: Generalise to any number of channels and sample types
 class MonoBuffer {
+  // TODO: Generalise to any number of channels and sample types
+  // TODO: rename Sample
+  // TODO: Make proper use of c++ const keyword for non-editable views
+  // TODO: Create proper move semantics
 public:
   const int numberOfSamples;
   int numberOfFrames() { return numberOfSamples; }
@@ -115,5 +118,17 @@ public:
   void fadeBoth(double fadeInDuration = 0.1, double fadeOutDuration = 0.1) {
     fadeIn(fadeInDuration);
     fadeOut(fadeOutDuration);
+  }
+
+  MonoBuffer *repeat(float numberOfRepetitions) {
+    // TODO: Return using move semantics
+
+    MonoBuffer *newbuffer =
+        new MonoBuffer(numberOfSamples * numberOfRepetitions);
+
+    for (int i = 0; i < newbuffer->numberOfSamples; ++i)
+      newbuffer->data[i] = data[i % numberOfSamples];
+
+    return newbuffer;
   }
 };

@@ -1,4 +1,5 @@
 #include "../lib.h"
+#include <iostream>
 
 // TODO: Probably rename as something like `sample`
 // TODO: Refactor as class CommandLineSample (or similar)
@@ -13,8 +14,17 @@ int main(int argc, char **argv) {
 
   MonoBuffer *sliced = buffer->slice(from, to);
 
+  // TODO: refactor using move semantics
+  const float numberOfRepetitions = args.number("repeat", 1);
+  if (numberOfRepetitions != 1) {
+    std::cerr << "repeating\n";
+    auto repeated = sliced->repeat(numberOfRepetitions);
+    delete sliced;
+    sliced = repeated;
+    // TODO: Configurable crossfades
+  }
+
   // TODO: --fade --fadeIn and --fadeOut
-  // TODO: --repeat for looping the sample
   // TODO: --loopUntil duration (overrides repeat)
   // TODO:
   // TODO: --delay - adding silence before the sample
