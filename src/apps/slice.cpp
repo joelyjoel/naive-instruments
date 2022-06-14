@@ -9,6 +9,7 @@ int main(int argc, char **argv) {
   const auto filename = args[0];
   auto buffer = WavReader::readMonoFile(filename);
 
+  // TODO: support time units: s, samp, zx, onset etc
   const float from = args.number("from", 0);
   const float to = args.number("to", buffer->duration());
 
@@ -24,14 +25,22 @@ int main(int argc, char **argv) {
     // TODO: Configurable crossfades
   }
 
-  // TODO: --fade --fadeIn and --fadeOut
+  const float fadeIn = args.number("fadeIn", 0.005);
+  sliced->fadeIn(fadeIn);
+
+  const float fadeOut = args.number("fadeOut", 0.005);
+  sliced->fadeOut(fadeOut);
+
+  const float fade = args.number("fade", 0);
+  sliced->fadeBoth(fade);
+
   // TODO: --loopUntil duration (overrides repeat)
-  // TODO:
-  // TODO: --delay - adding silence before the sample
+  // TODO: --after - adding silence before the sample
 
   // TODO: Refactor as CommandLineApp .output(buffer)
   const std::string outputPath = args.string("o", "");
-  // TODO: --normalise : normalise the output
+  if (args.boolean("normalise"))
+    sliced->normalise();
   if (outputPath.empty()) {
     BufferedPlayback::play(*sliced);
   } else {
