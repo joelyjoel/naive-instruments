@@ -138,6 +138,8 @@ public:
   CommandLineArguments(int argc, char **argv) : argc(argc), argv(argv) {
     parseArgs();
   }
+  CommandLineArguments(MainArgs &args)
+      : CommandLineArguments(args.argc, args.argv) {}
 
   const std::string operator[](int index) {
     if (index < positionalArguments.size())

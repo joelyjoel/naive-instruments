@@ -25,13 +25,16 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: all
-all: main rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo slice
+all: main rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo 
 
 #TODO: A big utility for namespacing all other utilities
 
 main:
 	mkdir -p bin
-	g++ ${FLAGS} src/file-io/record.cpp src/main.cpp -o bin/ni
+	g++ ${FLAGS} \
+		src/file-io/record.cpp \
+		src/playback/BufferedPlayback.cpp \
+		src/main.cpp -o bin/ni
 
 build-and-run-tests:
 	git clean -fd -- snapshots
@@ -67,13 +70,6 @@ playback-demo:
 		src/playback/BufferedPlayback.cpp \
 		-o bin/playback-demo
 
-slice:
-	mkdir -p bin
-	g++ \
-		${FLAGS} \
-		src/apps/slice.cpp \
-		src/playback/BufferedPlayback.cpp \
-		-o bin/slice
 
 #TODO: concat - join samples together with crossfades
 #TODO: mix - mix samples together

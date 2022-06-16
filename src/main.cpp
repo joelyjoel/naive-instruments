@@ -1,8 +1,9 @@
-#include "./lib.h"
+#include "apps/SliceApp.h"
+#include "lib.h"
 #include <string>
 
 int main(int argc, char **argv) {
-  MainArgs args(argc, argv + 2);
+  MainArgs args(argc - 1, argv + 1);
 
   if (argc == 1) {
     // TODO: use class FrontPage : public App
@@ -10,7 +11,6 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  // TODO: Migrate slice utility as `ni sample`
   // TODO: Migrate getch-log as `ni graph -i`
   // TODO: Migrate rms-graph as `ni graph`
   // TODO: Migrate ruler as `ni ruler`
@@ -22,6 +22,9 @@ int main(int argc, char **argv) {
   if (command == "help") {
     std::cout << "No help has been written yet!\n";
     return 0;
+  } else if (command == "slice") {
+    SliceApp app(args);
+    app.run();
   } else {
     std::cout << "Unknown command: " << command << "\n";
     return 1;
