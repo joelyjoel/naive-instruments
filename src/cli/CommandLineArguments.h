@@ -4,6 +4,17 @@
 #include <string>
 #include <vector>
 
+/**
+ * Contianer class so that command line arguments (in raw C form) can be
+ * passed around with less code.
+ */
+class MainArgs {
+public:
+  int argc;
+  char **argv;
+  MainArgs(int argc, char **argv) : argc(argc), argv(argv) {}
+};
+
 const int MISSING_ARGUMENT = 98;
 
 class KeyValue {

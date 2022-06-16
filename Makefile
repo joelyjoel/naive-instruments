@@ -25,9 +25,13 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: all
-all: rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo slice
+all: main rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo slice
 
 #TODO: A big utility for namespacing all other utilities
+
+main:
+	mkdir -p bin
+	g++ ${FLAGS} src/file-io/record.cpp src/main.cpp -o bin/ni
 
 build-and-run-tests:
 	git clean -fd -- snapshots
