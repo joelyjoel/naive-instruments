@@ -25,7 +25,7 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: all
-all: main rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-demo ncurses-window-demo 
+all: main build-and-run-tests zx-select ruler getch-log playback-demo ncurses-window-demo 
 
 #TODO: A big utility for namespacing all other utilities
 
@@ -44,10 +44,6 @@ build-and-run-tests:
 zx-select:
 	mkdir -p bin
 	g++ ${FLAGS} src/apps/zx-select.cpp -o bin/zx-select
-
-rms-graph:
-	mkdir -p bin
-	g++ ${FLAGS} src/apps/rms-graph.cpp -o bin/rms-graph
 
 getch-log:
 	mkdir -p bin

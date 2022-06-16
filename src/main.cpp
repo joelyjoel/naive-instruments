@@ -1,3 +1,4 @@
+#include "apps/GraphApp.h"
 #include "apps/SliceApp.h"
 #include "lib.h"
 #include <string>
@@ -24,6 +25,9 @@ int main(int argc, char **argv) {
     return 0;
   } else if (command == "slice") {
     SliceApp app(args);
+    app.run();
+  } else if (command == "graph") {
+    GraphApp app(args);
     app.run();
   } else {
     std::cout << "Unknown command: " << command << "\n";
