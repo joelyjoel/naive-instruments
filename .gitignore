@@ -1,4 +1,5 @@
 output.wav
+*.bin
 bin
 junk-output
 test-outputs

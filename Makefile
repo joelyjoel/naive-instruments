@@ -31,8 +31,8 @@ all: rms-graph build-and-run-tests zx-select ruler rms-graph getch-log playback-
 
 build-and-run-tests:
 	git clean -fd -- snapshots
-	g++ ${FLAGS} src/file-io/record.cpp src/main.cpp
-	./a.out
+	g++ ${FLAGS} src/file-io/record.cpp src/snapshot-tests.cpp -o src/snapshot-tests.bin
+	src/snapshot-tests.bin
 
 zx-select:
 	mkdir -p bin
