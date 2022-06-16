@@ -9,6 +9,7 @@
 #include "file-io/WavWriter.h"
 #include "file-io/record.h"
 
+#include "cli/CommandLineApp.h"
 #include "cli/CommandLineArguments.h"
 #include "cli/LineTool.h"
 #include "cli/NCursesWindow.h"

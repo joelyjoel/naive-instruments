@@ -5,6 +5,7 @@
 // TODO: Refactor as class CommandLineSample (or similar)
 int main(int argc, char **argv) {
   CommandLineArguments args(argc, argv);
+  CommandLineApp app(argc, argv);
 
   const auto filename = args[0];
   auto buffer = WavReader::readMonoFile(filename);
@@ -37,13 +38,5 @@ int main(int argc, char **argv) {
   // TODO: --loopUntil duration (overrides repeat)
   // TODO: --after - adding silence before the sample
 
-  // TODO: Refactor as CommandLineApp .output(buffer)
-  const std::string outputPath = args.string("o", "");
-  if (args.boolean("normalise"))
-    sliced->normalise();
-  if (outputPath.empty()) {
-    BufferedPlayback::play(*sliced);
-  } else {
-    WavWriter::write(outputPath, *sliced);
-  }
+  app.output(sliced);
 }
