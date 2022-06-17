@@ -39,6 +39,7 @@
 // Analysis
 #include "analysis/BangAwaiter.h"
 #include "analysis/RmsAsciGrapher.h"
+#include "analysis/WaveformBufferer.h"
 
 // Playback
 #include "playback/BufferedPlayback.h"

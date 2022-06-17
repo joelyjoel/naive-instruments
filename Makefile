@@ -25,7 +25,7 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: main
-all: main build-and-run-tests zx-select 
+all: main build-and-run-tests  
 
 #TODO: A big utility for namespacing all other utilities
 
@@ -41,9 +41,6 @@ build-and-run-tests:
 	g++ ${FLAGS} src/file-io/record.cpp src/snapshot-tests.cpp -o src/snapshot-tests.bin
 	src/snapshot-tests.bin
 
-zx-select:
-	mkdir -p bin
-	g++ ${FLAGS} src/apps/zx-select.cpp -o bin/zx-select
 
 
 

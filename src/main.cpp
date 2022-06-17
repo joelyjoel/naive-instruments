@@ -3,6 +3,7 @@
 #include "apps/OscApp.h"
 #include "apps/RulerApp.h"
 #include "apps/SliceApp.h"
+#include "apps/ZxSelectApp.h"
 #include "lib.h"
 #include <string>
 
@@ -15,9 +16,7 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  // TODO: Migrate getch-log as `ni graph -i`
   // TODO: Migrate zero crossing utils as units in the sample interface
-  // TODO: Migrate relentless-tone as `ni osc`
 
   // TODO: Use a class for switching commands
   std::string command = argv[1];
@@ -38,6 +37,10 @@ int main(int argc, char **argv) {
     app.run();
   } else if (command == "osc") {
     OscApp app(args);
+    app.run();
+  } else if (command == "zx-select") {
+    // TODO: Deprecate command in favour of special units?
+    ZxSelectApp app(args);
     app.run();
   } else {
     std::cout << "Unknown command: " << command << "\n";
