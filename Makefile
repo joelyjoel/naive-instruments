@@ -25,7 +25,7 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: main
-all: main build-and-run-tests zx-select ruler getch-log playback-demo ncurses-window-demo 
+all: main build-and-run-tests zx-select getch-log playback-demo ncurses-window-demo 
 
 #TODO: A big utility for namespacing all other utilities
 
@@ -48,10 +48,6 @@ zx-select:
 getch-log:
 	mkdir -p bin
 	g++ ${FLAGS} src/apps/getch-log.cpp -o bin/getch-log
-
-ruler:
-	mkdir -p bin
-	g++ ${FLAGS} src/apps/ruler.cpp -o bin/ruler
 
 ncurses-window-demo:
 	mkdir -p bin

@@ -1,6 +1,7 @@
 #include "apps/GraphApp.h"
 #include "apps/MixApp.h"
 #include "apps/OscApp.h"
+#include "apps/RulerApp.h"
 #include "apps/SliceApp.h"
 #include "lib.h"
 #include <string>
@@ -15,8 +16,6 @@ int main(int argc, char **argv) {
   }
 
   // TODO: Migrate getch-log as `ni graph -i`
-  // TODO: Migrate rms-graph as `ni graph`
-  // TODO: Migrate ruler as `ni ruler`
   // TODO: Migrate zero crossing utils as units in the sample interface
   // TODO: Migrate relentless-tone as `ni osc`
 
@@ -30,6 +29,9 @@ int main(int argc, char **argv) {
     app.run();
   } else if (command == "graph") {
     GraphApp app(args);
+    app.run();
+  } else if (command == "ruler") {
+    RulerApp app(args);
     app.run();
   } else if (command == "mix") {
     MixApp app(args);
