@@ -25,7 +25,7 @@ FLAGS=-std=c++20 \
 			${PORTAUDIO_FLAGS}
 
 default: main
-all: main build-and-run-tests zx-select playback-demo ncurses-window-demo 
+all: main build-and-run-tests zx-select 
 
 #TODO: A big utility for namespacing all other utilities
 
@@ -45,23 +45,9 @@ zx-select:
 	mkdir -p bin
 	g++ ${FLAGS} src/apps/zx-select.cpp -o bin/zx-select
 
-ncurses-window-demo:
-	mkdir -p bin
-	g++ ${FLAGS} src/apps/ncurses-window-demo.cpp -o bin/ncurses-window-demo
-
-
-playback-demo:
-	mkdir -p bin
-	g++ \
-		${FLAGS} \
-		src/apps/playback-demo.cpp \
-		src/playback/BufferedPlayback.cpp \
-		-o bin/playback-demo
 
 
 #TODO: concat - join samples together with crossfades
-#TODO: mix - mix samples together
-#TODO: osc - create wavetable tones
 #TODO: envelope - create flexible control signals
 #TODO: AHD - simple Attack Hold Decay envelopes
 
