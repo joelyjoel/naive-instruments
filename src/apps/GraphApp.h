@@ -18,9 +18,14 @@ public:
     initscr();
     mouseinterval(0);
     mousemask(BUTTON1_CLICKED | BUTTON4_PRESSED | BUTTON2_PRESSED, NULL);
+    MonoBuffer &sample = *WavReader::readMonoFile(args[0]);
 
     double from = 0;
-    double to = 0.1;
+    double to = sample.duration();
+
+    bool scrub = args.boolean("scrub");
+    BufferedPlayback playback;
+    playback.start(true);
 
     WavReader file(args[0]);
     while (true) {
@@ -33,20 +38,26 @@ public:
         throw 69;
         break;
       case 'h':
-        from -= increment;
-        to -= increment;
+        if (from > increment) {
+          from -= increment;
+          to -= increment;
+        }
         break;
       case 'l':
-        from += increment;
-        to += increment;
+        if (to + increment < sample.duration()) {
+          from += increment;
+          to += increment;
+        }
         break;
       case '+':
         to -= increment;
         from += increment;
         break;
       case '-':
-        to += increment;
-        from -= increment;
+        if (to + increment < sample.duration() && from > increment) {
+          to += increment;
+          from -= increment;
+        }
         break;
       case '=':
         from = 0;
@@ -69,7 +80,11 @@ public:
 
       refresh();
 
-      // printw("%ls", output.str().c_str());
+      if (scrub) {
+        // TODO: Fix this memory leak!
+        MonoBuffer *toPlay = sample.slice(float(from), float(to));
+        playback.setSignal(*toPlay);
+      }
     }
     endwin();
   }

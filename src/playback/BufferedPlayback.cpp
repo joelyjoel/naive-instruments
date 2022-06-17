@@ -23,7 +23,7 @@ static int audioCallback(const void *inputBuffer, void *outputBuffer,
   return 0;
 }
 
-void BufferedPlayback::start() {
+void BufferedPlayback::startAudioThread() {
 
   // Initialise Portaudio
   std::cout << "Initialising port audio\n";

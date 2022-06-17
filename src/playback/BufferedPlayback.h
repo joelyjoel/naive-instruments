@@ -3,9 +3,11 @@
 #include <exception>
 #include <iostream>
 #include <portaudio.h>
+#include <thread>
 
 #include "../core.h"
 
+#include "../instruments/Constant.h"
 #include "../instruments/Sampler.h"
 #include "./CircularBuffer.h"
 
@@ -20,7 +22,11 @@ private:
   PaError err;
 
 public:
-  BufferedPlayback() : buffer(1024) {}
+  BufferedPlayback(NaiveInstrument<double> &input) : buffer(1024) {
+    signal = &input;
+  }
+  BufferedPlayback() : BufferedPlayback(*new Constant(0)) {}
+  NaiveInstrument<double> *signal;
   CircularBuffer<double> buffer;
   double shift() { return buffer.shift(); }
   void push(double y) { buffer.push(y); }
@@ -32,7 +38,25 @@ public:
     }
   }
 
-  void start();
+  void startAudioThread();
+
+  std::thread *topUpThread;
+  void startTopUpThread() {
+    topUpThread = new std::thread([this]() {
+      while (true)
+        this->topUpBufferAndSleep();
+    });
+  }
+
+  void start(bool async = false) {
+    topUpBuffer();
+    startAudioThread();
+    startTopUpThread();
+    if (async)
+      topUpThread->detach();
+    else
+      topUpThread->join();
+  }
 
   void stop() {
     std::cout << "Stopping stream\n";
@@ -44,10 +68,14 @@ public:
     assertNotError();
   }
 
-  void topUpBuffer(NaiveInstrument<double> &signal) {
-    while (buffer.hasFreeSpace()) {
-      buffer.push(signal.next());
-    }
+  void topUpBuffer() {
+    while (buffer.hasFreeSpace())
+      buffer.push(signal->next());
+  }
+
+  void topUpBufferAndSleep() {
+    topUpBuffer();
+    Pa_Sleep(idealTopUpInterval() * 1000 * .25);
   }
 
   double idealTopUpInterval() {
@@ -55,18 +83,18 @@ public:
   }
 
   static void play(NaiveInstrument<double> &signal) {
-    // TODO: Create a seperate loader thread
-    BufferedPlayback playback;
-    playback.topUpBuffer(signal);
-    playback.start();
-    while (true) {
-      playback.topUpBuffer(signal);
-      Pa_Sleep(playback.idealTopUpInterval() * 1000 * .25);
-    }
+    BufferedPlayback playback(signal);
+    playback.start(false);
   }
 
   static void play(MonoBuffer &audio) {
     Sampler sampler(audio);
     play(sampler);
+  }
+
+  void setSignal(NaiveInstrument<double> &sound) { signal = &sound; }
+  void setSignal(MonoBuffer &sample) {
+    Sampler *sampler = new Sampler(sample);
+    setSignal(*sampler);
   }
 };
