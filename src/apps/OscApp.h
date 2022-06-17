@@ -1,13 +1,14 @@
 #include "../lib.h"
+#include <iostream>
 
 class OscApp : public CommandLineApp {
   using CommandLineApp::CommandLineApp;
 
 public:
   void run() {
-    Sine osc;
+    Saw osc;
 
-    osc.frequency << stof(args[0]);
+    osc.frequency << args.signal(0);
 
     output(osc);
   }

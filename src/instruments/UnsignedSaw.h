@@ -13,7 +13,7 @@ public:
     while (phase > 1)
       phase -= 1.0;
     while (phase < 0)
-      phase -= 1.0;
+      phase += 1.0;
     return phase;
   }
 

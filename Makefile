@@ -24,7 +24,7 @@ FLAGS=-std=c++20 \
 			${NCURSES_FLAGS} \
 			${PORTAUDIO_FLAGS}
 
-default: all
+default: main
 all: main build-and-run-tests zx-select ruler getch-log playback-demo ncurses-window-demo 
 
 #TODO: A big utility for namespacing all other utilities

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core.h"
+#include "Constant.h"
 #include <iostream>
 #include <string>
 
@@ -19,8 +20,7 @@ public:
   static NaiveInstrument<double> *
   many(std::vector<NaiveInstrument<double> *> &inputs) {
     if (inputs.size() == 0)
-      // TODO: Return silence
-      throw TODO;
+      return new Constant(0);
     else {
       NaiveInstrument *sum = inputs[0];
       for (int i = 1; i < inputs.size(); ++i) {

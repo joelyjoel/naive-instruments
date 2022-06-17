@@ -1,4 +1,6 @@
 #pragma once
+#include "../core.h"
+#include "SignalString.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -27,6 +29,8 @@ public:
 };
 
 class CommandLineArguments {
+  // TODO: Split into two classes, one for core funcitonality and an extension
+  // for convenient parser methods
 private:
   int argc;
   char **argv;
@@ -198,6 +202,13 @@ public:
     else
       return fallback;
   }
+  const std::string string(int positionalArgIndex,
+                           const std::string &fallback) {
+    if (positionalArgIndex < numberOfPositionalArgs())
+      return positionalArguments[positionalArgIndex];
+    else
+      return fallback;
+  }
 
   const std::string require(const std::string &key) {
     if (namedArgs.contains(key))
@@ -222,6 +233,14 @@ public:
 
   friend std::ostream &operator<<(std::ostream &os,
                                   const CommandLineArguments &args);
+
+  NaiveInstrument<double> *signal(const std::string &key,
+                                  const std::string &fallback = "0") {
+    return SignalString::parse(string(key, fallback));
+  }
+  NaiveInstrument<double> *signal(int key, const std::string &fallback = "0") {
+    return SignalString::parse(string(key, fallback));
+  }
 };
 
 std::ostream &operator<<(std::ostream &os, const CommandLineArguments &args);

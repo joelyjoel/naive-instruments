@@ -45,8 +45,9 @@ public:
   }
 
   void topUpBuffer(NaiveInstrument<double> &signal) {
-    while (buffer.hasFreeSpace())
+    while (buffer.hasFreeSpace()) {
       buffer.push(signal.next());
+    }
   }
 
   double idealTopUpInterval() {
