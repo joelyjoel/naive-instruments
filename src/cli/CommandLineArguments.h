@@ -1,5 +1,6 @@
 #pragma once
 #include "../core.h"
+#include "../parsing/Parse.h"
 #include "SignalString.h"
 #include <iostream>
 #include <map>
@@ -183,7 +184,7 @@ public:
       auto str = require(key);
       float val;
       try {
-        val = std::stof(str);
+        val = Parse::number(str);
       } catch (int err) {
         std::cerr << "Argument \"" << key << "\" must be an number\n";
         throw MISSING_ARGUMENT;
