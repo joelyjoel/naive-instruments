@@ -29,5 +29,6 @@ private:
   const string positivePointNumber = "\\." + naturalNumber;
 
 public:
-  const string number = Or(naturalNumber, positiveDecimal, positivePointNumber);
+  const string number =
+      "-?" + Bracket(Or(naturalNumber, positiveDecimal, positivePointNumber));
 };
