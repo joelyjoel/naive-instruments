@@ -8,7 +8,8 @@ using std::string, std::vector;
  */
 class RegularExpressionSources {
 private:
-  const string Bracket(const string &operand) { return "(" + operand + ")"; }
+  const string Bracket(const string &operand) { return "(?:" + operand + ")"; }
+  const string Capture(const string &operand) { return "(" + operand + ")"; }
   const string Optional(const string &operand) {
     return Bracket(operand) + "?";
   }
@@ -23,6 +24,8 @@ private:
 public:
   const string naturalNumber = "\\d+";
   const string integer = "(-|+)? ?" + naturalNumber;
+  const string word = "\\w+";
+  const string ignoreWhitespace = "\\s*";
 
 private:
   const string positiveDecimal = naturalNumber + "\\." + naturalNumber;
@@ -31,4 +34,7 @@ private:
 public:
   const string number =
       "-?" + Bracket(Or(naturalNumber, positiveDecimal, positivePointNumber));
+
+  const string numberWithUnit =
+      Capture(number) + ignoreWhitespace + Capture("\\w*");
 };
