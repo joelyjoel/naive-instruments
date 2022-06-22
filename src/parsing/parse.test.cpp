@@ -30,8 +30,20 @@ TEST_CASE("Parsing numbers with units", "[Parse]") {
   REQUIRE(Parse::numberWithUnit("12").unit == Units::noUnit);
 }
 
+TEST_CASE("Parsing units which use special characters", "[Parse]") {
+  REQUIRE(Parse::numberWithUnit("50%").number == 50);
+  REQUIRE(Parse::numberWithUnit("50%").unit == Units::percent);
+}
+
 TEST_CASE("Parsing times with different units", "[Parse]") {
   REQUIRE(Parse::time("1") == 1);
   REQUIRE(Parse::time("1s") == 1.0);
   REQUIRE(Parse::time("100ms") == 0.1f);
+}
+
+TEST_CASE("Parsing ratios", "[Parse]") {
+  REQUIRE(Parse::ratio("50%") == .5);
+  REQUIRE(Parse::ratio(".75") == .75);
+  REQUIRE(Parse::ratio("12st") == 2);
+  REQUIRE(Parse::ratio("2 octaves") == 4);
 }

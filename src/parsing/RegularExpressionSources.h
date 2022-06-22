@@ -25,6 +25,7 @@ public:
   const string naturalNumber = "\\d+";
   const string integer = "(-|+)? ?" + naturalNumber;
   const string word = "\\w+";
+  const string unit = "%|(?:\\w+)?";
   const string ignoreWhitespace = "\\s*";
 
 private:
@@ -36,5 +37,5 @@ public:
       "-?" + Bracket(Or(naturalNumber, positiveDecimal, positivePointNumber));
 
   const string numberWithUnit =
-      Capture(number) + ignoreWhitespace + Capture("\\w*");
+      Capture(number) + ignoreWhitespace + Capture(unit);
 };

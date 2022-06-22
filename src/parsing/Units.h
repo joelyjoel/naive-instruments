@@ -5,12 +5,7 @@ using std::string;
 
 class Units {
 public:
-  typedef enum {
-    Time = 1,
-    Frequency = 2,
-    Interval = 3,
-    Volume = 4,
-  } Domain;
+  typedef enum { Time = 1, Frequency, Ratio } Domain;
 
   typedef enum {
     unknownUnit = -1,
@@ -31,12 +26,11 @@ public:
     /** Midi pitch number */
     midi,
 
-    // Interval
-    octaves = Interval * 100,
+    // ratio
+    percent = Ratio * 100,
+    octaves,
     semitones,
-
-    // Volume
-    decibels = Volume * 100,
+    decibels,
 
   } Unit;
 
@@ -64,9 +58,11 @@ public:
     else if (str == "midi")
       return midi;
     else if (str == "octave" || str == "octaves")
-      return midi;
+      return octaves;
     else if (str == "st")
       return semitones;
+    else if (str == "%")
+      return percent;
 
     else
       return unknownUnit;

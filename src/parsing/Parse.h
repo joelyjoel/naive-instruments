@@ -44,4 +44,9 @@ public:
     auto parsed = numberWithUnit(str);
     return EvaluateUnits::time(parsed.number, parsed.unit);
   }
+
+  static float ratio(const string &str) {
+    auto parsed = numberWithUnit(str);
+    return EvaluateUnits::ratio(parsed.number, parsed.unit);
+  }
 };

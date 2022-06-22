@@ -24,4 +24,19 @@ public:
       throw CantHandleUnit;
     }
   }
+
+  static float ratio(float n, Units::Unit unit) {
+    switch (unit) {
+    case Units::noUnit:
+      return n;
+    case Units::percent:
+      return n * .01;
+    case Units::semitones:
+      return pow(2, n / 12.0);
+    case Units::octaves:
+      return pow(2, n);
+    default:
+      throw CantHandleUnit;
+    }
+  }
 };
