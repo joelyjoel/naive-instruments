@@ -18,6 +18,10 @@ public:
       return n;
     case Units::milliseconds:
       return n * .001;
+    case Units::minutes:
+      return n * 60;
+    case Units::hours:
+      return n * 60 * 60;
     case Units::samples:
       return n / float(sampleRate);
     default:
