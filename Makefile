@@ -42,6 +42,11 @@ build-and-run-tests:
 	g++ ${FLAGS} src/file-io/record.cpp src/snapshot-tests.cpp -o src/snapshot-tests.bin
 	src/snapshot-tests.bin
 
+tests:
+	g++ ${FLAGS} src/**/*.test.cpp -o bin/unit-tests
+
+test: tests
+	bin/unit-tests
 
 
 
