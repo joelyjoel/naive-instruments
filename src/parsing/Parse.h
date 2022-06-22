@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../core.h"
+#include "NumberWithUnit.h"
 #include "RegularExpressionSources.h"
 #include <iostream>
 #include <regex>
@@ -16,12 +18,27 @@ private:
 
 public:
   static float number(const std::string &str) {
-    std::cerr << "\n" << regexs.number << "\n\n";
     const regex re(regexs.number);
     bool isMatch = regex_match(str, re);
     if (isMatch)
       return stof(str);
     else
       throw 1;
+  }
+
+  static NumberWithUnit numberWithUnit(const std::string &str) {
+    const regex pattern(regexs.numberWithUnit);
+    std::smatch result;
+    bool isMatch = regex_match(str, result, pattern);
+    float n = number(result[1].str());
+    string unit = result[2].str();
+
+    return {n, unit};
+  }
+
+  Unit unit(const std::string &str) {}
+
+  static float time(const std::string &str) {
+    auto parse = numberWithUnit(str);
   }
 };

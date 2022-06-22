@@ -8,9 +8,9 @@ public:
     const auto filename = args[0];
     auto buffer = WavReader::readMonoFile(filename);
 
-    // TODO: support time units: s, samp, zx, onset etc
-    const float from = args.number("from", 0);
-    const float to = args.number("to", buffer->duration());
+    const float from = args.time("from", "0s");
+    // TODO: not 100s
+    const float to = args.time("to", "100s");
 
     MonoBuffer *sliced = buffer->slice(from, to);
 

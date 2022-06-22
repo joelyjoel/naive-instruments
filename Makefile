@@ -35,6 +35,7 @@ main:
 		src/file-io/record.cpp \
 		src/playback/BufferedPlayback.cpp \
 		src/parsing/Parse.cpp \
+		src/parsing/Unit.cpp \
 		src/main.cpp -o bin/ni
 
 build-and-run-tests:

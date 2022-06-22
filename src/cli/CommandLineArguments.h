@@ -194,6 +194,15 @@ public:
       return fallback;
   }
 
+  const float time(const std::string &key, const std::string &fallback) {
+    std::cerr << "Getting time\n";
+    if (exists(key)) {
+      auto str = require(key);
+      return Parse::time(str);
+    } else
+      return Parse::time(fallback);
+  }
+
   bool boolean(const std::string &key) { return exists(key); }
 
   const std::string string(const std::string &key,
