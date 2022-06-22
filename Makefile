@@ -19,6 +19,10 @@ PORTAUDIO_FLAGS=-I ../include\
 
 NCURSES_FLAGS=-D_XOPEN_SOURCE_EXTENDED -lncurses
 
+CPP_SOURCE_FILES=src/file-io/record.cpp \
+	src/playback/BufferedPlayback.cpp \
+	src/parsing/Parse.cpp
+
 FLAGS=-std=c++20 \
 			-I ./dependencies -L ./dependencies \
 			${NCURSES_FLAGS} \
@@ -32,9 +36,7 @@ all: main build-and-run-tests
 main:
 	mkdir -p bin
 	g++ ${FLAGS} \
-		src/file-io/record.cpp \
-		src/playback/BufferedPlayback.cpp \
-		src/parsing/Parse.cpp \
+		${CPP_SOURCE_FILES} \
 		src/main.cpp -o bin/ni
 
 build-and-run-tests:
@@ -43,7 +45,7 @@ build-and-run-tests:
 	src/snapshot-tests.bin
 
 tests:
-	g++ ${FLAGS} src/**/*.test.cpp -o bin/unit-tests
+	g++ ${FLAGS} src/**/*.test.cpp ${CPP_SOURCE_FILES} -o bin/unit-tests
 
 test: tests
 	bin/unit-tests

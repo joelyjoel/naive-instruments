@@ -16,7 +16,6 @@ private:
 
 public:
   static float number(const std::string &str) {
-    std::cerr << "\n" << regexs.number << "\n\n";
     const regex re(regexs.number);
     bool isMatch = regex_match(str, re);
     if (isMatch)

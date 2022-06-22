@@ -3,13 +3,17 @@
                           // in one cpp file
 #include "../../dependencies/catch.hpp"
 
+#include "Parse.h"
+
 unsigned int Factorial(unsigned int number) {
   return number <= 1 ? number : Factorial(number - 1) * number;
 }
 
-TEST_CASE("Factorials are computed", "[factorial]") {
-  REQUIRE(Factorial(1) == 1);
-  REQUIRE(Factorial(2) == 2);
-  REQUIRE(Factorial(3) == 6);
-  REQUIRE(Factorial(10) == 3628800);
+TEST_CASE("Parsing numbers", "[factorial]") {
+  REQUIRE(Parse::number("42") == 42);
+  REQUIRE(Parse::number(".42") == 0.42f);
+  REQUIRE(Parse::number("1.42") == 1.42f);
+  REQUIRE(Parse::number("-42") == -42);
+  REQUIRE(Parse::number("-.42") == -0.42f);
+  REQUIRE(Parse::number("-1.42") == -1.42f);
 }
