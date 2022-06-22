@@ -29,3 +29,9 @@ TEST_CASE("Parsing numbers with units", "[Parse]") {
   REQUIRE(Parse::numberWithUnit("12 seconds").unit == Units::seconds);
   REQUIRE(Parse::numberWithUnit("12").unit == Units::noUnit);
 }
+
+TEST_CASE("Parsing times with different units", "[Parse]") {
+  REQUIRE(Parse::time("1") == 1);
+  REQUIRE(Parse::time("1s") == 1.0);
+  REQUIRE(Parse::time("100ms") == 0.1f);
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EvaluateUnits.h"
 #include "NumberWithUnit.h"
 #include "RegularExpressionSources.h"
 #include "Units.h"
@@ -37,5 +38,10 @@ public:
       return {n, u};
     } else
       throw 1;
+  }
+
+  static float time(const string &str) {
+    auto parsed = numberWithUnit(str);
+    return EvaluateUnits::time(parsed.number, parsed.unit);
   }
 };
