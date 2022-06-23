@@ -40,6 +40,6 @@ Frequency signal for Twinkle Twinkle Little Star
 120bpm:
 c_ c_ g_ g_ a_ a_ g__  
 f_ f_ e_ e_ d_ d_ c__
-```;
+```
 
 

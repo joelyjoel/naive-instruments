@@ -13,12 +13,17 @@ private:
   const string Optional(const string &operand) {
     return Bracket(operand) + "?";
   }
+  const string Kleene(const string &operand) { return Bracket(operand) + "*"; }
 
   const string Or(const string &a, const string &b) {
     return Bracket(a) + "|" + Bracket(b);
   }
   const string Or(const string &a, const string &b, const string &c) {
     return Bracket(a) + "|" + Bracket(b) + "|" + Bracket(c);
+  }
+  const string Or(const string &a, const string &b, const string &c,
+                  const string &d) {
+    return Bracket(a) + "|" + Bracket(b) + "|" + Bracket(c) + "|" + Bracket(d);
   }
 
 public:
@@ -38,4 +43,18 @@ public:
 
   const string numberWithUnit =
       Capture(number) + ignoreWhitespace + Capture(unit);
+
+  // Control Signals
+private:
+  const string controlSequenceTempoInstruction = numberWithUnit + ":";
+  const string controlSequenceValueInstruction = numberWithUnit;
+  const string controlSequenceGlideInstruction = "~";
+  const string controlSequenceRestInstruction = "_";
+  const string controlSequenceInstruction =
+      Or(controlSequenceTempoInstruction, controlSequenceValueInstruction,
+         controlSequenceGlideInstruction, controlSequenceRestInstruction);
+
+public:
+  const string controlSequence =
+      Kleene(Capture(controlSequenceInstruction) + ignoreWhitespace);
 };
