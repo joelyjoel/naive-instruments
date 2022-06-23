@@ -48,3 +48,10 @@ TEST_CASE("Parsing ratios", "[Parse]") {
   REQUIRE(Parse::ratio("12st") == 2);
   REQUIRE(Parse::ratio("2 octaves") == 4);
 }
+
+TEST_CASE("Parsing frequencies", "[Parse]") {
+  REQUIRE(Parse::frequency("99Hz") == 99);
+  REQUIRE(Parse::frequency("60bpm") == 1);
+  REQUIRE(Parse::bpm("60bpm") == 60);
+  REQUIRE(Parse::bpm("2.5Hz") == 150);
+}

@@ -1,6 +1,7 @@
 #include "Units.h"
 
 #include "../core.h"
+#include "NumberWithUnit.h"
 
 class EvaluateUnits {
 public:
@@ -10,8 +11,7 @@ public:
   /**
    * Evaluates a parsed time as millseconds.
    */
-  static float time(float n, Units::Unit unit,
-                    EvaluateTimeContext *ctx = nullptr) {
+  static float time(float n, Units::Unit unit) {
     switch (unit) {
     case Units::noUnit:
     case Units::seconds:
@@ -27,6 +27,35 @@ public:
     default:
       throw CantHandleUnit;
     }
+  }
+
+  static float time(float n, Units::Unit unit, MonoBuffer &sample) {
+    switch (unit) {
+    case Units::samples:
+      return n / float(sample.sampleRate);
+    case Units::percent:
+      return n * .01 * sample.duration();
+    // TODO: Zero crossings
+    default:
+      return time(n, unit);
+    }
+  }
+
+  static float frequency(NumberWithUnit &n) {
+    switch (n.unit) {
+    case Units::noUnit:
+    case Units::Hz:
+      return n.number;
+    case Units::bpm:
+      return n.number / 60.0;
+    default:
+      throw CantHandleUnit;
+    }
+  }
+
+  static float bpm(NumberWithUnit &n) {
+    float f = frequency(n);
+    return f * 60.0;
   }
 
   static float ratio(float n, Units::Unit unit) {

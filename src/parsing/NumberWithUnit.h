@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Units.h"
 
 class NumberWithUnit {
