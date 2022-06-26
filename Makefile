@@ -1,7 +1,7 @@
 coreCPPFiles="src/file-io/record.cpp"
 
 PORTAUDIO_FLAGS=-I ../include\
-							  -I ../vendor/include \
+								-I ../vendor/include \
 								-stdlib=libc++ \
 								-fPIC \
 								-isystem /usr/local/include \
@@ -20,8 +20,9 @@ PORTAUDIO_FLAGS=-I ../include\
 NCURSES_FLAGS=-D_XOPEN_SOURCE_EXTENDED -lncurses
 
 CPP_SOURCE_FILES=src/file-io/record.cpp \
-	src/playback/BufferedPlayback.cpp \
-	src/parsing/Parse.cpp
+								 src/playback/BufferedPlayback.cpp \
+								 src/parsing/Parse.cpp \
+								 src/parsing/RegularExpressionSources.cpp
 
 FLAGS=-std=c++20 \
 			-I ./dependencies -L ./dependencies \
