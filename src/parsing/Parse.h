@@ -25,54 +25,77 @@ public:
     if (isMatch)
       return stof(str);
     else
-      return FAILED;
+      return Disappointment;
   }
 
-  static Units::Unit unit(const string &str) { return Units::parse(str); }
+  static Hopefully<Units::Unit> unit(const string &str) {
+    return Units::parse(str);
+  }
 
-  static NumberWithUnit numberWithUnit(const string &str) {
+  static Hopefully<NumberWithUnit> numberWithUnit(const string &str) {
     const regex re(regexs.numberWithUnit);
     std::smatch result;
     if (regex_match(str, result, re)) {
-      const auto n = number(result[1]);
-      const auto u = unit(result[2]);
-      return {*n, u};
+      Hopefully<float> n = number(result[1]);
+      Hopefully<Units::Unit> u = unit(result[2]);
+      if (n.success() && u.success())
+        return NumberWithUnit(*n, *u);
+      else
+        return Disappointment;
     } else
-      throw 1;
+      return Disappointment;
   }
 
-  static float time(const string &str) {
-    auto parsed = numberWithUnit(str);
-    return EvaluateUnits::time(parsed.number, parsed.unit);
+  static Hopefully<float> time(const string &str) {
+    Hopefully<NumberWithUnit> parsed = numberWithUnit(str);
+    if (parsed.success()) {
+      return EvaluateUnits::time(*parsed);
+    } else
+      return Disappointment;
   }
 
   /**
    * Parse time using a sample as context.
    */
-  static float time(const string &str, MonoBuffer sample) {
+  static Hopefully<float> time(const string &str, MonoBuffer sample) {
     auto parsed = numberWithUnit(str);
-    return EvaluateUnits::time(parsed.number, parsed.unit, sample);
+    if (parsed.success())
+      return EvaluateUnits::time(*parsed, sample);
+    return Disappointment;
   }
 
-  static float ratio(const string &str) {
+  static Hopefully<float> ratio(const string &str) {
     auto parsed = numberWithUnit(str);
     // TODO: Parse ratios like 2:3
     // TODO: Parse fractions like 1/2
-    return EvaluateUnits::ratio(parsed.number, parsed.unit);
+    if (parsed.success())
+      return EvaluateUnits::ratio(*parsed);
+    else
+      return Disappointment;
   }
 
-  static float frequency(const string &str) {
+  static Hopefully<float> frequency(const string &str) {
     // TODO: Parse midi note names
     auto parsed = numberWithUnit(str);
-    return EvaluateUnits::frequency(parsed);
-  }
-  static float bpm(const string &str) {
-    auto parsed = numberWithUnit(str);
-    return EvaluateUnits::bpm(parsed);
+    if (parsed.success())
+      return EvaluateUnits::frequency(*parsed);
+    else
+      return Disappointment;
   }
 
-  static float interval(const string &str) {
+  static Hopefully<float> bpm(const string &str) {
     auto parsed = numberWithUnit(str);
-    return EvaluateUnits::interval(parsed);
+    if (parsed.success())
+      return EvaluateUnits::bpm(*parsed);
+    else
+      return Disappointment;
+  }
+
+  static Hopefully<float> interval(const string &str) {
+    auto parsed = numberWithUnit(str);
+    if (parsed.success())
+      return EvaluateUnits::interval(*parsed);
+    else
+      return Disappointment;
   }
 };

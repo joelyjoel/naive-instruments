@@ -1,18 +1,23 @@
 #pragma once
 #include "Errors.h"
 
-typedef enum { FAILED, PASSED } MaybeState;
+typedef enum { Disappointment, Satisfaction } HopefullyState;
 
 /**
  * A container class for things that may or may not be available.
  */
 template <typename T> class Hopefully {
-  const T actual;
-  const MaybeState state;
+
+  // I know this must be wasting time copying objects multiple times, I
+  // need to better understand C++ constructors/conversions to fix that
+
+  T actual;
+  const HopefullyState state;
 
 public:
-  Hopefully(T actual) : actual(actual), state(PASSED) {}
-  Hopefully(void) : state(FAILED){};
+  Hopefully(T actual) : actual(actual), state(Satisfaction) {}
+  Hopefully(HopefullyState state) : state(state) {}
+  Hopefully(void) : state(Disappointment){};
 
   bool success() const { return state; }
   const T access() const {
@@ -23,4 +28,12 @@ public:
   }
 
   const T operator*() const { return access(); }
+  const T *operator->() const { return &actual; }
+
+  bool operator==(const T &operand) const {
+    if (success())
+      return operand == actual;
+    else
+      return false;
+  }
 };
