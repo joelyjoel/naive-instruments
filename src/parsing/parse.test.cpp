@@ -55,3 +55,9 @@ TEST_CASE("Parsing frequencies", "[Parse]") {
   REQUIRE(Parse::bpm("60bpm") == 60);
   REQUIRE(Parse::bpm("2.5Hz") == 150);
 }
+
+TEST_CASE("Parsing intervals", "[Parse]") {
+  REQUIRE(Parse::interval("100Hz") == 0.01f);
+  REQUIRE(Parse::interval("60bpm") == 1);
+  REQUIRE(Parse::interval("100ms") == 0.1f);
+}

@@ -69,4 +69,9 @@ public:
     auto parsed = numberWithUnit(str);
     return EvaluateUnits::bpm(parsed);
   }
+
+  static float interval(const string &str) {
+    auto parsed = numberWithUnit(str);
+    return EvaluateUnits::interval(parsed);
+  }
 };

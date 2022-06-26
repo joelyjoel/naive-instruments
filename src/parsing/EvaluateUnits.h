@@ -53,6 +53,28 @@ public:
     }
   }
 
+  static float interval(NumberWithUnit &n) {
+    switch (n.unit) {
+    case Units::noUnit:
+    case Units::seconds:
+      return n.number;
+    case Units::bpm:
+      return 1.0 / (n.number / 60.0);
+    case Units::Hz:
+      return 1.0 / n.number;
+    case Units::milliseconds:
+      return n.number * .001;
+    case Units::minutes:
+      return n.number * 60;
+    case Units::hours:
+      return n.number * 60 * 60;
+    case Units::samples:
+      return n.number / float(sampleRate);
+    default:
+      throw CantHandleUnit;
+    }
+  }
+
   static float bpm(NumberWithUnit &n) {
     float f = frequency(n);
     return f * 60.0;
