@@ -11,37 +11,37 @@ public:
   /**
    * Evaluates a parsed time as millseconds.
    */
-  static float time(float n, Units::Unit unit) {
-    switch (unit) {
+  static Hopefully<float> time(const NumberWithUnit &n) {
+    switch (n.unit) {
     case Units::noUnit:
     case Units::seconds:
-      return n;
+      return n.number;
     case Units::milliseconds:
-      return n * .001;
+      return n.number * .001;
     case Units::minutes:
-      return n * 60;
+      return n.number * 60;
     case Units::hours:
-      return n * 60 * 60;
+      return n.number * 60 * 60;
     case Units::samples:
-      return n / float(sampleRate);
+      return n.number / float(sampleRate);
     default:
-      throw CantHandleUnit;
+      return Disappointment;
     }
   }
 
-  static float time(float n, Units::Unit unit, MonoBuffer &sample) {
-    switch (unit) {
+  static Hopefully<float> time(const NumberWithUnit &n, MonoBuffer &sample) {
+    switch (n.unit) {
     case Units::samples:
-      return n / float(sample.sampleRate);
+      return n.number / float(sample.sampleRate);
     case Units::percent:
-      return n * .01 * sample.duration();
+      return n.number * .01 * sample.duration();
     // TODO: Zero crossings
     default:
-      return time(n, unit);
+      return time(n);
     }
   }
 
-  static float frequency(NumberWithUnit &n) {
+  static Hopefully<float> frequency(const NumberWithUnit &n) {
     switch (n.unit) {
     case Units::noUnit:
     case Units::Hz:
@@ -49,11 +49,11 @@ public:
     case Units::bpm:
       return n.number / 60.0;
     default:
-      throw CantHandleUnit;
+      return Disappointment;
     }
   }
 
-  static float interval(NumberWithUnit &n) {
+  static Hopefully<float> interval(const NumberWithUnit &n) {
     switch (n.unit) {
     case Units::noUnit:
     case Units::seconds:
@@ -75,23 +75,26 @@ public:
     }
   }
 
-  static float bpm(NumberWithUnit &n) {
-    float f = frequency(n);
-    return f * 60.0;
+  static Hopefully<float> bpm(const NumberWithUnit &n) {
+    Hopefully<float> f = frequency(n);
+    if (f.success())
+      return *f * 60.0;
+    else
+      return Disappointment;
   }
 
-  static float ratio(float n, Units::Unit unit) {
-    switch (unit) {
+  static Hopefully<float> ratio(const NumberWithUnit &n) {
+    switch (n.unit) {
     case Units::noUnit:
-      return n;
+      return n.number;
     case Units::percent:
-      return n * .01;
+      return n.number * .01;
     case Units::semitones:
-      return pow(2, n / 12.0);
+      return pow(2, n.number / 12.0);
     case Units::octaves:
-      return pow(2, n);
+      return pow(2, n.number);
     default:
-      throw CantHandleUnit;
+      return Disappointment;
     }
   }
 };

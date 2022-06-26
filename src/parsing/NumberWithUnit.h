@@ -8,4 +8,5 @@ public:
   Units::Unit unit;
 
   NumberWithUnit(float n, Units::Unit unit) : number(n), unit(unit) {}
+  NumberWithUnit() : number(0), unit(Units::noUnit) {}
 };
