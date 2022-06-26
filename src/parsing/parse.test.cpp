@@ -10,12 +10,12 @@ unsigned int Factorial(unsigned int number) {
 }
 
 TEST_CASE("Parsing numbers", "[Parse]") {
-  REQUIRE(Parse::number("42") == 42);
-  REQUIRE(Parse::number(".42") == 0.42f);
-  REQUIRE(Parse::number("1.42") == 1.42f);
-  REQUIRE(Parse::number("-42") == -42);
-  REQUIRE(Parse::number("-.42") == -0.42f);
-  REQUIRE(Parse::number("-1.42") == -1.42f);
+  REQUIRE(*Parse::number("42") == 42);
+  REQUIRE(*Parse::number(".42") == 0.42f);
+  REQUIRE(*Parse::number("1.42") == 1.42f);
+  REQUIRE(*Parse::number("-42") == -42);
+  REQUIRE(*Parse::number("-.42") == -0.42f);
+  REQUIRE(*Parse::number("-1.42") == -1.42f);
 }
 TEST_CASE("Parsing units", "[Parse]") {
   REQUIRE(Parse::unit("s") == Units::seconds);

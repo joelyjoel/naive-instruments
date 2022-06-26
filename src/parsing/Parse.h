@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../core.h"
 #include "EvaluateUnits.h"
 #include "NumberWithUnit.h"
 #include "RegularExpressionSources.h"
@@ -18,13 +19,13 @@ private:
   static const RegularExpressionSources regexs;
 
 public:
-  static float number(const string &str) {
+  static Hopefully<float> number(const string &str) {
     const regex re(regexs.number);
     bool isMatch = regex_match(str, re);
     if (isMatch)
       return stof(str);
     else
-      throw 1;
+      return FAILED;
   }
 
   static Units::Unit unit(const string &str) { return Units::parse(str); }
@@ -35,7 +36,7 @@ public:
     if (regex_match(str, result, re)) {
       const auto n = number(result[1]);
       const auto u = unit(result[2]);
-      return {n, u};
+      return {*n, u};
     } else
       throw 1;
   }

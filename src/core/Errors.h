@@ -1,3 +1,3 @@
 #pragma once
 
-enum Errors { CantHandleUnit };
+enum Errors { CantHandleUnit, UnfulfilledMaybe };
