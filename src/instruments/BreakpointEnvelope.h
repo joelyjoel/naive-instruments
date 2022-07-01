@@ -47,14 +47,15 @@ public:
     return duration;
   }
 
-private:
-  double lastEndValue() {
+protected:
+  const double lastEndValue() {
     if (sections.size() > 0)
       return sections[sections.size() - 1].endValue;
     else
       return restValue;
   }
 
+private:
   double startValue, endValue, progressPerSample, progress;
   void playSection(Section &section) {
     startValue = section.startValue;

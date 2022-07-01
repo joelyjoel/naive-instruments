@@ -22,11 +22,11 @@ const string RegularExpressionSources::controlSequenceTempoInstruction =
     numberWithUnit + ":";
 const string RegularExpressionSources::controlSequenceValueInstruction =
     numberWithUnit;
-const string RegularExpressionSources::controlSequenceGlideInstruction = "~";
-const string RegularExpressionSources::controlSequenceRestInstruction = "_";
+const string RegularExpressionSources::controlSequenceSustainInstruction =
+    "[~_]+";
 const string RegularExpressionSources::controlSequenceInstruction =
     Or(controlSequenceTempoInstruction, controlSequenceValueInstruction,
-       controlSequenceGlideInstruction, controlSequenceRestInstruction);
+       controlSequenceSustainInstruction);
 
 const string RegularExpressionSources::controlSequence =
     Kleene(Capture(controlSequenceInstruction) + ignoreWhitespace);

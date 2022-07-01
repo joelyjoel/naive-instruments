@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
@@ -7,6 +9,7 @@ using std::string, std::vector;
  * NOTE: Use as singleton
  */
 class RegularExpressionSources {
+  // TODO: use a new class ComposableRegex for all these definitions
 private:
   static const string Bracket(const string &operand) {
     return "(?:" + operand + ")";
@@ -52,8 +55,7 @@ public:
 private:
   static const string controlSequenceTempoInstruction;
   static const string controlSequenceValueInstruction;
-  static const string controlSequenceGlideInstruction;
-  static const string controlSequenceRestInstruction;
+  static const string controlSequenceSustainInstruction;
   static const string controlSequenceInstruction;
 
 public:
