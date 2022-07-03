@@ -184,7 +184,7 @@ public:
       auto str = require(key);
       float val;
       try {
-        val = Parse::number(str);
+        val = *Parse::number(str);
       } catch (int err) {
         std::cerr << "Argument \"" << key << "\" must be an number\n";
         throw MISSING_ARGUMENT;
