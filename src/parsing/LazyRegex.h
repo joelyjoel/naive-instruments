@@ -44,6 +44,20 @@ public:
   LazyRegex operator+(const LazyRegex &operand) const {
     return src() + operand.src();
   }
+
+private:
+  LazyRegex bracket() { return "(?:" + src() + ")"; }
+
+public:
+  LazyRegex capture() { return "(" + src() + ")"; }
+
+  LazyRegex optional() { return bracket() + "?"; }
+  LazyRegex disjunction(LazyRegex &operand) {
+    return bracket() + "|" + operand.bracket();
+  }
+  LazyRegex operator|(LazyRegex &operand) { return disjunction(operand); }
+
+  LazyRegex kleene() { return bracket() + "*"; }
 };
 
 LazyRegex operator+(const string &a, const LazyRegex &b);
