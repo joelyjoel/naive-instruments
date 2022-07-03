@@ -88,21 +88,26 @@ private:
 
   bool appendSustainInstruction(const string &instruction) {
     std::cerr << "Attempting to append sustain instruction\n";
-    for (int i = 0; i < instruction.size(); ++i) {
-      char c = instruction[i];
-      if (c == '_')
-        interpolationSteps.push_back({stepInterval, Rest});
-      else if (c == '~')
-        interpolationSteps.push_back({stepInterval, LinearGlide});
-      else if (c == ' ')
-        continue;
-      else {
-        std::cerr << "Unexpected character in sustain instruction: " << c
-                  << "\n";
-        throw 1;
+    regex pattern(RegularExpressionSources::controlSequenceSustainInstruction);
+    if (!regex_match(instruction, pattern))
+      return false;
+    else {
+      for (int i = 0; i < instruction.size(); ++i) {
+        char c = instruction[i];
+        if (c == '_')
+          interpolationSteps.push_back({stepInterval, Rest});
+        else if (c == '~')
+          interpolationSteps.push_back({stepInterval, LinearGlide});
+        else if (c == ' ')
+          continue;
+        else {
+          std::cerr << "Unexpected character in sustain instruction: " << c
+                    << "\n";
+          throw 1;
+        }
       }
+      return true;
     }
-    return true;
   }
 
   int sumGlidingDuration() {
