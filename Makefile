@@ -51,6 +51,12 @@ tests:
 test: tests
 	bin/unit-tests
 
+check: test build-and-run-tests
+
+distcheck:
+	echo "make distcheck has no task yet..";
+
+
 
 
 #TODO: concat - join samples together with crossfades
