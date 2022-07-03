@@ -37,7 +37,7 @@ public:
 
   static Hopefully<ControlSignal *> parse(const string &instructions) {
     auto instance = new ControlSignal();
-    if (instance->appendInstructionString(instructions))
+    if (instance->appendControlString(instructions))
       return instance;
     else {
       delete instance;
