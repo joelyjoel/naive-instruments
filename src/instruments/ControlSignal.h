@@ -11,13 +11,21 @@ using std::string, std::regex, std::smatch, std::regex_match, std::vector;
 
 class ControlSignal : public BreakpointEnvelope {
 public:
-  void appendControlString(const string &controlStr) {
-    const regex pattern(RegularExpressionSources::controlSequence);
+  bool appendControlString(const string &controlStr) {
+    const string patternSrc =
+        "^" + RegularExpressionSources::controlSequence + "$";
+    std::cerr << "Pattern src: '" << patternSrc << "'\n";
+    const regex pattern(patternSrc);
     smatch instructionStrings;
     if (regex_match(controlStr, instructionStrings, pattern)) {
+      std::cerr << "Found " << instructionStrings.size()
+                << " instructions within '" << controlStr << "'\n";
       for (int i = 1; i < instructionStrings.size(); ++i)
-        appendInstructionString(instructionStrings[i]);
+        appendInstructionString(instructionStrings[i].str());
       flushInterpolation();
+      return true;
+    } else {
+      return false;
     }
   }
 
