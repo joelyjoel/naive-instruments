@@ -55,9 +55,9 @@ public:
 private:
   static const string controlSequenceTempoInstruction;
   static const string controlSequenceValueInstruction;
-  static const string controlSequenceSustainInstruction;
   static const string controlSequenceInstruction;
 
 public:
+  static const string controlSequenceSustainInstruction;
   static const string controlSequence;
 };
