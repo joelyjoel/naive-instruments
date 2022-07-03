@@ -2,6 +2,7 @@
 
 #include "../core.h"
 #include "../instruments/Constant.h"
+#include "../instruments/ControlSignal.h"
 #include "../instruments/Sampler.h"
 
 #include <iostream>
@@ -16,6 +17,12 @@ public:
     if (std::regex_search(str, wavFileRegex)) {
       std::cerr << "SAMPLE: " << str << "\n";
       return new Sampler(str);
+    }
+
+    Hopefully<ControlSignal *> controlSignal = ControlSignal::parse(str);
+    if (controlSignal.success()) {
+      std::cerr << "Using ControlSignal\n";
+      return *controlSignal;
     }
 
     try {
