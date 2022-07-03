@@ -47,6 +47,7 @@ public:
 
 private:
   bool appendInstructionString(const string &instruction) {
+    std::cerr << "Appending instruction '" << instruction << "'\n";
     return appendTempoInstruction(instruction) ||
            appendValueInstruction(instruction) ||
            appendSustainInstruction(instruction);
@@ -68,7 +69,7 @@ private:
   }
 
   bool appendValueInstruction(const string &instruction) {
-    std::cerr << "Attempting to append value instruction\n";
+    std::cerr << "Attempting to append value instructiont \n";
     // TODO: Use dynamic domain parsing
     const Hopefully<float> y = Parse::frequency(instruction);
     if (y.success()) {
