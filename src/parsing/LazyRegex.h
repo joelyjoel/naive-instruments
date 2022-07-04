@@ -37,6 +37,8 @@ public:
    */
   const regex &operator*() { return pattern(); }
 
+  bool test(const string &str) { return std::regex_match(str, pattern()); }
+
   // Functions for regex composition
 
   LazyRegex operator+(const string &operand) const { return src() + operand; }
