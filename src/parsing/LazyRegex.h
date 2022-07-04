@@ -45,19 +45,19 @@ public:
     return src() + operand.src();
   }
 
-private:
-  LazyRegex bracket() { return "(?:" + src() + ")"; }
+  LazyRegex bracket() const { return "(?:" + src() + ")"; }
 
-public:
-  LazyRegex capture() { return "(" + src() + ")"; }
+  LazyRegex capture() const { return "(" + src() + ")"; }
 
-  LazyRegex optional() { return bracket() + "?"; }
-  LazyRegex disjunction(LazyRegex &operand) {
+  LazyRegex optional() const { return bracket() + "?"; }
+  LazyRegex disjunction(const LazyRegex &operand) const {
     return bracket() + "|" + operand.bracket();
   }
-  LazyRegex operator|(LazyRegex &operand) { return disjunction(operand); }
+  LazyRegex operator|(const LazyRegex &operand) const {
+    return disjunction(operand);
+  }
 
-  LazyRegex kleene() { return bracket() + "*"; }
+  LazyRegex kleene() const { return bracket() + "*"; }
 };
 
 LazyRegex operator+(const string &a, const LazyRegex &b);
