@@ -23,6 +23,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 								 src/playback/BufferedPlayback.cpp \
 								 src/parsing/Parse.cpp \
 								 src/parsing/LazyRegex.cpp \
+								 src/parsing/CommonPatterns.cpp \
 								 src/parsing/RegularExpressionSources.cpp
 
 FLAGS=-std=c++20 \
