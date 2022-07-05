@@ -1,3 +1,5 @@
+#include <exception>
+#include <iostream>
 #include <regex>
 #include <string>
 
@@ -25,8 +27,14 @@ public:
   const string &src() const { return _src; }
   const regex &pattern() {
     if (_pattern == nullptr) {
-      _pattern = new regex(src());
-      return *_pattern;
+      try {
+        _pattern = new regex(src());
+        return *_pattern;
+      } catch (std::exception err) {
+        std::cerr << "There was a problem creating a LazyRegex from source: "
+                  << src() << "\n";
+        throw err;
+      }
     } else
       return *_pattern;
   }
