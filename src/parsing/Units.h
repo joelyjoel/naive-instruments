@@ -1,5 +1,6 @@
 #pragma once
 
+#include "LazyRegex.h"
 #include <string>
 using std::string;
 
@@ -36,7 +37,7 @@ public:
 
 public:
   static Unit parse(const string &str) {
-    // TODO: Use an a array of Unit class instances
+    // TODG
     if (str == "")
       return noUnit;
     else if (str == "s" || str == "seconds")
@@ -67,4 +68,6 @@ public:
     else
       return unknownUnit;
   }
+
+  static LazyRegex pattern;
 };
