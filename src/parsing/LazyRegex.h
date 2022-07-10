@@ -69,6 +69,10 @@ public:
   }
 
   LazyRegex kleene() const { return bracket() + "*"; }
+
+  // Commonly used patterns:
+  //
+  static LazyRegex ignoreWhitespace;
 };
 
 LazyRegex operator+(const string &a, const LazyRegex &b);
