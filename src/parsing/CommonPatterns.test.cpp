@@ -60,9 +60,9 @@ TEST_CASE("CommonPaterns:unsignedPointNumber accepts unsigned numbers that "
 }
 
 TEST_CASE("number accepts any number") {
-  vector<string> validNumberStrings = {"0",   "10", "-0",    "-10",
-                                       "0.0", ".0", ".0123", "-.55"};
-  for (auto str : validNumberStrings)
+  vector<string> validNumberStrings = {"0",  "10",    "-0",   "-10", "0.0",
+                                       ".0", ".0123", "-.55", "-.45"};
+  for (auto &str : validNumberStrings)
     REQUIRE(CommonPatterns::number.test(str));
 }
 

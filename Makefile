@@ -25,6 +25,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 								 src/parsing/LazyRegex.cpp \
 								 src/parsing/CommonPatterns.cpp \
 								 src/parsing/Units.cpp \
+								 src/parsing/NumberWithUnit.cpp \
 								 src/parsing/RegularExpressionSources.cpp
 
 FLAGS=-std=c++20 \

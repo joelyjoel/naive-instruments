@@ -9,4 +9,6 @@ public:
 
   NumberWithUnit(float n, Units::Unit unit) : number(n), unit(unit) {}
   NumberWithUnit() : number(0), unit(Units::noUnit) {}
+
+  static LazyRegex pattern;
 };
