@@ -41,3 +41,14 @@ TEST_CASE("Parsing tempo instructions") {
   REQUIRE(*ControlString::TempoInstruction::parse("0.5 seconds:") == .5);
   REQUIRE(*ControlString::TempoInstruction::parse("2Hz:") == .5);
 }
+
+TEST_CASE("Parsing value instructions") {
+  REQUIRE(*ControlString::ValueInstruction::parse("12") == 12);
+}
+
+TEST_CASE("Parsing sustain instructions") {
+  REQUIRE(*ControlString::SustainStepInstruction::parse("~") ==
+          ControlString::SustainStepInstruction::Gliding);
+  REQUIRE(*ControlString::SustainStepInstruction::parse("_") ==
+          ControlString::SustainStepInstruction::Resting);
+}
