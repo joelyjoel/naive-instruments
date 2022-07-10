@@ -1,5 +1,5 @@
 #include "NumberWithUnit.h"
-#include "CommonPatterns.h"
+#include "NumberPatterns.h"
 
-LazyRegex NumberWithUnit::pattern(CommonPatterns::number +
+LazyRegex NumberWithUnit::pattern(NumberPatterns::number +
                                   Units::pattern.bracket());

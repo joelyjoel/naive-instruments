@@ -23,7 +23,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 								 src/playback/BufferedPlayback.cpp \
 								 src/parsing/Parse.cpp \
 								 src/parsing/LazyRegex.cpp \
-								 src/parsing/CommonPatterns.cpp \
+								 src/parsing/NumberPatterns.cpp \
 								 src/parsing/Units.cpp \
 								 src/parsing/NumberWithUnit.cpp \
 								 src/parsing/RegularExpressionSources.cpp

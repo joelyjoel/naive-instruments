@@ -1,6 +1,6 @@
 #include "LazyRegex.h"
 
-class CommonPatterns {
+class NumberPatterns {
 public:
   static LazyRegex naturalNumber;
   static LazyRegex integer;
@@ -10,8 +10,6 @@ public:
   static LazyRegex unsignedPointNumber;
 
   static LazyRegex number;
-
-  static LazyRegex word;
 
   // TODO: Move these two to relevant classes
   static LazyRegex unit;
