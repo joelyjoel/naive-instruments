@@ -65,3 +65,9 @@ TEST_CASE("number accepts any number") {
   for (auto &str : validNumberStrings)
     REQUIRE(NumberPatterns::number.test(str));
 }
+
+TEST_CASE("NumberPatterns::parseNumber") {
+  REQUIRE(NumberPatterns::parseNumber("55") == 55);
+  REQUIRE(NumberPatterns::parseNumber("0") == 0);
+  REQUIRE(NumberPatterns::parseNumber("-.45") == -.45);
+}

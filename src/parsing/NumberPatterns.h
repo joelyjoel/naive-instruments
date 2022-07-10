@@ -1,3 +1,4 @@
+#include "../core.h"
 #include "LazyRegex.h"
 
 class NumberPatterns {
@@ -23,7 +24,13 @@ private:
   static LazyRegex controlSequenceGlideInstruction;
   static LazyRegex controlSequenceRestInstruction;
   static LazyRegex controlSequenceInstruction;
+  static LazyRegex controlSequence;
 
 public:
-  static LazyRegex controlSequence;
+  static Hopefully<float> parseNumber(const std::string &str) {
+    if (number.test(str))
+      return stof(str);
+    else
+      return Disappointment;
+  }
 };
