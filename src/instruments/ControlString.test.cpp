@@ -33,3 +33,11 @@ TEST_CASE("ControlString::pattern") {
   REQUIRE(ControlString::pattern.test("1~~~0"));
   REQUIRE(ControlString::pattern.test("100_ 200_ 100_ 200_"));
 }
+
+TEST_CASE("Parsing tempo instructions") {
+  REQUIRE(*ControlString::TempoInstruction::parse("120bpm:") == .5);
+  REQUIRE(*ControlString::TempoInstruction::parse("500ms:") == .5);
+  REQUIRE(*ControlString::TempoInstruction::parse(".5s:") == .5);
+  REQUIRE(*ControlString::TempoInstruction::parse("0.5 seconds:") == .5);
+  REQUIRE(*ControlString::TempoInstruction::parse("2Hz:") == .5);
+}

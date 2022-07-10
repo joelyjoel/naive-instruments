@@ -53,6 +53,7 @@ public:
     }
   }
 
+  // TODO: Remove (duplicated by NumberWithUnit)
   static Hopefully<float> interval(const NumberWithUnit &n) {
     switch (n.unit) {
     case Units::noUnit:

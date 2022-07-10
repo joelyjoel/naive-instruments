@@ -27,4 +27,37 @@ public:
     } else
       return Disappointment;
   }
+
+  Hopefully<float> interval() const {
+    switch (unit) {
+    case Units::noUnit:
+    case Units::seconds:
+      return number;
+    case Units::bpm:
+      return 1.0 / (number / 60.0);
+    case Units::Hz:
+      return 1.0 / number;
+    case Units::milliseconds:
+      return number * .001;
+    case Units::minutes:
+      return number * 60;
+    case Units::hours:
+      return number * 60 * 60;
+    case Units::samples:
+      return number / float(sampleRate);
+    default:
+      throw Disappointment;
+    }
+  }
+
+  /**
+   * Parse a number with unit as an interval in seconds.
+   */
+  static Hopefully<float> parseInterval(const std::string &str) {
+    auto nu = parse(str);
+    if (nu.success()) {
+      return nu->interval();
+    } else
+      return Disappointment;
+  }
 };

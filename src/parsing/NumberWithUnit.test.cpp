@@ -18,3 +18,9 @@ TEST_CASE("NumberWithUnit::parse ~~ Parsing numbers with units", "[Parse]") {
   REQUIRE(NumberWithUnit::parse("12 seconds")->unit == Units::seconds);
   REQUIRE(NumberWithUnit::parse("12")->unit == Units::noUnit);
 }
+
+TEST_CASE("NumberWithUnit::parseInterval()") {
+  REQUIRE(NumberWithUnit::parseInterval("2Hz") == .5);
+  REQUIRE(NumberWithUnit::parseInterval("120bpm") == .5);
+  REQUIRE(NumberWithUnit::parseInterval("500ms") == .5);
+}
