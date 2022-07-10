@@ -37,7 +37,6 @@ public:
 
 public:
   static Unit parse(const string &str) {
-    // TODG
     if (str == "")
       return noUnit;
     else if (str == "s" || str == "seconds")

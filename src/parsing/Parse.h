@@ -9,7 +9,7 @@
 #include <regex>
 #include <string_view>
 
-using std::regex, std::regex_match, std::string;
+using std::regex, std::string;
 
 /**
  * Base class for parsing c-style strings
@@ -20,12 +20,7 @@ private:
 
 public:
   static Hopefully<float> number(const string &str) {
-    const regex re(regexs.number);
-    bool isMatch = regex_match(str, re);
-    if (isMatch)
-      return stof(str);
-    else
-      return Disappointment;
+    return NumberPatterns::parseNumber(str);
   }
 
   static Hopefully<Units::Unit> unit(const string &str) {
@@ -33,17 +28,7 @@ public:
   }
 
   static Hopefully<NumberWithUnit> numberWithUnit(const string &str) {
-    const regex re(regexs.numberWithUnit);
-    std::smatch result;
-    if (regex_match(str, result, re)) {
-      Hopefully<float> n = number(result[1]);
-      Hopefully<Units::Unit> u = unit(result[2]);
-      if (n.success() && u.success())
-        return NumberWithUnit(*n, *u);
-      else
-        return Disappointment;
-    } else
-      return Disappointment;
+    return NumberWithUnit::parse(str);
   }
 
   static Hopefully<float> time(const string &str) {
