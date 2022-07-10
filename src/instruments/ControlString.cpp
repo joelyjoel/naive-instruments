@@ -1,16 +1,17 @@
 #include "ControlString.h"
 
 // Control Signals
-LazyRegex ControlString::controlSequenceTempoInstruction(
-    NumberWithUnit::pattern + ":");
-LazyRegex
-    ControlString::controlSequenceValueInstruction(NumberWithUnit::pattern);
-LazyRegex ControlString::controlSequenceGlideInstruction("~");
-LazyRegex ControlString::controlSequenceRestInstruction("_");
-LazyRegex ControlString::controlSequenceInstruction(
-    controlSequenceTempoInstruction | controlSequenceValueInstruction |
-    controlSequenceGlideInstruction | controlSequenceRestInstruction);
 
-LazyRegex ControlString::controlSequence((controlSequenceInstruction.capture() +
-                                          LazyRegex::ignoreWhitespace)
-                                             .kleene());
+LazyRegex ControlString::TempoInstruction::pattern(
+    NumberWithUnit::pattern.bracket() + ":");
+
+LazyRegex ControlString::ValueInstruction::pattern(NumberWithUnit::pattern);
+
+LazyRegex ControlString::SustainStepInstruction::pattern("[~_]");
+
+LazyRegex ControlString::anyInstructionPattern(TempoInstruction::pattern |
+                                               ValueInstruction::pattern |
+                                               SustainStepInstruction::pattern);
+
+LazyRegex ControlString::pattern(
+    (anyInstructionPattern.capture() + LazyRegex::ignoreWhitespace).kleene());

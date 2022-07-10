@@ -1,15 +1,25 @@
-#include "../core.h"
-#include "./BreakpointEnvelope.h"
-#include "../parsing/NumberWithUnit.h"
 #include "../parsing/LazyRegex.h"
+#include "../parsing/NumberWithUnit.h"
+#include "./BreakpointEnvelope.h"
 
 class ControlString : public BreakpointEnvelope {
 
 public:
-  static LazyRegex controlSequenceTempoInstruction;
-  static LazyRegex controlSequenceValueInstruction;
-  static LazyRegex controlSequenceGlideInstruction;
-  static LazyRegex controlSequenceRestInstruction;
-  static LazyRegex controlSequenceInstruction;
-  static LazyRegex controlSequence;
+  class TempoInstruction {
+  public:
+    static LazyRegex pattern;
+  };
+
+  class ValueInstruction {
+  public:
+    static LazyRegex pattern;
+  };
+
+  class SustainStepInstruction {
+  public:
+    static LazyRegex pattern;
+  };
+
+  static LazyRegex anyInstructionPattern;
+  static LazyRegex pattern;
 };
