@@ -12,6 +12,8 @@ public:
     const std::string str = args[0];
     auto &f = ControlString::parse(str);
 
+    std::cerr << "Frequency: " << f << "\n";
+
     osc.frequency << f;
 
     output(osc);
