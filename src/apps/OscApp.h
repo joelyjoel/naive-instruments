@@ -7,7 +7,7 @@ class OscApp : public CommandLineApp {
 
 public:
   void run() {
-    Saw osc;
+    Sine osc;
 
     const std::string str = args[0];
     auto &f = ControlString::parse(str);
