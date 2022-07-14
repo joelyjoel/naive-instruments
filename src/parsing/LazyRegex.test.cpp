@@ -71,3 +71,28 @@ TEST_CASE("Kleene closure of a LazyRegex") {
   REQUIRE(regex_match("fooofoofoo", *pattern) == false);
   REQUIRE(regex_match("bar", *pattern) == false);
 }
+
+TEST_CASE("Counting occurrences of a regex in a string") {
+  LazyRegex p1("foo");
+
+  REQUIRE(p1.count("foofoo foo") == 3);
+}
+
+TEST_CASE("Counting capture groups") {
+  LazyRegex p1("foo");
+  LazyRegex p2("f(oo)");
+  LazyRegex p3("(f)(oo)");
+
+  REQUIRE(p1.countCaptures() == 0);
+  REQUIRE(p2.countCaptures() == 1);
+  REQUIRE(p3.countCaptures() == 2);
+}
+
+TEST_CASE("Removing capture groups") {
+  REQUIRE(LazyRegex("foo").noCaptures().countCaptures() == 0);
+  REQUIRE(LazyRegex("foo").noCaptures().src() == "foo");
+  REQUIRE(LazyRegex("f(oo)").noCaptures().countCaptures() == 0);
+  REQUIRE(LazyRegex("f(oo)").noCaptures().src() == "f(?:oo)");
+  REQUIRE(LazyRegex("f((o)o)").noCaptures().countCaptures() == 0);
+  REQUIRE(LazyRegex("f((o)o)").noCaptures().src() == "f(?:(?:o)o)");
+}

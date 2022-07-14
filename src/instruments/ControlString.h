@@ -54,6 +54,118 @@ public:
     }
   };
 
+  bool append(const string &str) {
+    std::smatch result;
+    string remainder = str.substr(0, str.size());
+    while (std::regex_search(remainder, result, *firstInstructionPattern)) {
+      std::cout << "remainder: " << remainder << "\n";
+      std::cout << "instruction: " << result[1] << "\n";
+      appendInstruction(result[1]);
+      remainder = remainder.substr(result[1].str().size(), remainder.size());
+    }
+
+    if (remainder.size() == 0)
+      return true;
+    else
+      return false;
+  }
+
+  /**
+   * returns `true` when successful.
+   */
+  bool appendInstruction(const string &str) {
+    std::cout << "Appending single instruction '" << str << "'\n";
+    auto sustainInstruction = SustainStepInstruction::parse(str);
+    if (sustainInstruction.success())
+      return appendSustainInstruction(*sustainInstruction);
+
+    auto tempoInstruction = TempoInstruction::parse(str);
+    if (tempoInstruction.success()) {
+      return appendTempoInstruction(*tempoInstruction);
+    }
+
+    auto value = ValueInstruction::parse(str);
+    if (value.success()) {
+      return appendValueInstruction(*value);
+    }
+
+    return false;
+  }
+
+private:
+  struct SustainStep {
+    double duration;
+    SustainStepInstruction::SustainKind kind;
+  };
+  std::vector<SustainStep> sustainSteps;
+
+  int countGlidingSteps() {
+    int n = 0;
+    for (auto &step : sustainSteps)
+      if (step.kind == SustainStepInstruction::Gliding)
+        ++n;
+    return n;
+  }
+
+  double lastValue = lastEndValue();
+  void flushSustainSteps(double target) {
+    const int numberOfGlidingSteps = countGlidingSteps();
+    double y = lastValue;
+    const double totalChange = target - y;
+    const double changePerGlidingStep = totalChange / numberOfGlidingSteps;
+    std::cout << "flushSustainSteps(" << target << ") " << numberOfGlidingSteps
+              << "\n";
+    for (auto &step : sustainSteps) {
+      if (step.kind == SustainStepInstruction::Gliding) {
+        addSection(y, y + changePerGlidingStep, step.duration);
+        y += changePerGlidingStep;
+      } else {
+        addHold(step.duration);
+      }
+    }
+    sustainSteps.clear();
+  }
+
+public:
+  bool appendSustainInstruction(
+      SustainStepInstruction::SustainKind sustainInstruction) {
+    sustainSteps.push_back({stepInterval, sustainInstruction});
+    return true;
+  }
+
+  float stepInterval = 1;
+  bool appendTempoInstruction(float interval) {
+    stepInterval = interval;
+    return true;
+  }
+
+public:
+  bool appendValueInstruction(float target) {
+    if (sustainSteps.size() > 0)
+      flushSustainSteps(target);
+    else
+      restValue = target;
+    lastValue = target;
+    return true;
+  }
+
+public:
   static LazyRegex anyInstructionPattern;
+  static LazyRegex firstInstructionPattern;
   static LazyRegex pattern;
+
+  static ControlString &parse(const std::string &str) {
+    ControlString *instance = new ControlString();
+    auto successful = instance->append(str);
+    if (!successful) {
+      std::cerr << "Unable to parse control signal\n";
+      throw 1;
+    }
+    instance->flushSustainSteps(instance->restValue);
+    std::cout << "Duration: " << instance->duration() << "\n";
+
+    std::cout << "ControlString::parse(\"" << str << "\") --> '" << *instance
+              << "\"\n";
+    return *instance;
+  }
 };

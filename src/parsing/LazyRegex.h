@@ -73,6 +73,20 @@ public:
   // Commonly used patterns:
   //
   static LazyRegex ignoreWhitespace;
+
+  int count(const std::string &str) {
+    auto iterator = std::sregex_iterator(str.begin(), str.end(), pattern());
+    int n = std::distance(iterator, std::sregex_iterator());
+    return n;
+  }
+
+public:
+  int countCaptures() const { return LazyRegex("\\([^?]").count(src()); }
+
+  LazyRegex noCaptures() {
+    std::regex e("\\((?=[^?])");
+    return std::regex_replace(src(), e, "(?:");
+  }
 };
 
 LazyRegex operator+(const string &a, const LazyRegex &b);

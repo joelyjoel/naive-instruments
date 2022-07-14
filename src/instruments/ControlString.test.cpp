@@ -14,6 +14,11 @@ TEST_CASE("ControlSTring::ValueInstruction::pattern") {
   REQUIRE(!ControlString::ValueInstruction::pattern.test("99s:"));
 }
 
+TEST_CASE("Value instruction doesn't match sustain characters") {
+  REQUIRE(!ControlString::ValueInstruction::pattern.test("_"));
+  REQUIRE(!ControlString::ValueInstruction::pattern.test("55_"));
+}
+
 TEST_CASE("ControlString::SustainStepInstruction::pattern") {
   REQUIRE(ControlString::SustainStepInstruction::pattern.test("~"));
   REQUIRE(ControlString::SustainStepInstruction::pattern.test("_"));
@@ -51,4 +56,13 @@ TEST_CASE("Parsing sustain instructions") {
           ControlString::SustainStepInstruction::Gliding);
   REQUIRE(*ControlString::SustainStepInstruction::parse("_") ==
           ControlString::SustainStepInstruction::Resting);
+}
+
+TEST_CASE("ControlString::pattern has only one capture group") {
+  REQUIRE(ControlString::pattern.countCaptures() == 1);
+}
+
+TEST_CASE("Parsing a whole (simple) control string") {
+  auto &parsed = ControlString::parse("55___");
+  REQUIRE(parsed.duration() > 0);
 }
