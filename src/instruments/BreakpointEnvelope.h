@@ -28,6 +28,23 @@ public:
     double endValue;
     double duration;
     double progressPerSample() { return 1.0 / (sampleRate * duration); }
+
+    double gradient() const { return endValue - startValue / duration; }
+    bool isHold() const { return startValue == endValue; }
+
+    std::ostream &describe(std::ostream &out,
+                           const Section *const previous = nullptr,
+                           const Section *const next = nullptr) const {
+
+      if (!previous || previous->duration != duration)
+        out << duration * 4 << "s:";
+      if (!previous || previous->endValue != startValue)
+        out << startValue;
+      out << (isHold() ? "_" : "~");
+      if (!next || next->startValue != endValue)
+        out << endValue;
+      return out;
+    }
   };
 
 public:
@@ -94,3 +111,5 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &out, const BreakpointEnvelope &B);
+std::ostream &operator<<(std::ostream &out,
+                         const BreakpointEnvelope::Section &B);
