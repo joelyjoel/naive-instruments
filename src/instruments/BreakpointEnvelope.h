@@ -38,7 +38,10 @@ public:
   void addSection(double endValue, double duration) {
     startValue = lastEndValue();
   };
-  void addHold(double duration);
+  void addHold(double duration) {
+    auto y = lastEndValue();
+    addSection(y, y, duration);
+  };
 
   double duration() {
     double duration = 0;
