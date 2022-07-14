@@ -47,7 +47,7 @@ public:
     return duration;
   }
 
-private:
+protected:
   double lastEndValue() {
     if (sections.size() > 0)
       return sections[sections.size() - 1].endValue;
@@ -55,6 +55,7 @@ private:
       return restValue;
   }
 
+private:
   double startValue, endValue, progressPerSample, progress;
   void playSection(Section &section) {
     startValue = section.startValue;
@@ -74,7 +75,10 @@ private:
       playRestSection();
   }
 
+protected:
   double restValue;
+
+private:
   void playRestSection() {
     startValue = lastEndValue();
     endValue = lastEndValue();
