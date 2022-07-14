@@ -92,3 +92,5 @@ private:
   int nowPlayingSectionIndex;
   void advanceToNextSection() { playSection(++nowPlayingSectionIndex); }
 };
+
+std::ostream &operator<<(std::ostream &out, const BreakpointEnvelope &B);
