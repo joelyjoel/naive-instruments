@@ -58,10 +58,8 @@ public:
     std::smatch result;
     string remainder = str.substr(0, str.size());
     while (std::regex_search(remainder, result, *firstInstructionPattern)) {
-      std::cout << "remainder: " << remainder << "\n";
-      std::cout << "instruction: " << result[1] << "\n";
       appendInstruction(result[1]);
-      remainder = remainder.substr(result[1].str().size(), remainder.size());
+      remainder = remainder.substr(result[0].str().size(), remainder.size());
     }
 
     if (remainder.size() == 0)
@@ -74,7 +72,6 @@ public:
    * returns `true` when successful.
    */
   bool appendInstruction(const string &str) {
-    std::cout << "Appending single instruction '" << str << "'\n";
     auto sustainInstruction = SustainStepInstruction::parse(str);
     if (sustainInstruction.success())
       return appendSustainInstruction(*sustainInstruction);
@@ -113,8 +110,6 @@ private:
     double y = lastValue;
     const double totalChange = target - y;
     const double changePerGlidingStep = totalChange / numberOfGlidingSteps;
-    std::cout << "flushSustainSteps(" << target << ") " << numberOfGlidingSteps
-              << "\n";
     for (auto &step : sustainSteps) {
       if (step.kind == SustainStepInstruction::Gliding) {
         addSection(y, y + changePerGlidingStep, step.duration);
@@ -162,10 +157,7 @@ public:
       throw 1;
     }
     instance->flushSustainSteps(instance->restValue);
-    std::cout << "Duration: " << instance->duration() << "\n";
 
-    std::cout << "ControlString::parse(\"" << str << "\") --> '" << *instance
-              << "\"\n";
     return *instance;
   }
 };
