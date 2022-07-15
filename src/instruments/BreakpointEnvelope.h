@@ -29,6 +29,7 @@ public:
     double duration;
     double progressPerSample() { return 1.0 / (sampleRate * duration); }
 
+    double change() const { return endValue - startValue; }
     double gradient() const { return endValue - startValue / duration; }
     bool isHold() const { return startValue == endValue; }
 
@@ -37,12 +38,13 @@ public:
                            const Section *const next = nullptr) const {
 
       if (!previous || previous->duration != duration)
-        out << duration * 4 << "s:";
-      if (!previous || previous->endValue != startValue)
+        out << duration << "s:";
+      if (!previous || previous->endValue != startValue ||
+          previous->change() != change())
         out << startValue;
       out << (isHold() ? "_" : "~");
       if (!next || next->startValue != endValue)
-        out << endValue;
+        out << endValue << " ";
       return out;
     }
   };
