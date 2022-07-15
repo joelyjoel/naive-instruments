@@ -1,6 +1,7 @@
 #include "apps/GraphApp.h"
 #include "apps/MixApp.h"
 #include "apps/OscApp.h"
+#include "apps/RandomEnvelopeApp.h"
 #include "apps/RulerApp.h"
 #include "apps/SliceApp.h"
 #include "apps/ZxSelectApp.h"
@@ -37,6 +38,9 @@ int main(int argc, char **argv) {
     app.run();
   } else if (command == "osc") {
     OscApp app(args);
+    app.run();
+  } else if (command == "randvelope") {
+    RandomEnvelopeApp app(args);
     app.run();
   } else if (command == "zx-select") {
     // TODO: Deprecate command in favour of special units?
