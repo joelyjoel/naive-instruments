@@ -56,11 +56,16 @@ public:
   }
   void addSection(double endValue, double duration) {
     startValue = lastEndValue();
+    addSection(startValue, endValue, duration);
   };
   void addHold(double duration) {
     auto y = lastEndValue();
     addSection(y, y, duration);
   };
+
+  void closeTheLoop(double duration) {
+    addSection(lastEndValue(), firstStartValue(), duration);
+  }
 
   double duration() {
     double duration = 0;
@@ -75,6 +80,9 @@ protected:
       return sections[sections.size() - 1].endValue;
     else
       return restValue;
+  }
+  double firstStartValue() {
+    return (sections.size() > 0) ? sections[0].startValue : restValue;
   }
 
 private:
@@ -96,6 +104,9 @@ private:
     else
       playRestSection();
   }
+
+public:
+  void loop() { looped = true; }
 
 protected:
   double restValue;
