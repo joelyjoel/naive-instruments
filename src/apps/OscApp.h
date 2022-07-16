@@ -10,6 +10,7 @@ public:
     Sine osc;
     Pitch pitchConverter;
     Multiply gain;
+    Add pitchSum;
 
     LFO vibrato;
 
@@ -17,10 +18,15 @@ public:
     /* auto &f = **ControlString::parse(str); */
 
     NaiveInstrument<double> &pitch = *args.signal("pitch", "50");
-
     NaiveInstrument<double> &volume = *args.signal("volume", "1");
+    NaiveInstrument<double> &vibratoRate = *args.signal("vf", "5");
+    NaiveInstrument<double> &vibratoAmount = *args.signal("va", "0");
 
-    gain.a << osc << pitchConverter << pitch;
+    vibrato.depth << vibratoAmount;
+    vibrato.frequency << vibratoRate;
+    pitchSum.a << pitch;
+    pitchSum.b << vibrato;
+    gain.a << osc << pitchConverter << pitchSum;
     gain.b << volume;
 
     output(gain);
