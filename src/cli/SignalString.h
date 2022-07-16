@@ -2,6 +2,7 @@
 
 #include "../core.h"
 #include "../instruments/Constant.h"
+#include "../instruments/ControlString.h"
 #include "../instruments/Sampler.h"
 
 #include <iostream>
@@ -17,6 +18,10 @@ public:
       std::cerr << "SAMPLE: " << str << "\n";
       return new Sampler(str);
     }
+
+    Hopefully<ControlString *> cs = ControlString::parse(str);
+    if (cs.success())
+      return *cs;
 
     try {
       double f = std::stoi(str);

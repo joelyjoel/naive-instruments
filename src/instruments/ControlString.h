@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../parsing/LazyRegex.h"
 #include "../parsing/NumberWithUnit.h"
 #include "./BreakpointEnvelope.h"
@@ -149,15 +151,16 @@ public:
   static LazyRegex firstInstructionPattern;
   static LazyRegex pattern;
 
-  static ControlString &parse(const std::string &str) {
+  static Hopefully<ControlString *> parse(const std::string &str) {
     ControlString *instance = new ControlString();
     auto successful = instance->append(str);
     if (!successful) {
-      std::cerr << "Unable to parse control signal\n";
-      throw 1;
+      std::cerr << "Couldn't parse control string: \"" << str << "\"n";
+      return Disappointment;
     }
+
     instance->flushSustainSteps(instance->restValue);
 
-    return *instance;
+    return instance;
   }
 };
