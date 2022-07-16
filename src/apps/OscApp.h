@@ -11,14 +11,16 @@ public:
     Pitch pitchConverter;
     Multiply gain;
 
+    LFO vibrato;
+
     /* const std::string str = args[0]; */
     /* auto &f = **ControlString::parse(str); */
 
-    NaiveInstrument<double> &f = *args.signal("f", "50");
+    NaiveInstrument<double> &pitch = *args.signal("pitch", "50");
 
     NaiveInstrument<double> &volume = *args.signal("volume", "1");
 
-    gain.a << osc << pitchConverter << f;
+    gain.a << osc << pitchConverter << pitch;
     gain.b << volume;
 
     output(gain);
