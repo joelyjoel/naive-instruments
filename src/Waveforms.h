@@ -45,4 +45,22 @@ public:
     assert(buffer.numberOfFrames() == 162);
     return buffer;
   }
+
+  static MonoBuffer &byName(const std::string &name) {
+    if (name == "sin" || name == "sine")
+      return sine();
+    else if (name == "saw" || name == "sawtooth")
+      return saw();
+    else if (name == "tri" || name == "triangle")
+      return triangle();
+    else if (name == "sq" || name == "square")
+      return square();
+    else
+      try {
+        return fromFile("wavetables/" + name + ".wav");
+      } catch (...) {
+        std::cerr << "Couldn't find waveform called '" << name << "'\n";
+        throw 1;
+      }
+  }
 };

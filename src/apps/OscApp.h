@@ -7,7 +7,10 @@ class OscApp : public CommandLineApp {
 
 public:
   void run() {
-    Sine osc;
+
+    auto waveform = Waveforms::byName(args.string("waveform", "sine"));
+
+    Osc osc(waveform);
     Pitch pitchConverter;
     Multiply gain;
     Add pitchSum;
