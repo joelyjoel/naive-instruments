@@ -9,15 +9,18 @@ public:
   void run() {
     Sine osc;
     Pitch pitchConverter;
+    Multiply gain;
 
-    const std::string str = args[0];
-    auto &f = ControlString::parse(str);
-    f.loop();
+    /* const std::string str = args[0]; */
+    /* auto &f = **ControlString::parse(str); */
 
-    std::cerr << "Frequency: " << f << "\n";
+    NaiveInstrument<double> &f = *args.signal("f", "50");
 
-    osc.frequency << pitchConverter << f;
+    NaiveInstrument<double> &volume = *args.signal("volume", "1");
 
-    output(osc);
+    gain.a << osc << pitchConverter << f;
+    gain.b << volume;
+
+    output(gain);
   }
 };
