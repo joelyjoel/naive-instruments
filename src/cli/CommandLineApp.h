@@ -2,6 +2,7 @@
 
 #include "../core.h"
 #include "../file-io/WavWriter.h"
+#include "../file-io/record.h"
 #include "../playback/BufferedPlayback.h"
 #include "CommandLineArguments.h"
 #include <iostream>
@@ -25,13 +26,24 @@ public:
   }
 
   void output(NaiveInstrument<double> &signal) {
-    if (outputPath().empty())
+    auto &path = outputPath();
+    if (path.empty())
       BufferedPlayback::play(signal);
     else
     // TODO: Handle case where -o is given
     {
-      error("Not implemented saving multiple signals yet");
-      throw TODO;
+      const auto durationStr = args.require("duration");
+      float duration;
+
+      try {
+        duration = *Parse::interval(durationStr);
+      } catch (...) {
+        std::cerr << "Couldn't parse --duration option\n";
+        throw 1;
+      }
+
+      record(path, signal, duration);
+      std::cout << path << "\n";
     }
   }
 
