@@ -4,6 +4,24 @@ This is an audio library, its my naive attempt to implement an audio library to
 calm myself down while I'm in an anxiety state. I'm not really thinking about 
 performance, just about what makes sense to me. That's why its naive.
 
+## Installation
+ 
+TODO: Add proper instructions
+
+Comppile it:
+
+```bash
+make
+```
+
+Add the `bin/` directory to your path.
+
+.bashrc
+
+```bash
+PATH=$PATH:~/path/to/this/repo/bin
+```
+
 ## Control Signal shorthand
 
 You may use a shorthand for control signals. These are made out of a sequence 
