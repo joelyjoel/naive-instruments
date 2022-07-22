@@ -2,6 +2,7 @@
 
 #include "../core.h"
 #include "../file-io/WavWriter.h"
+#include "../file-io/piping.h"
 #include "../file-io/record.h"
 #include "../playback/BufferedPlayback.h"
 #include "CommandLineArguments.h"
@@ -18,7 +19,10 @@ public:
   void output(MonoBuffer &buffer) {
     if (args.boolean("normalise"))
       buffer.normalise();
-    if (outputPath().empty()) {
+
+    if (stdoutIsAPipe()) {
+      std::cerr << "TODO: Implement piping buffers to stdout\n";
+    } else if (outputPath().empty()) {
       BufferedPlayback::play(buffer);
     } else {
       WavWriter::write(outputPath(), buffer);
@@ -27,7 +31,9 @@ public:
 
   void output(NaiveInstrument<double> &signal) {
     auto &path = outputPath();
-    if (path.empty())
+    if (stdoutIsAPipe())
+      std::cerr << "TODO: Implement piping signals to stdout!\n";
+    else if (path.empty())
       BufferedPlayback::play(signal);
     else
     // TODO: Handle case where -o is given
