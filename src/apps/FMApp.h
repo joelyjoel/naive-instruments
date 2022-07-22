@@ -73,8 +73,8 @@ public:
     for (int i = 0; i < numberOfOscs; ++i) {
       NaiveInstrument<double> *oscOutput = outputs[i];
       const std::string key = std::to_string(i) + "-out";
-      if (args.exists(key)) {
-        NaiveInstrument<double> *level = args.signal(key, "0");
+      if (args.exists(key) || i == 0) {
+        NaiveInstrument<double> *level = args.signal(key, i == 0 ? "1" : "0");
         Multiply *m = new Multiply;
         m->a << oscOutput;
         m->b << level;
