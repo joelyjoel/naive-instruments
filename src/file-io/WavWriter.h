@@ -9,18 +9,22 @@
 class WavWriter {
 
   std::ofstream out;
+  int numberOfFrames;
 
 public:
   WavWriter(const std::string &outfile, int numberOfFrames)
-      : out(outfile, std::ios::binary) {
+      : numberOfFrames(numberOfFrames), out(outfile, std::ios::binary) {
 
-    // Stereo 16-bit
-    int dataSize = 2 * sizeof(int16_t) * numberOfFrames;
+    writeHeader();
+  }
 
+  int dataSize() { return 2 * sizeof(int16_t) * numberOfFrames; }
+
+  void writeHeader() {
     WAV_HEADER header;
 
-    header.Subchunk2Size = dataSize;
-    header.ChunkSize = dataSize + sizeof(header) - 8;
+    header.Subchunk2Size = dataSize();
+    header.ChunkSize = dataSize() + sizeof(header) - 8;
     // -8 because of the "RIFF{uint32_t ChunkSize}" at the beginning
 
     out.write(reinterpret_cast<const char *>(&header), sizeof(header));
