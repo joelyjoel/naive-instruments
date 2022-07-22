@@ -1,3 +1,4 @@
+#include "apps/FMApp.h"
 #include "apps/FilterApp.h"
 #include "apps/GraphApp.h"
 #include "apps/MixApp.h"
@@ -53,6 +54,9 @@ int main(int argc, char **argv) {
   } else if (command == "zx-select") {
     // TODO: Deprecate command in favour of special units?
     ZxSelectApp app(args);
+    app.run();
+  } else if (command == "fm") {
+    FMApp app(args);
     app.run();
   } else {
     std::cout << "Unknown command: " << command << "\n";
