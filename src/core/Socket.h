@@ -72,4 +72,22 @@ public:
   }
 
   void operator<<(double k) { setConstant(k); }
+
+public:
+  bool hasPlug() { return plugged != nullptr; }
+  NaiveInstrument<double> *currentConnection() {
+    if (hasPlug())
+      return plugged;
+    else {
+      std::cerr << "Cannot get connection of uplugged socket!\n";
+      throw 1;
+    }
+  }
+  double currentConstant() {
+    if (hasPlug()) {
+      std::cerr << "Cannot get constant of plugged socket!\n";
+      throw 1;
+    } else
+      return constant;
+  }
 };

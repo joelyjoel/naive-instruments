@@ -13,13 +13,46 @@ public:
     for (int i = 0; i < numberOfOscs; ++i)
       oscs.push_back(new Sine());
 
-    // Assign the frequencies
+    // Assign the fundamental frequencies
+    std::vector<Socket<double> *> pitchSockets;
     for (int i = 0; i < numberOfOscs; ++i) {
       Osc *osc = oscs[i];
 
       NaiveInstrument<double> *pitch = SignalString::parse(args[i]);
       Pitch *pitchConverter = new Pitch();
       osc->frequency << pitchConverter << *pitch;
+
+      pitchSockets.push_back(&pitchConverter->pitch);
+    }
+
+    // TODO: Add modulation routings
+    for (int carrierIndex = 0; carrierIndex < numberOfOscs; ++carrierIndex) {
+      for (int modulatorIndex = 0; modulatorIndex < numberOfOscs;
+           ++modulatorIndex) {
+        const std::string key =
+            std::to_string(carrierIndex) + "-" + std::to_string(modulatorIndex);
+        if (args.exists(key)) {
+          NaiveInstrument<double> *modulation = args.signal(key);
+          Multiply *m = new Multiply();
+          m->a << oscs[modulatorIndex];
+          m->b << modulation;
+          std::cout << "Modulating Osc" << carrierIndex << " by Osc"
+                    << modulatorIndex << "\n";
+          Socket<double> &socket = *pitchSockets[carrierIndex];
+
+          if (socket.hasPlug()) {
+            Add *adder = new Add();
+            adder->a << m;
+            adder->b << socket.currentConnection();
+            socket << adder;
+          } else {
+            Add *adder = new Add();
+            adder->a << m;
+            adder->b << socket.currentConstant();
+            socket << adder;
+          }
+        }
+      }
     }
 
     NaiveInstrument<double> *mixdown = nullptr;
