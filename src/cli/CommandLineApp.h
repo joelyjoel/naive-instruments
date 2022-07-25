@@ -21,7 +21,8 @@ public:
       buffer.normalise();
 
     if (stdoutIsAPipe()) {
-      std::cerr << "TODO: Implement piping buffers to stdout\n";
+      std::cerr << "Piping to stdout\n";
+      WavWriter::write(std::cout, buffer);
     } else if (outputPath().empty()) {
       BufferedPlayback::play(buffer);
     } else {
@@ -29,35 +30,25 @@ public:
     }
   }
 
+  float duration() {
+    const auto durationStr = args.require("duration");
+    try {
+      return *Parse::interval(durationStr);
+    } catch (...) {
+      std::cerr << "Couldn't parse --duration option\n";
+      throw 1;
+    }
+  }
+
   void output(NaiveInstrument<double> &signal) {
     auto &path = outputPath();
     if (stdoutIsAPipe()) {
       std::cerr << "Piping to stdout\n";
-      const auto durationStr = args.require("duration");
-      float duration;
-      try {
-        duration = *Parse::interval(durationStr);
-      } catch (...) {
-        std::cerr << "Couldn't parse --duration option\n";
-        throw 1;
-      }
-      record(std::cout, signal, duration);
+      record(std::cout, signal, duration());
     } else if (path.empty())
       BufferedPlayback::play(signal);
-    else
-    // TODO: Handle case where -o is given
-    {
-      const auto durationStr = args.require("duration");
-      float duration;
-
-      try {
-        duration = *Parse::interval(durationStr);
-      } catch (...) {
-        std::cerr << "Couldn't parse --duration option\n";
-        throw 1;
-      }
-
-      record(path, signal, duration);
+    else {
+      record(path, signal, duration());
       std::cout << path << "\n";
     }
   }

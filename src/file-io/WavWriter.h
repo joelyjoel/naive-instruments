@@ -7,6 +7,8 @@
 #include <iostream>
 
 class WavWriter {
+  // TODO: Remove this limitation where numberOfFrames needs to be known in
+  // advance
 
   std::ostream &out;
   int numberOfFrames;
@@ -15,13 +17,16 @@ public:
   WavWriter(const std::string &outfile, int numberOfFrames)
       : numberOfFrames(numberOfFrames),
         out(*new std::ofstream(outfile, std::ios::binary)) {
-
     writeHeader();
   }
 
   WavWriter(std::ostream &outputStream, int numberOfFrames)
       : numberOfFrames(numberOfFrames), out(outputStream) {
     writeHeader();
+  }
+
+  static WavWriter *cout(int numberOfFrames) {
+    return new WavWriter(std::cout, numberOfFrames);
   }
 
   int dataSize() { return 2 * sizeof(int16_t) * numberOfFrames; }
@@ -57,11 +62,16 @@ public:
 public:
   void operator<<(double signalPoint) { write(signalPoint); }
 
-  static void write(const std::string &outputFilePath, MonoBuffer &buffer) {
+  static void write(std::ostream &outputStream, MonoBuffer &buffer) {
     double attenuation = .9;
     int numberOfFrames = buffer.numberOfFrames();
-    WavWriter recorder(outputFilePath, numberOfFrames);
+    WavWriter recorder(outputStream, numberOfFrames);
     for (int i = 0; i < numberOfFrames; ++i)
       recorder << buffer[i] * attenuation;
+  }
+
+  static void write(const std::string &outputFilePath, MonoBuffer &buffer) {
+    std::ofstream outputStream(outputFilePath, std::ios::binary);
+    write(outputStream, buffer);
   }
 };

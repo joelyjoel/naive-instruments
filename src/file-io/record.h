@@ -9,3 +9,6 @@
  */
 void record(const std::string &outputFile, NaiveInstrument<double> &signal,
             float duration);
+
+void record(std::ostream &outputStream, NaiveInstrument<double> &signal,
+            float duration);
