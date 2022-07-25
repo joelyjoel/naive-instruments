@@ -8,13 +8,19 @@
 
 class WavWriter {
 
-  std::ofstream out;
+  std::ostream &out;
   int numberOfFrames;
 
 public:
   WavWriter(const std::string &outfile, int numberOfFrames)
-      : numberOfFrames(numberOfFrames), out(outfile, std::ios::binary) {
+      : numberOfFrames(numberOfFrames),
+        out(*new std::ofstream(outfile, std::ios::binary)) {
 
+    writeHeader();
+  }
+
+  WavWriter(std::ostream &outputStream, int numberOfFrames)
+      : numberOfFrames(numberOfFrames), out(outputStream) {
     writeHeader();
   }
 
