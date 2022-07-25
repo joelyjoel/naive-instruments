@@ -31,9 +31,18 @@ public:
 
   void output(NaiveInstrument<double> &signal) {
     auto &path = outputPath();
-    if (stdoutIsAPipe())
-      std::cerr << "TODO: Implement piping signals to stdout!\n";
-    else if (path.empty())
+    if (stdoutIsAPipe()) {
+      std::cerr << "Piping to stdout\n";
+      const auto durationStr = args.require("duration");
+      float duration;
+      try {
+        duration = *Parse::interval(durationStr);
+      } catch (...) {
+        std::cerr << "Couldn't parse --duration option\n";
+        throw 1;
+      }
+      record(std::cout, signal, duration);
+    } else if (path.empty())
       BufferedPlayback::play(signal);
     else
     // TODO: Handle case where -o is given
