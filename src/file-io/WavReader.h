@@ -13,7 +13,7 @@ typedef struct {
 } StereoFrame;
 
 class WavReader {
-  std::ifstream in;
+  std::istream &in;
 
 private:
   WAV_HEADER header;
@@ -37,10 +37,13 @@ private:
   int numberOfChannels() { return header.NumOfChan; }
 
 public:
-  WavReader(const std::string &filePath) : in(filePath, std::ios::binary) {
+  WavReader(const std::string &filePath)
+      : in(*new std::ifstream(filePath, std::ios::binary)) {
     // TODO: Check the file exists
     readHeader();
   }
+
+  WavReader(std::istream &inputStream) : in(inputStream) { readHeader(); }
 
   StereoFrame readNextFrame() {
     if (numberOfChannels() == 2) {
@@ -71,7 +74,12 @@ public:
   float duration() { return float(numberOfFrames()) / float(sampleRate()); }
 
   static MonoBuffer *readMonoFile(const std::string &filePath) {
-    WavReader file(filePath);
+    std::ifstream inputStream(filePath, std::ios::binary);
+    return readStream(inputStream);
+  }
+
+  static MonoBuffer *readStream(std::istream &inputStream) {
+    WavReader file(inputStream);
     int numberOfFrames = file.numberOfFrames();
     MonoBuffer &buffer = *(new MonoBuffer(numberOfFrames));
     for (int i = 0; i < numberOfFrames; ++i) {
