@@ -242,6 +242,8 @@ public:
   NaiveInstrument<double> *signal(int key, const std::string &fallback = "0") {
     return SignalString::parse(string(key, fallback));
   }
+
+  MainArgs subCommandArguments() { return {argc - 1, argv + 1}; }
 };
 
 std::ostream &operator<<(std::ostream &os, const CommandLineArguments &args);
