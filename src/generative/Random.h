@@ -1,15 +1,33 @@
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
 class Random {
 
+public:
+  static uint64_t clockSeed() {
+    uint64_t seed = time(NULL);
+
+    for (int i = 0; i < 10; ++i)
+      seed = xorshift(seed);
+    return seed;
+  }
+
 private:
-  const long seed;
-  long latest;
+  static uint64_t xorshift(uint64_t x) {
+    x ^= x << 13;
+    x ^= x >> 7;
+    x ^= x << 17;
+    return x;
+  }
+
+private:
+  const uint64_t seed;
+  uint64_t latest;
 
 public:
-  Random(long seed = 1) : seed(seed) {
+  Random(uint64_t seed = clockSeed()) : seed(seed) {
     if (seed == 0) {
       std::cerr << "Random seed may not be 0\n";
       throw 1;
@@ -17,16 +35,17 @@ public:
     latest = seed;
   }
 
-  long next() {
-    latest ^= (latest << 21);
-    latest ^= (latest >> 35);
-    latest ^= (latest << 4);
+  uint64_t next() {
+    latest = xorshift(latest);
     return latest;
   }
 
+  uint64_t operator()() { return next(); }
+
 public:
   float number() {
-    return static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+    return static_cast<float>(next()) /
+           static_cast<float>(std::numeric_limits<uint64_t>::max());
   }
 
   float number(float max) { return number() * max; }

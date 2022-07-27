@@ -16,32 +16,44 @@ class RandomApp : CommandLineApp {
 
 public:
   void run() {
+
+    if (!args.exists(0)) {
+      std::cerr << "A random what?\n";
+      return;
+    }
     const std::string &command = args[0];
+
     if (command == "envelope") {
       MainArgs subArgs = args.subCommandArguments();
       RandomEnvelopeApp app(subArgs);
       app.run();
     } else if (command == "frequency")
       frequency();
-    else if (command == "pitch") {
+    else if (command == "pitch")
       pitch();
-    } else {
+    else
       std::cerr << "Unexpected sub-command: " << command << "\n";
-    }
   }
 
 private:
-  Random random;
+  uint64_t seed() {
+    if (args.exists("seed"))
+      return args.number("seed");
+    else
+      return Random::clockSeed();
+  }
+
+  Random random = seed();
 
   void frequency() {
     double min = args.number("min", 20);
     double max = args.number("max", 20000);
-    std::cout << random.frequency(min, max) << "Hz\n";
+    std::cout << random.number(min, max) << "Hz\n";
   }
 
   void pitch() {
     double min = args.number("min", 21);
     double max = args.number("max", 108);
-    std::cout << random.pitch(min, max) << "MIDI\n";
+    std::cout << random.number(min, max) << "MIDI\n";
   }
 };

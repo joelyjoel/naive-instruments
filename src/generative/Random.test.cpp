@@ -6,9 +6,9 @@ TEST_CASE("Random class generates expected numbers when seed = 1") {
   const long seed = 1;
   Random random(seed);
 
-  const std::vector<long> expectedValues = {
-      35651601,           1130297953386881, -9204155787274874573,
-      143006948545953793, 530110192467034,  569735658174708356,
+  const std::vector<uint64_t> expectedValues = {
+      1082269761,
+      1152992998833853505,
   };
 
   for (long expectedValue : expectedValues) {

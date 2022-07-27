@@ -181,17 +181,21 @@ public:
    */
   const float number(const std::string &key, float fallback) {
     if (exists(key)) {
-      auto str = require(key);
-      float val;
-      try {
-        val = *Parse::number(str);
-      } catch (int err) {
-        std::cerr << "Argument \"" << key << "\" must be an number\n";
-        throw MISSING_ARGUMENT;
-      }
-      return val;
+      return number(key);
     } else
       return fallback;
+  }
+
+  const float number(const std::string &key) {
+    auto str = require(key);
+    float val;
+    try {
+      val = *Parse::number(str);
+    } catch (int err) {
+      std::cerr << "Argument \"" << key << "\" must be an number\n";
+      throw MISSING_ARGUMENT;
+    }
+    return val;
   }
 
   bool boolean(const std::string &key) { return exists(key); }
