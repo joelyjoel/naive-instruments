@@ -63,6 +63,6 @@ TEST_CASE("ControlString::pattern has only one capture group") {
 }
 
 TEST_CASE("Parsing a whole (simple) control string") {
-  auto &parsed = ControlString::parse("55___");
-  REQUIRE(parsed.duration() > 0);
+  ControlString *parsed = *ControlString::parse("55___");
+  REQUIRE(parsed->duration() > 0);
 }
