@@ -5,13 +5,7 @@ class SliceApp : public CommandLineApp {
 
 public:
   void run() {
-    MonoBuffer *buffer;
-    if (stdinIsAPipe()) {
-      buffer = WavReader::readStream(std::cin);
-    } else {
-      const auto filename = args[0];
-      buffer = WavReader::readMonoFile(filename);
-    }
+    MonoBuffer *buffer = mainInputAsBuffer();
 
     // TODO: support time units: s, samp, zx, onset etc
     const float from = args.number("from", 0);

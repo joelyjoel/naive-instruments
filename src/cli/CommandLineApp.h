@@ -30,6 +30,19 @@ public:
     }
   }
 
+  MonoBuffer *mainInputAsBuffer() {
+    if (args.exists("input")) {
+      const auto filename = args["input"];
+      return WavReader::readMonoFile(filename);
+    } else if (stdinIsAPipe()) {
+      return WavReader::readStream(std::cin);
+    } else {
+      // TODO: implement some kind of array shifting with positional arguments
+      const auto filename = args[0];
+      return WavReader::readMonoFile(filename);
+    }
+  }
+
   float duration() {
     const auto durationStr = args.require("duration");
     try {
