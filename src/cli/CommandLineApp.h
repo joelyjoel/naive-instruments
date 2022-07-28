@@ -12,6 +12,15 @@ class CommandLineApp {
 public:
   CommandLineArguments args;
 
+protected:
+  uint64_t seed() {
+    if (args.exists("seed"))
+      return args.number("seed");
+    else
+      return Random::clockSeed();
+  }
+  Random random = seed();
+
 public:
   CommandLineApp(int argc, char **argv) : args(argc, argv) {}
   CommandLineApp(MainArgs &args) : args(args) {}

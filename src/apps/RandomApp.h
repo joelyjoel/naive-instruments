@@ -35,16 +35,6 @@ public:
       std::cerr << "Unexpected sub-command: " << command << "\n";
   }
 
-private:
-  uint64_t seed() {
-    if (args.exists("seed"))
-      return args.number("seed");
-    else
-      return Random::clockSeed();
-  }
-
-  Random random = seed();
-
   void frequency() {
     double min = args.number("min", 20);
     double max = args.number("max", 20000);

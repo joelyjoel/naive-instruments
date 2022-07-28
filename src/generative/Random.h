@@ -60,4 +60,6 @@ public:
   }
 
   float pitch(float min = 21, float max = 108) { return number(min, max); }
+
+  bool chance(float probability = .5) { return number() > probability; }
 };
