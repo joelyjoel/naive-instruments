@@ -6,11 +6,20 @@
 #include <vector>
 
 class BreakpointEnvelope : public NaiveInstrument<double> {
+
   double tick() {
+    std::cerr << "\n\n" << label() << ":\n";
+    std::cerr << "sections.size(): " << sections.size() << "\n";
+    std::cerr << "progress: " << progress << "\n";
+    std::cerr << "progressPerSample: " << progressPerSample << "\n";
+    std::cerr << "startValue: " << startValue << "\n";
+    std::cerr << "endValue: " << endValue << "\n";
     progress += progressPerSample;
     if (progress >= 1)
       advanceToNextSection();
-    return progress * endValue + (1.0 - progress) * startValue;
+    auto val = progress * endValue + (1.0 - progress) * startValue;
+    std::cerr << "TICK\n";
+    return val;
   }
 
 public:
@@ -96,6 +105,7 @@ private:
 
   bool looped = false;
   void playSection(int sectionIndex) {
+    std::cerr << "Playing section " << sectionIndex << "\n";
     nowPlayingSectionIndex = sectionIndex;
     if (sectionIndex < sections.size())
       playSection(sections[sectionIndex]);

@@ -19,17 +19,23 @@ public:
       return new Sampler(str);
     }
 
+    if (NumberWithUnit::pattern.test(str)) {
+      std::cerr << "'" << str << "' could be a constant\n";
+      try {
+        double f = std::stoi(str);
+        std::cerr << "Got const " << f << " from " << str << "\n";
+        return new Constant(f);
+      } catch (std::invalid_argument err) {
+        std::cerr << "Can't parse '" << str << "' as contant\n";
+        throw 1;
+      }
+    }
+
     Hopefully<ControlString *> cs = ControlString::parse(str);
     if (cs.success())
       return *cs;
 
-    try {
-      double f = std::stoi(str);
-      std::cerr << "Got osc " << f << " from " << str << "\n";
-      return new Constant(f);
-    } catch (std::invalid_argument err) {
-      std::cerr << "Can't parse '" << str << "'\n";
-      return new Constant(0);
-    }
+    std::cerr << "Can't parse '" << str << "'\n";
+    throw 1;
   }
 };
