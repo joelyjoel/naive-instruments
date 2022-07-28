@@ -43,5 +43,8 @@
 #include "analysis/RmsAsciGrapher.h"
 #include "analysis/WaveformBufferer.h"
 
+// Pitch
+#include "pitch/Pitch.h"
+
 // Playback
 #include "playback/BufferedPlayback.h"

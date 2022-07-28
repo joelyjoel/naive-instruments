@@ -35,3 +35,5 @@ TEST_CASE("Stringifying Pitch class intances") {
   REQUIRE(Pitch(C4).str() == "C4");
   REQUIRE(Pitch(C0).str() == "C0");
 }
+
+TEST_CASE("Lilypond pitch printing") { REQUIRE(Pitch(C4).lilypond() == "c'"); }

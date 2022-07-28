@@ -31,6 +31,8 @@ public:
       frequency();
     else if (command == "pitch")
       pitch();
+    else if (command == "lilypond-pitch")
+      lilypondPitch();
     else
       std::cerr << "Unexpected sub-command: " << command << "\n";
   }
@@ -55,5 +57,10 @@ private:
     double min = args.number("min", 21);
     double max = args.number("max", 108);
     std::cout << random.number(min, max) << "MIDI\n";
+  }
+
+  void lilypondPitch() {
+    Pitch p(random.pitch());
+    std::cout << p.lilypond();
   }
 };
