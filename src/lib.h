@@ -28,6 +28,7 @@
 #include "instruments/Floor.h"
 #include "instruments/LFO.h"
 #include "instruments/Multiply.h"
+#include "instruments/Noise.h"
 #include "instruments/Osc.h"
 #include "instruments/Pitch.h"
 #include "instruments/Ramp.h"

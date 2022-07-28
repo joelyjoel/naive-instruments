@@ -1,3 +1,5 @@
+#pragma once
+
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
@@ -40,7 +42,7 @@ public:
     return latest;
   }
 
-  uint64_t operator()() { return next(); }
+  uint64_t operator()() { return number(); }
 
 public:
   float number() {

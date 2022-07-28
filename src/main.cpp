@@ -1,5 +1,6 @@
 #include "apps/GraphApp.h"
 #include "apps/MixApp.h"
+#include "apps/NoiseApp.h"
 #include "apps/OscApp.h"
 #include "apps/RandomApp.h"
 #include "apps/RulerApp.h"
@@ -38,6 +39,9 @@ int main(int argc, char **argv) {
     app.run();
   } else if (command == "osc") {
     OscApp app(args);
+    app.run();
+  } else if (command == "noise") {
+    NoiseApp app(args);
     app.run();
   } else if (command == "random") {
     RandomApp app(args);

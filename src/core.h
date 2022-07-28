@@ -5,3 +5,4 @@
 #include "core/NaiveInstrument.h"
 #include "core/Patch.h"
 #include "core/Socket.h"
+#include "generative/Random.h"
