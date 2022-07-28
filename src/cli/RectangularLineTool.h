@@ -1,3 +1,5 @@
+#pragma once
+
 #include "./RectangleBuffer.h"
 #include <iostream>
 #include <string>

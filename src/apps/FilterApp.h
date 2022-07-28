@@ -19,7 +19,7 @@ public:
       filter.frequency << frequency;
       output(filter);
     } else if (args.exists("pitch")) {
-      Pitch pitchConverter;
+      PitchConverter pitchConverter;
       auto pitch = args.signal("pitch");
       filter.frequency << pitchConverter << *pitch;
       output(filter);

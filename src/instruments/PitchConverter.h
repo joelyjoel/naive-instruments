@@ -7,7 +7,7 @@ public:
   double tick() { return pow(2.0, (interval() / 12.0)); }
 };
 
-class Pitch : public NaiveInstrument<double> {
+class PitchConverter : public NaiveInstrument<double> {
 public:
   Socket<double> &pitch = addSocket<double>();
 

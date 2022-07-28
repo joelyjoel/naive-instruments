@@ -11,7 +11,7 @@ public:
     auto waveform = Waveforms::byName(args.string("waveform", "sine"));
 
     Osc osc(waveform);
-    Pitch pitchConverter;
+    PitchConverter pitchConverter;
     Multiply gain;
     Add pitchSum;
 

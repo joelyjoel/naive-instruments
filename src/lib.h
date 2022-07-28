@@ -31,7 +31,7 @@
 #include "instruments/Multiply.h"
 #include "instruments/Noise.h"
 #include "instruments/Osc.h"
-#include "instruments/Pitch.h"
+#include "instruments/PitchConverter.h"
 #include "instruments/Ramp.h"
 #include "instruments/Sampler.h"
 #include "instruments/UnsignedSaw.h"
