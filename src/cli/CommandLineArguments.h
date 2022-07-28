@@ -199,6 +199,7 @@ public:
   }
 
   bool boolean(const std::string &key) { return exists(key); }
+  bool flag(const std::string &key) { return boolean(key); }
 
   const std::string string(const std::string &key,
                            const std::string &fallback) {
