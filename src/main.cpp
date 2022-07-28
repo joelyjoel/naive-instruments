@@ -26,35 +26,26 @@ int main(int argc, char **argv) {
   if (command == "help") {
     std::cout << "No help has been written yet!\n";
     return 0;
-  } else if (command == "slice") {
-    SliceApp app(args);
-    app.run();
-  } else if (command == "graph") {
-    GraphApp app(args);
-    app.run();
-  } else if (command == "ruler") {
-    RulerApp app(args);
-    app.run();
-  } else if (command == "mix") {
-    MixApp app(args);
-    app.run();
-  } else if (command == "osc") {
-    OscApp app(args);
-    app.run();
-  } else if (command == "filter") {
-    FilterApp app(args);
-    app.run();
-  } else if (command == "noise") {
-    NoiseApp app(args);
-    app.run();
-  } else if (command == "random") {
-    RandomApp app(args);
-    app.run();
-  } else if (command == "zx-select") {
+  } else if (command == "slice")
+    SliceApp(args).run();
+  else if (command == "graph")
+    GraphApp(args).run();
+  else if (command == "ruler")
+    RulerApp(args).run();
+  else if (command == "mix")
+    MixApp(args).run();
+  else if (command == "osc")
+    OscApp(args).run();
+  else if (command == "filter")
+    FilterApp(args).run();
+  else if (command == "noise")
+    NoiseApp(args).run();
+  else if (command == "random")
+    RandomApp(args).run();
+  else if (command == "zx-select")
     // TODO: Deprecate command in favour of special units?
-    ZxSelectApp app(args);
-    app.run();
-  } else {
+    ZxSelectApp(args).run();
+  else {
     std::cout << "Unknown command: " << command << "\n";
     return 1;
   }
