@@ -29,6 +29,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 								 src/instruments/BreakpointEnvelope.cpp \
 								 src/instruments/ControlString.cpp \
 								 src/file-io/piping.cpp \
+								 src/pitch/Pitch.cpp \
 								 src/parsing/RegularExpressionSources.cpp
 
 FLAGS=-std=c++20 \
