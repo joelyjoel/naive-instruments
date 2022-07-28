@@ -53,7 +53,7 @@ build-and-run-tests:
 	src/snapshot-tests.bin
 
 tests:
-	g++ ${FLAGS} src/**/*.test.cpp ${CPP_SOURCE_FILES} -o bin/unit-tests
+	g++ ${FLAGS} src/**/*.test.cpp src/*.test.cpp ${CPP_SOURCE_FILES} -o bin/unit-tests
 
 test: tests
 	bin/unit-tests
