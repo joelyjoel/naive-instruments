@@ -42,16 +42,18 @@ public:
     return latest;
   }
 
-  uint64_t operator()() { return number(); }
-
 public:
   float number() {
     return static_cast<float>(next()) /
            static_cast<float>(std::numeric_limits<uint64_t>::max());
   }
+  uint64_t operator()() { return number(); }
 
   float number(float max) { return number() * max; }
+  float operator()(float max) { return number(max); }
+
   float number(float min, float max) { return number() * (max - min) + min; }
+  float operator()(float min, float max) { return number(min, max); }
 
   float frequency(float min = 20, float max = 20000) {
     return number(min, max);
