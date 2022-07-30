@@ -30,6 +30,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 								 src/instruments/ControlString.cpp \
 								 src/file-io/piping.cpp \
 								 src/pitch/Pitch.cpp \
+								 src/lilypond/Lilypond.cpp \
 								 src/parsing/RegularExpressionSources.cpp
 
 FLAGS=-std=c++20 \

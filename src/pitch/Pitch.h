@@ -1,3 +1,5 @@
+#pragma once
+
 #include "MidiNumber.h"
 #include <string>
 #include <vector>

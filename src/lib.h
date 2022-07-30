@@ -44,6 +44,7 @@
 #include "analysis/WaveformBufferer.h"
 
 // Pitch
+#include "lilypond/Lilypond.h"
 #include "pitch/Pitch.h"
 
 // Playback
