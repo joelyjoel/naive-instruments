@@ -33,6 +33,8 @@ public:
       pitch();
     else if (command == "lilypond-pitch")
       lilypondPitch();
+    else if (command == "lilypond-phrase")
+      lilypondPhrase();
     else
       std::cerr << "Unexpected sub-command: " << command << "\n";
   }
@@ -62,5 +64,14 @@ private:
   void lilypondPitch() {
     Pitch p(random.pitch());
     std::cout << p.lilypond();
+  }
+
+  void lilypondPhrase() {
+    Lilypond::Phrase phrase;
+    int numberOfNotes = random(1, 16);
+    for (int i = 0; i < numberOfNotes; ++i)
+      phrase.appendNote(MidiNumber(random.pitch()));
+
+    std::cout << phrase;
   }
 };
