@@ -63,11 +63,10 @@ public:
   void operator<<(double signalPoint) { write(signalPoint); }
 
   static void write(std::ostream &outputStream, MonoBuffer &buffer) {
-    double attenuation = .9;
     int numberOfFrames = buffer.numberOfFrames();
     WavWriter recorder(outputStream, numberOfFrames);
     for (int i = 0; i < numberOfFrames; ++i)
-      recorder << buffer[i] * attenuation;
+      recorder << buffer[i];
   }
 
   static void write(const std::string &outputFilePath, MonoBuffer &buffer) {
