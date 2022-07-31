@@ -15,6 +15,7 @@ stablePackDir="$(pwd)/stable-test-results"
 
 rm -rf "$testPackDir"
 mkdir -p "$testPackDir"
+mkdir -p "$stablePackDir"
 
 for testScript in tests/*.sh ; do
   absoluteScriptPath="$(pwd)/$testScript"
@@ -32,20 +33,22 @@ missing=()
 failed=()
 created=()
 
-for stableFile in $stablePackDir/* ; do
-  filename=$(basename "$stableFile")
-  freshFile="$testPackDir/$filename"
-  if [ -f "$freshFile" ]; then
-    ./compare-audio.sh "$stableFile" "$freshFile" > /dev/null
-    if [ $? -ne 0 ]; then
-      failed+=( "$filename" )
-      
+if [ "$(ls "$stablePackDir")" != "" ]; then
+  for stableFile in $stablePackDir/* ; do
+    filename=$(basename "$stableFile")
+    freshFile="$testPackDir/$filename"
+    if [ -f "$freshFile" ]; then
+      ./compare-audio.sh "$stableFile" "$freshFile" > /dev/null
+      if [ $? -ne 0 ]; then
+        failed+=( "$filename" )
+        
+      fi
+      passed+=( "$filename" )
+    else
+      missing+=( "$filename" )
     fi
-    passed+=( "$filename" )
-  else
-    missing+=( "$filename" )
-  fi
-done
+  done
+fi
 
 for freshFile in $testPackDir/* ; do 
   filename=$(basename "$freshFile")
