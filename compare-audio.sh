@@ -10,9 +10,8 @@ hash1=$(ffmpeg -loglevel error -i "$file1" -map 0 -f hash -)
 hash2=$(ffmpeg -loglevel error -i "$file2" -map 0 -f hash -)
 
 if [ "$hash1" = "$hash2" ]; then
-  echo "Equal"
   exit 0
 else
-  echo "Not equal"
+  echo -e "Audio files don't match: $file1 != $file2"
   exit 1
 fi
