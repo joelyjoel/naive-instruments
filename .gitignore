@@ -6,3 +6,4 @@ test-outputs
 .cache
 a.out
 .DS_Store
+most-recent-test-results/
