@@ -1,30 +1,40 @@
 #! /usr/local/bin/bash
 
-outputDirectory="most-recent-test-results"
-stableTestResults="stable-test-results"
+# This script will run all the scripts in the tests/* directory which create a
+# sample pack, called the 'test-pack'. This newly generated sample pack is then
+# compared against the 'stable-pack'. If there are samples in the stable-pack
+# which are missing or non-matching in the test-pack then the test is failed.
+# Conversely, if there are samples in the test-pack which are not yet present
+# in the stable pack then these need to be auditioned/reviewed and added to the
+# stable-pack.
 
+# 1. Run the tests, creating the test-pack
 
-rm -rf "$outputDirectory"
-mkdir -p "$outputDirectory"
+testPackDir="$(pwd)/most-recent-test-results"
+stablePackDir="$(pwd)/stable-test-results"
+
+rm -rf "$testPackDir"
+mkdir -p "$testPackDir"
 
 for testScript in tests/*.sh ; do
   absoluteScriptPath="$(pwd)/$testScript"
   logs=$(
-    cd $outputDirectory && $absoluteScriptPath 2> /dev/null
+    cd $testPackDir 
+    $absoluteScriptPath 2> /dev/null
   ) 
 done
 
+
+# 2. Compare test pack to the stable pack
 
 passed=()
 missing=()
 failed=()
 created=()
-count=0
 
-for stableFile in $stableTestResults/* ; do
-  ((count = count + 1))
+for stableFile in $stablePackDir/* ; do
   filename=$(basename "$stableFile")
-  freshFile="$outputDirectory/$filename"
+  freshFile="$testPackDir/$filename"
   if [ -f "$freshFile" ]; then
     ./compare-audio.sh "$stableFile" "$freshFile" > /dev/null
     if [ $? -ne 0 ]; then
@@ -37,23 +47,28 @@ for stableFile in $stableTestResults/* ; do
   fi
 done
 
-for freshFile in $outputDirectory/* ; do 
+for freshFile in $testPackDir/* ; do 
   filename=$(basename "$freshFile")
-  stableVersion="$stableTestResults/$filename"
+  stableVersion="$stablePackDir/$filename"
   if [ -f "$stableVersion" ]; then
     :
   else
-    created+=("$filename")
+    created+=("$testPackDir/$filename")
   fi
 done
 
 
 
 
-# Print the report
+# 3. Generate a report
+
+echo "stablePack: $stablePackDir"
+echo "testPack: $testPackDir"
+
 numberOfPassingSamples=${#passed[@]}
 if [ $numberOfPassingSamples -ne 0 ]; then
   echo -e "passed:"
+  echo "  # Woo! These samples all look correct!"
   for i in ${!passed[@]}; do
     name=${passed[$i]}
     echo "  - $name"
@@ -63,6 +78,7 @@ fi
 numberOfMissingSamples=${#missing[@]}
 if [ $numberOfMissingSamples -ne 0 ]; then
   echo -e "missing:"
+  echo "  # These samples exist in the stable-pack, but were missing in the test-pack."
   for i in ${!missing[@]}; do 
     name=${missing[$i]}
     echo "  - $name"
@@ -72,6 +88,7 @@ fi
 numberOfFailingSamples=${#failed[@]}
 if [ $numberOfFailingSamples -ne 0 ]; then 
   echo "failed:"
+  echo "  # These samples had non-matching checksums between the stable-pack and the test-pack."
   for i in ${!failed[@]}; do
     name=${failed[$i]}
     echo "  - $name"
@@ -82,6 +99,7 @@ fi
 numberOfExtraSamples=${#created[@]}
 if [ $numberOfExtraSamples -ne 0 ]; then 
   echo -e "created:"
+  echo -e "  # These samples need to be auditioned and added to the stable-pack if they pass review."
   for i in ${!created[@]}; do
     name=${created[$i]}
     echo "  - $name"
