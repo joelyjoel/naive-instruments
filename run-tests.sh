@@ -41,9 +41,9 @@ if [ "$(ls "$stablePackDir")" != "" ]; then
       ./compare-audio.sh "$stableFile" "$freshFile" > /dev/null
       if [ $? -ne 0 ]; then
         failed+=( "$filename" )
-        
+      else
+        passed+=( "$filename" )
       fi
-      passed+=( "$filename" )
     else
       missing+=( "$filename" )
     fi
