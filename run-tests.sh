@@ -21,7 +21,7 @@ for testScript in tests/*.sh ; do
   absoluteScriptPath="$(pwd)/$testScript"
   logs=$(
     cd $testPackDir 
-    $absoluteScriptPath 2> /dev/null
+    bash "$absoluteScriptPath" 2> /dev/null
   ) 
 done
 
