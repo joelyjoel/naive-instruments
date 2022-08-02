@@ -27,6 +27,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 								 src/parsing/Units.cpp \
 								 src/parsing/NumberWithUnit.cpp \
 								 src/instruments/Add.cpp \
+								 src/instruments/Multiply.cpp \
 								 src/instruments/BreakpointEnvelope.cpp \
 								 src/instruments/ControlString.cpp \
 								 src/file-io/piping.cpp \
