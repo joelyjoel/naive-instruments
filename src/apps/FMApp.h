@@ -53,18 +53,7 @@ public:
                     << modulatorIndex << "\n";
           Socket<double> &socket = *pitchSockets[carrierIndex];
 
-          // TODO: This logic could me refactored as Socket& '+=' overload
-          if (socket.hasPlug()) {
-            Add *adder = new Add();
-            adder->a << m;
-            adder->b << socket.currentConnection();
-            socket << adder;
-          } else {
-            Add *adder = new Add();
-            adder->a << m;
-            adder->b << socket.currentConstant();
-            socket << adder;
-          }
+          socket += *m;
         }
       }
     }

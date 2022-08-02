@@ -33,3 +33,9 @@ public:
     }
   }
 };
+
+/**
+ * Mix an additional signal into a socket
+ */
+void operator+=(Socket<double> &socket,
+                NaiveInstrument<double> &additionalSignal);
