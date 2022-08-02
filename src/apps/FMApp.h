@@ -46,14 +46,14 @@ public:
                                 std::to_string(carrierIndex);
         if (args.exists(key)) {
           NaiveInstrument<double> *modulation = args.signal(key);
+
           Multiply *m = new Multiply();
           m->a << outputs[modulatorIndex];
           m->b << modulation;
-          std::cerr << "Modulating Osc" << carrierIndex << " by Osc"
-                    << modulatorIndex << "\n";
-          Socket<double> &socket = *pitchSockets[carrierIndex];
 
-          socket += *m;
+          IntervalToRatio *ratio = new IntervalToRatio;
+          ratio->interval << m;
+          oscs[carrierIndex]->frequency *= *ratio;
         }
       }
     }
