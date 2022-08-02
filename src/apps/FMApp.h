@@ -32,7 +32,7 @@ public:
       Osc *osc = oscs[i];
 
       NaiveInstrument<double> *pitch = SignalString::parse(args[i]);
-      Pitch *pitchConverter = new Pitch();
+      PitchConverter *pitchConverter = new PitchConverter();
       osc->frequency << pitchConverter << *pitch;
 
       pitchSockets.push_back(&pitchConverter->pitch);
