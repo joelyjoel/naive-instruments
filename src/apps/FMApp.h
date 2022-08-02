@@ -49,10 +49,11 @@ public:
           Multiply *m = new Multiply();
           m->a << outputs[modulatorIndex];
           m->b << modulation;
-          std::cout << "Modulating Osc" << carrierIndex << " by Osc"
+          std::cerr << "Modulating Osc" << carrierIndex << " by Osc"
                     << modulatorIndex << "\n";
           Socket<double> &socket = *pitchSockets[carrierIndex];
 
+          // TODO: This logic could me refactored as Socket& '+=' overload
           if (socket.hasPlug()) {
             Add *adder = new Add();
             adder->a << m;
