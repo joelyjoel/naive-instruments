@@ -35,6 +35,7 @@ CPP_SOURCE_FILES=src/file-io/record.cpp \
 
 FLAGS=-std=c++20 \
 			-I ./dependencies -L ./dependencies \
+			-l boost_program_options \
 			${NCURSES_FLAGS} \
 			${PORTAUDIO_FLAGS}
 

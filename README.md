@@ -8,6 +8,12 @@ performance, just about what makes sense to me. That's why its naive.
  
 TODO: Add proper instructions
 
+You will need boost!
+
+```bash
+brew install boost
+```
+
 Comppile it:
 
 ```bash
