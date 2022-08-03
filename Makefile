@@ -49,6 +49,13 @@ main:
 		${CPP_SOURCE_FILES} \
 		src/main.cpp -o bin/ni
 
+debug:
+	mkdir -p bin
+	g++ ${FLAGS} \
+		${CPP_SOURCE_FILES} \
+		-g \
+		src/main.cpp -o bin/ni
+
 build-and-run-tests:
 	git clean -fd -- snapshots
 	g++ ${FLAGS} src/file-io/record.cpp src/snapshot-tests.cpp -o src/snapshot-tests.bin
