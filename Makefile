@@ -47,14 +47,14 @@ main:
 	mkdir -p bin
 	g++ ${FLAGS} \
 		${CPP_SOURCE_FILES} \
-		src/main.cpp -o bin/ni
+		src/main.cpp -o bin/malc
 
 debug:
 	mkdir -p bin
 	g++ ${FLAGS} \
 		${CPP_SOURCE_FILES} \
 		-g \
-		src/main.cpp -o bin/ni
+		src/main.cpp -o bin/malc
 
 build-and-run-tests:
 	git clean -fd -- snapshots
