@@ -27,15 +27,21 @@ public:
     }
 
     // Assign the fundamental frequencies
-    std::vector<Socket<double> *> pitchSockets;
+    NaiveInstrument<double> *fundamentalPitch = SignalString::parse(args[0]);
+    PitchConverter fundamentalFrequency;
+    fundamentalFrequency << *fundamentalPitch;
     for (int i = 0; i < numberOfOscs; ++i) {
       Osc *osc = oscs[i];
 
-      NaiveInstrument<double> *pitch = SignalString::parse(args[i]);
-      PitchConverter *pitchConverter = new PitchConverter();
-      osc->frequency << pitchConverter << *pitch;
-
-      pitchSockets.push_back(&pitchConverter->pitch);
+      if (i == 0) {
+        osc->frequency << fundamentalFrequency;
+      } else {
+        NaiveInstrument<double> *ratio = SignalString::parse(args[i]);
+        Multiply *m = new Multiply;
+        m->a << fundamentalFrequency;
+        m->b << ratio;
+        osc->frequency << m;
+      }
     }
 
     // TODO: Add modulation routings
