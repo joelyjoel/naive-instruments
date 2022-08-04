@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
     RulerApp app(args);
     app();
   } else if (command == "mix") {
-    MixApp app(args);
+    MixApp app(args.argc, args.argv);
     app();
   } else if (command == "osc") {
     OscApp app(args.argc, args.argv);
