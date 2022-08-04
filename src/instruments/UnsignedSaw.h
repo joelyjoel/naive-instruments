@@ -5,7 +5,7 @@
 
 class UnsignedSaw : public Signal<double> {
 public:
-  Socket<double> &frequency = addSocket<double>();
+  SignalInput<double> &frequency = addSocket<double>();
   double phase;
 
   double tick() {

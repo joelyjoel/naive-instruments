@@ -8,8 +8,8 @@
 #define YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE 420
 #define CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE 69
 
-class AbstractSocket;
-template <typename SignalFrame> class Socket;
+class UntypedSignalInput;
+template <typename SignalFrame> class SignalInput;
 
 /**
  * This class just exists so that sockets don't have to know the SignalFrame
@@ -20,12 +20,12 @@ public:
   int internalClock = 0;
 
 protected:
-  std::vector<AbstractSocket *> sockets;
+  std::vector<UntypedSignalInput *> sockets;
 
 protected:
   template <typename SignalFrame>
-  Socket<SignalFrame> &addSocket(double initValue = 0) {
-    auto socket = new Socket<SignalFrame>(this);
+  SignalInput<SignalFrame> &addSocket(double initValue = 0) {
+    auto socket = new SignalInput<SignalFrame>(this);
     sockets.push_back(socket);
     return *socket;
   }
@@ -74,7 +74,7 @@ public:
   SignalFrame next() { return tickUntil(internalClock + 1); }
   SignalFrame operator++() { return next(); }
 
-  AbstractSocket &defaultSocket() {
+  UntypedSignalInput &defaultSocket() {
     if (sockets.size() > 0)
       return *sockets[0];
     else {

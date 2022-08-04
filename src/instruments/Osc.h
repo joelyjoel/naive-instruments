@@ -12,7 +12,7 @@ class Osc : public Patch<double> {
   Wavetable wavetable;
 
 public:
-  Socket<double> &frequency = exposeSocket(phase.frequency);
+  SignalInput<double> &frequency = exposeSocket(phase.frequency);
 
 public:
   Osc(MonoBuffer &waveform) : Patch(wavetable) {

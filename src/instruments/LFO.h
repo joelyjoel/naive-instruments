@@ -17,7 +17,7 @@ public:
     sum.b << modulation;
   }
 
-  Socket<double> &frequency = exposeSocket(osc.frequency);
-  Socket<double> &depth = exposeSocket(modulation.b);
-  Socket<double> &center = exposeSocket(sum.a);
+  SignalInput<double> &frequency = exposeSocket(osc.frequency);
+  SignalInput<double> &depth = exposeSocket(modulation.b);
+  SignalInput<double> &center = exposeSocket(sum.a);
 };

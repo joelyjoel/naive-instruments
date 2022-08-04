@@ -3,12 +3,12 @@
 #include "Signal.h"
 #include <iostream>
 
-class AbstractSocket {
+class UntypedSignalInput {
 protected:
   UntypedSignal *owner;
 
 public:
-  AbstractSocket(UntypedSignal *owner) : owner(owner){};
+  UntypedSignalInput(UntypedSignal *owner) : owner(owner){};
 
   virtual void connect(Signal<double> *signal) {
     std::cerr << "No override for "
@@ -26,14 +26,14 @@ public:
 /**
  * Abstraction for the inputs to a Signal
  */
-template <typename SignalFrame> class Socket : public AbstractSocket {
+template <typename SignalFrame> class SignalInput : public UntypedSignalInput {
 
   Signal<SignalFrame> *plugged;
   SignalFrame constant;
 
 public:
-  Socket(UntypedSignal *owner)
-      : AbstractSocket(owner), constant(0), plugged(nullptr) {}
+  SignalInput(UntypedSignal *owner)
+      : UntypedSignalInput(owner), constant(0), plugged(nullptr) {}
 
   /**
    * Synchronise the plugged instrument with the owner

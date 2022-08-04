@@ -7,8 +7,8 @@
 
 class Add : public Signal<double> {
 public:
-  Socket<double> &a = addSocket<double>();
-  Socket<double> &b = addSocket<double>();
+  SignalInput<double> &a = addSocket<double>();
+  SignalInput<double> &b = addSocket<double>();
 
   Add() {}
 
@@ -36,4 +36,4 @@ public:
 /**
  * Mix an additional signal into a socket
  */
-void operator+=(Socket<double> &socket, Signal<double> &additionalSignal);
+void operator+=(SignalInput<double> &socket, Signal<double> &additionalSignal);

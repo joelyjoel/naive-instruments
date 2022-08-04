@@ -25,9 +25,9 @@ public:
   FilterKind kind = LowPass;
 
 public:
-  Socket<double> input = addSocket<double>();
-  Socket<double> frequency = addSocket<double>();
-  Socket<double> bandwidth = addSocket<double>();
+  SignalInput<double> input = addSocket<double>();
+  SignalInput<double> frequency = addSocket<double>();
+  SignalInput<double> bandwidth = addSocket<double>();
 
 private:
   double a0, a1, a2, b1, b2;

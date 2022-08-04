@@ -8,7 +8,7 @@ private:
   double threshold = 0;
 
 public:
-  Socket<double> &input = addSocket<double>();
+  SignalInput<double> &input = addSocket<double>();
   bool detectDownwardsZeroCrossings = true;
   bool detectUpwardsZeroCrossings = false;
 

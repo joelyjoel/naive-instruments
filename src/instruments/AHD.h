@@ -2,9 +2,9 @@
 #include "../core.h"
 class AHD : public Signal<double> {
 public:
-  Socket<double> &attack = addSocket<double>(1);
-  Socket<double> &hold = addSocket<double>(1);
-  Socket<double> decay = addSocket<double>(1);
+  SignalInput<double> &attack = addSocket<double>(1);
+  SignalInput<double> &hold = addSocket<double>(1);
+  SignalInput<double> decay = addSocket<double>(1);
 
 private:
   enum AHDStage { A, H, D, finished };

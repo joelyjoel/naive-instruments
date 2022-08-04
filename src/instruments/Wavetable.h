@@ -12,7 +12,7 @@ class Wavetable : public Signal<double> {
 public:
   std::string label() { return "Wavetable"; }
 
-  Socket<double> &phase = addSocket<double>();
+  SignalInput<double> &phase = addSocket<double>();
 
   Wavetable(MonoBuffer &waveform = Waveforms::sine()) : waveform(&waveform) {}
 

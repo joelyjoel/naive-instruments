@@ -7,9 +7,9 @@ private:
   double phase = 0;
 
 public:
-  Socket<double> &start = addSocket<double>(1.0);
-  Socket<double> &end = addSocket<double>(0);
-  Socket<double> &duration = addSocket<double>(1.0);
+  SignalInput<double> &start = addSocket<double>(1.0);
+  SignalInput<double> &end = addSocket<double>(0);
+  SignalInput<double> &duration = addSocket<double>(1.0);
 
   double tick() {
     if (phase < 1) {
