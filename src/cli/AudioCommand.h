@@ -18,6 +18,34 @@ protected:
         "Path to wav file for recording audio\n");
   }
 
+  /**
+   * Three ways to get a primary input into a file.
+   *   1) --input <file>
+   *   2) pipe a wav file to stdin
+   *   3) use the positional argument
+   */
+  void descripeInputOptions() {
+    options.add_options()("input", po::value<std::string>(),
+                          "The main input signal");
+    if (!stdinIsAPipe())
+      positionalOptions.add("input", 1);
+  }
+
+  /**
+   * Get the primary audio input as a buffer.
+   */
+  MonoBuffer *inputAsBuffer() {
+    if (args.count("input")) {
+      const std::string filename = args["input"].as<std::string>();
+      return WavReader::readMonoFile(filename);
+    } else if (stdinIsAPipe()) {
+      return WavReader::readStream(std::cin);
+    } else {
+      cerr << "No input!\n";
+      throw 1;
+    }
+  }
+
   const Hopefully<std::string> outputFile() {
     if (args.count("output-file"))
       return args["output-file"].as<std::string>();
