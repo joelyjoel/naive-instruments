@@ -38,6 +38,7 @@ protected:
    * Description/declaration of the options in the command.
    */
   po::options_description options;
+  po::positional_options_description positionalOptions;
   virtual void describeOptions() {
     cerr << "Oh no, it looks like the programmer forgot to override e "
             "describeOptions method!\n";
@@ -54,7 +55,12 @@ protected:
 
 private:
   void parseOptions() {
-    po::store(po::parse_command_line(argc, argv, options), args);
+    /* po::store(po::parse_command_line(argc, argv, options), args); */
+    po::store(po::command_line_parser(argc, argv)
+                  .options(options)
+                  .positional(positionalOptions)
+                  .run(),
+              args);
     po::notify(args);
   }
 };
