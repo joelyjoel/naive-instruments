@@ -3,7 +3,7 @@
 #include "../core.h"
 #include <string>
 
-class UnsignedSaw : public NaiveInstrument<double> {
+class UnsignedSaw : public Signal<double> {
 public:
   Socket<double> &frequency = addSocket<double>();
   double phase;

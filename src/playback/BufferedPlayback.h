@@ -22,11 +22,9 @@ private:
   PaError err;
 
 public:
-  BufferedPlayback(NaiveInstrument<double> &input) : buffer(1024) {
-    signal = &input;
-  }
+  BufferedPlayback(Signal<double> &input) : buffer(1024) { signal = &input; }
   BufferedPlayback() : BufferedPlayback(*new Constant(0)) {}
-  NaiveInstrument<double> *signal;
+  Signal<double> *signal;
   CircularBuffer<double> buffer;
   double shift() { return buffer.shift(); }
   void push(double y) { buffer.push(y); }
@@ -82,7 +80,7 @@ public:
     return float(buffer.size()) / float(sampleRate);
   }
 
-  static void play(NaiveInstrument<double> &signal) {
+  static void play(Signal<double> &signal) {
     BufferedPlayback playback(signal);
     playback.start(false);
   }
@@ -92,7 +90,7 @@ public:
     play(sampler);
   }
 
-  void setSignal(NaiveInstrument<double> &sound) { signal = &sound; }
+  void setSignal(Signal<double> &sound) { signal = &sound; }
   void setSignal(MonoBuffer &sample) {
     Sampler *sampler = new Sampler(sample);
     setSignal(*sampler);

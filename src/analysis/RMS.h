@@ -5,10 +5,10 @@
 
 class RMS {
 private:
-  NaiveInstrument<double> *signal;
+  Signal<double> *signal;
 
 public:
-  void operator<<(NaiveInstrument<double> &input) { signal = &input; }
+  void operator<<(Signal<double> &input) { signal = &input; }
 
 public:
   RMS() {}

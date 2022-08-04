@@ -1,6 +1,6 @@
 #include "../core.h"
 
-class Noise : public NaiveInstrument<double> {
+class Noise : public Signal<double> {
   Random random;
 
 public:

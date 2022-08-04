@@ -31,7 +31,7 @@ protected:
   }
 
 public:
-  virtual std::string label() { return "NaiveInstrument"; }
+  virtual std::string label() { return "Signal"; }
   std::string summary() {
     return label() + "@" + std::to_string(internalClock);
   }
@@ -40,8 +40,7 @@ public:
 /**
  * I think its intuitive to think of audio processes like little machines.
  */
-template <typename SignalFrame>
-class NaiveInstrument : public UntypedInstrument {
+template <typename SignalFrame> class Signal : public UntypedInstrument {
 protected:
   SignalFrame latestFrame;
 
@@ -85,8 +84,7 @@ public:
   }
 
   template <typename InputSignalFrame>
-  NaiveInstrument<InputSignalFrame> &
-  operator<<(NaiveInstrument<InputSignalFrame> &signal) {
+  Signal<InputSignalFrame> &operator<<(Signal<InputSignalFrame> &signal) {
     defaultSocket().connect(&signal);
     return signal;
   }

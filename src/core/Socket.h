@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NaiveInstrument.h"
+#include "Signal.h"
 #include <iostream>
 
 class AbstractSocket {
@@ -10,9 +10,9 @@ protected:
 public:
   AbstractSocket(UntypedInstrument *owner) : owner(owner){};
 
-  virtual void connect(NaiveInstrument<double> *signal) {
+  virtual void connect(Signal<double> *signal) {
     std::cerr << "No override for "
-                 "AbstractSocket::connect(NaiveInstrument<double>*) method\n";
+                 "AbstractSocket::connect(Signal<double>*) method\n";
     throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
   }
 
@@ -24,11 +24,11 @@ public:
 };
 
 /**
- * Abstraction for the inputs to a NaiveInstrument
+ * Abstraction for the inputs to a Signal
  */
 template <typename SignalFrame> class Socket : public AbstractSocket {
 
-  NaiveInstrument<SignalFrame> *plugged;
+  Signal<SignalFrame> *plugged;
   SignalFrame constant;
 
 public:
@@ -47,9 +47,7 @@ public:
 
   SignalFrame operator()() { return sync(); }
 
-  void connect(NaiveInstrument<SignalFrame> *instrument) {
-    plugged = instrument;
-  }
+  void connect(Signal<SignalFrame> *instrument) { plugged = instrument; }
 
   void disconnect() { plugged = nullptr; }
 
@@ -59,14 +57,12 @@ public:
     constant = k;
   }
 
-  NaiveInstrument<SignalFrame> &
-  operator<<(NaiveInstrument<SignalFrame> *instrument) {
+  Signal<SignalFrame> &operator<<(Signal<SignalFrame> *instrument) {
     connect(instrument);
     return *instrument;
   }
 
-  NaiveInstrument<SignalFrame> &
-  operator<<(NaiveInstrument<SignalFrame> &instrument) {
+  Signal<SignalFrame> &operator<<(Signal<SignalFrame> &instrument) {
     connect(&instrument);
     return instrument;
   }
@@ -75,7 +71,7 @@ public:
 
 public:
   bool hasPlug() { return plugged != nullptr; }
-  NaiveInstrument<double> *currentConnection() {
+  Signal<double> *currentConnection() {
     if (hasPlug())
       return plugged;
     else {

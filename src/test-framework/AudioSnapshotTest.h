@@ -14,12 +14,12 @@ class AudioSnapshotTest {
   const std::string snapshotsDirectory = "snapshots/";
   const std::string snapshotPath;
   const std::string testOutputPath;
-  NaiveInstrument<double> &signal;
+  Signal<double> &signal;
   const float duration;
 
 public:
-  AudioSnapshotTest(const std::string &testName,
-                    NaiveInstrument<double> &signal, float duration = 1)
+  AudioSnapshotTest(const std::string &testName, Signal<double> &signal,
+                    float duration = 1)
       : testName(testName), signal(signal), duration(duration),
         snapshotPath(snapshotsDirectory + testName + ".wav"),
         testOutputPath(testOutputDirectory + testName + ".wav") {
@@ -27,8 +27,8 @@ public:
     run();
   }
 
-  AudioSnapshotTest(const std::string &testName,
-                    NaiveInstrument<double> *signal, float duration = 1)
+  AudioSnapshotTest(const std::string &testName, Signal<double> *signal,
+                    float duration = 1)
       : AudioSnapshotTest(testName, *signal, duration) {}
 
 public:

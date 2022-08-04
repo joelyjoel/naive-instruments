@@ -9,7 +9,7 @@ const int LIMIT_EXCEEDED = 99;
  */
 class BangAwaiter {
 private:
-  NaiveInstrument<bool> *signal;
+  Signal<bool> *signal;
 
 public:
   void next(int limit = 44100) {
@@ -20,7 +20,7 @@ public:
         throw LIMIT_EXCEEDED;
   }
 
-  NaiveInstrument<bool> &operator<<(NaiveInstrument<bool> &input) {
+  Signal<bool> &operator<<(Signal<bool> &input) {
     signal = &input;
     return input;
   }

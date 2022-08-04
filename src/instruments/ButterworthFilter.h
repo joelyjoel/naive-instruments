@@ -1,7 +1,7 @@
 #include "../core.h"
 #include <cmath>
 
-class ButterworthFilter : public NaiveInstrument<double> {
+class ButterworthFilter : public Signal<double> {
 
   double x1 = 0, x2 = 0, y = 0, y1 = 0, y2 = 0;
   double tick() override {

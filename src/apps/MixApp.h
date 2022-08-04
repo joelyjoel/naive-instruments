@@ -10,7 +10,7 @@ public:
       return;
     }
 
-    std::vector<NaiveInstrument<double> *> samplers;
+    std::vector<Signal<double> *> samplers;
 
     for (int i = 0; i < args.numberOfPositionalArgs(); ++i) {
       // TODO: Use getSample instead

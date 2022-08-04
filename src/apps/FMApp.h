@@ -10,13 +10,13 @@ public:
 
     // Create the oscs
     std::vector<Osc *> oscs;
-    std::vector<NaiveInstrument<double> *> outputs;
+    std::vector<Signal<double> *> outputs;
     for (int i = 0; i < numberOfOscs; ++i) {
       Osc *osc = new Sine;
       oscs.push_back(osc);
       const std::string key = std::to_string(i);
       if (args.exists(key)) {
-        NaiveInstrument<double> *level = args.signal(key);
+        Signal<double> *level = args.signal(key);
         Multiply *m = new Multiply;
         m->a << osc;
         m->b << level;
@@ -27,7 +27,7 @@ public:
     }
 
     // Assign the fundamental frequencies
-    NaiveInstrument<double> *fundamentalPitch = SignalString::parse(args[0]);
+    Signal<double> *fundamentalPitch = SignalString::parse(args[0]);
     PitchConverter fundamentalFrequency;
     fundamentalFrequency << *fundamentalPitch;
     for (int i = 0; i < numberOfOscs; ++i) {
@@ -36,7 +36,7 @@ public:
       if (i == 0) {
         osc->frequency << fundamentalFrequency;
       } else {
-        NaiveInstrument<double> *ratio = SignalString::parse(args[i]);
+        Signal<double> *ratio = SignalString::parse(args[i]);
         Multiply *m = new Multiply;
         m->a << fundamentalFrequency;
         m->b << ratio;
@@ -51,7 +51,7 @@ public:
         const std::string key = std::to_string(modulatorIndex) + "to" +
                                 std::to_string(carrierIndex);
         if (args.exists(key)) {
-          NaiveInstrument<double> *modulation = args.signal(key);
+          Signal<double> *modulation = args.signal(key);
 
           Multiply *m = new Multiply();
           m->a << outputs[modulatorIndex];
@@ -65,12 +65,12 @@ public:
     }
 
     // Create the final mix
-    NaiveInstrument<double> *mixdown = nullptr;
+    Signal<double> *mixdown = nullptr;
     for (int i = 0; i < numberOfOscs; ++i) {
-      NaiveInstrument<double> *oscOutput = outputs[i];
+      Signal<double> *oscOutput = outputs[i];
       const std::string key = std::to_string(i) + "-out";
       if (args.exists(key) || i == 0) {
-        NaiveInstrument<double> *level = args.signal(key, i == 0 ? "1" : "0");
+        Signal<double> *level = args.signal(key, i == 0 ? "1" : "0");
         Multiply *m = new Multiply;
         m->a << oscOutput;
         m->b << level;

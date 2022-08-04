@@ -3,7 +3,7 @@
 #include "../core.h"
 #include <iostream>
 
-class Constant : public NaiveInstrument<double> {
+class Constant : public Signal<double> {
 private:
   double value = 0;
 

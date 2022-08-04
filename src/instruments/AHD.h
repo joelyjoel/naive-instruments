@@ -1,6 +1,6 @@
 #pragma once
 #include "../core.h"
-class AHD : public NaiveInstrument<double> {
+class AHD : public Signal<double> {
 public:
   Socket<double> &attack = addSocket<double>(1);
   Socket<double> &hold = addSocket<double>(1);

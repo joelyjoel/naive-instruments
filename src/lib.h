@@ -1,8 +1,8 @@
 #pragma once
 
 #include "core/MonoBuffer.h"
-#include "core/NaiveInstrument.h"
 #include "core/Patch.h"
+#include "core/Signal.h"
 #include "core/Socket.h"
 #include "core/constants.h"
 #include "file-io/WavReader.h"

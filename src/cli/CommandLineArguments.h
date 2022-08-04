@@ -240,11 +240,11 @@ public:
   friend std::ostream &operator<<(std::ostream &os,
                                   const CommandLineArguments &args);
 
-  NaiveInstrument<double> *signal(const std::string &key,
-                                  const std::string &fallback = "0") {
+  Signal<double> *signal(const std::string &key,
+                         const std::string &fallback = "0") {
     return SignalString::parse(string(key, fallback));
   }
-  NaiveInstrument<double> *signal(int key, const std::string &fallback = "0") {
+  Signal<double> *signal(int key, const std::string &fallback = "0") {
     return SignalString::parse(string(key, fallback));
   }
 

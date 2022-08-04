@@ -11,7 +11,7 @@
 
 class SignalString {
 public:
-  static NaiveInstrument<double> *parse(const std::string str) {
+  static Signal<double> *parse(const std::string str) {
 
     std::regex wavFileRegex(".wav$");
     if (std::regex_search(str, wavFileRegex)) {

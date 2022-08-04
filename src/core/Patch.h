@@ -1,16 +1,15 @@
 #pragma once
 
-#include "NaiveInstrument.h"
+#include "Signal.h"
 #include "Socket.h"
 #include <string>
 
-template <typename SignalFrame>
-class Patch : public NaiveInstrument<SignalFrame> {
+template <typename SignalFrame> class Patch : public Signal<SignalFrame> {
 private:
-  NaiveInstrument<SignalFrame> &output;
+  Signal<SignalFrame> &output;
 
 public:
-  Patch(NaiveInstrument<SignalFrame> &output) : output(output) {}
+  Patch(Signal<SignalFrame> &output) : output(output) {}
 
   SignalFrame tick() {
     return output.tickUntil(UntypedInstrument::internalClock);
@@ -18,7 +17,7 @@ public:
 
 protected:
   template <typename T> Socket<T> &exposeSocket(Socket<T> &socket) {
-    NaiveInstrument<SignalFrame>::sockets.push_back(&socket);
+    Signal<SignalFrame>::sockets.push_back(&socket);
     return socket;
   }
 

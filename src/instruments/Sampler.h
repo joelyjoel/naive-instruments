@@ -4,7 +4,7 @@
 #include "../file-io/WavReader.h"
 #include <iostream>
 
-class Sampler : public NaiveInstrument<double> {
+class Sampler : public Signal<double> {
 private:
   MonoBuffer *buffer;
   int playhead = 0;

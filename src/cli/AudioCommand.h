@@ -31,7 +31,7 @@ protected:
   }
 
 protected:
-  void output(NaiveInstrument<double> &signal) {
+  void output(Signal<double> &signal) {
     auto &path = outputFile();
     if (stdoutIsAPipe()) {
       std::cerr << "Piping to stdout\n";

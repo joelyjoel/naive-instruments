@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-class Add : public NaiveInstrument<double> {
+class Add : public Signal<double> {
 public:
   Socket<double> &a = addSocket<double>();
   Socket<double> &b = addSocket<double>();
@@ -17,12 +17,11 @@ public:
   std::string label() { return "Add"; }
 
 public:
-  static NaiveInstrument<double> *
-  many(std::vector<NaiveInstrument<double> *> &inputs) {
+  static Signal<double> *many(std::vector<Signal<double> *> &inputs) {
     if (inputs.size() == 0)
       return new Constant(0);
     else {
-      NaiveInstrument *sum = inputs[0];
+      Signal *sum = inputs[0];
       for (int i = 1; i < inputs.size(); ++i) {
         Add *newAdd = new Add;
         newAdd->a << sum;
@@ -37,5 +36,4 @@ public:
 /**
  * Mix an additional signal into a socket
  */
-void operator+=(Socket<double> &socket,
-                NaiveInstrument<double> &additionalSignal);
+void operator+=(Socket<double> &socket, Signal<double> &additionalSignal);

@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class ZeroCrossingDetector : public NaiveInstrument<bool> {
+class ZeroCrossingDetector : public Signal<bool> {
 private:
   double previous = 0;
   double threshold = 0;

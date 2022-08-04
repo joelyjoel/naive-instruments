@@ -8,7 +8,7 @@ private:
   ZeroCrossingDetector detector;
   BangAwaiter waiter;
 
-  NaiveInstrument<double> *input;
+  Signal<double> *input;
 
   void assemble() { waiter << detector << bufferer; }
 
@@ -58,7 +58,7 @@ public:
 
   MonoBuffer *operator[](int waveformIndex) { return select(waveformIndex); }
 
-  NaiveInstrument<double> &operator<<(NaiveInstrument<double> &inputSignal) {
+  Signal<double> &operator<<(Signal<double> &inputSignal) {
     input = &inputSignal;
     return bufferer << inputSignal;
   }

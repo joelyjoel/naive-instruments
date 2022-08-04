@@ -53,7 +53,7 @@ public:
     }
   }
 
-  void output(NaiveInstrument<double> &signal) {
+  void output(Signal<double> &signal) {
     auto &path = outputPath();
     if (stdoutIsAPipe()) {
       std::cerr << "Piping to stdout\n";

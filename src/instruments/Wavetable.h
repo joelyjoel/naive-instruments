@@ -4,7 +4,7 @@
 #include "../core.h"
 #include <string>
 
-class Wavetable : public NaiveInstrument<double> {
+class Wavetable : public Signal<double> {
   int bufferLength;
 
   MonoBuffer *waveform;

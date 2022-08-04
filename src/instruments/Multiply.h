@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class Multiply : public NaiveInstrument<double> {
+class Multiply : public Signal<double> {
 public:
   Socket<double> &a = addSocket<double>();
   Socket<double> &b = addSocket<double>();
@@ -13,5 +13,4 @@ public:
 /**
  * Mix an additional signal into a socket
  */
-void operator*=(Socket<double> &socket,
-                NaiveInstrument<double> &additionalSignal);
+void operator*=(Socket<double> &socket, Signal<double> &additionalSignal);

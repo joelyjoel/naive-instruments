@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class BreakpointEnvelope : public NaiveInstrument<double> {
+class BreakpointEnvelope : public Signal<double> {
   double tick() {
     progress += progressPerSample;
     if (progress >= 1)

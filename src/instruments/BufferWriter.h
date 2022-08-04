@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class BufferWriter : public NaiveInstrument<double> {
+class BufferWriter : public Signal<double> {
 public:
   Socket<double> &input = addSocket<double>();
 

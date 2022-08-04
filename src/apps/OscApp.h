@@ -42,13 +42,13 @@ public:
     /* const std::string str = args[0]; */
     /* auto &f = **ControlString::parse(str); */
 
-    NaiveInstrument<double> &pitch =
+    Signal<double> &pitch =
         *SignalString::parse(args["pitch"].as<std::string>());
-    NaiveInstrument<double> &volume =
+    Signal<double> &volume =
         *SignalString::parse(args["volume"].as<std::string>());
-    NaiveInstrument<double> &vibratoRate =
+    Signal<double> &vibratoRate =
         *SignalString::parse(args["vibrato-frequency"].as<std::string>());
-    NaiveInstrument<double> &vibratoAmount =
+    Signal<double> &vibratoAmount =
         *SignalString::parse(args["vibrato-amount"].as<std::string>());
 
     vibrato.depth << vibratoAmount;

@@ -3,7 +3,7 @@
 #include "../core.h"
 #include <cmath>
 
-class Floor : public NaiveInstrument<double> {
+class Floor : public Signal<double> {
 public:
   Socket<double> &input = addSocket<double>();
 

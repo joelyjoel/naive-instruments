@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class FixedPipe : public NaiveInstrument<double> {
+class FixedPipe : public Signal<double> {
   double *buffer;
   int bufferSize;
   int tapeHeadIndex = 0;

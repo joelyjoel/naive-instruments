@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class Ramp : public NaiveInstrument<double> {
+class Ramp : public Signal<double> {
 private:
   double phase = 0;
 
