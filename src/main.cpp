@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
     OscApp app(args.argc, args.argv);
     app();
   } else if (command == "filter") {
-    FilterApp app(args);
+    FilterApp app(args.argc, args.argv);
     app();
   } else if (command == "noise") {
     NoiseApp app(args.argc, args.argv);

@@ -1,11 +1,25 @@
 #include "../lib.h"
 
-class FilterApp : public CommandLineApp {
-  using CommandLineApp::CommandLineApp;
+class FilterApp : public AudioCommand {
+  using AudioCommand::AudioCommand;
+
+  void describeOptions() override {
+    describeOutputOptions();
+    options.add_options()("frequency", po::value<std::string>(),
+                          "Cut or central frequency for the filter")(
+        "pitch", po::value<std::string>(),
+        "Define the cut off frequency (or central frequency) using a "
+        "midi number")("high-pass,hp", "Use a high-pass filter")(
+        "band-pass,bp", "Use a band pass filter")(
+        "band-reject,br", "Use a band-reject filter")("low-pass,lp",
+                                                      "Use a low-pass filter");
+
+    // TODO: Add bandwidth
+  }
 
 public:
-  void run() override {
-    MonoBuffer *input = mainInputAsBuffer();
+  void action() override {
+    MonoBuffer *input = inputAsBuffer();
 
     Sampler sampler(*input);
     ButterworthFilter filter;
@@ -14,13 +28,15 @@ public:
 
     filter.input << sampler;
 
-    if (args.exists("frequency")) {
-      auto frequency = args.signal("frequency");
+    if (args.count("frequency")) {
+      Signal<double> *frequency =
+          SignalString::parse(args["frequency"].as<std::string>());
       filter.frequency << frequency;
       output(filter);
-    } else if (args.exists("pitch")) {
+    } else if (args.count("pitch")) {
       PitchConverter pitchConverter;
-      auto pitch = args.signal("pitch");
+      Signal<double> *pitch =
+          SignalString::parse(args["pitch"].as<std::string>());
       filter.frequency << pitchConverter << *pitch;
       output(filter);
     } else {
@@ -30,13 +46,13 @@ public:
   }
 
   ButterworthFilter::FilterKind getFilterKind() {
-    if (args.flag("hp"))
+    if (args.count("high-pass"))
       return ButterworthFilter::HighPass;
-    else if (args.flag("bp"))
+    else if (args.count("band-pass"))
       return ButterworthFilter::BandPass;
-    else if (args.flag("br"))
+    else if (args.count("band-reduce"))
       return ButterworthFilter::BandReduce;
-    else if (args.flag("lp"))
+    else if (args.count("low-pass"))
       return ButterworthFilter::LowPass;
     else
       return ButterworthFilter::LowPass;
