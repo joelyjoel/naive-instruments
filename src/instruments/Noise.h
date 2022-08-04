@@ -7,5 +7,5 @@ public:
   Noise(uint64_t seed = 1) : random(seed) {}
 
 private:
-  double tick() { return random.number(); }
+  double tick() { return random.number(-1, 1); }
 };
