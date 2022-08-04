@@ -2,14 +2,36 @@
 #include "../lib.h"
 #include <iostream>
 
-class OscApp : public CommandLineApp {
-  using CommandLineApp::CommandLineApp;
+class OscApp : public AudioCommand {
+  using AudioCommand::AudioCommand;
+
+  void describeOptions() override {
+    describeOutputOptions();
+    options.add_options()
+
+        ("pitch", po::value<std::string>()->default_value("50"),
+         "Frequency of the oscillator expressed as a midi pitch number.")
+
+            ("waveform", po::value<std::string>()->default_value("sine"),
+             "Set the oscillator's waveform (sine|saw|square|triangle)")
+
+                ("volume", po::value<std::string>()->default_value("1"),
+                 "Output level of the oscillator from 0-1")
+
+                    ("vibrato-frequency,vf",
+                     po::value<std::string>()->default_value("5Hz"),
+                     "Vibrato frequency")
+
+                        ("vibrato-amount,va",
+                         po::value<std::string>()->default_value("0"),
+                         "Amount of vibrato (in semitones)");
+  }
 
 public:
-  void run() {
+  void action() override {
 
-    auto waveform = Waveforms::byName(args.string("waveform", "sine"));
-
+    MonoBuffer &waveform =
+        Waveforms::byName(args["waveform"].as<std::string>());
     Osc osc(waveform);
     PitchConverter pitchConverter;
     Multiply gain;
@@ -20,10 +42,14 @@ public:
     /* const std::string str = args[0]; */
     /* auto &f = **ControlString::parse(str); */
 
-    NaiveInstrument<double> &pitch = *args.signal("pitch", "50");
-    NaiveInstrument<double> &volume = *args.signal("volume", "1");
-    NaiveInstrument<double> &vibratoRate = *args.signal("vf", "5");
-    NaiveInstrument<double> &vibratoAmount = *args.signal("va", "0");
+    NaiveInstrument<double> &pitch =
+        *SignalString::parse(args["pitch"].as<std::string>());
+    NaiveInstrument<double> &volume =
+        *SignalString::parse(args["volume"].as<std::string>());
+    NaiveInstrument<double> &vibratoRate =
+        *SignalString::parse(args["vibrato-frequency"].as<std::string>());
+    NaiveInstrument<double> &vibratoAmount =
+        *SignalString::parse(args["vibrato-amount"].as<std::string>());
 
     vibrato.depth << vibratoAmount;
     vibrato.frequency << vibratoRate;

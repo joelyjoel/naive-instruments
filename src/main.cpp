@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
     MixApp app(args);
     app();
   } else if (command == "osc") {
-    OscApp app(args);
+    OscApp app(args.argc, args.argv);
     app();
   } else if (command == "filter") {
     FilterApp app(args);
