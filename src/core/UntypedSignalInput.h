@@ -10,12 +10,12 @@ public:
   virtual void connect(Signal<double> *signal) {
     std::cerr << "No override for "
                  "AbstractSocket::connect(Signal<double>*) method\n";
-    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
+    throw 1;
   }
 
 public:
   virtual void setConstant(double k) {
     std::cerr << "No override for AbstractSocket::setConstant(double) method\n";
-    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
+    throw 1;
   }
 };

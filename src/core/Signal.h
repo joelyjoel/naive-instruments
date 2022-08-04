@@ -6,9 +6,6 @@
 #include <string>
 #include <vector>
 
-#define YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE 420
-#define CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE 69
-
 /**
  * I think its intuitive to think of audio processes like little machines.
  */
@@ -28,8 +25,6 @@ public:
       ++internalClock;
       tick();
     }
-    if (time > internalClock)
-      throw CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE;
     return latestFrame;
   }
 
@@ -37,12 +32,17 @@ public:
    * Naive instruments work a bit like clock work. Every frame of the digital
    * signal they "tick". What they actually do when they tick is up to them!
    */
-  virtual void tick() { throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE; }
+  virtual void tick() {
+    std::cerr
+        << "Oh no, looks like the programmer forgot to implement the tick "
+           "method for a Signal\n";
+    throw 1;
+  }
 
 public:
   virtual void reset() {
-    std::cerr << label() << " cannot reset";
-    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
+    std::cerr << "The reset method has not been implemented for this unit\n";
+    throw 1;
   }
 
   SignalFrame operator[](int index) { return tickUntil(index); }
