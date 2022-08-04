@@ -50,7 +50,7 @@ protected:
   po::variables_map args;
 
 protected:
-  void describeHelpOption() { options.add_options()("help", "Show help"); }
+  void describeHelpOption() { options.add_options()("help,h", "Show help"); }
   void showHelp() { cerr << options << "\n"; }
 
 private:
