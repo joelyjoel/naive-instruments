@@ -21,14 +21,14 @@ public:
   Sampler(MonoBuffer &sharedBuffer) { buffer = &sharedBuffer; }
 
 public:
-  double tick() override {
+  void tick() override {
     if (playhead < 0) {
       ++playhead;
-      return 0;
+      out(0);
     } else if (playhead < buffer->numberOfFrames())
-      return (*buffer)[++playhead];
+      out((*buffer)[++playhead]);
     else
-      return 0;
+      out(0);
   }
 
   void reset() override { playhead = 0; }

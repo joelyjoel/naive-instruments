@@ -7,7 +7,7 @@ public:
   SignalInput<double> &a = addSocket<double>();
   SignalInput<double> &b = addSocket<double>();
 
-  double tick() { return a() * b(); }
+  void tick() { out(a() * b()); }
 };
 
 /**

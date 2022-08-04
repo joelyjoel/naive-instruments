@@ -11,7 +11,7 @@ private:
   double phase = 0;
   AHDStage stage = A;
 
-  double tick() {
+  void tick() {
 
     switch (stage) {
 
@@ -21,7 +21,8 @@ private:
         phase = 0;
         stage = H;
       }
-      return phase;
+      out(phase);
+      break;
 
     case H:
       phase += 1 / sampleRate / hold();
@@ -29,7 +30,8 @@ private:
         phase = 0;
         stage = D;
       }
-      return 1;
+      out(1);
+      break;
 
     case D:
       phase += 1 / sampleRate / decay();
@@ -37,10 +39,11 @@ private:
         phase = 0;
         stage = finished;
       }
-      return 1 - phase;
+      out(1 - phase);
+      break;
 
     case finished:
-      return 0;
+      out(0);
       break;
     }
   }

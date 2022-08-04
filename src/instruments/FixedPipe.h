@@ -15,7 +15,7 @@ public:
   }
   ~FixedPipe() { delete buffer; }
 
-  double tick() {
+  void tick() {
     buffer[tapeHeadIndex] = input();
     std::cout << input() << "\n";
 
@@ -24,7 +24,7 @@ public:
       tapeHeadIndex -= bufferSize;
 
     std::cout << tapeHeadIndex << " " << buffer[tapeHeadIndex] << "\n";
-    return buffer[tapeHeadIndex];
+    out(buffer[tapeHeadIndex]);
   }
 
   std::string label() { return "FixedPipe"; }

@@ -6,11 +6,11 @@
 #include <vector>
 
 class BreakpointEnvelope : public Signal<double> {
-  double tick() {
+  void tick() {
     progress += progressPerSample;
     if (progress >= 1)
       advanceToNextSection();
-    return progress * endValue + (1.0 - progress) * startValue;
+    out(progress * endValue + (1.0 - progress) * startValue);
   }
 
 public:

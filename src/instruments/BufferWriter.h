@@ -21,12 +21,12 @@ private:
   int writeHead = 0;
 
 public:
-  double tick() {
+  void tick() {
     double signal = input();
     if (writeHead < buffer->numberOfFrames())
       (*buffer)[writeHead] = signal;
     ++writeHead;
-    return signal;
+    out(signal);
   }
 
   int currentSize() { return writeHead; }

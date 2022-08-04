@@ -4,7 +4,7 @@
 class ButterworthFilter : public Signal<double> {
 
   double x1 = 0, x2 = 0, y = 0, y1 = 0, y2 = 0;
-  double tick() override {
+  void tick() override {
     double x = input();
     calculateCoefficients();
 
@@ -15,7 +15,7 @@ class ButterworthFilter : public Signal<double> {
     x2 = x1;
     x1 = x;
 
-    return y;
+    out(y);
   }
 
 public:

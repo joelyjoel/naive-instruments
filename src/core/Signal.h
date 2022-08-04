@@ -16,11 +16,17 @@ template <typename SignalFrame> class Signal : public UntypedSignal {
 protected:
   SignalFrame latestFrame;
 
+protected:
+  /**
+   * Update the latest frame.
+   */
+  void out(const SignalFrame &y) { latestFrame = y; }
+
 public:
   SignalFrame tickUntil(int time) {
     while (internalClock < time) {
       ++internalClock;
-      latestFrame = tick();
+      tick();
     }
     if (time > internalClock)
       throw CANT_ACCESS_SIGNAL_FROM_THE_PAST_ERROR_CODE;
@@ -31,9 +37,7 @@ public:
    * Naive instruments work a bit like clock work. Every frame of the digital
    * signal they "tick". What they actually do when they tick is up to them!
    */
-  virtual SignalFrame tick() {
-    throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE;
-  }
+  virtual void tick() { throw YOU_MUST_IMPLEMENT_THIS_YOURSELF_ERROR_CODE; }
 
 public:
   virtual void reset() {

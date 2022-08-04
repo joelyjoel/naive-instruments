@@ -11,7 +11,9 @@ private:
 public:
   Patch(Signal<SignalFrame> &output) : output(output) {}
 
-  SignalFrame tick() { return output.tickUntil(UntypedSignal::internalClock); }
+  void tick() {
+    Signal<SignalFrame>::out(output.tickUntil(UntypedSignal::internalClock));
+  }
 
 protected:
   template <typename T> SignalInput<T> &exposeSocket(SignalInput<T> &socket) {
