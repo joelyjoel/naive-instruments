@@ -1,6 +1,7 @@
 #include "apps/FMApp.h"
 #include "apps/FilterApp.h"
 #include "apps/GraphApp.h"
+#include "apps/HelloApp.h"
 #include "apps/MixApp.h"
 #include "apps/NoiseApp.h"
 #include "apps/OscApp.h"
@@ -27,6 +28,9 @@ int main(int argc, char **argv) {
   if (command == "help") {
     std::cout << "No help has been written yet!\n";
     return 0;
+  } else if (command == "hello") {
+    HelloApp app(args.argc, args.argv);
+    app.run();
   } else if (command == "slice") {
     SliceApp app(args);
     app();
