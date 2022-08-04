@@ -6,6 +6,7 @@ class HelloApp : public Command {
 
   void describeOptions() override {
     // none yet
+    positionalOptions.add("name", -1);
     options.add_options()("name", po::value<std::string>(),
                           "Tell us your name!");
   }
