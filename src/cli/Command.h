@@ -29,7 +29,7 @@ public:
 
 protected:
   virtual void action() {
-    cerr << "Oh no, looks like the programmer forgot to oerride the action "
+    cerr << "Oh no, looks like the programmer forgot to override the action "
             "method\n";
   }
 
