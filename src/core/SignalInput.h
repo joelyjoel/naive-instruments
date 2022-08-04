@@ -9,28 +9,35 @@
  */
 template <typename SignalFrame> class SignalInput : public UntypedSignalInput {
 
-  Signal<SignalFrame> *plugged;
+private:
+  Signal<SignalFrame> *connection;
   SignalFrame constant;
 
 public:
   SignalInput(UntypedSignal *owner)
-      : UntypedSignalInput(owner), constant(0), plugged(nullptr) {}
+      : UntypedSignalInput(owner), constant(0), connection(nullptr) {}
 
   /**
    * Synchronise the plugged instrument with the owner
    */
   SignalFrame sync() {
-    if (plugged)
-      return plugged->tickUntil(owner->internalClock);
+    if (connection)
+      return connection->tickUntil(owner->internalClock);
     else
       return constant;
   }
 
   SignalFrame operator()() { return sync(); }
 
-  void connect(Signal<SignalFrame> *instrument) { plugged = instrument; }
+  void connect(Signal<SignalFrame> *inputSignal) {
+    untypedConnection = inputSignal;
+    connection = inputSignal;
+  }
 
-  void disconnect() { plugged = nullptr; }
+  void disconnect() {
+    connection = nullptr;
+    untypedConnection = nullptr;
+  }
 
 public:
   void setConstant(double k) {
@@ -51,10 +58,9 @@ public:
   void operator<<(double k) { setConstant(k); }
 
 public:
-  bool hasPlug() { return plugged != nullptr; }
   Signal<SignalFrame> *currentConnection() {
     if (hasPlug())
-      return plugged;
+      return connection;
     else {
       std::cerr << "Cannot get connection of uplugged socket!\n";
       throw 1;

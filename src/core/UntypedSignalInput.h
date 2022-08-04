@@ -18,4 +18,10 @@ public:
     std::cerr << "No override for AbstractSocket::setConstant(double) method\n";
     throw 1;
   }
+
+protected:
+  UntypedSignal *untypedConnection = nullptr;
+
+public:
+  bool hasPlug() { return untypedConnection != nullptr; }
 };
