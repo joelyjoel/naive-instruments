@@ -2,7 +2,7 @@
 #include "../lib.h"
 #include "./RandomEnvelopeApp.h"
 
-class RandomApp : CommandLineApp {
+class RandomApp : public CommandLineApp {
   using CommandLineApp::CommandLineApp;
 
   float randomFloat() {

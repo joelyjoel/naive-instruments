@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class FMApp : CommandLineApp {
+class FMApp : public CommandLineApp {
 
   using CommandLineApp::CommandLineApp;
 

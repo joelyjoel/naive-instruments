@@ -29,35 +29,35 @@ int main(int argc, char **argv) {
     return 0;
   } else if (command == "slice") {
     SliceApp app(args);
-    app.run();
+    app();
   } else if (command == "graph") {
     GraphApp app(args);
-    app.run();
+    app();
   } else if (command == "ruler") {
     RulerApp app(args);
-    app.run();
+    app();
   } else if (command == "mix") {
     MixApp app(args);
-    app.run();
+    app();
   } else if (command == "osc") {
     OscApp app(args);
-    app.run();
+    app();
   } else if (command == "filter") {
     FilterApp app(args);
-    app.run();
+    app();
   } else if (command == "noise") {
     NoiseApp app(args);
-    app.run();
+    app();
   } else if (command == "random") {
     RandomApp app(args);
-    app.run();
+    app();
   } else if (command == "zx-select") {
     // TODO: Deprecate command in favour of special units?
     ZxSelectApp app(args);
-    app.run();
+    app();
   } else if (command == "fm") {
     FMApp app(args);
-    app.run();
+    app();
   } else {
     std::cout << "Unknown command: " << command << "\n";
     return 1;

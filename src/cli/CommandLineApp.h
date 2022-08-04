@@ -75,6 +75,9 @@ public:
 private:
   virtual void run() { std::cout << "Not implemented...\n"; }
 
+public:
+  void operator()() { run(); }
+
 protected:
   void error(const std::string &errMessage) {
     std::cerr << "Error: " << errMessage << "\n";
