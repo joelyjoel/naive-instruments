@@ -52,7 +52,7 @@ public:
 
 public:
   bool hasPlug() { return plugged != nullptr; }
-  Signal<double> *currentConnection() {
+  Signal<SignalFrame> *currentConnection() {
     if (hasPlug())
       return plugged;
     else {
