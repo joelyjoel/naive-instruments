@@ -15,7 +15,7 @@ template <typename SignalFrame> class Socket;
  * This class just exists so that sockets don't have to know the SignalFrame
  * type of their owners.
  */
-class UntypedInstrument {
+class UntypedSignal {
 public:
   int internalClock = 0;
 
@@ -40,7 +40,7 @@ public:
 /**
  * I think its intuitive to think of audio processes like little machines.
  */
-template <typename SignalFrame> class Signal : public UntypedInstrument {
+template <typename SignalFrame> class Signal : public UntypedSignal {
 protected:
   SignalFrame latestFrame;
 

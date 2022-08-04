@@ -5,10 +5,10 @@
 
 class AbstractSocket {
 protected:
-  UntypedInstrument *owner;
+  UntypedSignal *owner;
 
 public:
-  AbstractSocket(UntypedInstrument *owner) : owner(owner){};
+  AbstractSocket(UntypedSignal *owner) : owner(owner){};
 
   virtual void connect(Signal<double> *signal) {
     std::cerr << "No override for "
@@ -32,7 +32,7 @@ template <typename SignalFrame> class Socket : public AbstractSocket {
   SignalFrame constant;
 
 public:
-  Socket(UntypedInstrument *owner)
+  Socket(UntypedSignal *owner)
       : AbstractSocket(owner), constant(0), plugged(nullptr) {}
 
   /**
