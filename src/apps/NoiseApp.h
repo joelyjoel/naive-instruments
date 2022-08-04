@@ -1,10 +1,14 @@
 #include "../lib.h"
 
-class NoiseApp : public CommandLineApp {
-  using CommandLineApp::CommandLineApp;
-
+class NoiseApp : public AudioCommand {
 public:
-  void run() {
+  using AudioCommand::AudioCommand;
+
+protected:
+  void describeOptions() override { describeOutputOptions(); }
+
+protected:
+  void action() override {
     Noise noise;
     output(noise);
   }

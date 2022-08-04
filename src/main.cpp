@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
     FilterApp app(args);
     app();
   } else if (command == "noise") {
-    NoiseApp app(args);
+    NoiseApp app(args.argc, args.argv);
     app();
   } else if (command == "random") {
     RandomApp app(args);
