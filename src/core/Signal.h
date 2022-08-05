@@ -29,11 +29,6 @@ public:
   }
 
 public:
-  virtual void reset() {
-    std::cerr << "The reset method has not been implemented for this unit\n";
-    throw 1;
-  }
-
   SignalFrame operator[](int index) { return tickUntil(index); }
 
   SignalFrame next() { return tickUntil(internalClock + 1); }

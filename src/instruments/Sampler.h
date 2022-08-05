@@ -31,8 +31,10 @@ public:
       out(0);
   }
 
-  void reset() override { playhead = 0; }
+protected:
+  void resetState() override { playhead = 0; }
 
+public:
   void skipTo(int frame) { playhead = frame; }
 
 public:

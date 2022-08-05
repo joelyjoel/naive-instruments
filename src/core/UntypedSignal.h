@@ -42,4 +42,19 @@ public:
            "method for a Signal\n";
     throw 1;
   }
+
+protected:
+  /**
+   * Reset the internal state of the Signal. Stateless signals will NOT
+   * override this method
+   */
+  virtual void resetState() {
+    // noop
+  }
+
+public:
+  void reset() {
+    resetState();
+    // TODO: Reset all the inputs too
+  }
 };
