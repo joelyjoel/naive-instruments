@@ -7,9 +7,9 @@ private:
   double phase = 0;
 
 public:
-  SignalInput<double> &start = addSocket<double>(1.0);
-  SignalInput<double> &end = addSocket<double>(0);
-  SignalInput<double> &duration = addSocket<double>(1.0);
+  SignalInput<double> &start = addInput<double>(1.0);
+  SignalInput<double> &end = addInput<double>(0);
+  SignalInput<double> &duration = addInput<double>(1.0);
 
   void tick() {
     if (phase < 1) {

@@ -5,7 +5,7 @@
 
 class Floor : public Signal<double> {
 public:
-  SignalInput<double> &input = addSocket<double>();
+  SignalInput<double> &input = addInput<double>();
 
   void tick() { out(floor(input())); }
 };

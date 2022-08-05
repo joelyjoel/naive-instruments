@@ -4,8 +4,8 @@
 
 class Multiply : public Signal<double> {
 public:
-  SignalInput<double> &a = addSocket<double>();
-  SignalInput<double> &b = addSocket<double>();
+  SignalInput<double> &a = addInput<double>();
+  SignalInput<double> &b = addInput<double>();
 
   void tick() { out(a() * b()); }
 };

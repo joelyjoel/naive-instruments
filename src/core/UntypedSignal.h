@@ -15,13 +15,13 @@ public:
   int internalClock = 0;
 
 protected:
-  std::vector<UntypedSignalInput *> sockets;
+  std::vector<UntypedSignalInput *> inputs;
 
 protected:
   template <typename SignalFrame>
-  SignalInput<SignalFrame> &addSocket(double initValue = 0) {
+  SignalInput<SignalFrame> &addInput(double initValue = 0) {
     auto socket = new SignalInput<SignalFrame>(this);
-    sockets.push_back(socket);
+    inputs.push_back(socket);
     return *socket;
   }
 

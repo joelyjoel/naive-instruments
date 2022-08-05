@@ -4,7 +4,7 @@
 
 class BufferWriter : public Signal<double> {
 public:
-  SignalInput<double> &input = addSocket<double>();
+  SignalInput<double> &input = addInput<double>();
 
 private:
   MonoBuffer *buffer;

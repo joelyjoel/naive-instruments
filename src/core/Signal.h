@@ -40,8 +40,8 @@ public:
   SignalFrame operator++() { return next(); }
 
   UntypedSignalInput &defaultSocket() {
-    if (sockets.size() > 0)
-      return *sockets[0];
+    if (inputs.size() > 0)
+      return *inputs[0];
     else {
       std::cerr << "There is no socket!\n";
       throw 1;

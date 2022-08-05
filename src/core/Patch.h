@@ -16,9 +16,9 @@ public:
   }
 
 protected:
-  template <typename T> SignalInput<T> &exposeSocket(SignalInput<T> &socket) {
-    Signal<SignalFrame>::sockets.push_back(&socket);
-    return socket;
+  template <typename T> SignalInput<T> &exposeInput(SignalInput<T> &input) {
+    Signal<SignalFrame>::inputs.push_back(&input);
+    return input;
   }
 
   std::string label() { return "Patch"; }
