@@ -1,13 +1,13 @@
 #include "Multiply.h"
 
 // FIXME: This causes a memory leak!
-void operator*=(SignalInput<double> &socket, Signal<double> &scale) {
+void operator*=(SignalInput<double> &signalInput, Signal<double> &scale) {
   Multiply *multiply = new Multiply();
-  if (socket.hasPlug()) {
-    multiply->a << socket.currentConnection();
+  if (signalInput.hasPlug()) {
+    multiply->a << signalInput.currentConnection();
   } else {
-    multiply->a << socket.currentConstant();
+    multiply->a << signalInput.currentConstant();
   }
   multiply->b << scale;
-  socket << multiply;
+  signalInput << multiply;
 }

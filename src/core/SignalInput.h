@@ -62,13 +62,13 @@ public:
     if (hasPlug())
       return connection;
     else {
-      std::cerr << "Cannot get connection of uplugged socket!\n";
+      std::cerr << "Cannot get connection of unplugged input!\n";
       throw 1;
     }
   }
   double currentConstant() {
     if (hasPlug()) {
-      std::cerr << "Cannot get constant of plugged socket!\n";
+      std::cerr << "Cannot get constant of non-constant signal input!\n";
       throw 1;
     } else
       return constant;

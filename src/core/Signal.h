@@ -39,20 +39,20 @@ public:
   SignalFrame next() { return tickUntil(internalClock + 1); }
   SignalFrame operator++() { return next(); }
 
-  UntypedSignalInput &defaultSocket() {
+  UntypedSignalInput &defaultInput() {
     if (inputs.size() > 0)
       return *inputs[0];
     else {
-      std::cerr << "There is no socket!\n";
+      std::cerr << "Trying to get default input but the Signal has no inputs";
       throw 1;
     }
   }
 
   template <typename InputSignalFrame>
   Signal<InputSignalFrame> &operator<<(Signal<InputSignalFrame> &signal) {
-    defaultSocket().connect(&signal);
+    defaultInput().connect(&signal);
     return signal;
   }
 
-  void operator<<(double k) { defaultSocket().setConstant(k); }
+  void operator<<(double k) { defaultInput().setConstant(k); }
 };

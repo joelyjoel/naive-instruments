@@ -9,13 +9,14 @@ public:
 
   virtual void connect(Signal<double> *signal) {
     std::cerr << "No override for "
-                 "AbstractSocket::connect(Signal<double>*) method\n";
+                 "UntypedSignalInput::connect(Signal<double>*) method\n";
     throw 1;
   }
 
 public:
   virtual void setConstant(double k) {
-    std::cerr << "No override for AbstractSocket::setConstant(double) method\n";
+    std::cerr
+        << "No override for UntypedSignalInput::setConstant(double) method\n";
     throw 1;
   }
 

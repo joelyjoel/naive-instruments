@@ -11,6 +11,7 @@ public:
 };
 
 /**
- * Mix an additional signal into a socket
+ * Mix an additional signal into a input
  */
-void operator*=(SignalInput<double> &socket, Signal<double> &additionalSignal);
+void operator*=(SignalInput<double> &signalInput,
+                Signal<double> &additionalSignal);

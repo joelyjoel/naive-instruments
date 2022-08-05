@@ -1,13 +1,14 @@
 #include "Add.h"
 
 // FIXME: This causes a memory leak!
-void operator+=(SignalInput<double> &socket, Signal<double> &additionalSignal) {
+void operator+=(SignalInput<double> &signalInput,
+                Signal<double> &additionalSignal) {
   Add *add = new Add();
-  if (socket.hasPlug()) {
-    add->a << socket.currentConnection();
+  if (signalInput.hasPlug()) {
+    add->a << signalInput.currentConnection();
   } else {
-    add->a << socket.currentConstant();
+    add->a << signalInput.currentConstant();
   }
   add->b << additionalSignal;
-  socket << add;
+  signalInput << add;
 }

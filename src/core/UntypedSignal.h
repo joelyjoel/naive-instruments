@@ -7,8 +7,8 @@ class UntypedSignalInput;
 template <typename SignalFrame> class SignalInput;
 
 /**
- * This class just exists so that sockets don't have to know the SignalFrame
- * type of their owners.
+ * This class just exists so that SignalInput's don't have to know the
+ * SignalFrame type of their owners.
  */
 class UntypedSignal {
 public:
@@ -20,9 +20,9 @@ protected:
 protected:
   template <typename SignalFrame>
   SignalInput<SignalFrame> &addInput(double initValue = 0) {
-    auto socket = new SignalInput<SignalFrame>(this);
-    inputs.push_back(socket);
-    return *socket;
+    auto signalInput = new SignalInput<SignalFrame>(this);
+    inputs.push_back(signalInput);
+    return *signalInput;
   }
 
 public:
