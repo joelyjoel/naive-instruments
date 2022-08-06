@@ -1,0 +1,20 @@
+Bass sawtooth wave.wav:
+  checksum: SHA256=47a3bf6e6aaf58f1472aac078358a8744ca024eacfa87949dd85236acaa44143
+FM Kick.wav:
+  checksum: SHA256=b6f12fbb87fac49e7ffd664bec5c82a0b7fedf6069c6c92947664e5a5e99b1b1
+Middle C Sine wave with Vibrato.wav:
+  checksum: SHA256=5c6a68d9016a4cc763611e65ec329a14c44a3507d5b4aca21741d318caf2534c
+Sawtooth wave on middle C lasting one second.wav:
+  checksum: SHA256=0c56b0fcaa93d4a3734ad9eebd7b332045e6af30e6904665b664c6c3bc3eb66e
+Simple FM tone.wav:
+  checksum: SHA256=efe375cb504c12b59ab92bcc16a3e15f6bab4d64fec445f4828e503f710f9e32
+Sine sweep accross entire grand piano range.wav:
+  checksum: SHA256=07117671d3adb2cd74ce1011f6da0b54a5fe94d3b51ad8e4cc538d800cdce3ea
+Sine wave on middle C lasting one second.wav:
+  checksum: SHA256=5f7c7931c7195c0a8439b9dca624955df9de7c297c9cc78b5df510625fdcfeda
+Square wave on middle C lasting one second.wav:
+  checksum: SHA256=1f0a59bee6cc97105f118033c963411367806c1b3abc08bd24620418b0600263
+Triangle wave on middle C lasting one second.wav:
+  checksum: SHA256=9675a9c9473810e6a59df5e67665f77f84ad9d9bdbab31e4076cb1607df430ed
+Upward sine sweep accross entire grand piano range.wav:
+  checksum: SHA256=671fd99b86e812a188ea31743ee676861600a0871fafd6d0db9f984bdcb5da60
