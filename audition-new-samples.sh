@@ -44,7 +44,11 @@ for i in ${!toReview[@]} ; do
 
       "y" | "yes")
         echo -e "Copying $sample -> $stablePackDir\n"
-        cp "$sample" "$stablePackDir"
+        # cp "$sample" "$stablePackDir"
+        checksum=$(ffmpeg -loglevel error -i "$sample" -map 0 -f hash -)
+        echo "checksum $checksum"
+
+        yq -i ".[\"$sampleName\"].checksum = \"$checksum\"" checksums.yaml
         break
         ;;
 

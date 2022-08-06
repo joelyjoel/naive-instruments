@@ -8,14 +8,18 @@
 # in the stable pack then these need to be auditioned/reviewed and added to the
 # stable-pack.
 
+# NOTE: This test script has been optimised to avoid using too much disk space,
+# now checksums are stored in checksums.yaml and these are used to test the
+# test pack rather than using the stable pack. Its not as cool, but its way
+# more performant.
+
+
 # 1. Run the tests, creating the test-pack
 
 testPackDir="$(pwd)/most-recent-test-results"
-stablePackDir="$(pwd)/stable-test-results"
 
 rm -rf "$testPackDir"
 mkdir -p "$testPackDir"
-mkdir -p "$stablePackDir"
 
 for testScript in tests/*.sh ; do
   absoluteScriptPath="$(pwd)/$testScript"
@@ -33,39 +37,35 @@ missing=()
 failed=()
 created=()
 
-if [ "$(ls "$stablePackDir")" != "" ]; then
-  for stableFile in $stablePackDir/* ; do
-    filename=$(basename "$stableFile")
-    freshFile="$testPackDir/$filename"
-    if [ -f "$freshFile" ]; then
-      ./compare-audio.sh "$stableFile" "$freshFile" > /dev/null
-      if [ $? -ne 0 ]; then
-        failed+=( "$filename" )
-      else
-        passed+=( "$filename" )
-      fi
+numberOfChecksums=$(yq "length" checksums.yaml)
+for ((i=0;i<$numberOfChecksums;i++)) do 
+  filename=$(yq "keys | .$i" checksums.yaml)
+  stableChecksum=$(yq ".[\"$filename\"].checksum" checksums.yaml)
+  freshFile="$testPackDir/$filename"
+  if [ -f "$freshFile" ]; then
+    freshChecksum=$(ffmpeg -loglevel error -i "$freshFile" -map 0 -f hash -)
+    if [ "$freshChecksum" = "$stableChecksum" ]; then
+      passed+=( "$filename" )
     else
-      missing+=( "$filename" )
+      failed+=( "$filename" )
     fi
-  done
-fi
-
-for freshFile in $testPackDir/* ; do 
-  filename=$(basename "$freshFile")
-  stableVersion="$stablePackDir/$filename"
-  if [ -f "$stableVersion" ]; then
-    :
-  else
-    created+=("$testPackDir/$filename")
+  else 
+    missing+=("$filename")
   fi
 done
 
 
+for freshFile in $testPackDir/* ; do 
+  filename=$(basename "$freshFile")
+  notInStablePack=$(yq ".[\"$filename\"] == null" checksums.yaml)
+  if [ "$notInStablePack" == "true" ]; then
+    created+=("$freshFile")
+  fi
+done
 
 
 # 3. Generate a report
 
-echo "stablePack: $stablePackDir"
 echo "testPack: $testPackDir"
 
 numberOfPassingSamples=${#passed[@]}
