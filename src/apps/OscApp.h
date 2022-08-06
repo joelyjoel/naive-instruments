@@ -19,7 +19,7 @@ class OscApp : public AudioCommand {
                  "Output level of the oscillator from 0-1")
 
                     ("vibrato-frequency,vf",
-                     po::value<std::string>()->default_value("5Hz"),
+                     po::value<std::string>()->default_value("5"),
                      "Vibrato frequency")
 
                         ("vibrato-amount,va",
