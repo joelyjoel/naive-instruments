@@ -10,10 +10,7 @@ private:
 public:
   Patch(Signal<SignalFrame> &output) : output(output) {}
 
-  void action() {
-    output.sync(this->internalClock);
-    Signal<SignalFrame>::out(output());
-  }
+  void action() { Signal<SignalFrame>::out(output[this->internalClock]); }
 
 protected:
   template <typename T> SignalInput<T> &exposeInput(SignalInput<T> &input) {
