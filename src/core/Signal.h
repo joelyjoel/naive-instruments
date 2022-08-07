@@ -75,6 +75,24 @@ public:
       action();
     }
   }
+
+public:
+  void reset() {
+    // FIXME: Circuit breaker for feedback loops
+    for (auto input : inputs)
+      if (input->hasConnection())
+        input->connection().reset();
+
+    resetState();
+  }
+
+protected:
+  /**
+   * Stateful signals can override this method to reset their state.
+   */
+  virtual void resetState() {
+    // noop
+  }
 };
 
 template <typename frame> class Signal : public UntypedSignal {
@@ -83,7 +101,15 @@ private:
 
 public:
   frame operator()() { return latestFrame; }
+  frame operator[](int clock) {
+    sync(clock);
+    return latestFrame;
+  }
+  frame operator++() {
+    sync(internalClock + 1);
+    return latestFrame;
+  }
 
 protected:
-  void out(frame &y) { latestFrame = y; }
+  void out(const frame &y) { latestFrame = y; }
 };
