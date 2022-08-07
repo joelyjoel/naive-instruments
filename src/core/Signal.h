@@ -51,27 +51,27 @@ public:
 template <typename frame> class SignalInput : public UntypedSignalInput {
 
 private:
-  Signal<frame> *connection;
+  Signal<frame> *_connection;
   frame constant;
 
 public:
   SignalInput(UntypedSignal *owner)
-      : UntypedSignalInput(owner), constant(0), connection(nullptr) {}
+      : UntypedSignalInput(owner), constant(0), _connection(nullptr) {}
 
   frame operator()() {
     if (hasConnection())
-      return (*connection)();
+      return (*_connection)();
     else
       return constant;
   }
 
   void connect(Signal<frame> *inputSignal) {
     untypedConnection = inputSignal;
-    connection = inputSignal;
+    _connection = inputSignal;
   }
 
   void disconnect() {
-    connection = nullptr;
+    _connection = nullptr;
     untypedConnection = nullptr;
   }
 
@@ -94,9 +94,9 @@ public:
   void operator<<(double k) { setConstant(k); }
 
 public:
-  Signal<frame> *currentConnection() {
+  Signal<frame> *connection() {
     if (hasConnection())
-      return connection;
+      return _connection;
     else {
       std::cerr << "Cannot get connection of unplugged input!\n";
       throw 1;

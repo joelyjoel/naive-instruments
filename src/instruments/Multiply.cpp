@@ -4,7 +4,7 @@
 void operator*=(SignalInput<double> &signalInput, Signal<double> &scale) {
   Multiply *multiply = new Multiply();
   if (signalInput.hasConnection()) {
-    multiply->a << signalInput.currentConnection();
+    multiply->a << signalInput.connection();
   } else {
     multiply->a << signalInput.currentConstant();
   }
