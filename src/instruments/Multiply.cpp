@@ -3,7 +3,7 @@
 // FIXME: This causes a memory leak!
 void operator*=(SignalInput<double> &signalInput, Signal<double> &scale) {
   Multiply *multiply = new Multiply();
-  if (signalInput.hasPlug()) {
+  if (signalInput.hasConnection()) {
     multiply->a << signalInput.currentConnection();
   } else {
     multiply->a << signalInput.currentConstant();

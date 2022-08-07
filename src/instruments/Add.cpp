@@ -4,7 +4,7 @@
 void operator+=(SignalInput<double> &signalInput,
                 Signal<double> &additionalSignal) {
   Add *add = new Add();
-  if (signalInput.hasPlug()) {
+  if (signalInput.hasConnection()) {
     add->a << signalInput.currentConnection();
   } else {
     add->a << signalInput.currentConstant();

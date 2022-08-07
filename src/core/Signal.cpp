@@ -1,7 +1,7 @@
 #include "Signal.h"
 
 void UntypedSignalInput::reset() {
-  if (hasPlug())
+  if (hasConnection())
     untypedConnection->reset();
 }
 

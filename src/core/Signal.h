@@ -34,7 +34,7 @@ protected:
   UntypedSignal *untypedConnection = nullptr;
 
 public:
-  bool hasPlug() { return untypedConnection != nullptr; }
+  bool hasConnection() { return untypedConnection != nullptr; }
 
 public:
   void reset();
@@ -90,7 +90,7 @@ public:
 
 public:
   Signal<SignalFrame> *currentConnection() {
-    if (hasPlug())
+    if (hasConnection())
       return connection;
     else {
       std::cerr << "Cannot get connection of unplugged input!\n";
@@ -98,7 +98,7 @@ public:
     }
   }
   double currentConstant() {
-    if (hasPlug()) {
+    if (hasConnection()) {
       std::cerr << "Cannot get constant of non-constant signal input!\n";
       throw 1;
     } else
