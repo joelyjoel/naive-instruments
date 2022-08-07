@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Signal.h"
-#include "SignalInput.h"
 #include <string>
 
 template <typename SignalFrame> class Patch : public Signal<SignalFrame> {
