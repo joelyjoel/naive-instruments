@@ -2,6 +2,7 @@
 #include "apps/FilterApp.h"
 #include "apps/GraphApp.h"
 #include "apps/HelloApp.h"
+#include "apps/MetronomeApp.h"
 #include "apps/MixApp.h"
 #include "apps/NoiseApp.h"
 #include "apps/OscApp.h"
@@ -61,6 +62,9 @@ int main(int argc, char **argv) {
     app();
   } else if (command == "fm") {
     FMApp app(args);
+    app();
+  } else if (command == "metronome") {
+    MetronomeApp app(args.argc, args.argv);
     app();
   } else {
     std::cout << "Unknown command: " << command << "\n";
