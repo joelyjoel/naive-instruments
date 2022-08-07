@@ -1,5 +1,10 @@
 #include "Signal.h"
 
+void UntypedSignalInput::reset() {
+  if (hasPlug())
+    untypedConnection->reset();
+}
+
 /**
  * Synchronise the plugged instrument with the owner
  */

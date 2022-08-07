@@ -35,6 +35,9 @@ protected:
 
 public:
   bool hasPlug() { return untypedConnection != nullptr; }
+
+public:
+  void reset();
 };
 
 /**
@@ -151,8 +154,10 @@ protected:
 
 public:
   void reset() {
+    // FIXME: Need a circuit breaker for feedback loops
+    for (auto input : inputs)
+      input->reset();
     resetState();
-    // TODO: Reset all the inputs too
   }
 };
 
