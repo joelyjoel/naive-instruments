@@ -35,6 +35,8 @@
 #include "instruments/Osc.h"
 #include "instruments/PitchConverter.h"
 #include "instruments/Ramp.h"
+#include "instruments/Resetter.h"
+#include "instruments/Rhythm.h"
 #include "instruments/Sampler.h"
 #include "instruments/UnsignedSaw.h"
 #include "instruments/Wavetable.h"

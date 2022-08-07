@@ -18,3 +18,5 @@ Triangle wave on middle C lasting one second.wav:
   checksum: SHA256=9675a9c9473810e6a59df5e67665f77f84ad9d9bdbab31e4076cb1607df430ed
 Upward sine sweep accross entire grand piano range.wav:
   checksum: SHA256=671fd99b86e812a188ea31743ee676861600a0871fafd6d0db9f984bdcb5da60
+120bpm metronome.wav:
+  checksum: SHA256=6b85b6d49d5cfaaf5fd88e92420127c673926cc680bab4516c235eaab712e11f

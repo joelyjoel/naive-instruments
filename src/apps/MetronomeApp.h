@@ -5,9 +5,12 @@ class MetronomeApp : public AudioCommand {
   using AudioCommand::AudioCommand;
 
   void describeOptions() override {
+    describeOutputOptions();
     options.add_options()("bpm,beats-per-minute",
-                          po::value<std::string>()->default_value("139"),
-                          "What beats per minute should the metronome play");
+                          po::value<string>()->default_value("139"),
+                          "What beats per minute should the metronome play")(
+        "pattern", po::value<string>()->default_value("10101010"),
+        "Binary rhythmic pattern");
   }
 
   void action() override {
@@ -18,10 +21,13 @@ class MetronomeApp : public AudioCommand {
     attenuator.a << osc;
     attenuator.b << envelope;
 
-    MetronomicResetter metro;
-    metro.input << attenuator;
-    metro.bpm << SignalString::parse(args["bpm"].as<std::string>());
+    Rhythm &rhythm = *Rhythm::fromBinaryString(args["pattern"].as<string>());
+    rhythm.bpm << SignalString::parse(args["bpm"].as<string>());
 
-    output(metro);
+    Resetter resetter;
+    resetter.input << attenuator;
+    resetter.trigger << rhythm;
+
+    output(resetter);
   }
 };
