@@ -20,6 +20,7 @@ PORTAUDIO_FLAGS=-I ../include\
 NCURSES_FLAGS=-D_XOPEN_SOURCE_EXTENDED -lncurses
 
 CPP_SOURCE_FILES=src/file-io/record.cpp \
+								 src/core/Signal.cpp \
 								 src/playback/BufferedPlayback.cpp \
 								 src/parsing/Parse.cpp \
 								 src/parsing/LazyRegex.cpp \
