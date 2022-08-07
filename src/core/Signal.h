@@ -6,9 +6,9 @@
 #include <vector>
 
 class UntypedSignalInput;
-template <typename SignalFrame> class SignalInput;
+template <typename frame> class SignalInput;
 class UntypedSignal;
-template <typename SignalFrame> class Signal;
+template <typename frame> class Signal;
 
 class UntypedSignalInput {
 protected:
@@ -48,24 +48,24 @@ public:
 /**
  * Abstraction for the inputs to a Signal
  */
-template <typename SignalFrame> class SignalInput : public UntypedSignalInput {
+template <typename frame> class SignalInput : public UntypedSignalInput {
 
 private:
-  Signal<SignalFrame> *connection;
-  SignalFrame constant;
+  Signal<frame> *connection;
+  frame constant;
 
 public:
   SignalInput(UntypedSignal *owner)
       : UntypedSignalInput(owner), constant(0), connection(nullptr) {}
 
-  SignalFrame operator()() {
+  frame operator()() {
     if (hasConnection())
       return (*connection)();
     else
       return constant;
   }
 
-  void connect(Signal<SignalFrame> *inputSignal) {
+  void connect(Signal<frame> *inputSignal) {
     untypedConnection = inputSignal;
     connection = inputSignal;
   }
@@ -81,12 +81,12 @@ public:
     constant = k;
   }
 
-  Signal<SignalFrame> &operator<<(Signal<SignalFrame> *instrument) {
+  Signal<frame> &operator<<(Signal<frame> *instrument) {
     connect(instrument);
     return *instrument;
   }
 
-  Signal<SignalFrame> &operator<<(Signal<SignalFrame> &instrument) {
+  Signal<frame> &operator<<(Signal<frame> &instrument) {
     connect(&instrument);
     return instrument;
   }
@@ -94,7 +94,7 @@ public:
   void operator<<(double k) { setConstant(k); }
 
 public:
-  Signal<SignalFrame> *currentConnection() {
+  Signal<frame> *currentConnection() {
     if (hasConnection())
       return connection;
     else {
@@ -113,7 +113,7 @@ public:
 
 /**
  * This class just exists so that SignalInput's don't have to know the
- * SignalFrame type of their owners.
+ * frame type of their owners.
  */
 class UntypedSignal {
 public:
@@ -123,9 +123,8 @@ protected:
   std::vector<UntypedSignalInput *> inputs;
 
 protected:
-  template <typename SignalFrame>
-  SignalInput<SignalFrame> &addInput(double initValue = 0) {
-    auto signalInput = new SignalInput<SignalFrame>(this);
+  template <typename frame> SignalInput<frame> &addInput(double initValue = 0) {
+    auto signalInput = new SignalInput<frame>(this);
     inputs.push_back(signalInput);
     return *signalInput;
   }
@@ -184,29 +183,29 @@ public:
 /**
  * I think its intuitive to think of audio processes like little machines.
  */
-template <typename SignalFrame> class Signal : public UntypedSignal {
+template <typename frame> class Signal : public UntypedSignal {
 protected:
-  SignalFrame latestFrame;
+  frame latestFrame;
 
 protected:
   /**
    * Update the latest frame.
    */
-  void out(const SignalFrame &y) { latestFrame = y; }
+  void out(const frame &y) { latestFrame = y; }
 
 public:
-  SignalFrame operator[](int clock) {
+  frame operator[](int clock) {
     sync(clock);
     return latestFrame;
   }
 
-  SignalFrame next() {
+  frame next() {
     sync(internalClock + 1);
     return latestFrame;
   }
-  SignalFrame operator++() { return next(); }
+  frame operator++() { return next(); }
 
-  SignalFrame operator()() { return latestFrame; }
+  frame operator()() { return latestFrame; }
 
   UntypedSignalInput &defaultInput() {
     if (inputs.size() > 0)
@@ -217,8 +216,7 @@ public:
     }
   }
 
-  template <typename InputSignalFrame>
-  Signal<InputSignalFrame> &operator<<(Signal<InputSignalFrame> &signal) {
+  template <typename T> Signal<T> &operator<<(Signal<T> &signal) {
     defaultInput().connect(&signal);
     return signal;
   }
