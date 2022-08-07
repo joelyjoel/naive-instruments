@@ -29,6 +29,7 @@
 #include "instruments/FixedPipe.h"
 #include "instruments/Floor.h"
 #include "instruments/LFO.h"
+#include "instruments/MetronomicResetter.h"
 #include "instruments/Multiply.h"
 #include "instruments/Noise.h"
 #include "instruments/Osc.h"
