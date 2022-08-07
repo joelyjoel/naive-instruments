@@ -30,6 +30,11 @@ public:
     throw 1;
   }
 
+  /**
+   * Synchronise the plugged instrument with the owner
+   */
+  void sync(int clock);
+
 protected:
   UntypedSignal *untypedConnection = nullptr;
 
@@ -53,12 +58,12 @@ public:
   SignalInput(UntypedSignal *owner)
       : UntypedSignalInput(owner), constant(0), connection(nullptr) {}
 
-  /**
-   * Synchronise the plugged instrument with the owner
-   */
-  SignalFrame sync();
-
-  SignalFrame operator()() { return sync(); }
+  SignalFrame operator()() {
+    if (hasConnection())
+      return (*connection)();
+    else
+      return constant;
+  }
 
   void connect(Signal<SignalFrame> *inputSignal) {
     untypedConnection = inputSignal;
@@ -143,6 +148,21 @@ public:
     throw 1;
   }
 
+public:
+  void sync(int clock) {
+    while (internalClock < clock) {
+      ++internalClock;
+      syncInputs();
+      action();
+    }
+  }
+
+private:
+  void syncInputs() {
+    for (auto input : inputs)
+      input->sync(internalClock);
+  }
+
 protected:
   /**
    * Reset the internal state of the Signal. Stateless signals will NOT
@@ -175,19 +195,18 @@ protected:
   void out(const SignalFrame &y) { latestFrame = y; }
 
 public:
-  SignalFrame tickUntil(int time) {
-    while (internalClock < time) {
-      ++internalClock;
-      action();
-    }
+  SignalFrame operator[](int clock) {
+    sync(clock);
     return latestFrame;
   }
 
-public:
-  SignalFrame operator[](int index) { return tickUntil(index); }
-
-  SignalFrame next() { return tickUntil(internalClock + 1); }
+  SignalFrame next() {
+    sync(internalClock + 1);
+    return latestFrame;
+  }
   SignalFrame operator++() { return next(); }
+
+  SignalFrame operator()() { return latestFrame; }
 
   UntypedSignalInput &defaultInput() {
     if (inputs.size() > 0)

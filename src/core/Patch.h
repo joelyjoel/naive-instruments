@@ -11,7 +11,8 @@ public:
   Patch(Signal<SignalFrame> &output) : output(output) {}
 
   void action() {
-    Signal<SignalFrame>::out(output.tickUntil(UntypedSignal::internalClock));
+    output.sync(this->internalClock);
+    this->out(output());
   }
 
 protected:

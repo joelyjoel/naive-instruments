@@ -5,12 +5,7 @@ void UntypedSignalInput::reset() {
     untypedConnection->reset();
 }
 
-/**
- * Synchronise the plugged instrument with the owner
- */
-template <> double SignalInput<double>::sync() {
-  if (connection)
-    return connection->tickUntil(owner->internalClock);
-  else
-    return constant;
+void UntypedSignalInput::sync(int clock) {
+  if (hasConnection())
+    untypedConnection->sync(clock);
 }
