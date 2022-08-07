@@ -6,7 +6,7 @@
 #include <vector>
 
 class BreakpointEnvelope : public Signal<double> {
-  void action() {
+  void action() override {
     progress += progressPerSample;
     if (progress >= 1)
       advanceToNextSection();
@@ -14,7 +14,7 @@ class BreakpointEnvelope : public Signal<double> {
   }
 
 public:
-  std::string label() { return "BreakpointEnvelope"; }
+  std::string label() override { return "BreakpointEnvelope"; }
 
   BreakpointEnvelope() {
     progress = 1;
@@ -121,6 +121,9 @@ private:
 
   int nowPlayingSectionIndex;
   void advanceToNextSection() { playSection(++nowPlayingSectionIndex); }
+
+protected:
+  void resetState() override { playSection(0); }
 };
 
 std::ostream &operator<<(std::ostream &out, const BreakpointEnvelope &B);
