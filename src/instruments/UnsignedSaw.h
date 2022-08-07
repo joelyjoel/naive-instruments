@@ -8,7 +8,7 @@ public:
   SignalInput<double> &frequency = addInput<double>();
   double phase;
 
-  void tick() {
+  void action() {
     phase += frequency() / sampleRate;
     while (phase > 1)
       phase -= 1.0;

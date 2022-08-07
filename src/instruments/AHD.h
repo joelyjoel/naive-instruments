@@ -11,7 +11,7 @@ private:
   double phase = 0;
   AHDStage stage = A;
 
-  void tick() {
+  void action() {
 
     switch (stage) {
 

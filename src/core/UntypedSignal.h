@@ -36,7 +36,7 @@ public:
    * Naive instruments work a bit like clock work. Every frame of the digital
    * signal they "tick". What they actually do when they tick is up to them!
    */
-  virtual void tick() {
+  virtual void action() {
     std::cerr
         << "Oh no, looks like the programmer forgot to implement the tick "
            "method for a Signal\n";

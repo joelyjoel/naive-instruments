@@ -11,7 +11,7 @@ public:
   SignalInput<double> &end = addInput<double>(0);
   SignalInput<double> &duration = addInput<double>(1.0);
 
-  void tick() {
+  void action() {
     if (phase < 1) {
       phase += (1.0 / 44100.0) / duration();
       out(phase * end() + (1 - phase) * start());

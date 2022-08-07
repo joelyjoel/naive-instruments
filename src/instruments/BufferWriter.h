@@ -21,7 +21,7 @@ private:
   int writeHead = 0;
 
 public:
-  void tick() {
+  void action() {
     double signal = input();
     if (writeHead < buffer->numberOfFrames())
       (*buffer)[writeHead] = signal;

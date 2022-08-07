@@ -12,7 +12,7 @@ public:
   bool detectDownwardsZeroCrossings = true;
   bool detectUpwardsZeroCrossings = false;
 
-  void tick() {
+  void action() {
     double next = input();
     bool result = (detectDownwardsZeroCrossings && previous > threshold &&
                    next < -threshold) ||

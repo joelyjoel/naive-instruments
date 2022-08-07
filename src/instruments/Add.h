@@ -12,7 +12,7 @@ public:
 
   Add() {}
 
-  void tick() { out(a() + b()); }
+  void action() { out(a() + b()); }
 
   std::string label() { return "Add"; }
 

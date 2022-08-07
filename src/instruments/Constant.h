@@ -9,5 +9,5 @@ private:
 
 public:
   Constant(double k) : value(k) {}
-  void tick() { out(value); }
+  void action() { out(value); }
 };

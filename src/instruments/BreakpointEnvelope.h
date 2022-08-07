@@ -6,7 +6,7 @@
 #include <vector>
 
 class BreakpointEnvelope : public Signal<double> {
-  void tick() {
+  void action() {
     progress += progressPerSample;
     if (progress >= 1)
       advanceToNextSection();

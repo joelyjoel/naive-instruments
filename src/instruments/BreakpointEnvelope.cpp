@@ -1,4 +1,3 @@
-
 #include "BreakpointEnvelope.h"
 std::ostream &operator<<(std::ostream &out, const BreakpointEnvelope &B) {
   for (int i = 0; i < B.sections.size(); ++i) {

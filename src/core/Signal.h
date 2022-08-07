@@ -23,7 +23,7 @@ public:
   SignalFrame tickUntil(int time) {
     while (internalClock < time) {
       ++internalClock;
-      tick();
+      action();
     }
     return latestFrame;
   }

@@ -21,7 +21,7 @@ public:
   Sampler(MonoBuffer &sharedBuffer) { buffer = &sharedBuffer; }
 
 public:
-  void tick() override {
+  void action() override {
     if (playhead < 0) {
       ++playhead;
       out(0);

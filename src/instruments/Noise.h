@@ -7,5 +7,5 @@ public:
   Noise(uint64_t seed = 1) : random(seed) {}
 
 private:
-  void tick() { out(random.number(-1, 1)); }
+  void action() { out(random.number(-1, 1)); }
 };

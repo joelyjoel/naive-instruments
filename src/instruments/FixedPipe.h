@@ -15,7 +15,7 @@ public:
   }
   ~FixedPipe() { delete buffer; }
 
-  void tick() {
+  void action() {
     buffer[tapeHeadIndex] = input();
     std::cout << input() << "\n";
 
