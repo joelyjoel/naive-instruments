@@ -14,7 +14,7 @@ public:
 
 protected:
   template <typename T> SignalInput<T> &exposeInput(SignalInput<T> &input) {
-    Signal<SignalFrame>::inputs.push_back(&input);
+    this->addInput(&input);
     return input;
   }
 
