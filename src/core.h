@@ -4,4 +4,5 @@
 #include "core/MonoBuffer.h"
 #include "core/Patch.h"
 #include "core/Signal.h"
+#include "core/constants.h"
 #include "generative/Random.h"
