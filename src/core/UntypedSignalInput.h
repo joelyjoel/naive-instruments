@@ -1,4 +1,7 @@
-#include "Signal.h"
+#include <iostream>
+
+class UntypedSignal;
+template <typename SignalFrame> class Signal;
 
 class UntypedSignalInput {
 protected:
