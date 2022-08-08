@@ -1,23 +1,17 @@
 #include "../core.h"
+#include "Metronome.h"
+#include "Resetter.h"
 
-class MetronomicResetter : public Signal<double> {
-public:
-  SignalInput<double> &input = addInput<double>();
-  SignalInput<double> &bpm = addInput<double>();
-
+class MetronomicResetter : public Patch<double> {
 private:
-  const double k = 1.0 / (60.0 * sampleRate);
-  double progress = 0;
+  Metronome metronome;
+  Resetter resetter;
 
 public:
-  void action() override {
+  SignalInput<double> &input = exposeInput(resetter.input);
+  SignalInput<double> &bpm = exposeInput(metronome.bpm);
 
-    out(input());
-    progress += bpm() * k;
+  MetronomicResetter() : Patch(resetter) { resetter.trigger << metronome; }
 
-    while (progress >= 1) {
-      progress -= 1;
-      input.reset();
-    }
-  }
+  std::string label() override { return "MetronomicResetter"; }
 };

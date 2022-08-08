@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../core.h"
 
 class Resetter : public Signal<double> {
