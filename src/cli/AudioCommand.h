@@ -1,8 +1,11 @@
+#include "../Waveforms.h"
 #include "../core.h"
 #include "../file-io/piping.h"
 #include "../file-io/record.h"
+#include "../instruments/PitchConverter.h"
 #include "../parsing/Parse.h"
 #include "../playback/BufferedPlayback.h"
+#include "./SignalString.h"
 #include "Command.h"
 
 class AudioCommand : public Command {
@@ -31,6 +34,41 @@ protected:
       positionalOptions.add("input", 1);
   }
 
+  void addWaveformOptions() {
+    options.add_options()(
+        "waveform", po::value<std::string>()->default_value("sine"),
+        "Set the oscillator's waveform (sine|saw|square|triangle)");
+  }
+
+  MonoBuffer *inputWaveform() {
+    return &Waveforms::byName(args["waveform"].as<std::string>());
+  }
+
+  void addPitchOptions() {
+    options.add_options()(
+        "pitch", po::value<std::string>()->default_value("50"),
+        "Frequency of the oscillator expressed as a midi pitch number.");
+  }
+
+  Signal<double> *inputPitch() {
+    return SignalString::parse(args["pitch"].as<std::string>());
+  }
+
+  Signal<double> *inputFrequency() {
+    Signal<double> *pitch = inputPitch();
+    PitchConverter *converter = new PitchConverter();
+    *converter << *pitch;
+    return converter;
+  }
+
+  void addVibratoOptions() {
+    options.add_options()("vibrato-frequency,vf",
+                          po::value<std::string>()->default_value("5"),
+                          "Vibrato frequency")(
+        "vibrato-amount,va", po::value<std::string>()->default_value("0"),
+        "Amount of vibrato (in semitones)");
+  }
+
   /**
    * Get the primary audio input as a buffer.
    */
@@ -56,6 +94,14 @@ protected:
   float outputDuration() {
     std::string durationStr = args["duration"].as<std::string>();
     return *Parse::interval(durationStr);
+  }
+
+  // TODO: Cleary you are getting confused Joelle
+  float inputDuration() {
+    if (args.count("duration"))
+      return outputDuration();
+    else
+      return 1;
   }
 
 protected:

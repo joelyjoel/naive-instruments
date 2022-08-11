@@ -46,6 +46,7 @@ public:
     return buffer;
   }
 
+  // TODO: Probably better to return a pointer not a ref
   static MonoBuffer &byName(const std::string &name) {
     if (name == "sin" || name == "sine")
       return sine();

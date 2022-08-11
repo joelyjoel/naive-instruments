@@ -7,31 +7,18 @@ class OscApp : public AudioCommand {
 
   void describeOptions() override {
     describeOutputOptions();
-    options.add_options()
-
-        ("pitch", po::value<std::string>()->default_value("50"),
-         "Frequency of the oscillator expressed as a midi pitch number.")
-
-            ("waveform", po::value<std::string>()->default_value("sine"),
-             "Set the oscillator's waveform (sine|saw|square|triangle)")
-
-                ("volume", po::value<std::string>()->default_value("1"),
-                 "Output level of the oscillator from 0-1")
-
-                    ("vibrato-frequency,vf",
-                     po::value<std::string>()->default_value("5"),
-                     "Vibrato frequency")
-
-                        ("vibrato-amount,va",
-                         po::value<std::string>()->default_value("0"),
-                         "Amount of vibrato (in semitones)");
+    addPitchOptions();
+    addWaveformOptions();
+    addVibratoOptions();
+    options.add_options()("volume",
+                          po::value<std::string>()->default_value("1"),
+                          "Output level of the oscillator from 0-1");
   }
 
 public:
   void action() override {
 
-    MonoBuffer &waveform =
-        Waveforms::byName(args["waveform"].as<std::string>());
+    MonoBuffer &waveform = *inputWaveform();
     Osc osc(waveform);
     PitchConverter pitchConverter;
     Multiply gain;
@@ -42,8 +29,7 @@ public:
     /* const std::string str = args[0]; */
     /* auto &f = **ControlString::parse(str); */
 
-    Signal<double> &pitch =
-        *SignalString::parse(args["pitch"].as<std::string>());
+    Signal<double> &pitch = *inputPitch();
     Signal<double> &volume =
         *SignalString::parse(args["volume"].as<std::string>());
     Signal<double> &vibratoRate =
