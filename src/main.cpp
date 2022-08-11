@@ -1,3 +1,4 @@
+#include "apps/BoopApp.h"
 #include "apps/FMApp.h"
 #include "apps/FilterApp.h"
 #include "apps/GraphApp.h"
@@ -46,6 +47,9 @@ int main(int argc, char **argv) {
     app();
   } else if (command == "osc") {
     OscApp app(args.argc, args.argv);
+    app();
+  } else if (command == "boop") {
+    BoopApp app(args.argc, args.argv);
     app();
   } else if (command == "filter") {
     FilterApp app(args.argc, args.argv);
