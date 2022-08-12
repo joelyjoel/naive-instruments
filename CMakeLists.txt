@@ -8,10 +8,15 @@ project(NaiveInstruments VERSION 1.0)
 FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
+FIND_PACKAGE( Curses REQUIRED )
+include_directories( ${CURSES_INCLUDE_DIR})
+
+
 
 add_executable(NaiveInstruments src/main.cpp)
 
 TARGET_LINK_LIBRARIES( NaiveInstruments LINK_PUBLIC ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES( NaiveInstruments LINK_PUBLIC ${CURSES_LIBRARIES} )
 
 target_include_directories(NaiveInstruments PUBLIC dependencies)
 
