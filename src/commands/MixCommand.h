@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class MixApp : public AudioCommand {
+class MixCommand : public AudioCommand {
   using AudioCommand::AudioCommand;
 
 protected:

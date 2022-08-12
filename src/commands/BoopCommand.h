@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class BoopApp : public AudioCommand {
+class BoopCommand : public AudioCommand {
   using AudioCommand::AudioCommand;
 
   void describeOptions() override {

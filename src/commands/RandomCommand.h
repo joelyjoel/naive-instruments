@@ -1,8 +1,8 @@
 #include "../generative/Random.h"
 #include "../lib.h"
-#include "./RandomEnvelopeApp.h"
+#include "./RandomEnvelopeCommand.h"
 
-class RandomApp : public CommandLineApp {
+class RandomCommand : public CommandLineApp {
   using CommandLineApp::CommandLineApp;
 
   float randomFloat() {
@@ -25,7 +25,7 @@ public:
 
     if (command == "envelope") {
       MainArgs subArgs = args.subCommandArguments();
-      RandomEnvelopeApp app(subArgs);
+      RandomEnvelopeCommand app(subArgs);
       app.run();
     } else if (command == "frequency")
       frequency();

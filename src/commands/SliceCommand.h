@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class SliceApp : public CommandLineApp {
+class SliceCommand : public CommandLineApp {
   using CommandLineApp::CommandLineApp;
 
 public:

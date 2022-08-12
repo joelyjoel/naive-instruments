@@ -2,7 +2,7 @@
 #include "../lib.h"
 #include <iostream>
 
-class OscApp : public AudioCommand {
+class OscCommand : public AudioCommand {
   using AudioCommand::AudioCommand;
 
   void describeOptions() override {

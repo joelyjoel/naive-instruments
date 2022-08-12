@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-class GraphApp : public CommandLineApp {
+class GraphCommand : public CommandLineApp {
   using CommandLineApp::CommandLineApp;
 
 public:

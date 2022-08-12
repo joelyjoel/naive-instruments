@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class FilterApp : public AudioCommand {
+class FilterCommand : public AudioCommand {
   using AudioCommand::AudioCommand;
 
   void describeOptions() override {

@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class ZxSelectApp : public CommandLineApp {
+class ZxSelectCommand : public CommandLineApp {
 public:
   using CommandLineApp::CommandLineApp;
 

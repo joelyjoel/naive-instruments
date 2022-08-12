@@ -1,6 +1,6 @@
 #include "../cli/Command.h"
 
-class HelloApp : public Command {
+class HelloCommand : public Command {
 
   using Command::Command;
 

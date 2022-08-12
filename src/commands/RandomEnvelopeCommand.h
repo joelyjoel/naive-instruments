@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class RandomEnvelopeApp : public CommandLineApp {
+class RandomEnvelopeCommand : public CommandLineApp {
   using CommandLineApp::CommandLineApp;
 
   BreakpointEnvelope env;

@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class MetronomeApp : public AudioCommand {
+class MetronomeCommand : public AudioCommand {
 
   using AudioCommand::AudioCommand;
 

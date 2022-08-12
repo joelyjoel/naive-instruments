@@ -5,7 +5,7 @@
 // Next we declare a class which extends the `AudioCommand` base class. This
 // has helpful methods for command line options, audio input/output from
 // streams and sending audio to the speakers.
-class NoiseApp : public AudioCommand {
+class NoiseCommand : public AudioCommand {
 public:
   // We have to manually add the class constructor from the base class. This is
   // some boilerplate code that I hope to eliminate the need for soon.

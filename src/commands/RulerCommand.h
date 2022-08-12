@@ -1,6 +1,6 @@
 #include "../lib.h"
 
-class RulerApp : public CommandLineApp {
+class RulerCommand : public CommandLineApp {
 public:
   using CommandLineApp::CommandLineApp;
 

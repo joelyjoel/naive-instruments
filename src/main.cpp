@@ -1,16 +1,16 @@
-#include "commands/BoopApp.h"
-#include "commands/FMApp.h"
-#include "commands/FilterApp.h"
-#include "commands/GraphApp.h"
-#include "commands/HelloApp.h"
-#include "commands/MetronomeApp.h"
-#include "commands/MixApp.h"
-#include "commands/NoiseApp.h"
-#include "commands/OscApp.h"
-#include "commands/RandomApp.h"
-#include "commands/RulerApp.h"
-#include "commands/SliceApp.h"
-#include "commands/ZxSelectApp.h"
+#include "commands/BoopCommand.h"
+#include "commands/FMCommand.h"
+#include "commands/FilterCommand.h"
+#include "commands/GraphCommand.h"
+#include "commands/HelloCommand.h"
+#include "commands/MetronomeCommand.h"
+#include "commands/MixCommand.h"
+#include "commands/NoiseCommand.h"
+#include "commands/OscCommand.h"
+#include "commands/RandomCommand.h"
+#include "commands/RulerCommand.h"
+#include "commands/SliceCommand.h"
+#include "commands/ZxSelectCommand.h"
 #include "lib.h"
 #include <string>
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
   MainArgs args(argc - 1, argv + 1);
 
   if (argc == 1) {
-    // TODO: use class FrontPage : public App
+    // TODO: use class FrontPage
     std::cout << "Naive Instruments CLI.\n";
     return 0;
   }
@@ -31,44 +31,44 @@ int main(int argc, char **argv) {
     std::cout << "No help has been written yet!\n";
     return 0;
   } else if (command == "hello") {
-    HelloApp app(args.argc, args.argv);
+    HelloCommand app(args.argc, args.argv);
     app.run();
   } else if (command == "slice") {
-    SliceApp app(args);
+    SliceCommand app(args);
     app();
   } else if (command == "graph") {
-    GraphApp app(args);
+    GraphCommand app(args);
     app();
   } else if (command == "ruler") {
-    RulerApp app(args);
+    RulerCommand app(args);
     app();
   } else if (command == "mix") {
-    MixApp app(args.argc, args.argv);
+    MixCommand app(args.argc, args.argv);
     app();
   } else if (command == "osc") {
-    OscApp app(args.argc, args.argv);
+    OscCommand app(args.argc, args.argv);
     app();
   } else if (command == "boop") {
-    BoopApp app(args.argc, args.argv);
+    BoopCommand app(args.argc, args.argv);
     app();
   } else if (command == "filter") {
-    FilterApp app(args.argc, args.argv);
+    FilterCommand app(args.argc, args.argv);
     app();
   } else if (command == "noise") {
-    NoiseApp app(args.argc, args.argv);
+    NoiseCommand app(args.argc, args.argv);
     app();
   } else if (command == "random") {
-    RandomApp app(args);
+    RandomCommand app(args);
     app();
   } else if (command == "zx-select") {
     // TODO: Deprecate command in favour of special units?
-    ZxSelectApp app(args);
+    ZxSelectCommand app(args);
     app();
   } else if (command == "fm") {
-    FMApp app(args);
+    FMCommand app(args);
     app();
   } else if (command == "metronome") {
-    MetronomeApp app(args.argc, args.argv);
+    MetronomeCommand app(args.argc, args.argv);
     app();
   } else {
     std::cout << "Unknown command: " << command << "\n";
