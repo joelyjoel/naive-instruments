@@ -30,6 +30,7 @@ Add the `bin/` directory [to your path](https://linuxize.com/post/how-to-add-dir
 PATH=$PATH:~/path/to/this/repo/bin
 ```
 
+
 ## How add a new command
 
 To create a new command you need do two things:
@@ -46,12 +47,12 @@ Here's an example of a very simple command:
 
 // The first thing we do here is to include the library, to make all the
 // classes available:
-#include <naive-instruments.h>
+#include "../lib.h"
 
 // Next we declare a class which extends the `AudioCommand` base class. This
 // has helpful methods for command line options, audio input/output from
 // streams and sending audio to the speakers.
-class NoiseApp : public AudioCommand {
+class NoiseCommand : public AudioCommand {
 public:
   // We have to manually add the class constructor from the base class. This is
   // some boilerplate code that I hope to eliminate the need for soon.

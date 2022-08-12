@@ -71,6 +71,8 @@ unit-tests:
 test: unit-tests
 	bin/unit-tests
 
+readme:
+	bash docs/readme.sh > README.md
 
 
 #TODO: concat - join samples together with crossfades
