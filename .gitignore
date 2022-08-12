@@ -8,3 +8,4 @@ a.out
 .DS_Store
 most-recent-test-results/
 stable-test-results/
+/build
