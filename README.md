@@ -4,23 +4,25 @@ This is an audio library, its my naive attempt to implement an audio library to
 calm myself down while I'm in an anxiety state. I'm not really thinking about 
 performance, just about what makes sense to me. That's why its naive.
 
+It aims to be a command line application for editing & processing audio signals.
+
 ## Installation
  
-TODO: Add proper instructions
+At the moment, the makefile is only set up to build for Mac OS.
 
-You will need boost!
+You will need [boost](https://www.boost.org)!
 
 ```bash
 brew install boost
 ```
 
-Comppile it:
+Compile it:
 
 ```bash
 make
 ```
 
-Add the `bin/` directory to your path.
+Add the `bin/` directory [to your path](https://linuxize.com/post/how-to-add-directory-to-path-in-linux/).
 
 .bashrc
 
@@ -29,6 +31,8 @@ PATH=$PATH:~/path/to/this/repo/bin
 ```
 
 ## Control Signal shorthand
+
+PLEASE NOTE: I'm kinda planning to change this a lot soon based on what I've learnt from using it for a while. Watch this space..
 
 You may use a shorthand for control signals. These are made out of a sequence 
 of time-steps.
