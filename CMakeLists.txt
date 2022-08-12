@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
-project(NaiveInstruments VERSION 1.0)
+project(naive VERSION 1.0)
 
 
 FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
@@ -20,7 +20,7 @@ INCLUDE_DIRECTORIES( "/usr/local/Cellar/portaudio/19.7.0/include" )
 
 
 add_executable(
-  NaiveInstruments
+  naive
   src/main.cpp
   src/cli/CommandLineArguments.cpp
   src/core/Signal.cpp
@@ -39,10 +39,10 @@ add_executable(
   src/playback/BufferedPlayback.cpp
 )
 
-TARGET_LINK_LIBRARIES( NaiveInstruments LINK_PUBLIC "/usr/local/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
+TARGET_LINK_LIBRARIES( naive LINK_PUBLIC "/usr/local/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
 
-TARGET_LINK_LIBRARIES( NaiveInstruments LINK_PUBLIC ${Boost_LIBRARIES} )
-TARGET_LINK_LIBRARIES( NaiveInstruments LINK_PUBLIC ${CURSES_LIBRARIES} )
+TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${CURSES_LIBRARIES} )
 
-target_include_directories(NaiveInstruments PUBLIC dependencies)
+target_include_directories(naive PUBLIC dependencies)
 
