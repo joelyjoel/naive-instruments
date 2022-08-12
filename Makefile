@@ -1,5 +1,3 @@
-coreCPPFiles="src/file-io/record.cpp"
-
 PORTAUDIO_FLAGS=-I ../include\
 								-I ../vendor/include \
 								-stdlib=libc++ \
