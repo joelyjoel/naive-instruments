@@ -31,7 +31,7 @@ PATH=$PATH:~/path/to/this/repo/bin
 ```
 
 
-## How add a new command
+## How to add a new command
 
 To create a new command you need do two things:
 
