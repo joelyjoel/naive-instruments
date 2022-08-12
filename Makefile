@@ -49,7 +49,9 @@ main:
 	mkdir -p bin
 	g++ ${FLAGS} \
 		${CPP_SOURCE_FILES} \
-		src/main.cpp -o bin/malc
+		src/main.cpp -o bin/naive
+	# For sentimental/legacy reasons
+	cp bin/naive bin/malc
 
 debug:
 	mkdir -p bin
