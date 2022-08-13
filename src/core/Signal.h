@@ -131,7 +131,7 @@ protected:
 
 public:
   virtual std::string label() { return "Signal"; }
-  std::string summary() {
+  virtual std::string summary() {
     return label() + "@" + std::to_string(internalClock);
   }
 
@@ -222,4 +222,10 @@ public:
   }
 
   void operator<<(double k) { defaultInput().setConstant(k); }
+
+public:
+  std::string summary() override {
+    return label() + "[" + std::to_string(internalClock) +
+           "] = " + std::to_string(latestFrame);
+  }
 };
