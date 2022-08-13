@@ -26,9 +26,7 @@ include_directories( ${CURSES_INCLUDE_DIR})
 INCLUDE_DIRECTORIES( "/usr/local/Cellar/portaudio/19.7.0/include" )
 
 
-add_executable(
-  naive
-  src/main.cpp
+set(NaiveSourcFiles 
   src/file-io/record.cpp 
   src/core/Signal.cpp 
   src/playback/BufferedPlayback.cpp 
@@ -45,9 +43,34 @@ add_executable(
   src/parsing/RegularExpressionSources.cpp
 )
 
+
+add_executable(
+  naive
+  src/main.cpp
+  ${NaiveSourcFiles}
+)
+
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC "/usr/local/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
 
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${Boost_LIBRARIES} )
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${CURSES_LIBRARIES} )
 
 target_include_directories(naive PUBLIC dependencies)
+ add_executable(
+   test_naive
+   src/catch-config.test.cpp 
+   ${NaiveSourcFiles}
+   # TODO: It actually probably is a bit safer to use a glob here
+   src/generative/Random.test.cpp 
+   src/instruments/BreakpointEnvelope.test.cpp 
+   src/instruments/ControlString.test.cpp 
+   src/parsing/LazyRegex.test.cpp 
+   src/parsing/NumberPatterns.test.cpp 
+   src/parsing/NumberWithUnit.test.cpp 
+   src/parsing/parse.test.cpp 
+   src/parsing/RegularExpressionSources.test.cpp 
+   src/parsing/Units.test.cpp
+ )
+TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${CURSES_LIBRARIES} )
+TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC "/usr/local/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
