@@ -41,6 +41,7 @@ set(NaiveSourcFiles
   src/instruments/ControlString.cpp 
   src/file-io/piping.cpp 
   src/parsing/RegularExpressionSources.cpp
+  src/instruments/Rhythm.cpp
 )
 
 

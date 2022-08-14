@@ -4,10 +4,13 @@
 using std::cerr;
 using std::vector, std::string;
 
+// TODO: Refactor as two classes. A rhythm class, and a RhythmPlayer :
+// Signal<bool> class
+
 class Rhythm : public Signal<bool> {
 
 public:
-  SignalInput<double> &bpm = addInput<double>();
+  SignalInput<double> &bpm = addInput<double>(139.0);
 
   Rhythm(vector<float> durations) : durations(durations) {}
 
@@ -42,10 +45,19 @@ public:
       else if (c == '1' || c == '!')
         durations.push_back(.5);
       else {
-        cerr << "Unexpected char '" << c << "'\n";
+        cerr << "Unexpected char '" << c << "' while parsing rhythm\n";
         throw 1;
       }
     }
     return new Rhythm(durations);
   }
+
+public:
+  std::ostream &describe(std::ostream &out) {
+    for (float duration : durations)
+      out << duration << "b ";
+    return out;
+  }
 };
+
+std::ostream &operator<<(std::ostream &out, Rhythm &rhythm);

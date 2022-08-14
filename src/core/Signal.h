@@ -142,8 +142,9 @@ public:
    */
   virtual void action() {
     std::cerr
-        << "Oh no, looks like the programmer forgot to implement the tick "
-           "method for a Signal\n";
+        << "Oh no, looks like the programmer forgot to implement the action "
+           "method for "
+        << label() << "\n";
     throw 1;
   }
 
