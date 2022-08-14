@@ -29,7 +29,7 @@ class MetronomeCommand : public AudioCommand {
       attenuator->b << envelope;
 
       cerr << "Pattern: " << patternStr << "\n";
-      Rhythm *rhythm = Rhythm::fromBinaryString(patternStr);
+      Rhythm *rhythm = Rhythm::parse(patternStr);
       rhythm->bpm << bpm;
       cerr << *rhythm << "\n";
       Resetter *resetter = new Resetter;

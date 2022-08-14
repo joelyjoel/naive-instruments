@@ -35,7 +35,7 @@ protected:
   }
 
 public:
-  static Rhythm *fromBinaryString(const string &str) {
+  static Rhythm *parse(const string &str) {
     vector<float> durations = {0};
     for (int i = 0; i < str.size(); ++i) {
       char c = str[i];
