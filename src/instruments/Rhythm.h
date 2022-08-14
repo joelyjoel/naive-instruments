@@ -36,6 +36,22 @@ protected:
 
 public:
   static Rhythm *parse(const string &str) {
+    // TODO: Use a dictionary for named rhythms instead?
+    if (str == "son" || str == "son32")
+      return parse("1001001000101000");
+    else if (str == "rhumba" || str == "rhumba32")
+      return parse("1001000100101000");
+    else if (str == "son23")
+      return parse("0010100010010010");
+    else if (str == "rhumba23")
+      return parse("0010100010010001");
+    else if (str == "+")
+      return parse("x8 0+");
+    else if (str == "e")
+      return parse("x16 0100");
+    else if (str == "u")
+      return parse("x16 0001");
+
     vector<float> durations = {0};
     for (int i = 0; i < str.size(); ++i) {
       char c = str[i];
