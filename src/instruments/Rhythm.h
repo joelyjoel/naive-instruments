@@ -37,9 +37,9 @@ public:
     for (int i = 0; i < str.size(); ++i) {
       char c = str[i];
 
-      if (c == '0')
+      if (c == '0' || c == '.')
         durations[durations.size() - 1] += .5;
-      else if (c == '1')
+      else if (c == '1' || c == '!')
         durations.push_back(.5);
       else {
         cerr << "Unexpected char '" << c << "'\n";
