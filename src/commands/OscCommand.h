@@ -30,19 +30,13 @@ public:
     /* auto &f = **ControlString::parse(str); */
 
     Signal<double> &pitch = *inputPitch();
-    Signal<double> &volume =
-        *SignalString::parse(args["volume"].as<std::string>());
-    Signal<double> &vibratoRate =
-        *SignalString::parse(args["vibrato-frequency"].as<std::string>());
-    Signal<double> &vibratoAmount =
-        *SignalString::parse(args["vibrato-amount"].as<std::string>());
 
-    vibrato.depth << vibratoAmount;
-    vibrato.frequency << vibratoRate;
+    vibrato.depth << args["vibrato-amount"].as<std::string>();
+    vibrato.frequency << args["vibrato-frequency"].as<std::string>();
     pitchSum.a << pitch;
     pitchSum.b << vibrato;
     gain.a << osc << pitchConverter << pitchSum;
-    gain.b << volume;
+    gain.b << args["volume"].as<std::string>();
 
     output(gain);
   }
