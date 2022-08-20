@@ -29,6 +29,7 @@
 #include "instruments/Decay.h"
 #include "instruments/FixedPipe.h"
 #include "instruments/Floor.h"
+#include "instruments/Invert.h"
 #include "instruments/LFO.h"
 #include "instruments/MetronomicResetter.h"
 #include "instruments/Multiply.h"
