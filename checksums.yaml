@@ -18,8 +18,6 @@ Triangle wave on middle C lasting one second.wav:
   checksum: SHA256=9675a9c9473810e6a59df5e67665f77f84ad9d9bdbab31e4076cb1607df430ed
 Upward sine sweep accross entire grand piano range.wav:
   checksum: SHA256=671fd99b86e812a188ea31743ee676861600a0871fafd6d0db9f984bdcb5da60
-120bpm metronome.wav:
-  checksum: SHA256=6b85b6d49d5cfaaf5fd88e92420127c673926cc680bab4516c235eaab712e11f
 Simple boop.wav:
   checksum: SHA256=bac2cd9da14bcbab03716a30c6d87c23f849e80625185315f9947426f1f0fbd5
 Sliding boop.wav:
@@ -28,3 +26,5 @@ Slightly longer boop.wav:
   checksum: SHA256=9b6b1b00365e01f214a73cd507805fe0d1d111818811f27810dfb2239d185ffb
 Trianglular boop.wav:
   checksum: SHA256=64f91af18f11174b5c407d7bb97bcd7174ce9e49ae3051659cd4222a520f7162
+120bpm metronome.wav:
+  checksum: SHA256=5bf073ce7ea82732d4fbe47acc336ae11359e5183a3a9253ce951dc30373e1c6

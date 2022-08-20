@@ -16,7 +16,9 @@ class MetronomeCommand : public AudioCommand {
 
     Signal<double> *bpm = SignalString::parse(args["bpm"].as<string>());
     vector<Signal<double> *> tracks;
-    const vector<string> &patternStrings = args["pattern"].as<vector<string>>();
+    const vector<string> &patternStrings =
+        args.count("pattern") ? args["pattern"].as<vector<string>>()
+                              : vector<string>({"10"});
 
     for (int i = 0; i < patternStrings.size(); ++i) {
       const string &patternStr = patternStrings[i];
