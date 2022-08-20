@@ -11,3 +11,10 @@ void operator*=(SignalInput<double> &signalInput, Signal<double> &scale) {
   multiply->b << scale;
   signalInput << multiply;
 }
+
+Signal<double> *operator*(Signal<double> &a, Signal<double> &b) {
+  Multiply *m = new Multiply;
+  m->a << a;
+  m->b << b;
+  return m;
+}

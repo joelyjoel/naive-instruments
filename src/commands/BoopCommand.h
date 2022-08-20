@@ -13,7 +13,6 @@ class BoopCommand : public AudioCommand {
     MonoBuffer &waveform = *inputWaveform();
     Osc osc(waveform);
     PitchConverter pitchConverter;
-    Multiply m;
 
     Signal<double> *frequency = inputFrequency();
     Decay envelope;
@@ -21,9 +20,7 @@ class BoopCommand : public AudioCommand {
     envelope.duration << inputDuration();
 
     osc << *frequency;
-    m.a << osc;
-    m.b << envelope;
 
-    output(m);
+    output(*((osc) * (envelope)));
   }
 };

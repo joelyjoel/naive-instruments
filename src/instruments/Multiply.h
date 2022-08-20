@@ -16,3 +16,5 @@ public:
  */
 void operator*=(SignalInput<double> &signalInput,
                 Signal<double> &additionalSignal);
+
+Signal<double> *operator*(Signal<double> &a, Signal<double> &b);
