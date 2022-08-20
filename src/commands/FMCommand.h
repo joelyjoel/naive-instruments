@@ -71,17 +71,12 @@ public:
       const std::string key = std::to_string(i) + "-out";
       if (args.exists(key) || i == 0) {
         Signal<double> *level = args.signal(key, i == 0 ? "1" : "0");
-        Multiply *m = new Multiply;
-        m->a << oscOutput;
-        m->b << level;
 
         if (mixdown == nullptr) {
-          mixdown = m;
+          mixdown = *oscOutput * *level;
         } else {
           Add *add = new Add();
-          add->a << mixdown;
-          add->b << m;
-          mixdown = add;
+          mixdown = *mixdown + *(*oscOutput * *level);
         }
       }
     }

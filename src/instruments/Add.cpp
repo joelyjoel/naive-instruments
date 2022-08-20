@@ -12,3 +12,10 @@ void operator+=(SignalInput<double> &signalInput,
   add->b << additionalSignal;
   signalInput << add;
 }
+
+Signal<double> *operator+(Signal<double> &a, Signal<double> &b) {
+  Add *add = new Add;
+  add->a << a;
+  add->b << b;
+  return add;
+}
