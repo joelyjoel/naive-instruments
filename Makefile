@@ -5,3 +5,4 @@ default:
 
 test: 
 	cd build && make test_naive && test_naive
+	cd build && make naive && cd ../ && ./run-tests.sh
