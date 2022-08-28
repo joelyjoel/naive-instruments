@@ -11,6 +11,8 @@ class UntypedSignal;
 template <typename frame> class Signal;
 
 class UntypedSignalInput {
+  friend UntypedSignal;
+
 protected:
   UntypedSignal *owner;
 
@@ -179,6 +181,15 @@ public:
     for (auto input : inputs)
       input->reset();
     resetState();
+  }
+
+public:
+  std::vector<UntypedSignal *> inputSignals() const {
+    std::vector<UntypedSignal *> list;
+    for (auto input : inputs)
+      if (input->hasConnection())
+        list.push_back(input->untypedConnection);
+    return list;
   }
 };
 
