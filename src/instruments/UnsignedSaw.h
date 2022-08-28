@@ -5,7 +5,7 @@
 
 class UnsignedSaw : public Signal<double> {
 public:
-  SignalInput<double> &frequency = addInput<double>();
+  SignalInput<double> &frequency = addInput<double>("frequency/Hz");
   double phase;
 
   void action() override {

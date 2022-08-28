@@ -8,7 +8,7 @@ class FixedPipe : public Signal<double> {
   int tapeHeadIndex = 0;
 
 public:
-  SignalInput<double> &input = addInput<double>();
+  SignalInput<double> &input = addInput<double>("input");
 
   FixedPipe(double duration) : bufferSize(duration * sampleRate) {
     buffer = new double[bufferSize];

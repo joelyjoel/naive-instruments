@@ -7,9 +7,9 @@ private:
   double phase = 0;
 
 public:
-  SignalInput<double> &start = addInput<double>(1.0);
-  SignalInput<double> &end = addInput<double>(0);
-  SignalInput<double> &duration = addInput<double>(1.0);
+  SignalInput<double> &start = addInput<double>("start", 1.0);
+  SignalInput<double> &end = addInput<double>("end", 0);
+  SignalInput<double> &duration = addInput<double>("duration/s", 1.0);
 
   void action() {
     if (phase < 1) {

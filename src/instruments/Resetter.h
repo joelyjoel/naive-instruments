@@ -4,8 +4,8 @@
 
 class Resetter : public Signal<double> {
 public:
-  SignalInput<double> &input = addInput<double>();
-  SignalInput<bool> &trigger = addInput<bool>();
+  SignalInput<double> &input = addInput<double>("input");
+  SignalInput<bool> &trigger = addInput<bool>("trigger/bool");
 
 protected:
   void action() override {

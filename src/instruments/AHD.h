@@ -2,9 +2,9 @@
 #include "../core.h"
 class AHD : public Signal<double> {
 public:
-  SignalInput<double> &attack = addInput<double>(1);
-  SignalInput<double> &hold = addInput<double>(1);
-  SignalInput<double> decay = addInput<double>(1);
+  SignalInput<double> &attack = addInput<double>("attack/s", 1);
+  SignalInput<double> &hold = addInput<double>("hold/s", 1);
+  SignalInput<double> decay = addInput<double>("decay/s", 1);
 
 private:
   enum AHDStage { A, H, D, finished };

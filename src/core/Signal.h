@@ -123,7 +123,8 @@ protected:
   std::vector<UntypedSignalInput *> inputs;
 
 protected:
-  template <typename frame> SignalInput<frame> &addInput(double initValue = 0) {
+  template <typename frame>
+  SignalInput<frame> &addInput(const std::string &name, double initValue = 0) {
     auto signalInput = new SignalInput<frame>(this);
     inputs.push_back(signalInput);
     return *signalInput;

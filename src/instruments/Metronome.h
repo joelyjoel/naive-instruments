@@ -2,7 +2,7 @@
 
 class Metronome : public Signal<bool> {
 public:
-  SignalInput<double> &bpm = addInput<double>();
+  SignalInput<double> &bpm = addInput<double>("bpm/bpm");
 
 private:
   const double k = 1.0 / (60.0 * sampleRate);

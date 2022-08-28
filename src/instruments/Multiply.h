@@ -4,8 +4,8 @@
 
 class Multiply : public Signal<double> {
 public:
-  SignalInput<double> &a = addInput<double>();
-  SignalInput<double> &b = addInput<double>();
+  SignalInput<double> &a = addInput<double>("a");
+  SignalInput<double> &b = addInput<double>("a");
 
   void action() override { out(a() * b()); }
   std::string label() override { return "Multiply"; }

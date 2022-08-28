@@ -3,7 +3,7 @@
 #include "../core.h"
 
 template <typename T> class PassThrough : public Signal<T> {
-  SignalInput<T> &input = addInput<T>();
+  SignalInput<T> &input = addInput<T>("input");
 
   void action() { out(input()); }
 };
