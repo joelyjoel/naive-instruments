@@ -17,20 +17,12 @@ protected:
   UntypedSignal *owner;
 
 public:
-  UntypedSignalInput(UntypedSignal *owner) : owner(owner){};
+  UntypedSignalInput(UntypedSignal *owner);
 
-  virtual void connect(Signal<double> *signal) {
-    std::cerr << "No override for "
-                 "UntypedSignalInput::connect(Signal<double>*) method\n";
-    throw 1;
-  }
+  virtual void connect(Signal<double> *signal);
 
 public:
-  virtual void setConstant(double k) {
-    std::cerr
-        << "No override for UntypedSignalInput::setConstant(double) method\n";
-    throw 1;
-  }
+  virtual void setConstant(double k);
 
   /**
    * Synchronise the plugged instrument with the owner
@@ -41,7 +33,7 @@ protected:
   UntypedSignal *untypedConnection = nullptr;
 
 public:
-  bool hasConnection() { return untypedConnection != nullptr; }
+  bool hasConnection();
 
 public:
   void reset();
