@@ -17,7 +17,7 @@ protected:
   UntypedSignal *owner;
 
 public:
-  UntypedSignalInput(UntypedSignal *owner);
+  UntypedSignalInput(UntypedSignal *owner, const std::string &name);
 
   virtual void connect(Signal<double> *signal);
 
@@ -49,8 +49,8 @@ private:
   frame constant;
 
 public:
-  SignalInput(UntypedSignal *owner)
-      : UntypedSignalInput(owner), constant(0), _connection(nullptr) {}
+  SignalInput(UntypedSignal *owner, const std::string &name)
+      : UntypedSignalInput(owner, name), constant(0), _connection(nullptr) {}
 
   frame operator()() {
     if (hasConnection())
@@ -110,19 +110,13 @@ public:
  * frame type of their owners.
  */
 class UntypedSignal {
+  friend UntypedSignalInput;
+
 public:
   int internalClock = 0;
 
 protected:
   std::vector<UntypedSignalInput *> inputs;
-
-protected:
-  template <typename frame>
-  SignalInput<frame> &addInput(const std::string &name, double initValue = 0) {
-    auto signalInput = new SignalInput<frame>(this);
-    inputs.push_back(signalInput);
-    return *signalInput;
-  }
 
 public:
   virtual std::string label() { return "Signal"; }

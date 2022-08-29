@@ -8,7 +8,7 @@ private:
   double threshold = 0;
 
 public:
-  SignalInput<double> &input = addInput<double>("input/audio");
+  SignalInput<double> input{this, "input/audio"};
   bool detectDownwardsZeroCrossings = true;
   bool detectUpwardsZeroCrossings = false;
 

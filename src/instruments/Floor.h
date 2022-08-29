@@ -5,7 +5,7 @@
 
 class Floor : public Signal<double> {
 public:
-  SignalInput<double> &input = addInput<double>("input");
+  SignalInput<double> input{this, "input"};
 
   void action() { out(floor(input())); }
 };

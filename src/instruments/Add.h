@@ -7,8 +7,8 @@
 
 class Add : public Signal<double> {
 public:
-  SignalInput<double> &a = addInput<double>("a");
-  SignalInput<double> &b = addInput<double>("b");
+  SignalInput<double> a{this, "a"};
+  SignalInput<double> b{this, "b"};
 
   Add() {}
 

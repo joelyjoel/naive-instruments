@@ -5,7 +5,10 @@ private:
   double phase = 0;
 
 public:
-  SignalInput<double> &duration = addInput<double>("duration/s", 1.0);
+  SignalInput<double> duration{
+      this,
+      "duration/s",
+  };
 
 protected:
   void action() override {

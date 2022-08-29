@@ -4,7 +4,7 @@
 
 class BufferWriter : public Signal<double> {
 public:
-  SignalInput<double> &input = addInput<double>("input");
+  SignalInput<double> input = {this, "input"};
 
 private:
   MonoBuffer *buffer;

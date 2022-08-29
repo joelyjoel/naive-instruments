@@ -4,7 +4,11 @@
 // class UntypedSignalInput
 // --------------------------------------------------------------------------------
 
-UntypedSignalInput::UntypedSignalInput(UntypedSignal *owner) : owner(owner){};
+UntypedSignalInput::UntypedSignalInput(UntypedSignal *owner,
+                                       const std::string &name)
+    : owner(owner) {
+  owner->inputs.push_back(this);
+};
 
 void UntypedSignalInput::connect(Signal<double> *signal) {
   ;
