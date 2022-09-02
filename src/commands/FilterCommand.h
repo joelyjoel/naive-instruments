@@ -19,26 +19,28 @@ class FilterCommand : public AudioCommand {
 
 public:
   void action() override {
+    // TODO: This needs to be shared too
     MonoBuffer *input = inputAsBuffer();
 
-    Sampler sampler(*input);
-    ButterworthFilter filter;
+    shared_ptr<Sampler> sampler = make_shared<Sampler>(*input);
+    shared_ptr<ButterworthFilter> filter = make_shared<ButterworthFilter>();
 
-    filter.kind = getFilterKind();
+    filter->kind = getFilterKind();
 
-    filter.input << sampler;
+    filter->input << sampler;
 
     if (args.count("frequency")) {
-      Signal<double> *frequency =
+      shared_ptr<Signal<double>> frequency =
           SignalString::parse(args["frequency"].as<std::string>());
-      filter.frequency << frequency;
-      output(filter);
+      filter->frequency << frequency;
+      output(*filter);
     } else if (args.count("pitch")) {
-      PitchConverter pitchConverter;
-      Signal<double> *pitch =
+      shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
+      shared_ptr<Signal<double>> pitch =
           SignalString::parse(args["pitch"].as<std::string>());
-      filter.frequency << pitchConverter << *pitch;
-      output(filter);
+      pitchConverter->pitch << pitch;
+      filter->frequency << pitchConverter;
+      output(*filter);
     } else {
       std::cerr << "No --frequency or --pitch specified\n";
       throw 1;

@@ -11,25 +11,26 @@
 
 class SignalString {
 public:
-  static Signal<double> *parse(const std::string str) {
+  static shared_ptr<Signal<double>> parse(const std::string str) {
 
     std::regex wavFileRegex(".wav$");
     if (std::regex_search(str, wavFileRegex)) {
       std::cerr << "SAMPLE: " << str << "\n";
-      return new Sampler(str);
+      return make_shared<Sampler>(str);
     }
 
-    Hopefully<ControlString *> cs = ControlString::parse(str);
+    // TODO: use empty shared_ptr for failure?
+    Hopefully<shared_ptr<ControlString>> cs = ControlString::parse(str);
     if (cs.success())
       return *cs;
 
     try {
       double f = std::stoi(str);
       std::cerr << "Got osc " << f << " from " << str << "\n";
-      return new Constant(f);
+      return make_shared<Constant>(f);
     } catch (std::invalid_argument err) {
       std::cerr << "Can't parse '" << str << "'\n";
-      return new Constant(0);
+      return make_shared<Constant>(0);
     }
   }
 };

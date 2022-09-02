@@ -11,16 +11,16 @@ class BoopCommand : public AudioCommand {
 
   void action() override {
     MonoBuffer &waveform = *inputWaveform();
-    Osc osc(waveform);
-    PitchConverter pitchConverter;
+    shared_ptr<Osc> osc = make_shared<Osc>(waveform);
+    shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
 
-    Signal<double> *frequency = inputFrequency();
-    Decay envelope;
+    shared_ptr<Signal<double>> frequency = inputFrequency();
+    shared_ptr<Decay> envelope = make_shared<Decay>();
 
-    envelope.duration << inputDuration();
+    envelope->duration << inputDuration();
 
-    osc << *frequency;
+    osc->frequency << frequency;
 
-    output(*((osc) * (envelope)));
+    output(*(osc * envelope));
   }
 };

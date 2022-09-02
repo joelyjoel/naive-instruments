@@ -19,25 +19,27 @@ public:
   void action() override {
 
     MonoBuffer &waveform = *inputWaveform();
-    Osc osc(waveform);
-    PitchConverter pitchConverter;
-    Multiply gain;
-    Add pitchSum;
+    shared_ptr<Osc> osc = make_shared<Osc>(waveform);
+    shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
+    shared_ptr<Multiply> gain = make_shared<Multiply>();
+    shared_ptr<Add> pitchSum = make_shared<Add>();
 
-    LFO vibrato;
+    shared_ptr<LFO> vibrato = make_shared<LFO>();
 
     /* const std::string str = args[0]; */
     /* auto &f = **ControlString::parse(str); */
 
-    Signal<double> &pitch = *inputPitch();
+    shared_ptr<Signal<double>> pitch = inputPitch();
 
-    vibrato.depth << args["vibrato-amount"].as<std::string>();
-    vibrato.frequency << args["vibrato-frequency"].as<std::string>();
-    pitchSum.a << pitch;
-    pitchSum.b << vibrato;
-    gain.a << osc << pitchConverter << pitchSum;
-    gain.b << args["volume"].as<std::string>();
+    vibrato->depth << args["vibrato-amount"].as<std::string>();
+    vibrato->frequency << args["vibrato-frequency"].as<std::string>();
+    pitchSum->a << pitch;
+    pitchSum->b << vibrato;
+    pitchConverter->pitch << pitchSum;
+    osc->frequency << pitchConverter;
+    gain->a << osc;
+    gain->b << args["volume"].as<std::string>();
 
-    output(gain);
+    output(*gain);
   }
 };

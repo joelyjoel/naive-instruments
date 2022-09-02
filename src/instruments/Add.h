@@ -17,13 +17,14 @@ public:
   std::string label() { return "Add"; }
 
 public:
-  static Signal<double> *many(std::vector<Signal<double> *> &inputs) {
+  static shared_ptr<Signal<double>>
+  many(std::vector<shared_ptr<Signal<double>>> &inputs) {
     if (inputs.size() == 0)
-      return new Constant(0);
+      return std::make_shared<Constant>(0);
     else {
-      Signal *sum = inputs[0];
+      shared_ptr<Signal<double>> sum = inputs[0];
       for (int i = 1; i < inputs.size(); ++i) {
-        Add *newAdd = new Add;
+        shared_ptr<Add> newAdd = std::make_shared<Add>();
         newAdd->a << sum;
         newAdd->b << inputs[i];
         sum = newAdd;
@@ -31,12 +32,17 @@ public:
       return sum;
     }
   }
+
+  friend void operator+=(SignalInput<double> &signalInput,
+                         shared_ptr<Signal<double>>);
+  ;
 };
 
 /**
- * Mix an additional signal into an input
+ * Mix an additional signal into an input.
  */
 void operator+=(SignalInput<double> &signalInput,
-                Signal<double> &additionalSignal);
+                shared_ptr<Signal<double>> &additionalSignal);
 
-Signal<double> *operator+(Signal<double> &a, Signal<double> &b);
+shared_ptr<Signal<double>> operator+(shared_ptr<Signal<double>> a,
+                                     shared_ptr<Signal<double>> b);

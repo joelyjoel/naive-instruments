@@ -35,7 +35,7 @@ protected:
   }
 
 public:
-  static Rhythm *parse(const string &str) {
+  static shared_ptr<Rhythm> parse(const string &str) {
     // TODO: Use a dictionary for named rhythms instead?
     if (str == "son" || str == "son32")
       return parse("1001001000101000");
@@ -65,7 +65,7 @@ public:
         throw 1;
       }
     }
-    return new Rhythm(durations);
+    return make_shared<Rhythm>(durations);
   }
 
 public:

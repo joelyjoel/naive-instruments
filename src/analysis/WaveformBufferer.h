@@ -4,16 +4,23 @@
 
 class WaveformBufferer {
 private:
-  BufferWriter bufferer;
-  ZeroCrossingDetector detector;
+  shared_ptr<BufferWriter> bufferer;
+  shared_ptr<ZeroCrossingDetector> detector =
+      make_shared<ZeroCrossingDetector>();
   BangAwaiter waiter;
 
-  Signal<double> *input;
+  shared_ptr<Signal<double>> input;
 
-  void assemble() { waiter << detector << bufferer; }
+  void assemble() {
+    waiter << detector;
+    detector->input << bufferer;
+  }
 
 public:
-  WaveformBufferer() : bufferer(4096) { assemble(); }
+  WaveformBufferer() {
+    bufferer = make_shared<BufferWriter>(4096);
+    assemble();
+  }
 
 public:
   int minNumberOfFrames = 0;
@@ -24,16 +31,16 @@ private:
     do {
       bufferer.reset();
       waiter.next();
-    } while (bufferer.currentSize() < minNumberOfFrames);
+    } while (bufferer->currentSize() < minNumberOfFrames);
     ++index;
-    return bufferer.copyBuffer();
+    return bufferer->copyBuffer();
   }
 
   void skipNextWaveform() {
     do {
       bufferer.reset();
       waiter.next();
-    } while (bufferer.currentSize() < minNumberOfFrames);
+    } while (bufferer->currentSize() < minNumberOfFrames);
     ++index;
   }
 
@@ -58,8 +65,7 @@ public:
 
   MonoBuffer *operator[](int waveformIndex) { return select(waveformIndex); }
 
-  Signal<double> &operator<<(Signal<double> &inputSignal) {
-    input = &inputSignal;
-    return bufferer << inputSignal;
+  void operator<<(shared_ptr<Signal<double>> inputSignal) {
+    bufferer->input << inputSignal;
   }
 };

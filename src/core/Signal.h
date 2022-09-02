@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+using std::shared_ptr, std::make_shared;
+
 class UntypedSignalInput;
 template <typename frame> class SignalInput;
 class UntypedSignal;
@@ -19,7 +21,7 @@ protected:
 public:
   UntypedSignalInput(UntypedSignal *owner, const std::string &name);
 
-  virtual void connect(Signal<double> *signal);
+  virtual void connect(shared_ptr<Signal<double>> signal);
 
 public:
   virtual void setConstant(double k);
@@ -30,7 +32,7 @@ public:
   void sync(int clock);
 
 protected:
-  UntypedSignal *untypedConnection = nullptr;
+  std::shared_ptr<UntypedSignal> untypedConnection;
 
 public:
   bool hasConnection();
@@ -45,29 +47,31 @@ public:
 template <typename frame> class SignalInput : public UntypedSignalInput {
 
 private:
-  Signal<frame> *_connection;
   frame constant;
 
 public:
   SignalInput(UntypedSignal *owner, const std::string &name)
-      : UntypedSignalInput(owner, name), constant(0), _connection(nullptr) {}
+      : UntypedSignalInput(owner, name), constant(0) {}
 
+public:
+  std::shared_ptr<Signal<frame>> typedConnection() {
+    // Hmm seems risky
+    return std::dynamic_pointer_cast<Signal<frame>>(untypedConnection);
+  }
+
+public:
   frame operator()() {
-    if (hasConnection())
-      return (*_connection)();
-    else
+    if (hasConnection()) {
+      return (*typedConnection())();
+    } else
       return constant;
   }
 
-  void connect(Signal<frame> *inputSignal) {
+  void connect(std::shared_ptr<Signal<frame>> inputSignal) {
     untypedConnection = inputSignal;
-    _connection = inputSignal;
   }
 
-  void disconnect() {
-    _connection = nullptr;
-    untypedConnection = nullptr;
-  }
+  void disconnect() { untypedConnection = nullptr; }
 
 public:
   void setConstant(double k) {
@@ -75,27 +79,14 @@ public:
     constant = k;
   }
 
-  Signal<frame> &operator<<(Signal<frame> *instrument) {
+  Signal<frame> &operator<<(std::shared_ptr<Signal<frame>> instrument) {
     connect(instrument);
     return *instrument;
-  }
-
-  Signal<frame> &operator<<(Signal<frame> &instrument) {
-    connect(&instrument);
-    return instrument;
   }
 
   void operator<<(double k) { setConstant(k); }
 
 public:
-  Signal<frame> *connection() {
-    if (hasConnection())
-      return _connection;
-    else {
-      std::cerr << "Cannot get connection of unplugged input!\n";
-      throw 1;
-    }
-  }
   double currentConstant() {
     if (hasConnection()) {
       std::cerr << "Cannot get constant of non-constant signal input!\n";
@@ -170,8 +161,8 @@ public:
   }
 
 public:
-  std::vector<UntypedSignal *> inputSignals() const {
-    std::vector<UntypedSignal *> list;
+  std::vector<std::shared_ptr<UntypedSignal>> inputSignals() const {
+    std::vector<std::shared_ptr<UntypedSignal>> list;
     for (auto input : inputs)
       if (input->hasConnection())
         list.push_back(input->untypedConnection);
@@ -213,11 +204,6 @@ public:
       std::cerr << "Trying to get default input but the Signal has no inputs";
       throw 1;
     }
-  }
-
-  template <typename T> Signal<T> &operator<<(Signal<T> &signal) {
-    defaultInput().connect(&signal);
-    return signal;
   }
 
   void operator<<(double k) { defaultInput().setConstant(k); }

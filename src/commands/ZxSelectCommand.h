@@ -10,7 +10,7 @@ public:
     std::cerr << "Normalize: " << normalize << "\n";
 
     MonoBuffer *inputBuffer = mainInputAsBuffer();
-    Sampler sampler(*inputBuffer);
+    shared_ptr<Sampler> sampler = make_shared<Sampler>(*inputBuffer);
     WaveformBufferer bufferer;
     bufferer.minNumberOfFrames = args.integer("min-frames", 100);
 

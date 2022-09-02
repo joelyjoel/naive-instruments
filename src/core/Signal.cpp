@@ -10,10 +10,10 @@ UntypedSignalInput::UntypedSignalInput(UntypedSignal *owner,
   owner->inputs.push_back(this);
 };
 
-void UntypedSignalInput::connect(Signal<double> *signal) {
+void UntypedSignalInput::connect(shared_ptr<Signal<double>> signal) {
   ;
   std::cerr << "No override for "
-               "UntypedSignalInput::connect(Signal<double>*) method\n";
+               "UntypedSignalInput::connect method\n";
   throw 1;
 }
 

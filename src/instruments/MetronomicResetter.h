@@ -4,14 +4,17 @@
 
 class MetronomicResetter : public Patch<double> {
 private:
-  Metronome metronome;
-  Resetter resetter;
+  shared_ptr<Metronome> metronome = make_shared<Metronome>();
+  shared_ptr<Resetter> resetter = make_shared<Resetter>();
 
 public:
-  SignalInput<double> &input = exposeInput(resetter.input);
-  SignalInput<double> &bpm = exposeInput(metronome.bpm);
+  SignalInput<double> &input = exposeInput(resetter->input);
+  SignalInput<double> &bpm = exposeInput(metronome->bpm);
 
-  MetronomicResetter() : Patch(resetter) { resetter.trigger << metronome; }
+  MetronomicResetter() {
+    resetter->trigger << metronome;
+    exposeOutput(resetter);
+  }
 
   std::string label() override { return "MetronomicResetter"; }
 };

@@ -151,8 +151,8 @@ public:
   static LazyRegex firstInstructionPattern;
   static LazyRegex pattern;
 
-  static Hopefully<ControlString *> parse(const std::string &str) {
-    ControlString *instance = new ControlString();
+  static Hopefully<shared_ptr<ControlString>> parse(const std::string &str) {
+    shared_ptr<ControlString> instance = make_shared<ControlString>();
     auto successful = instance->append(str);
     if (!successful) {
       std::cerr << "Couldn't parse control string: \"" << str << "\"n";

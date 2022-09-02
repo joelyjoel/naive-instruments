@@ -1,10 +1,11 @@
 #include "Multiply.h"
 
 // FIXME: This causes a memory leak!
-void operator*=(SignalInput<double> &signalInput, Signal<double> &scale) {
-  Multiply *multiply = new Multiply();
+void operator*=(SignalInput<double> &signalInput,
+                shared_ptr<Signal<double>> scale) {
+  shared_ptr<Multiply> multiply = make_shared<Multiply>();
   if (signalInput.hasConnection()) {
-    multiply->a << signalInput.connection();
+    multiply->a << signalInput.typedConnection();
   } else {
     multiply->a << signalInput.currentConstant();
   }
@@ -12,8 +13,9 @@ void operator*=(SignalInput<double> &signalInput, Signal<double> &scale) {
   signalInput << multiply;
 }
 
-Signal<double> *operator*(Signal<double> &a, Signal<double> &b) {
-  Multiply *m = new Multiply;
+shared_ptr<Signal<double>> operator*(shared_ptr<Signal<double>> a,
+                                     shared_ptr<Signal<double>> b) {
+  shared_ptr<Multiply> m = make_shared<Multiply>();
   m->a << a;
   m->b << b;
   return m;

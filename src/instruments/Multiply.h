@@ -15,6 +15,7 @@ public:
  * Mix an additional signal into a input
  */
 void operator*=(SignalInput<double> &signalInput,
-                Signal<double> &additionalSignal);
+                shared_ptr<Signal<double>> additionalSignal);
 
-Signal<double> *operator*(Signal<double> &a, Signal<double> &b);
+shared_ptr<Signal<double>> operator*(shared_ptr<Signal<double>> a,
+                                     shared_ptr<Signal<double>> b);

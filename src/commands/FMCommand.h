@@ -9,15 +9,15 @@ public:
     int numberOfOscs = args.numberOfPositionalArgs();
 
     // Create the oscs
-    std::vector<Osc *> oscs;
-    std::vector<Signal<double> *> outputs;
+    std::vector<shared_ptr<Osc>> oscs;
+    std::vector<shared_ptr<Signal<double>>> outputs;
     for (int i = 0; i < numberOfOscs; ++i) {
-      Osc *osc = new Sine;
+      shared_ptr<Osc> osc = make_shared<Sine>();
       oscs.push_back(osc);
       const std::string key = std::to_string(i);
       if (args.exists(key)) {
-        Signal<double> *level = args.signal(key);
-        Multiply *m = new Multiply;
+        shared_ptr<Signal<double>> level = args.signal(key);
+        shared_ptr<Multiply> m = make_shared<Multiply>();
         m->a << osc;
         m->b << level;
         outputs.push_back(m);
@@ -27,17 +27,18 @@ public:
     }
 
     // Assign the fundamental frequencies
-    Signal<double> *fundamentalPitch = SignalString::parse(args[0]);
-    PitchConverter fundamentalFrequency;
-    fundamentalFrequency << *fundamentalPitch;
+    shared_ptr<Signal<double>> fundamentalPitch = SignalString::parse(args[0]);
+    shared_ptr<PitchConverter> fundamentalFrequency =
+        make_shared<PitchConverter>();
+    fundamentalFrequency->pitch << fundamentalPitch;
     for (int i = 0; i < numberOfOscs; ++i) {
-      Osc *osc = oscs[i];
+      shared_ptr<Osc> osc = oscs[i];
 
       if (i == 0) {
         osc->frequency << fundamentalFrequency;
       } else {
-        Signal<double> *ratio = SignalString::parse(args[i]);
-        Multiply *m = new Multiply;
+        shared_ptr<Signal<double>> ratio = SignalString::parse(args[i]);
+        shared_ptr<Multiply> m = make_shared<Multiply>();
         m->a << fundamentalFrequency;
         m->b << ratio;
         osc->frequency << m;
@@ -51,33 +52,31 @@ public:
         const std::string key = std::to_string(modulatorIndex) + "to" +
                                 std::to_string(carrierIndex);
         if (args.exists(key)) {
-          Signal<double> *modulation = args.signal(key);
+          shared_ptr<Signal<double>> modulation = args.signal(key);
 
-          Multiply *m = new Multiply();
+          shared_ptr<Multiply> m = make_shared<Multiply>();
           m->a << outputs[modulatorIndex];
           m->b << modulation;
 
-          IntervalToRatio *ratio = new IntervalToRatio;
+          shared_ptr<IntervalToRatio> ratio = make_shared<IntervalToRatio>();
           ratio->interval << m;
-          oscs[carrierIndex]->frequency *= *ratio;
+          oscs[carrierIndex]->frequency *= ratio;
         }
       }
     }
 
     // Create the final mix
-    Signal<double> *mixdown = nullptr;
+    shared_ptr<Signal<double>> mixdown;
     for (int i = 0; i < numberOfOscs; ++i) {
-      Signal<double> *oscOutput = outputs[i];
+      shared_ptr<Signal<double>> oscOutput = outputs[i];
       const std::string key = std::to_string(i) + "-out";
       if (args.exists(key) || i == 0) {
-        Signal<double> *level = args.signal(key, i == 0 ? "1" : "0");
+        shared_ptr<Signal<double>> level = args.signal(key, i == 0 ? "1" : "0");
 
-        if (mixdown == nullptr) {
-          mixdown = *oscOutput * *level;
-        } else {
-          Add *add = new Add();
-          mixdown = *mixdown + *(*oscOutput * *level);
-        }
+        if (mixdown)
+          mixdown = oscOutput * level;
+        else
+          mixdown = mixdown + (oscOutput * level);
       }
     }
 

@@ -7,20 +7,23 @@
 #include <iostream>
 #include <string>
 
+// TODO: Probably could be converted into a function or something once shared
+// pointers are fully adopted
 class Osc : public Patch<double> {
-  UnsignedSaw phase;
-  Wavetable wavetable;
+  shared_ptr<UnsignedSaw> phase{make_shared<UnsignedSaw>()};
+  shared_ptr<Wavetable> wavetable{make_shared<Wavetable>()};
 
 public:
-  SignalInput<double> &frequency = exposeInput(phase.frequency);
+  SignalInput<double> &frequency = exposeInput(phase->frequency);
 
 public:
-  Osc(MonoBuffer &waveform) : Patch(wavetable) {
-    wavetable.phase << phase;
-    wavetable.setWaveform(waveform);
+  Osc(MonoBuffer &waveform) {
+    wavetable->phase << phase;
+    wavetable->setWaveform(waveform);
+    exposeOutput(wavetable);
   }
 
-  std::string label() { return "Osc"; }
+  std::string label() override { return "Osc"; }
 };
 
 class Square : public Osc {

@@ -19,15 +19,15 @@ public:
       return;
     }
 
-    std::vector<Signal<double> *> samplers;
+    std::vector<shared_ptr<Signal<double>>> samplers;
 
     auto inputFiles = args["input"].as<std::vector<std::string>>();
     for (int i = 0; i < inputFiles.size(); ++i) {
       // TODO: Use getSample instead
-      samplers.push_back(new Sampler(inputFiles[i]));
+      samplers.push_back(make_shared<Sampler>(inputFiles[i]));
     }
 
-    auto *sum = Add::many(samplers);
+    shared_ptr<Signal<double>> sum = Add::many(samplers);
 
     output(*sum);
   }
