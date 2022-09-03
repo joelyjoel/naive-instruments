@@ -214,3 +214,8 @@ public:
            "] = " + std::to_string(latestFrame);
   }
 };
+
+/**
+ * Convenient alias for very freqeuent type.
+ */
+typedef shared_ptr<Signal<double>> sigarette;
