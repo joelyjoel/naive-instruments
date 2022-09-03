@@ -14,9 +14,8 @@ class MetronomeCommand : public AudioCommand {
 
   void action() override {
 
-    shared_ptr<Signal<double>> bpm =
-        SignalString::parse(args["bpm"].as<string>());
-    vector<shared_ptr<Signal<double>>> tracks;
+    sigarette bpm = SignalString::parse(args["bpm"].as<string>());
+    vector<sigarette> tracks;
     const vector<string> &patternStrings =
         args.count("pattern") ? args["pattern"].as<vector<string>>()
                               : vector<string>({"10"});
@@ -24,18 +23,15 @@ class MetronomeCommand : public AudioCommand {
     for (int i = 0; i < patternStrings.size(); ++i) {
       const string &patternStr = patternStrings[i];
 
-      shared_ptr<Sine> osc = make_shared<Sine>();
-      osc->frequency << (1 + i) * 500;
+      sigarette osc = sine((i + 1) * 500.0);
       shared_ptr<ControlString> envelope = *ControlString::parse("100ms:1~0");
-      shared_ptr<Multiply> attenuator = make_shared<Multiply>();
-      attenuator->a << osc;
-      attenuator->b << envelope;
+      sigarette attenuator = osc * envelope;
 
       cerr << "Pattern: " << patternStr << "\n";
       shared_ptr<Rhythm> rhythm = Rhythm::parse(patternStr);
       rhythm->bpm << bpm;
       cerr << *rhythm << "\n";
-      shared_ptr<Resetter> resetter = make_shared<Resetter>();
+      shared_ptr<Resetter> resetter = Resetter::create();
       resetter->input << attenuator;
       resetter->trigger << rhythm;
 

@@ -6,6 +6,12 @@ sigarette sine(sigarette frequency) {
   return osc;
 }
 
+sigarette sine(double frequency) {
+  auto osc = Osc::create(Waveforms::sine());
+  osc->frequency << frequency;
+  return osc;
+}
+
 sigarette saw(sigarette frequency) {
   auto osc = Osc::create(Waveforms::saw());
   osc->frequency << frequency;

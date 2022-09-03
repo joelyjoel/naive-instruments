@@ -4,8 +4,8 @@
 
 TEST_CASE("listing signal inputs") {
   shared_ptr<Add> adder = make_shared<Add>();
-  shared_ptr<Sine> sin1 = make_shared<Sine>();
-  shared_ptr<Sine> sin2 = make_shared<Sine>();
+  shared_ptr<Osc> sin1 = Osc::create_sine();
+  shared_ptr<Osc> sin2 = Osc::create_sine();
 
   REQUIRE(adder->inputSignals().size() == 0);
 

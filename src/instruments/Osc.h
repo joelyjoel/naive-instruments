@@ -38,27 +38,7 @@ public:
 };
 
 sigarette sine(sigarette frequency);
+sigarette sine(double frequency);
 sigarette saw(sigarette frequency);
 sigarette square(sigarette frequency);
 sigarette triangle(sigarette frequency);
-
-// TODO: Delete these!
-class Square : public Osc {
-public:
-  Square() : Osc(Waveforms::square()) {}
-};
-
-class Saw : public Osc {
-public:
-  Saw() : Osc(Waveforms::saw()) {}
-};
-
-class Sine : public Osc {
-public:
-  Sine() : Osc(Waveforms::sine()) {}
-};
-
-class Triangle : public Osc {
-public:
-  Triangle() : Osc(Waveforms::triangle()) {}
-};

@@ -8,8 +8,8 @@
 class LFO : public Patch<double> {
 private:
   // TODO: Make the waveform customisable
-  shared_ptr<Sine> osc = make_shared<Sine>();
-  shared_ptr<Multiply> modulation = make_shared<Multiply>();
+  shared_ptr<Osc> osc = Osc::create_sine();
+  shared_ptr<Multiply> modulation = Multiply::create();
   shared_ptr<Add> sum = make_shared<Add>();
 
 public:
