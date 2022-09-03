@@ -11,26 +11,21 @@ public:
     // Create the oscs
     std::vector<shared_ptr<Osc>> oscs;
     std::vector<shared_ptr<Signal<double>>> outputs;
+
     for (int i = 0; i < numberOfOscs; ++i) {
-      shared_ptr<Osc> osc = make_shared<Sine>();
+      shared_ptr<Osc> osc = Osc::create_sine();
       oscs.push_back(osc);
       const std::string key = std::to_string(i);
-      if (args.exists(key)) {
-        shared_ptr<Signal<double>> level = args.signal(key);
-        shared_ptr<Multiply> m = make_shared<Multiply>();
-        m->a << osc;
-        m->b << level;
-        outputs.push_back(m);
-      } else {
+      if (args.exists(key))
+        outputs.push_back(osc * args.signal(key));
+      else
         outputs.push_back(osc);
-      }
     }
 
     // Assign the fundamental frequencies
     shared_ptr<Signal<double>> fundamentalPitch = SignalString::parse(args[0]);
     shared_ptr<PitchConverter> fundamentalFrequency =
-        make_shared<PitchConverter>();
-    fundamentalFrequency->pitch << fundamentalPitch;
+        pitchToFrequency(fundamentalPitch);
     for (int i = 0; i < numberOfOscs; ++i) {
       shared_ptr<Osc> osc = oscs[i];
 
@@ -38,10 +33,7 @@ public:
         osc->frequency << fundamentalFrequency;
       } else {
         shared_ptr<Signal<double>> ratio = SignalString::parse(args[i]);
-        shared_ptr<Multiply> m = make_shared<Multiply>();
-        m->a << fundamentalFrequency;
-        m->b << ratio;
-        osc->frequency << m;
+        osc->frequency << fundamentalFrequency * ratio;
       }
     }
 
@@ -54,12 +46,8 @@ public:
         if (args.exists(key)) {
           shared_ptr<Signal<double>> modulation = args.signal(key);
 
-          shared_ptr<Multiply> m = make_shared<Multiply>();
-          m->a << outputs[modulatorIndex];
-          m->b << modulation;
-
-          shared_ptr<IntervalToRatio> ratio = make_shared<IntervalToRatio>();
-          ratio->interval << m;
+          shared_ptr<IntervalToRatio> ratio =
+              intervalToRatio(outputs[modulatorIndex] * modulation);
           oscs[carrierIndex]->frequency *= ratio;
         }
       }
