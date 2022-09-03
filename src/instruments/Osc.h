@@ -17,6 +17,7 @@ public:
   SignalInput<double> &frequency = exposeInput(phase->frequency);
 
 public:
+  // TODO: Make it a private constructor
   Osc(MonoBuffer &waveform) {
     wavetable->phase << phase;
     wavetable->setWaveform(waveform);
@@ -24,6 +25,16 @@ public:
   }
 
   std::string label() override { return "Osc"; }
+
+  static shared_ptr<Osc> create(MonoBuffer &waveform) {
+    return make_shared<Osc>(waveform);
+  }
+  static shared_ptr<Osc> create_sine() { return create(Waveforms::sine()); }
+  static shared_ptr<Osc> create_square() { return create(Waveforms::square()); }
+  static shared_ptr<Osc> create_saw() { return create(Waveforms::saw()); }
+  static shared_ptr<Osc> create_triangle() {
+    return create(Waveforms::triangle());
+  }
 };
 
 class Square : public Osc {
