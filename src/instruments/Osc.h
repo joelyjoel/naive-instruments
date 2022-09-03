@@ -37,6 +37,12 @@ public:
   }
 };
 
+sigarette sine(sigarette frequency);
+sigarette saw(sigarette frequency);
+sigarette square(sigarette frequency);
+sigarette triangle(sigarette frequency);
+
+// TODO: Delete these!
 class Square : public Osc {
 public:
   Square() : Osc(Waveforms::square()) {}

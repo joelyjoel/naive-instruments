@@ -43,6 +43,7 @@ set(NaiveSourcFiles
   src/parsing/RegularExpressionSources.cpp
   src/instruments/Rhythm.cpp
   src/cli/SignalString.cpp
+  src/instruments/Osc.cpp
 )
 
 
