@@ -2,6 +2,7 @@
 
 #include "constants.h"
 #include <iostream>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -167,6 +168,15 @@ public:
       if (input->hasConnection())
         list.push_back(input->untypedConnection);
     return list;
+  }
+
+  void recurse(auto &action, std::set<shared_ptr<UntypedSignal>> visited = {}) {
+    for (auto input : inputSignals())
+      if (!visited.contains(input)) {
+        visited.insert(input);
+        action(input);
+        input->recurse(visited);
+      }
   }
 };
 
