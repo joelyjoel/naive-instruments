@@ -23,7 +23,7 @@ include_directories( ${CURSES_INCLUDE_DIR})
 # list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/portaudio")
 # find_package( PortAudio REQUIRED )
 
-INCLUDE_DIRECTORIES( "/usr/local/Cellar/portaudio/19.7.0/include" )
+INCLUDE_DIRECTORIES( "/opt/homebrew/Cellar/portaudio/19.7.0/include" )
 
 
 set(NaiveSourcFiles 
@@ -53,7 +53,7 @@ add_executable(
   ${NaiveSourcFiles}
 )
 
-TARGET_LINK_LIBRARIES( naive LINK_PUBLIC "/usr/local/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
+TARGET_LINK_LIBRARIES( naive LINK_PUBLIC "/opt/homebrew/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
 
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${Boost_LIBRARIES} )
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${CURSES_LIBRARIES} )
@@ -77,4 +77,4 @@ target_include_directories(naive PUBLIC dependencies)
  )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${Boost_LIBRARIES} )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${CURSES_LIBRARIES} )
-TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC "/usr/local/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )
+TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC "/opt/homebrew/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )

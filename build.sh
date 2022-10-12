@@ -1,4 +1,4 @@
-#! /usr/local/bin/bash
+#! /bin/bash
 
 if [ -d build ] ; then 
   rm -rf build
