@@ -30,6 +30,12 @@ Add the `bin/` directory [to your path](https://linuxize.com/post/how-to-add-dir
 PATH=$PATH:~/path/to/this/repo/bin
 ```
 
+To run the tests you will need ffmpeg:
+
+```bash
+brew install ffmpeg
+```
+
 
 ## How to add a new command
 

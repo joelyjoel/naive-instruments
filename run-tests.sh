@@ -1,4 +1,3 @@
-#! /usr/local/bin/bash
 
 # This script will run all the scripts in the tests/* directory which create a
 # sample pack, called the 'test-pack'. This newly generated sample pack is then
