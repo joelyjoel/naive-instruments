@@ -31,3 +31,5 @@ TEST_CASE("Overrwriting a region using another sample and an offset") {
   REQUIRE(master.read(2) == 1);
   REQUIRE(master.read(5) == 4);
 }
+
+// TODO: Test concatenation

@@ -3,9 +3,6 @@
 
 template <typename T> class Sample {
 
-  // QUESTION: Should channel/frame offset be built into this class? Or is it
-  // better to use channel indexes (yes)
-
   int numberOfFrames;
   int numberOfChannels;
   T *data;
@@ -87,7 +84,7 @@ public:
     return max;
   }
 
-  static Sample<T> concat(Sample<T> &a, Sample<T> &b) {
+  static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
     if (a.sampleRate != b.sampleRate)
       throw 1; // TODO: Use proper exception
     int numberOfChannels = std::max(a.numberOfChannels, b.numberOfChannels);
@@ -99,5 +96,11 @@ public:
 
     sample.write(a);
     sample.write(b, a.numberOfFrames);
+    return sample;
   }
+
+  // TODO: rms
+  // TODO: writing wav files
+  // TODO: Reading wav files
+  // TODO: selectChannels
 };
