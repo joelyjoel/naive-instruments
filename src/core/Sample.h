@@ -2,6 +2,10 @@
 #include <memory>
 
 template <typename T> class Sample {
+
+  // QUESTION: Should channel/frame offset be built into this class? Or is it
+  // better to use channel indexes (yes)
+
   int numberOfFrames;
   int numberOfChannels;
   T *data;
@@ -41,7 +45,26 @@ private:
 
 public:
   T read(int channel, int frame) { return cell(channel, frame); }
+
+  /**
+   * Overwrite a single cell
+   */
   void write(int channel, int frame, T y) { cell(channel, frame) = y; }
+
+  /**
+   * Overwrite a region using another sample
+   */
+  void write(Sample<T> &y, int offset = 0) {
+    // TODO: Support channel offset
+    if (sampleRate != y.sampleRate)
+      throw 1; // TODO: Use proper exception
+    for (int c = 0; c < y.numberOfChannels; ++c)
+      for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
+        int writeFrame = readFrame + offset;
+        if (writeFrame > 0 && writeFrame < numberOfFrames)
+          write(c, writeFrame, y.read(c, readFrame));
+      }
+  }
 
   int frameAtTime(float t) { return t * sampleRate; }
 
@@ -71,5 +94,10 @@ public:
     int numberOfFrames = a.numberOfFrames + b.numberOfFrames;
     std::shared_ptr<Sample<T>> sample =
         std::make_shared<Sample<T>>(numberOfChannels, numberOfFrames);
+
+    // TODO: add configurable crossfades
+
+    sample.write(a);
+    sample.write(b, a.numberOfFrames);
   }
 };
