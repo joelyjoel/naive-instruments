@@ -40,3 +40,16 @@ TEST_CASE("Concatenating two samples") {
   REQUIRE(combined->read(7) == 8);
   REQUIRE(combined->read(0) == 1);
 }
+
+TEST_CASE("Mixing two samples together") {
+  Sample<int> master({1, 1, 1, 1, 1});
+  Sample<int> overdub({0, 1, 2, 3, 4});
+
+  master.mix(overdub);
+
+  REQUIRE(master.read(0) == 1);
+  REQUIRE(master.read(1) == 2);
+  REQUIRE(master.read(2) == 3);
+  REQUIRE(master.read(3) == 4);
+  REQUIRE(master.read(4) == 5);
+}

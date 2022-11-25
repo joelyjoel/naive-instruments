@@ -53,8 +53,6 @@ public:
    */
   void write(Sample<T> &y, int offset = 0) {
     // TODO: Support channel offset
-    if (sampleRate != y.sampleRate)
-      throw 1; // TODO: Use proper exception
     for (int c = 0; c < y.numberOfChannels; ++c)
       for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
         int writeFrame = readFrame + offset;
@@ -63,11 +61,18 @@ public:
       }
   }
 
-  int frameAtTime(float t) { return t * sampleRate; }
+  void mix(T y, int frame = 0, int channel = 0) { cell(channel, frame) += y; }
 
-  //
-  // Metrics
-  //
+  void mix(Sample<T> &y, int offset = 0) {
+    for (int c = 0; c < y.numberOfChannels; ++c)
+      for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
+        int writeFrame = readFrame + offset;
+        if (writeFrame >= 0 && writeFrame < numberOfFrames)
+          mix(y.read(readFrame, c), writeFrame, c);
+      }
+  }
+
+  int frameAtTime(float t) { return t * sampleRate; }
 
   float duration() { return float(numberOfFrames) / sampleRate; }
 
