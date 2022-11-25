@@ -7,18 +7,15 @@ template <typename T> class Sample {
   int numberOfFrames;
   int numberOfChannels;
   T *data;
-  float sampleRate;
 
 public:
-  Sample(int numberOfFrames, int numberOfChannels = 1, float sampleRate = 44100)
-      : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames),
-        sampleRate(sampleRate) {
+  Sample(int numberOfFrames, int numberOfChannels = 1)
+      : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames) {
     data = new T[numberOfChannels * numberOfFrames];
   }
 
-  Sample(std::vector<T> _data, int numberOfChannels = 1,
-         float sampleRate = 44100)
-      : Sample(_data.size(), numberOfChannels, sampleRate) {
+  Sample(std::vector<T> _data, int numberOfChannels = 1)
+      : Sample(_data.size(), numberOfChannels) {
     for (int i = 0; i < _data.size(); ++i)
       data[i] = _data[i];
   }
@@ -73,16 +70,10 @@ public:
       }
   }
 
-  int frameAtTime(float t) { return t * sampleRate; }
+  T peak(int frame0 = 0, int frame1 = 0) {
+    if (frame1 == 0)
+      frame1 = numberOfFrames;
 
-  float duration() { return float(numberOfFrames) / sampleRate; }
-
-  T peak(float t0 = 0, float t1 = 0) {
-    if (t1 == 0)
-      t1 = duration();
-
-    int frame0 = frameAtTime(t0);
-    int frame1 = frameAtTime(t1);
     T max = read(frame0, 0);
     for (int c = 0; c < numberOfChannels; ++c)
       for (int frame = frame0; frame < frame1; ++frame)
@@ -90,12 +81,9 @@ public:
     return max;
   }
 
-  T rms(float t0 = 0, float t1 = 0) {
-    if (t1 == 0)
-      t1 = duration();
-
-    int frame0 = frameAtTime(t0);
-    int frame1 = frameAtTime(t1);
+  T rms(int frame0 = 0, int frame1 = 0) {
+    if (frame1 == 0)
+      frame1 = numberOfFrames;
 
     T sum = 0;
     for (int frame = frame0; frame < frame1; ++frame)
@@ -114,8 +102,8 @@ public:
 
     int lengthOfNewSample = frame1 - frame0;
 
-    auto sample = std::make_shared<Sample<T>>(lengthOfNewSample,
-                                              numberOfChannels, sampleRate);
+    auto sample =
+        std::make_shared<Sample<T>>(lengthOfNewSample, numberOfChannels);
 
     for (int writeFrame = 0; writeFrame < lengthOfNewSample; ++writeFrame) {
       int readFrame = writeFrame + frame0;
@@ -127,12 +115,10 @@ public:
   }
 
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
-    if (a.sampleRate != b.sampleRate)
-      throw 1; // TODO: Use proper exception
     int numberOfChannels = std::max(a.numberOfChannels, b.numberOfChannels);
     int numberOfFrames = a.numberOfFrames + b.numberOfFrames;
-    std::shared_ptr<Sample<T>> sample = std::make_shared<Sample<T>>(
-        numberOfFrames, numberOfChannels, a.sampleRate);
+    std::shared_ptr<Sample<T>> sample =
+        std::make_shared<Sample<T>>(numberOfFrames, numberOfChannels);
 
     // TODO: add configurable crossfades
 
