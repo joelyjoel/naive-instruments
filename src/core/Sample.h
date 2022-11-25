@@ -8,11 +8,17 @@ template <typename T> class Sample {
   float sampleRate;
 
 public:
-  Sample(int numberOfChannels, int numberOfFrames, float sampleRate = 44100)
+  Sample(int numberOfFrames, int numberOfChannels = 1, float sampleRate = 44100)
       : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames),
         sampleRate(sampleRate) {
-
     data = new T[numberOfChannels * numberOfFrames];
+  }
+
+  Sample(std::vector<T> _data, int numberOfChannels = 1,
+         float sampleRate = 44100)
+      : Sample(_data.size(), numberOfChannels, sampleRate) {
+    for (int i = 0; i < _data.size(); ++i)
+      data[i] = _data[i];
   }
 
   ~Sample() { delete data; }
@@ -55,6 +61,7 @@ public:
     for (int c = 0; c < numberOfChannels; ++c)
       for (int frame = frame0; frame < frame1; ++frame)
         max = std::max(max, read(c, frame));
+    return max;
   }
 
   static Sample<T> concat(Sample<T> &a, Sample<T> &b) {
