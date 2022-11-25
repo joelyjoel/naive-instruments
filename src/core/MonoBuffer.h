@@ -10,10 +10,24 @@ class MonoBuffer {
   // TODO: Make proper use of c++ const keyword for non-editable views
   // TODO: Create proper move semantics
 public:
+  /**
+   * How many samples are there?
+   */
   const int numberOfSamples;
+
+  /**
+   * How long is the sampled signal in smp.
+   */
   int numberOfFrames() { return numberOfSamples; }
+
+  /**
+   * Pointer to the data
+   */
   double *data;
 
+  /**
+   * Create an empty sampled signal
+   */
   MonoBuffer(int numberOfSamples) : numberOfSamples(numberOfSamples) {
     data = new double[numberOfSamples];
     isAView = false;
