@@ -4,15 +4,18 @@
 template <typename T> class Sample {
   int numberOfFrames;
   int numberOfChannels;
-  std::shared_ptr<T> data;
+  T *data;
   float sampleRate;
 
 public:
   Sample(int numberOfChannels, int numberOfFrames, float sampleRate = 44100)
       : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames),
         sampleRate(sampleRate) {
-    data = std::make_shared<T[numberOfChannels * numberOfFrames]>;
+
+    data = new T[numberOfChannels * numberOfFrames];
   }
+
+  ~Sample() { delete data; }
 
 private:
   /**
@@ -32,7 +35,7 @@ private:
 
 public:
   T read(int channel, int frame) { return cell(channel, frame); }
-  T write(int channel, int frame, T y) { cell(channel, frame) = y; }
+  void write(int channel, int frame, T y) { cell(channel, frame) = y; }
 
   int frameAtTime(float t) { return t * sampleRate; }
 
