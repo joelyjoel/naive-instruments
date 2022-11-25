@@ -16,6 +16,10 @@ TEST_CASE("Create a sample from a vector and find the peak") {
   REQUIRE(Sample<int>({1, 2, 3, 4}).peak() == 4);
 }
 
+TEST_CASE("Root mean square of a sample") {
+  REQUIRE(Sample<int>({1, 1, 1, 1}).rms() == 1);
+}
+
 TEST_CASE("Overwrite a region of one sample using another") {
   Sample<int> master(8);
   Sample<int> overdub({1, 2, 3, 4});

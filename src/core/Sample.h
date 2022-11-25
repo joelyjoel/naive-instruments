@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <math.h>
 #include <memory>
 
 template <typename T> class Sample {
@@ -89,6 +90,24 @@ public:
     return max;
   }
 
+  T rms(float t0 = 0, float t1 = 0) {
+    if (t1 == 0)
+      t1 = duration();
+
+    int frame0 = frameAtTime(t0);
+    int frame1 = frameAtTime(t1);
+
+    T sum = 0;
+    for (int frame = frame0; frame < frame1; ++frame)
+      for (int channel = 0; channel < numberOfChannels; ++channel) {
+        T y = read(frame, channel);
+        sum += y * y;
+      }
+
+    int n = (frame1 - frame0) * numberOfChannels;
+    return sqrt(sum / n);
+  }
+
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
     if (a.sampleRate != b.sampleRate)
       throw 1; // TODO: Use proper exception
@@ -104,7 +123,6 @@ public:
     return sample;
   }
 
-  // TODO: rms
   // TODO: writing wav files
   // TODO: Reading wav files
   // TODO: selectChannels
