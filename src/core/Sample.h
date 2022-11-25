@@ -58,7 +58,7 @@ public:
     for (int c = 0; c < y.numberOfChannels; ++c)
       for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
         int writeFrame = readFrame + offset;
-        if (writeFrame > 0 && writeFrame < numberOfFrames)
+        if (writeFrame >= 0 && writeFrame < numberOfFrames)
           write(y.read(readFrame, c), writeFrame, c);
       }
   }
@@ -89,13 +89,13 @@ public:
       throw 1; // TODO: Use proper exception
     int numberOfChannels = std::max(a.numberOfChannels, b.numberOfChannels);
     int numberOfFrames = a.numberOfFrames + b.numberOfFrames;
-    std::shared_ptr<Sample<T>> sample =
-        std::make_shared<Sample<T>>(numberOfChannels, numberOfFrames);
+    std::shared_ptr<Sample<T>> sample = std::make_shared<Sample<T>>(
+        numberOfFrames, numberOfChannels, a.sampleRate);
 
     // TODO: add configurable crossfades
 
-    sample.write(a);
-    sample.write(b, a.numberOfFrames);
+    sample->write(a, 0);
+    sample->write(b, a.numberOfFrames);
     return sample;
   }
 

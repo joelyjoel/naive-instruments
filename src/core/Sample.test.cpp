@@ -32,4 +32,11 @@ TEST_CASE("Overrwriting a region using another sample and an offset") {
   REQUIRE(master.read(5) == 4);
 }
 
-// TODO: Test concatenation
+TEST_CASE("Concatenating two samples") {
+  Sample<int> first({1, 2, 3, 4});
+  Sample<int> second({5, 6, 7, 8});
+
+  auto combined = Sample<int>::concat(first, second);
+  REQUIRE(combined->read(7) == 8);
+  REQUIRE(combined->read(0) == 1);
+}
