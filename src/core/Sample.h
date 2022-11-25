@@ -44,12 +44,12 @@ private:
   // TODO: Define an iterator through a region of neighboring data
 
 public:
-  T read(int channel, int frame) { return cell(channel, frame); }
+  T read(int frame, int channel = 0) { return cell(channel, frame); }
 
   /**
    * Overwrite a single cell
    */
-  void write(int channel, int frame, T y) { cell(channel, frame) = y; }
+  void write(T y, int frame, int channel = 0) { cell(channel, frame) = y; }
 
   /**
    * Overwrite a region using another sample
@@ -62,7 +62,7 @@ public:
       for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
         int writeFrame = readFrame + offset;
         if (writeFrame > 0 && writeFrame < numberOfFrames)
-          write(c, writeFrame, y.read(c, readFrame));
+          write(y.read(readFrame, c), writeFrame, c);
       }
   }
 
@@ -80,10 +80,10 @@ public:
 
     int frame0 = frameAtTime(t0);
     int frame1 = frameAtTime(t1);
-    T max = read(0, frame0);
+    T max = read(frame0, 0);
     for (int c = 0; c < numberOfChannels; ++c)
       for (int frame = frame0; frame < frame1; ++frame)
-        max = std::max(max, read(c, frame));
+        max = std::max(max, read(frame, c));
     return max;
   }
 

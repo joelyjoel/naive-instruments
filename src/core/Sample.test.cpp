@@ -4,7 +4,7 @@
 TEST_CASE("reading and writing to a sample") {
 
   Sample<bool> mySample(8);
-  mySample.write(0, 0, true);
+  mySample.write(true, 0, 0);
   REQUIRE(mySample.read(0, 0) == true);
 };
 
@@ -20,14 +20,14 @@ TEST_CASE("Overwrite a region of one sample using another") {
   Sample<int> master(8);
   Sample<int> overdub({1, 2, 3, 4});
   master.write(overdub);
-  REQUIRE(master.read(0, 1) == 2);
+  REQUIRE(master.read(1) == 2);
 };
 
 TEST_CASE("Overrwriting a region using another sample and an offset") {
   Sample<int> master(8);
   Sample<int> overdub({1, 2, 3, 4});
   master.write(overdub, 2);
-  REQUIRE(master.read(0, 1) == 0);
-  REQUIRE(master.read(0, 2) == 1);
-  REQUIRE(master.read(0, 5) == 4);
+  REQUIRE(master.read(1) == 0);
+  REQUIRE(master.read(2) == 1);
+  REQUIRE(master.read(5) == 4);
 }
