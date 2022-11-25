@@ -108,6 +108,24 @@ public:
     return sqrt(sum / n);
   }
 
+  std::shared_ptr<Sample<T>> slice(int frame0 = 0, int frame1 = 0) {
+    if (frame1 == 0)
+      frame1 = numberOfFrames;
+
+    int lengthOfNewSample = frame1 - frame0;
+
+    auto sample = std::make_shared<Sample<T>>(lengthOfNewSample,
+                                              numberOfChannels, sampleRate);
+
+    for (int writeFrame = 0; writeFrame < lengthOfNewSample; ++writeFrame) {
+      int readFrame = writeFrame + frame0;
+      for (int channel = 0; channel < numberOfChannels; ++channel)
+        sample->write(read(readFrame, channel), writeFrame, channel);
+    }
+
+    return sample;
+  }
+
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
     if (a.sampleRate != b.sampleRate)
       throw 1; // TODO: Use proper exception

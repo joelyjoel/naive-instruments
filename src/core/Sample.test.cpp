@@ -57,3 +57,10 @@ TEST_CASE("Mixing two samples together") {
   REQUIRE(master.read(3) == 4);
   REQUIRE(master.read(4) == 5);
 }
+
+TEST_CASE("Slicing a sample") {
+  Sample<int> master({0, 1, 2, 3, 4, 5, 6, 7, 8}, 1);
+  auto slice = master.slice(2, 4);
+  REQUIRE(slice->read(0) == 2);
+  REQUIRE(slice->read(1) == 3);
+}
