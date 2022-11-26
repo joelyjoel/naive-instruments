@@ -5,6 +5,11 @@
 #include <memory>
 #include <vector>
 
+/**
+ * This class is an intermediary layer around the data buffer in a Sample class.
+ *
+ * It is unconcerned with sampleRate.
+ */
 template <typename T> class SampleData {
 
   int numberOfFrames;
@@ -24,6 +29,8 @@ public:
   }
 
   ~SampleData() { delete data; }
+
+  // TODO: .resize()
 
 private:
   /**
