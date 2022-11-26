@@ -80,3 +80,13 @@ TEST_CASE("Selecting a single channel from a multichannel sample") {
   REQUIRE(rightChannel->read(1) == 3);
   REQUIRE(rightChannel->read(2) == 5);
 }
+
+TEST_CASE("Stereo flip using selectChannels") {
+  Sample<int> stereo({0, 1, 2, 3, 4, 5, 6}, 2);
+  std::vector<int> channels = {1, 0};
+  auto flipped = stereo.selectChannels(channels);
+  REQUIRE(flipped->read(0) == 1);
+  REQUIRE(flipped->read(0, 1) == 0);
+  REQUIRE(flipped->read(1, 0) == 3);
+  REQUIRE(flipped->read(1, 1) == 2);
+}
