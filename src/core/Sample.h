@@ -2,6 +2,7 @@
 #include <iostream>
 #include <math.h>
 #include <memory>
+#include <vector>
 
 template <typename T> class Sample {
 
@@ -29,10 +30,13 @@ private:
    */
   T &cell(int channel, int frame) {
     // TODO: add bounds checks
-    if (frame < 0 || frame >= numberOfFrames)
+    if (frame < 0 || frame >= numberOfFrames) {
+      std::cerr << "frame out of bounds: " << frame << "\n";
       throw 1; // TODO: Use proper exception
-    else if (channel < 0 || channel >= numberOfChannels)
+    } else if (channel < 0 || channel >= numberOfChannels) {
+      std::cerr << "channel out of bonuds: " << channel << "\n";
       throw 1; // TODO: Use proper exception
+    }
 
     return data[frame * numberOfChannels + channel];
   }
@@ -125,6 +129,26 @@ public:
     return sample;
   }
 
+  // TODO: writing wav files
+  // TODO: Reading wav files
+
+  std::shared_ptr<Sample<T>>
+  selectChannels(std::vector<int> &channelsToSelect) {
+    auto newSample =
+        std::make_shared<Sample<T>>(numberOfFrames, channelsToSelect.size());
+    for (int writeChannel = 0; writeChannel < channelsToSelect.size();
+         ++writeChannel)
+      for (int frame = 0; frame < numberOfFrames; ++frame)
+        newSample->write(read(frame, channelsToSelect[writeChannel]), frame,
+                         writeChannel);
+    return newSample;
+  }
+
+  std::shared_ptr<Sample<T>> selectChannel(int channel) {
+    std::vector<int> channels = {channel};
+    return selectChannels(channels);
+  }
+
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
     int numberOfChannels = std::max(a.numberOfChannels, b.numberOfChannels);
     int numberOfFrames = a.numberOfFrames + b.numberOfFrames;
@@ -137,8 +161,4 @@ public:
     sample->write(b, a.numberOfFrames);
     return sample;
   }
-
-  // TODO: writing wav files
-  // TODO: Reading wav files
-  // TODO: selectChannels
 };

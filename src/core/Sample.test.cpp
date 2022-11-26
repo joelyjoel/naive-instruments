@@ -72,3 +72,11 @@ TEST_CASE(
   REQUIRE(sample.readWithInterpolation(0.5) == .5);
   REQUIRE(sample.readWithInterpolation(3.0) == 3);
 }
+
+TEST_CASE("Selecting a single channel from a multichannel sample") {
+  Sample<int> stereo({0, 1, 2, 3, 4, 5, 6}, 2);
+  auto rightChannel = stereo.selectChannel(1);
+  REQUIRE(rightChannel->read(0) == 1);
+  REQUIRE(rightChannel->read(1) == 3);
+  REQUIRE(rightChannel->read(2) == 5);
+}
