@@ -144,6 +144,14 @@ public:
     return newSample;
   }
 
+  std::shared_ptr<Sample<T>> stereoFlip() {
+    std::vector<int> channels = {1, 0};
+    if (numberOfChannels == 2)
+      return selectChannels(channels);
+    else
+      throw 1; // TODO: Use proper exception
+  }
+
   std::shared_ptr<Sample<T>> selectChannel(int channel) {
     std::vector<int> channels = {channel};
     return selectChannels(channels);

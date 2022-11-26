@@ -90,3 +90,12 @@ TEST_CASE("Stereo flip using selectChannels") {
   REQUIRE(flipped->read(1, 0) == 3);
   REQUIRE(flipped->read(1, 1) == 2);
 }
+
+TEST_CASE("Stereo flip using dedicated stereoFlip method") {
+  Sample<int> stereo({0, 1, 2, 3, 4, 5, 6}, 2);
+  auto flipped = stereo.stereoFlip();
+  REQUIRE(flipped->read(0) == 1);
+  REQUIRE(flipped->read(0, 1) == 0);
+  REQUIRE(flipped->read(1, 0) == 3);
+  REQUIRE(flipped->read(1, 1) == 2);
+}
