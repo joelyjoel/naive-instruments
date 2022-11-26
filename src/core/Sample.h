@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 #include <math.h>
 #include <memory>
 
@@ -40,6 +41,16 @@ private:
 
 public:
   T read(int frame, int channel = 0) { return cell(channel, frame); }
+
+  T readWithInterpolation(float frame, int channel = 0) {
+    // (linear interpolation between samples)
+    float progress = fmod(frame, 1);
+    if (progress == 0)
+      return read(int(frame), channel);
+    T before = read(int(frame), channel);
+    T after = read(int(frame + 1), channel);
+    return (1.0 - progress) * before + progress * after;
+  }
 
   /**
    * Overwrite a single cell

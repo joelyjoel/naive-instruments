@@ -64,3 +64,11 @@ TEST_CASE("Slicing a sample") {
   REQUIRE(slice->read(0) == 2);
   REQUIRE(slice->read(1) == 3);
 }
+
+TEST_CASE(
+    "Reading between the samples, linear interpolation should be applied") {
+  Sample<float> sample({0, 1, 2, 3});
+  REQUIRE(sample.readWithInterpolation(0.0) == 0);
+  REQUIRE(sample.readWithInterpolation(0.5) == .5);
+  REQUIRE(sample.readWithInterpolation(3.0) == 3);
+}
