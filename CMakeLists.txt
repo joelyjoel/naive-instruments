@@ -72,6 +72,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/parsing/NumberWithUnit.test.cpp 
    src/core/Signal.test.cpp 
    src/core/Sample.test.cpp
+   src/core/SampleData.test.cpp
    src/parsing/parse.test.cpp 
    src/parsing/RegularExpressionSources.test.cpp 
    src/parsing/Units.test.cpp
