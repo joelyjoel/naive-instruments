@@ -5,7 +5,7 @@ TEST_CASE("reading and writing to a sample") {
 
   Sample<bool> mySample(8);
   mySample.write(true, 0, 0);
-  REQUIRE(mySample.read(0, 0) == true);
+  REQUIRE(mySample.readByFrame(0, 0) == true);
 };
 
 // TODO: Bounds errors are thrown when accessing out of bounds
@@ -24,16 +24,16 @@ TEST_CASE("Overwrite a region of one sample using another") {
   Sample<int> master(8);
   Sample<int> overdub({1, 2, 3, 4});
   master.write(overdub);
-  REQUIRE(master.read(1) == 2);
+  REQUIRE(master.readByFrame(1) == 2);
 };
 
 TEST_CASE("Overrwriting a region using another sample and an offset") {
   Sample<int> master(8);
   Sample<int> overdub({1, 2, 3, 4});
   master.write(overdub, 2);
-  REQUIRE(master.read(1) == 0);
-  REQUIRE(master.read(2) == 1);
-  REQUIRE(master.read(5) == 4);
+  REQUIRE(master.readByFrame(1) == 0);
+  REQUIRE(master.readByFrame(2) == 1);
+  REQUIRE(master.readByFrame(5) == 4);
 }
 
 TEST_CASE("Concatenating two samples") {
@@ -41,8 +41,8 @@ TEST_CASE("Concatenating two samples") {
   Sample<int> second({5, 6, 7, 8});
 
   auto combined = Sample<int>::concat(first, second);
-  REQUIRE(combined->read(7) == 8);
-  REQUIRE(combined->read(0) == 1);
+  REQUIRE(combined->readByFrame(7) == 8);
+  REQUIRE(combined->readByFrame(0) == 1);
 }
 
 TEST_CASE("Mixing two samples together") {
@@ -51,23 +51,23 @@ TEST_CASE("Mixing two samples together") {
 
   master.mix(overdub);
 
-  REQUIRE(master.read(0) == 1);
-  REQUIRE(master.read(1) == 2);
-  REQUIRE(master.read(2) == 3);
-  REQUIRE(master.read(3) == 4);
-  REQUIRE(master.read(4) == 5);
+  REQUIRE(master.readByFrame(0) == 1);
+  REQUIRE(master.readByFrame(1) == 2);
+  REQUIRE(master.readByFrame(2) == 3);
+  REQUIRE(master.readByFrame(3) == 4);
+  REQUIRE(master.readByFrame(4) == 5);
 }
 
 TEST_CASE("Slicing a sample") {
   Sample<int> master({0, 1, 2, 3, 4, 5, 6, 7, 8}, 1);
   auto slice = master.slice(2, 4);
-  REQUIRE(slice->read(0) == 2);
-  REQUIRE(slice->read(1) == 3);
+  REQUIRE(slice->readByFrame(0) == 2);
+  REQUIRE(slice->readByFrame(1) == 3);
 }
 
 TEST_CASE(
     "Reading between the samples, linear interpolation should be applied") {
-  Sample<float> sample({0, 1, 2, 3});
+  Sample<float> sample({0, 1, 2, 3}, 1, 1);
   REQUIRE(sample.readWithInterpolation(0.0) == 0);
   REQUIRE(sample.readWithInterpolation(0.5) == .5);
   REQUIRE(sample.readWithInterpolation(3.0) == 3);
@@ -76,26 +76,26 @@ TEST_CASE(
 TEST_CASE("Selecting a single channel from a multichannel sample") {
   Sample<int> stereo({0, 1, 2, 3, 4, 5, 6}, 2);
   auto rightChannel = stereo.selectChannel(1);
-  REQUIRE(rightChannel->read(0) == 1);
-  REQUIRE(rightChannel->read(1) == 3);
-  REQUIRE(rightChannel->read(2) == 5);
+  REQUIRE(rightChannel->readByFrame(0) == 1);
+  REQUIRE(rightChannel->readByFrame(1) == 3);
+  REQUIRE(rightChannel->readByFrame(2) == 5);
 }
 
 TEST_CASE("Stereo flip using selectChannels") {
   Sample<int> stereo({0, 1, 2, 3, 4, 5, 6}, 2);
   std::vector<int> channels = {1, 0};
   auto flipped = stereo.selectChannels(channels);
-  REQUIRE(flipped->read(0) == 1);
-  REQUIRE(flipped->read(0, 1) == 0);
-  REQUIRE(flipped->read(1, 0) == 3);
-  REQUIRE(flipped->read(1, 1) == 2);
+  REQUIRE(flipped->readByFrame(0) == 1);
+  REQUIRE(flipped->readByFrame(0, 1) == 0);
+  REQUIRE(flipped->readByFrame(1, 0) == 3);
+  REQUIRE(flipped->readByFrame(1, 1) == 2);
 }
 
 TEST_CASE("Stereo flip using dedicated stereoFlip method") {
   Sample<int> stereo({0, 1, 2, 3, 4, 5, 6}, 2);
   auto flipped = stereo.stereoFlip();
-  REQUIRE(flipped->read(0) == 1);
-  REQUIRE(flipped->read(0, 1) == 0);
-  REQUIRE(flipped->read(1, 0) == 3);
-  REQUIRE(flipped->read(1, 1) == 2);
+  REQUIRE(flipped->readByFrame(0) == 1);
+  REQUIRE(flipped->readByFrame(0, 1) == 0);
+  REQUIRE(flipped->readByFrame(1, 0) == 3);
+  REQUIRE(flipped->readByFrame(1, 1) == 2);
 }

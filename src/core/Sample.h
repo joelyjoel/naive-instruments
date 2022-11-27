@@ -1,3 +1,4 @@
+#include "constants.h"
 #include <algorithm>
 #include <iostream>
 #include <math.h>
@@ -9,15 +10,18 @@ template <typename T> class Sample {
   int numberOfFrames;
   int numberOfChannels;
   T *data;
+  float sampleRate;
 
 public:
-  Sample(int numberOfFrames, int numberOfChannels = 1)
-      : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames) {
+  Sample(int numberOfFrames, int numberOfChannels = 1, float sampleRate = 44100)
+      : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames),
+        sampleRate(sampleRate) {
     data = new T[numberOfChannels * numberOfFrames];
   }
 
-  Sample(std::vector<T> _data, int numberOfChannels = 1)
-      : Sample(_data.size(), numberOfChannels) {
+  Sample(std::vector<T> _data, int numberOfChannels = 1,
+         float sampleRate = 44100)
+      : Sample(_data.size(), numberOfChannels, sampleRate) {
     for (int i = 0; i < _data.size(); ++i)
       data[i] = _data[i];
   }
@@ -44,15 +48,15 @@ private:
   // TODO: Define an iterator through a region of neighboring data
 
 public:
-  T read(int frame, int channel = 0) { return cell(channel, frame); }
+  T readByFrame(int frame, int channel = 0) { return cell(channel, frame); }
 
   T readWithInterpolation(float frame, int channel = 0) {
     // (linear interpolation between samples)
     float progress = fmod(frame, 1);
     if (progress == 0)
-      return read(int(frame), channel);
-    T before = read(int(frame), channel);
-    T after = read(int(frame + 1), channel);
+      return readByFrame(int(frame), channel);
+    T before = readByFrame(int(frame), channel);
+    T after = readByFrame(int(frame + 1), channel);
     return (1.0 - progress) * before + progress * after;
   }
 
@@ -70,7 +74,7 @@ public:
       for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
         int writeFrame = readFrame + offset;
         if (writeFrame >= 0 && writeFrame < numberOfFrames)
-          write(y.read(readFrame, c), writeFrame, c);
+          write(y.readByFrame(readFrame, c), writeFrame, c);
       }
   }
 
@@ -81,7 +85,7 @@ public:
       for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
         int writeFrame = readFrame + offset;
         if (writeFrame >= 0 && writeFrame < numberOfFrames)
-          mix(y.read(readFrame, c), writeFrame, c);
+          mix(y.readByFrame(readFrame, c), writeFrame, c);
       }
   }
 
@@ -89,10 +93,10 @@ public:
     if (frame1 == 0)
       frame1 = numberOfFrames;
 
-    T max = read(frame0, 0);
+    T max = readByFrame(frame0, 0);
     for (int c = 0; c < numberOfChannels; ++c)
       for (int frame = frame0; frame < frame1; ++frame)
-        max = std::max(max, read(frame, c));
+        max = std::max(max, readByFrame(frame, c));
     return max;
   }
 
@@ -103,7 +107,7 @@ public:
     T sum = 0;
     for (int frame = frame0; frame < frame1; ++frame)
       for (int channel = 0; channel < numberOfChannels; ++channel) {
-        T y = read(frame, channel);
+        T y = readByFrame(frame, channel);
         sum += y * y;
       }
 
@@ -123,7 +127,7 @@ public:
     for (int writeFrame = 0; writeFrame < lengthOfNewSample; ++writeFrame) {
       int readFrame = writeFrame + frame0;
       for (int channel = 0; channel < numberOfChannels; ++channel)
-        sample->write(read(readFrame, channel), writeFrame, channel);
+        sample->write(readByFrame(readFrame, channel), writeFrame, channel);
     }
 
     return sample;
@@ -139,8 +143,8 @@ public:
     for (int writeChannel = 0; writeChannel < channelsToSelect.size();
          ++writeChannel)
       for (int frame = 0; frame < numberOfFrames; ++frame)
-        newSample->write(read(frame, channelsToSelect[writeChannel]), frame,
-                         writeChannel);
+        newSample->write(readByFrame(frame, channelsToSelect[writeChannel]),
+                         frame, writeChannel);
     return newSample;
   }
 
