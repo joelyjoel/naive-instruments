@@ -90,6 +90,7 @@ set(NaiveSourcFiles
   src/instruments/Rhythm.cpp
   src/cli/SignalString.cpp
   src/instruments/Osc.cpp
+  src/file-io/readAudioFile.cpp
 )
 
 
@@ -103,6 +104,8 @@ TARGET_LINK_LIBRARIES( naive LINK_PUBLIC "/opt/homebrew/Cellar/portaudio/19.7.0/
 
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${Boost_LIBRARIES} )
 TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${CURSES_LIBRARIES} )
+
+TARGET_LINK_LIBRARIES( naive LINK_PUBLIC ${LIBSNDFILE_LIBRARIES})
 
 target_include_directories(naive PUBLIC dependencies)
  add_executable(
@@ -121,7 +124,9 @@ target_include_directories(naive PUBLIC dependencies)
    src/parsing/parse.test.cpp 
    src/parsing/RegularExpressionSources.test.cpp 
    src/parsing/Units.test.cpp
+   src/file-io/readAudioFile.test.cpp
  )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${Boost_LIBRARIES} )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${CURSES_LIBRARIES} )
+TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${LIBSNDFILE_LIBRARIES} )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC "/opt/homebrew/Cellar/portaudio/19.7.0/lib/libportaudio.dylib" )

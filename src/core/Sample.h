@@ -7,10 +7,13 @@
 
 template <typename T> class Sample {
 
+public:
   int numberOfFrames;
   int numberOfChannels;
-  T *data;
   float sampleRate;
+
+private:
+  T *data;
 
 public:
   Sample(int numberOfFrames, int numberOfChannels = 1, float sampleRate = 44100)
