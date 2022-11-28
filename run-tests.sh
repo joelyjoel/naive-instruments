@@ -22,6 +22,7 @@ mkdir -p "$testPackDir"
 
 for testScript in tests/*.sh ; do
   absoluteScriptPath="$(pwd)/$testScript"
+  echo "Running $absoluteScriptPath"
   logs=$(
     cd $testPackDir 
     bash "$absoluteScriptPath" 2> /dev/null
