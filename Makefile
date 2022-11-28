@@ -1,8 +1,9 @@
 # These are just shortcuts, please use cmake for a compatible build
 
 default:
-	cd build && make
+	cmake -S . -B build
+	cmake --build build
 
 test: 
-	cd build && make test_naive && ../bin/test_naive
-	cd build && make naive && cd ../ && ./run-tests.sh
+	cmake -S . -B build
+	cmake --build build && bin/test_naive && ./run-tests.sh
