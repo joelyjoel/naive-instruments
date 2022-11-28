@@ -13,6 +13,13 @@
 # more performant.
 
 
+if which naive ; then
+  echo "Found naive executable";
+else
+  echo "Couldn't find naive executable, have you added it to PATH?"
+  exit 1
+fi
+
 # 1. Run the tests, creating the test-pack
 
 testPackDir="$(pwd)/most-recent-test-results"
