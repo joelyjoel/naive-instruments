@@ -91,6 +91,7 @@ set(NaiveSourcFiles
   src/cli/SignalString.cpp
   src/instruments/Osc.cpp
   src/file-io/readAudioFile.cpp
+  src/file-io/writeAudioFile.cpp
 )
 
 

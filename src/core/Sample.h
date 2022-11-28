@@ -1,3 +1,4 @@
+#pragma once
 #include "constants.h"
 #include <algorithm>
 #include <iostream>
@@ -19,7 +20,7 @@ public:
   Sample(int numberOfFrames, int numberOfChannels = 1, float sampleRate = 44100)
       : numberOfChannels(numberOfChannels), numberOfFrames(numberOfFrames),
         sampleRate(sampleRate) {
-    data = new T[numberOfChannels * numberOfFrames];
+    data = new T[numberOfSamples()];
   }
 
   Sample(std::vector<T> _data, int numberOfChannels = 1,
@@ -47,6 +48,11 @@ private:
 
     return data[frame * numberOfChannels + channel];
   }
+
+public:
+  T *dataptr() { return data; }
+
+  int numberOfSamples() { return numberOfChannels * numberOfFrames; }
 
   // TODO: Define an iterator through a region of neighboring data
 

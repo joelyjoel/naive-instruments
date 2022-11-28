@@ -13,6 +13,7 @@ std::shared_ptr<Sample<double>> readAudioFile(const std::string &filename) {
 
   double buffer[file.frames()];
 
+  // TODO: Use bigger chunks
   for (int frame = 0; frame < file.frames(); ++frame) {
     int numberRead = file.readf(buffer, 1);
     for (int channel = 0; channel < file.channels(); ++channel) {
