@@ -7,3 +7,5 @@ TEST_CASE("can recognise a mono sample") {
   REQUIRE(sample->numberOfChannels == 1);
   REQUIRE(sample->sampleRate == 44100);
 }
+
+// TODO: Add some tests involving reading files
