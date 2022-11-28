@@ -99,3 +99,13 @@ TEST_CASE("Stereo flip using dedicated stereoFlip method") {
   REQUIRE(flipped->readByFrame(1, 0) == 3);
   REQUIRE(flipped->readByFrame(1, 1) == 2);
 }
+
+TEST_CASE("== operator for comparing samples, trivial example") {
+  Sample<int> a({0, 1, 2, 3}), b({0, 1, 2, 3}), c({1, 1, 1, 1});
+  REQUIRE((a == b) == true);
+  REQUIRE((b == a) == true);
+  REQUIRE((c != a) == true);
+  REQUIRE((b != c) == true);
+  REQUIRE((c != b) == true);
+  REQUIRE((a != c) == true);
+}

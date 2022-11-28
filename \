@@ -172,15 +172,11 @@ public:
 
   bool operator==(Sample<T> &other) {
     if (numberOfChannels == other.numberOfChannels &&
-        numberOfFrames == other.numberOfFrames &&
-        sampleRate == other.sampleRate) {
-      for (int i = 0; i < numberOfSamples(); ++i)
-        if (data[i] != other.data[i])
-          return false;
-      // otherwise
-      return true;
-    } else
-      return false;
+        numberOfFrames == other.numberOfFrames && sampleRate == other.sampleRate)
+    {
+    }
+    else return false;
+
   }
 
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
