@@ -109,3 +109,55 @@ TEST_CASE("== operator for comparing samples, trivial example") {
   REQUIRE((c != b) == true);
   REQUIRE((a != c) == true);
 }
+
+TEST_CASE("Looping a sample to twice its original duration") {
+  Sample<int> original({1, 2, 3, 4});
+
+  auto twice = original.loop(2);
+  REQUIRE(twice->readByFrame(0) == 1);
+  REQUIRE(twice->readByFrame(1) == 2);
+  REQUIRE(twice->readByFrame(2) == 3);
+  REQUIRE(twice->readByFrame(3) == 4);
+  REQUIRE(twice->readByFrame(4) == 1);
+  REQUIRE(twice->readByFrame(5) == 2);
+  REQUIRE(twice->readByFrame(6) == 3);
+  REQUIRE(twice->readByFrame(7) == 4);
+  REQUIRE(twice->numberOfFrames == 8);
+}
+
+TEST_CASE("Looping a sample to 1.5x its original duration") {
+  Sample<int> original({1, 2, 3, 4});
+
+  auto twice = original.loop(1.5);
+  REQUIRE(twice->readByFrame(0) == 1);
+  REQUIRE(twice->readByFrame(1) == 2);
+  REQUIRE(twice->readByFrame(2) == 3);
+  REQUIRE(twice->readByFrame(3) == 4);
+  REQUIRE(twice->readByFrame(4) == 1);
+  REQUIRE(twice->readByFrame(5) == 2);
+  REQUIRE(twice->numberOfFrames == 6);
+}
+
+TEST_CASE("Looping a sample to a specific duration (in frames)") {
+  Sample<int> original({1, 2, 3, 4});
+  auto twice = original.loopToFrames(6);
+  REQUIRE(twice->readByFrame(0) == 1);
+  REQUIRE(twice->readByFrame(1) == 2);
+  REQUIRE(twice->readByFrame(2) == 3);
+  REQUIRE(twice->readByFrame(3) == 4);
+  REQUIRE(twice->readByFrame(4) == 1);
+  REQUIRE(twice->readByFrame(5) == 2);
+  REQUIRE(twice->numberOfFrames == 6);
+}
+
+TEST_CASE("Loop to a duration specified in seconds") {
+  Sample<int> original({1, 2, 3, 4}, 1, 44100);
+  auto twice = original.loopToDuration(1);
+  REQUIRE(twice->readByFrame(0) == 1);
+  REQUIRE(twice->readByFrame(1) == 2);
+  REQUIRE(twice->readByFrame(2) == 3);
+  REQUIRE(twice->readByFrame(3) == 4);
+  REQUIRE(twice->readByFrame(4) == 1);
+  REQUIRE(twice->readByFrame(5) == 2);
+  REQUIRE(twice->numberOfFrames == 44100);
+}

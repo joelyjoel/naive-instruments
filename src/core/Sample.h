@@ -32,6 +32,8 @@ public:
 
   ~Sample() { delete data; }
 
+  float duration() { return numberOfFrames / sampleRate; }
+
 private:
   /**
    * Get a reference to a specific cell of the sample data.
@@ -181,6 +183,23 @@ public:
       return true;
     } else
       return false;
+  }
+
+  std::shared_ptr<Sample<T>> loop(float howManyTimes) {
+    auto newSample = std::make_shared<Sample<T>>(howManyTimes * numberOfFrames,
+                                                 numberOfChannels, sampleRate);
+    for (int i = 0; i < newSample->numberOfSamples(); ++i)
+      newSample->data[i] = data[i % numberOfSamples()];
+
+    return newSample;
+  }
+
+  std::shared_ptr<Sample<T>> loopToDuration(float targetDuration) {
+    return loop(targetDuration / duration());
+  }
+
+  std::shared_ptr<Sample<T>> loopToFrames(float howManyFrames) {
+    return loop(howManyFrames / numberOfFrames);
   }
 
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
