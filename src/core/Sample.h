@@ -202,6 +202,16 @@ public:
     return loop(howManyFrames / numberOfFrames);
   }
 
+  template <typename U> std::shared_ptr<Sample<U>> convertTo() {
+    auto newSample = std::make_shared<Sample<U>>(numberOfFrames,
+                                                 numberOfChannels, sampleRate);
+    for (int frame = 0; frame < numberOfFrames; ++frame)
+      for (int channel = 0; channel < numberOfChannels; ++channel)
+        newSample->write(U(readByFrame(frame, channel)), frame, channel);
+
+    return newSample;
+  }
+
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
     int numberOfChannels = std::max(a.numberOfChannels, b.numberOfChannels);
     int numberOfFrames = a.numberOfFrames + b.numberOfFrames;

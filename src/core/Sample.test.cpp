@@ -161,3 +161,12 @@ TEST_CASE("Loop to a duration specified in seconds") {
   REQUIRE(twice->readByFrame(5) == 2);
   REQUIRE(twice->numberOfFrames == 44100);
 }
+
+TEST_CASE("Converting a floating point sample into an integer one") {
+  Sample<float> original({1.0, 2.0, 3.0, 4.0});
+  auto converted = original.convertTo<int>();
+  REQUIRE(original.readByFrame(0) == 1);
+  REQUIRE(original.readByFrame(1) == 2);
+  REQUIRE(original.readByFrame(2) == 3);
+  REQUIRE(original.readByFrame(3) == 4);
+}
