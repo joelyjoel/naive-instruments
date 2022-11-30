@@ -89,15 +89,33 @@ public:
       }
   }
 
-  void mix(T y, int frame = 0, int channel = 0) { cell(channel, frame) += y; }
-
-  void mix(Sample<T> &y, int offset = 0) {
+  void overdub(Sample<T> &y, int offset = 0) {
+    if (sampleRate != y.sampleRate)
+      throw 1; // TODO: Throw a proper exception
     for (int c = 0; c < y.numberOfChannels; ++c)
       for (int readFrame = 0; readFrame < y.numberOfFrames; ++readFrame) {
         int writeFrame = readFrame + offset;
         if (writeFrame >= 0 && writeFrame < numberOfFrames)
-          mix(y.readByFrame(readFrame, c), writeFrame, c);
+          cell(c, writeFrame) += y.readByFrame(readFrame, c);
       }
+  }
+
+  void wipe() {
+    for (int i = 0; i < numberOfSamples(); ++i)
+      data[i] = 0;
+  }
+
+  std::shared_ptr<Sample<T>> mix(Sample<T> &other, int offset = 0) {
+    if (sampleRate != other.sampleRate)
+      throw 1; // TODO: Throw a proper exception
+    auto newSample = std::make_shared<Sample<T>>(
+        std::max(numberOfFrames, other.numberOfFrames + offset),
+        std::max(numberOfChannels, other.numberOfChannels), sampleRate);
+
+    newSample->wipe();
+    newSample->overdub(*this);
+    newSample->overdub(other, offset);
+    return newSample;
   }
 
   T peak(int frame0 = 0, int frame1 = 0) {
@@ -228,4 +246,6 @@ public:
   std::shared_ptr<Sample<T>> operator<<(Sample<T> &other) {
     return concat(*this, other);
   }
+
+  std::shared_ptr<Sample<T>> operator+(Sample<T> &other) { return mix(other); }
 };
