@@ -45,6 +45,14 @@ TEST_CASE("Concatenating two samples") {
   REQUIRE(combined->readByFrame(0) == 1);
 }
 
+TEST_CASE("Concatenation using << operator") {
+  Sample<int> first({1, 2, 3, 4});
+  Sample<int> second({5, 6, 7, 8});
+  auto combined = first << second;
+  REQUIRE(combined->readByFrame(7) == 8);
+  REQUIRE(combined->readByFrame(0) == 1);
+}
+
 TEST_CASE("Mixing two samples together") {
   Sample<int> master({1, 1, 1, 1, 1});
   Sample<int> overdub({0, 1, 2, 3, 4});

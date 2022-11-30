@@ -207,7 +207,7 @@ public:
                                                  numberOfChannels, sampleRate);
     for (int frame = 0; frame < numberOfFrames; ++frame)
       for (int channel = 0; channel < numberOfChannels; ++channel)
-        newSample->write(U(readByFrame(frame, channel)), frame, channel);
+        newSample->write((readByFrame(frame, channel)), frame, channel);
 
     return newSample;
   }
@@ -223,5 +223,9 @@ public:
     sample->write(a, 0);
     sample->write(b, a.numberOfFrames);
     return sample;
+  }
+
+  std::shared_ptr<Sample<T>> operator<<(Sample<T> &other) {
+    return concat(*this, other);
   }
 };
