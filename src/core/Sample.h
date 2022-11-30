@@ -100,6 +100,8 @@ public:
       }
   }
 
+  void operator+=(Sample<T> &other) { overdub(other); }
+
   void wipe() {
     for (int i = 0; i < numberOfSamples(); ++i)
       data[i] = 0;

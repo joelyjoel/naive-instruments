@@ -66,38 +66,17 @@ TEST_CASE("Mixing two samples together using the overdub method") {
   REQUIRE(master.readByFrame(4) == 5);
 }
 
-TEST_CASE("Mixing two samples together using the mix method") {
+TEST_CASE("Mixing a sample in place using the += operator") {
   Sample<int> master({1, 1, 1, 1, 1});
   Sample<int> overdub({0, 1, 2, 3, 4});
 
-  auto mixdown = master.mix(overdub);
+  master += overdub;
 
   REQUIRE(master.readByFrame(0) == 1);
-  REQUIRE(master.readByFrame(1) == 1);
-  REQUIRE(master.readByFrame(2) == 1);
-
-  REQUIRE(mixdown->readByFrame(0) == 1);
-  REQUIRE(mixdown->readByFrame(1) == 2);
-  REQUIRE(mixdown->readByFrame(2) == 3);
-  REQUIRE(mixdown->readByFrame(3) == 4);
-  REQUIRE(mixdown->readByFrame(4) == 5);
-}
-
-TEST_CASE("Mixing two samples together using the + operator") {
-  Sample<int> master({1, 1, 1, 1, 1});
-  Sample<int> overdub({0, 1, 2, 3, 4});
-
-  auto mixdown = master + overdub;
-
-  REQUIRE(master.readByFrame(0) == 1);
-  REQUIRE(master.readByFrame(1) == 1);
-  REQUIRE(master.readByFrame(2) == 1);
-
-  REQUIRE(mixdown->readByFrame(0) == 1);
-  REQUIRE(mixdown->readByFrame(1) == 2);
-  REQUIRE(mixdown->readByFrame(2) == 3);
-  REQUIRE(mixdown->readByFrame(3) == 4);
-  REQUIRE(mixdown->readByFrame(4) == 5);
+  REQUIRE(master.readByFrame(1) == 2);
+  REQUIRE(master.readByFrame(2) == 3);
+  REQUIRE(master.readByFrame(3) == 4);
+  REQUIRE(master.readByFrame(4) == 5);
 }
 
 TEST_CASE("Slicing a sample") {
