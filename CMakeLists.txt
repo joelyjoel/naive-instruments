@@ -90,7 +90,6 @@ set(NaiveSourcFiles
   src/instruments/Rhythm.cpp
   src/cli/SignalString.cpp
   src/instruments/Osc.cpp
-  src/file-io/writeAudioFile.cpp
 )
 
 

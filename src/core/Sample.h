@@ -273,4 +273,10 @@ public:
 
     return sample;
   }
+
+  void writeFile(const std::string &filename) {
+    SndfileHandle file(filename, SFM_WRITE, SF_FORMAT_WAV | SF_FORMAT_FLOAT,
+                       numberOfChannels, sampleRate);
+    file.write(dataptr(), numberOfSamples());
+  }
 };
