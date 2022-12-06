@@ -90,7 +90,6 @@ set(NaiveSourcFiles
   src/instruments/Rhythm.cpp
   src/cli/SignalString.cpp
   src/instruments/Osc.cpp
-  src/file-io/readAudioFile.cpp
   src/file-io/writeAudioFile.cpp
 )
 
@@ -125,7 +124,6 @@ target_include_directories(naive PUBLIC dependencies)
    src/parsing/parse.test.cpp 
    src/parsing/RegularExpressionSources.test.cpp 
    src/parsing/Units.test.cpp
-   src/file-io/readAudioFile.test.cpp
  )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${Boost_LIBRARIES} )
 TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${CURSES_LIBRARIES} )

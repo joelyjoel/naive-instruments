@@ -191,3 +191,9 @@ TEST_CASE("Converting a floating point sample into an integer one") {
   REQUIRE(original.readByFrame(2) == 3);
   REQUIRE(original.readByFrame(3) == 4);
 }
+
+TEST_CASE("can recognise metadata for a mono sample") {
+  auto sample = Sample<float>::readFile("audio-source-files/Egg-Moww.wav");
+  REQUIRE(sample->numberOfChannels == 1);
+  REQUIRE(sample->sampleRate == 44100);
+}

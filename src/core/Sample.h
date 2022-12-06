@@ -4,6 +4,7 @@
 #include <iostream>
 #include <math.h>
 #include <memory>
+#include <sndfile.hh>
 #include <vector>
 
 template <typename T> class Sample {
@@ -250,4 +251,26 @@ public:
   }
 
   std::shared_ptr<Sample<T>> operator+(Sample<T> &other) { return mix(other); }
+
+  static std::shared_ptr<Sample<T>> readFile(const std::string &filename) {
+
+    SndfileHandle file;
+    file = SndfileHandle(filename);
+
+    // Create the container
+    std::shared_ptr<Sample<T>> sample = std::make_shared<Sample<T>>(
+        file.frames(), file.channels(), file.samplerate());
+
+    double buffer[file.frames()];
+
+    // TODO: Use bigger chunks
+    for (int frame = 0; frame < file.frames(); ++frame) {
+      int numberRead = file.readf(buffer, 1);
+      for (int channel = 0; channel < file.channels(); ++channel) {
+        sample->write(buffer[channel], frame, channel);
+      }
+    }
+
+    return sample;
+  }
 };
