@@ -13,6 +13,7 @@ template <typename T> class ReadableSample {
   virtual T read(float timeInSeconds, int channel = 0) = 0;
   virtual int numberOfFrames() = 0;
   virtual int numberOfChannels() = 0;
+  virtual int numberOfSamples() = 0;
 };
 
 template <typename T> class Sample : ReadableSample<T> {
@@ -66,7 +67,9 @@ private:
 public:
   T *dataptr() { return data; }
 
-  int numberOfSamples() { return numberOfChannels() * numberOfFrames(); }
+  int numberOfSamples() override {
+    return numberOfChannels() * numberOfFrames();
+  }
 
   // TODO: Define an iterator through a region of neighboring data
 
