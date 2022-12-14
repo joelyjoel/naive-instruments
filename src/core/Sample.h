@@ -7,7 +7,12 @@
 #include <sndfile.hh>
 #include <vector>
 
-template <typename T> class Sample {
+template <typename T> class ReadableSample {
+  virtual float duration() = 0;
+  virtual T readByFrame(int frame, int channel = 0) = 0;
+};
+
+template <typename T> class Sample : ReadableSample<T> {
 
 public:
   int numberOfFrames;
@@ -33,7 +38,7 @@ public:
 
   ~Sample() { delete data; }
 
-  float duration() { return numberOfFrames / sampleRate; }
+  float duration() override { return numberOfFrames / sampleRate; }
 
 private:
   /**
@@ -60,7 +65,9 @@ public:
   // TODO: Define an iterator through a region of neighboring data
 
 public:
-  T readByFrame(int frame, int channel = 0) { return cell(channel, frame); }
+  T readByFrame(int frame, int channel = 0) override {
+    return cell(channel, frame);
+  }
 
   T readWithInterpolation(float frame, int channel = 0) {
     // (linear interpolation between samples)
