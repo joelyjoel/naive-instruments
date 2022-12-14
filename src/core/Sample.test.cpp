@@ -143,7 +143,7 @@ TEST_CASE("Looping a sample to twice its original duration") {
   REQUIRE(twice->readByFrame(5) == 2);
   REQUIRE(twice->readByFrame(6) == 3);
   REQUIRE(twice->readByFrame(7) == 4);
-  REQUIRE(twice->numberOfFrames == 8);
+  REQUIRE(twice->numberOfFrames() == 8);
 }
 
 TEST_CASE("Looping a sample to 1.5x its original duration") {
@@ -156,7 +156,7 @@ TEST_CASE("Looping a sample to 1.5x its original duration") {
   REQUIRE(twice->readByFrame(3) == 4);
   REQUIRE(twice->readByFrame(4) == 1);
   REQUIRE(twice->readByFrame(5) == 2);
-  REQUIRE(twice->numberOfFrames == 6);
+  REQUIRE(twice->numberOfFrames() == 6);
 }
 
 TEST_CASE("Looping a sample to a specific duration (in frames)") {
@@ -168,7 +168,7 @@ TEST_CASE("Looping a sample to a specific duration (in frames)") {
   REQUIRE(twice->readByFrame(3) == 4);
   REQUIRE(twice->readByFrame(4) == 1);
   REQUIRE(twice->readByFrame(5) == 2);
-  REQUIRE(twice->numberOfFrames == 6);
+  REQUIRE(twice->numberOfFrames() == 6);
 }
 
 TEST_CASE("Loop to a duration specified in seconds") {
@@ -180,7 +180,7 @@ TEST_CASE("Loop to a duration specified in seconds") {
   REQUIRE(twice->readByFrame(3) == 4);
   REQUIRE(twice->readByFrame(4) == 1);
   REQUIRE(twice->readByFrame(5) == 2);
-  REQUIRE(twice->numberOfFrames == 44100);
+  REQUIRE(twice->numberOfFrames() == 44100);
 }
 
 TEST_CASE("Converting a floating point sample into an integer one") {
