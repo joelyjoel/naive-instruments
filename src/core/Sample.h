@@ -12,16 +12,17 @@ template <typename T> class ReadableSample {
   virtual T readByFrame(int frame, int channel = 0) = 0;
   virtual T read(float timeInSeconds, int channel = 0) = 0;
   virtual int numberOfFrames() = 0;
+  virtual int numberOfChannels() = 0;
 };
 
 template <typename T> class Sample : ReadableSample<T> {
 
 private:
-  int _numberOfFrames;
+  int _numberOfFrames, _numberOfChannels;
 
 public:
   int numberOfFrames() override { return _numberOfFrames; }
-  int numberOfChannels;
+  int numberOfChannels() override { return _numberOfChannels; }
   float sampleRate;
 
 private:
@@ -29,7 +30,7 @@ private:
 
 public:
   Sample(int numberOfFrames, int numberOfChannels = 1, float sampleRate = 44100)
-      : numberOfChannels(numberOfChannels), _numberOfFrames(numberOfFrames),
+      : _numberOfChannels(numberOfChannels), _numberOfFrames(numberOfFrames),
         sampleRate(sampleRate) {
     data = new T[numberOfSamples()];
   }
@@ -54,18 +55,18 @@ private:
     if (frame < 0 || frame >= numberOfFrames()) {
       std::cerr << "frame out of bounds: " << frame << "\n";
       throw 1; // TODO: Use proper exception
-    } else if (channel < 0 || channel >= numberOfChannels) {
+    } else if (channel < 0 || channel >= numberOfChannels()) {
       std::cerr << "channel out of bonuds: " << channel << "\n";
       throw 1; // TODO: Use proper exception
     }
 
-    return data[frame * numberOfChannels + channel];
+    return data[frame * numberOfChannels() + channel];
   }
 
 public:
   T *dataptr() { return data; }
 
-  int numberOfSamples() { return numberOfChannels * numberOfFrames(); }
+  int numberOfSamples() { return numberOfChannels() * numberOfFrames(); }
 
   // TODO: Define an iterator through a region of neighboring data
 
@@ -99,7 +100,7 @@ public:
    */
   void write(Sample<T> &y, int offset = 0) {
     // TODO: Support channel offset
-    for (int c = 0; c < y.numberOfChannels; ++c)
+    for (int c = 0; c < y.numberOfChannels(); ++c)
       for (int readFrame = 0; readFrame < y.numberOfFrames(); ++readFrame) {
         int writeFrame = readFrame + offset;
         if (writeFrame >= 0 && writeFrame < numberOfFrames())
@@ -110,7 +111,7 @@ public:
   void overdub(Sample<T> &y, int offset = 0) {
     if (sampleRate != y.sampleRate)
       throw 1; // TODO: Throw a proper exception
-    for (int c = 0; c < y.numberOfChannels; ++c)
+    for (int c = 0; c < y.numberOfChannels(); ++c)
       for (int readFrame = 0; readFrame < y.numberOfFrames(); ++readFrame) {
         int writeFrame = readFrame + offset;
         if (writeFrame >= 0 && writeFrame < numberOfFrames())
@@ -130,7 +131,7 @@ public:
       throw 1; // TODO: Throw a proper exception
     auto newSample = std::make_shared<Sample<T>>(
         std::max(numberOfFrames(), other.numberOfFrames() + offset),
-        std::max(numberOfChannels, other.numberOfChannels), sampleRate);
+        std::max(numberOfChannels(), other.numberOfChannels()), sampleRate);
 
     newSample->wipe();
     newSample->overdub(*this);
@@ -143,7 +144,7 @@ public:
       frame1 = numberOfFrames();
 
     T max = readByFrame(frame0, 0);
-    for (int c = 0; c < numberOfChannels; ++c)
+    for (int c = 0; c < numberOfChannels(); ++c)
       for (int frame = frame0; frame < frame1; ++frame)
         max = std::max(max, readByFrame(frame, c));
     return max;
@@ -155,12 +156,12 @@ public:
 
     T sum = 0;
     for (int frame = frame0; frame < frame1; ++frame)
-      for (int channel = 0; channel < numberOfChannels; ++channel) {
+      for (int channel = 0; channel < numberOfChannels(); ++channel) {
         T y = readByFrame(frame, channel);
         sum += y * y;
       }
 
-    int n = (frame1 - frame0) * numberOfChannels;
+    int n = (frame1 - frame0) * numberOfChannels();
     return sqrt(sum / n);
   }
 
@@ -171,11 +172,11 @@ public:
     int lengthOfNewSample = frame1 - frame0;
 
     auto sample =
-        std::make_shared<Sample<T>>(lengthOfNewSample, numberOfChannels);
+        std::make_shared<Sample<T>>(lengthOfNewSample, numberOfChannels());
 
     for (int writeFrame = 0; writeFrame < lengthOfNewSample; ++writeFrame) {
       int readFrame = writeFrame + frame0;
-      for (int channel = 0; channel < numberOfChannels; ++channel)
+      for (int channel = 0; channel < numberOfChannels(); ++channel)
         sample->write(readByFrame(readFrame, channel), writeFrame, channel);
     }
 
@@ -199,7 +200,7 @@ public:
 
   std::shared_ptr<Sample<T>> stereoFlip() {
     std::vector<int> channels = {1, 0};
-    if (numberOfChannels == 2)
+    if (numberOfChannels() == 2)
       return selectChannels(channels);
     else
       throw 1; // TODO: Use proper exception
@@ -211,7 +212,7 @@ public:
   }
 
   bool operator==(Sample<T> &other) {
-    if (numberOfChannels == other.numberOfChannels &&
+    if (numberOfChannels() == other.numberOfChannels() &&
         numberOfFrames() == other.numberOfFrames() &&
         sampleRate == other.sampleRate) {
       for (int i = 0; i < numberOfSamples(); ++i)
@@ -225,7 +226,7 @@ public:
 
   std::shared_ptr<Sample<T>> loop(float howManyTimes) {
     auto newSample = std::make_shared<Sample<T>>(
-        howManyTimes * numberOfFrames(), numberOfChannels, sampleRate);
+        howManyTimes * numberOfFrames(), numberOfChannels(), sampleRate);
     for (int i = 0; i < newSample->numberOfSamples(); ++i)
       newSample->data[i] = data[i % numberOfSamples()];
 
@@ -241,17 +242,17 @@ public:
   }
 
   template <typename U> std::shared_ptr<Sample<U>> convertTo() {
-    auto newSample = std::make_shared<Sample<U>>(numberOfFrames(),
-                                                 numberOfChannels, sampleRate);
+    auto newSample = std::make_shared<Sample<U>>(
+        numberOfFrames(), numberOfChannels(), sampleRate);
     for (int frame = 0; frame < numberOfFrames(); ++frame)
-      for (int channel = 0; channel < numberOfChannels; ++channel)
+      for (int channel = 0; channel < numberOfChannels(); ++channel)
         newSample->write((readByFrame(frame, channel)), frame, channel);
 
     return newSample;
   }
 
   static std::shared_ptr<Sample<T>> concat(Sample<T> &a, Sample<T> &b) {
-    int numberOfChannels = std::max(a.numberOfChannels, b.numberOfChannels);
+    int numberOfChannels = std::max(a.numberOfChannels(), b.numberOfChannels());
     int numberOfFrames = a.numberOfFrames() + b.numberOfFrames();
     std::shared_ptr<Sample<T>> sample =
         std::make_shared<Sample<T>>(numberOfFrames, numberOfChannels);
@@ -293,7 +294,7 @@ public:
 
   void writeFile(const std::string &filename) {
     SndfileHandle file(filename, SFM_WRITE, SF_FORMAT_WAV | SF_FORMAT_FLOAT,
-                       numberOfChannels, sampleRate);
+                       numberOfChannels(), sampleRate);
     file.write(dataptr(), numberOfSamples());
   }
 };
