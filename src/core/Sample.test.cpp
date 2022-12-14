@@ -237,3 +237,10 @@ TEST_CASE("Writing a sample as floats, reading it as doubles") {
   REQUIRE(fromFile->readByFrame((2) == 3));
   REQUIRE(fromFile->readByFrame((3) == 4));
 };
+
+TEST_CASE("Reading a frame using a raw ptr") {
+  Sample<int> mySample({1, 2, 3, 4}, 2);
+  auto frame = mySample.frame(1);
+  REQUIRE(frame[0] == 3);
+  REQUIRE(frame[1] == 4);
+}

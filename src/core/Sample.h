@@ -11,6 +11,7 @@ template <typename T> class ReadableSample {
   virtual float duration() = 0;
   virtual T readByFrame(int frame, int channel = 0) = 0;
   virtual T read(float timeInSeconds, int channel = 0) = 0;
+  virtual T *frame(int frame) = 0;
   virtual int numberOfFrames() = 0;
   virtual int numberOfChannels() = 0;
   virtual int numberOfSamples() = 0;
@@ -63,6 +64,9 @@ private:
 
     return data[frame * numberOfChannels() + channel];
   }
+
+public:
+  T *frame(int f) override { return &data[f * numberOfChannels()]; }
 
 public:
   T *dataptr() { return data; }
