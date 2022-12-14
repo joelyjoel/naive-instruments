@@ -10,6 +10,7 @@
 template <typename T> class ReadableSample {
   virtual float duration() = 0;
   virtual T readByFrame(int frame, int channel = 0) = 0;
+  virtual T read(float timeInSeconds, int channel = 0) = 0;
 };
 
 template <typename T> class Sample : ReadableSample<T> {
@@ -77,6 +78,11 @@ public:
     T before = readByFrame(int(frame), channel);
     T after = readByFrame(int(frame + 1), channel);
     return (1.0 - progress) * before + progress * after;
+  }
+
+  T read(float time, int channel = 0) override {
+    int frame = time * sampleRate;
+    return readWithInterpolation(frame, channel);
   }
 
   /**
