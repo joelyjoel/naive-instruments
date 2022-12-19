@@ -9,6 +9,7 @@ protected:
     options.add_options()("input", po::value<std::vector<std::string>>(),
                           "Add a file to the mix");
     positionalOptions.add("input", -1);
+    describeOutputOptions();
   }
 
 public:
