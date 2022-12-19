@@ -138,7 +138,7 @@ public:
   }
 
 private:
-  void syncInputs() {
+  virtual void syncInputs() {
     for (auto input : inputs)
       input->sync(internalClock);
   }
