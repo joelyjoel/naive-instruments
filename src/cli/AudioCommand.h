@@ -5,6 +5,7 @@
 #include "../instruments/PitchConverter.h"
 #include "../parsing/Parse.h"
 #include "../playback/BufferedPlayback.h"
+#include "../playback/InteractivePlayback.h"
 #include "./SignalString.h"
 #include "Command.h"
 
@@ -18,7 +19,8 @@ protected:
         "duration", po::value<std::string>(),
         "Crop the audio output to a certain duration")(
         "output-file,o", po::value<std::string>(),
-        "Path to wav file for recording audio\n");
+        "Path to wav file for recording audio\n")(
+        "interactive,i", "Playback in interactive mode");
   }
 
   /**
@@ -69,6 +71,8 @@ protected:
         "Amount of vibrato (in semitones)");
   }
 
+  bool interactiveModeEnabled() { return args.count("interactive"); }
+
   /**
    * Get the primary audio input as a buffer.
    */
@@ -111,6 +115,8 @@ protected:
     if (stdoutIsAPipe()) {
       std::cerr << "Piping to stdout\n";
       record(std::cout, signal, outputDuration());
+    } else if (interactiveModeEnabled()) {
+      InteractivePlayback::play(signal);
     } else if (!path.success())
       BufferedPlayback::play(signal);
     else {

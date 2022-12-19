@@ -92,6 +92,7 @@ public:
 
   void setSignal(Signal<double> &sound) { signal = &sound; }
   void setSignal(MonoBuffer &sample) {
+    // FIXME: Memory leak!
     Sampler *sampler = new Sampler(sample);
     setSignal(*sampler);
   }
