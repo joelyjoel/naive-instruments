@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../instruments/Pacer.h"
 #include "../instruments/Pauser.h"
 #include "../lib.h"
 #include "BufferedPlayback.h"
@@ -15,12 +16,16 @@ class InteractivePlayback {
   }
 
   Pauser pauser;
+  Pacer pacer;
 
   // TODO: Use smart pointers insteadh of references
   void attachPlaybackControls(Signal<double> &input) {
     // FIXME: Unsafe!
     std::shared_ptr<Signal<double>> inputptr(&input);
-    pauser.input << inputptr;
+    pacer.rate << 1;
+    pacer.input << inputptr;
+    // FIXME: Unsafe again!
+    pauser.input << std::shared_ptr<Pacer>(&pacer);
   }
 
   void start(bool async = false) {
@@ -43,6 +48,10 @@ class InteractivePlayback {
           pauser.toggle();
         else if (c == 10)
           bufferedPlayback.resetSignal();
+        else if (c == 107)
+          pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (1 / 12.0)));
+        else if (c == 106)
+          pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (1 / 12.0)));
       }
     });
   }
