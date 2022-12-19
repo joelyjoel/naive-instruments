@@ -18,4 +18,7 @@ protected:
     } else
       out(0.0);
   }
+
+public:
+  void resetState() override { phase = 0; }
 };

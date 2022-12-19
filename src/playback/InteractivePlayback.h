@@ -26,6 +26,7 @@ class InteractivePlayback {
       while (true) {
         int c = getch();
         std::cerr << "Keypress! " << c << "\n";
+        bufferedPlayback.resetSignal();
       }
     });
   }

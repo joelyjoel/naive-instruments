@@ -96,4 +96,6 @@ public:
     Sampler *sampler = new Sampler(sample);
     setSignal(*sampler);
   }
+
+  void resetSignal() { signal->reset(); }
 };
