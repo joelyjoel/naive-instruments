@@ -138,6 +138,8 @@ public:
   }
 
 private:
+  // TODO: is using a virtual method the best approach here? Better to use an
+  // intermidiary class?
   virtual void syncInputs() {
     for (auto input : inputs)
       input->sync(internalClock);

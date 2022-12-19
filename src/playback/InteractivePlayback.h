@@ -41,7 +41,7 @@ class InteractivePlayback {
         std::cerr << "Keypress! " << c << "\n";
         if (c == 32)
           pauser.toggle();
-        else
+        else if (c == 10)
           bufferedPlayback.resetSignal();
       }
     });
