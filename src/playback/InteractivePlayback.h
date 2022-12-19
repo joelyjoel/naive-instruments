@@ -48,10 +48,14 @@ class InteractivePlayback {
           pauser.toggle();
         else if (c == 10)
           bufferedPlayback.resetSignal();
-        else if (c == 107)
+        else if (c == 61)
           pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (1 / 12.0)));
-        else if (c == 106)
+        else if (c == 45)
           pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (1 / 12.0)));
+        else if (c == 43)
+          pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (.05 / 12.0)));
+        else if (c == 95)
+          pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (.05 / 12.0)));
       }
     });
   }
