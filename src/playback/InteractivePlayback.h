@@ -1,5 +1,10 @@
+#pragma once
+
+#include "../lib.h"
 #include "BufferedPlayback.h"
 #include <iostream>
+#include <ncurses.h>
+
 class InteractivePlayback {
   BufferedPlayback bufferedPlayback;
 
@@ -7,7 +12,22 @@ class InteractivePlayback {
 
   void start(bool async = false) {
     std::cerr << "Starting interactive playback";
-    bufferedPlayback.start();
+    startCursesThread();
+    bufferedPlayback.start(async);
+  }
+
+  std::thread *cursesThread;
+  void startCursesThread() {
+    setlocale(LC_ALL, "");
+    initscr();
+    mouseinterval(0);
+    mousemask(BUTTON1_CLICKED | BUTTON4_PRESSED | BUTTON2_PRESSED, NULL);
+    cursesThread = new std::thread([this]() {
+      while (true) {
+        int c = getch();
+        std::cerr << "Keypress! " << c << "\n";
+      }
+    });
   }
 
 public:
