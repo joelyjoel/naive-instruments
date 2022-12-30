@@ -48,13 +48,13 @@ class InteractivePlayback {
           pauser.toggle();
         else if (c == 10)
           bufferedPlayback.resetSignal();
-        else if (c == 61)
+        else if (c == '=')
           pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (1 / 12.0)));
-        else if (c == 45)
+        else if (c == '-')
           pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (1 / 12.0)));
-        else if (c == 43)
+        else if (c == '+')
           pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (.05 / 12.0)));
-        else if (c == 95)
+        else if (c == '_')
           pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (.05 / 12.0)));
       }
     });

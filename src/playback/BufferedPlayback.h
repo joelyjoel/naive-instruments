@@ -22,7 +22,7 @@ private:
   PaError err;
 
 public:
-  BufferedPlayback(Signal<double> &input) : buffer(256) { signal = &input; }
+  BufferedPlayback(Signal<double> &input) : buffer(1024) { signal = &input; }
   BufferedPlayback() : BufferedPlayback(*new Constant(0)) {}
   Signal<double> *signal;
   CircularBuffer<double> buffer;
