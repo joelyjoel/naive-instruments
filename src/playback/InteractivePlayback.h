@@ -56,8 +56,25 @@ class InteractivePlayback {
           pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (.05 / 12.0)));
         else if (c == '_')
           pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (.05 / 12.0)));
+
+        render();
       }
     });
+  }
+
+  void render() {
+    // TODO: Separate class for rendering state?
+    // TODO: Eventually use a query string or something for UI components
+    clear();
+    string str ;
+    // TODO: Should be a sub function
+    str += "Playback rate = " + std::to_string(pacer.rate.currentConstant()) + "\n";
+    // TODO: Should be another sub function
+    if (pauser.is_paused())
+      str += "Paused\n";
+    else 
+      str += "Playing\n";
+    addstr(str.c_str());
   }
 
 public:

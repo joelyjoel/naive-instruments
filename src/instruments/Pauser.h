@@ -19,6 +19,8 @@ public:
   void resume() { paused = false; }
   void toggle() { paused = !paused; }
 
+  bool is_paused() { return paused == true; }
+
   void action() override {
     if (paused)
       out(0);
