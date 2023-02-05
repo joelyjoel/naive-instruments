@@ -73,9 +73,9 @@ class InteractivePlayback {
     /*        "\n"; */
     // TODO: Should be another sub function
     if (cdj.isPaused())
-      str += "Paused\n";
+      str += "\uf04c Paused\n";
     else
-      str += "Playing\n";
+      str += "\uf04b Playing\n";
     addstr(str.c_str());
   }
 
