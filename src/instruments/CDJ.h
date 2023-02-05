@@ -1,0 +1,38 @@
+#pragma once
+
+#include "../core.h"
+#include <iostream>
+
+class CDJ : public Signal<double> {
+
+public:
+  SignalInput<double> input{this, "input"};
+  float t = 0;
+
+  double *internalBuffer;
+  int bufferedUntil = 0;
+  int lookAhead = 100;
+  int bufferSize = 44100 * 60;
+
+  CDJ() { internalBuffer = new double[bufferSize]; }
+
+private:
+  void action() override {
+    bufferMore();
+    out(internalBuffer[int(t) % bufferSize]);
+    ++t;
+  }
+
+  void bufferMore() {
+    while (bufferedUntil < t + lookAhead) {
+      input.sync(bufferedUntil);
+      internalBuffer[bufferedUntil % bufferSize] = input();
+      ++bufferedUntil;
+    }
+  }
+
+public:
+  void syncInputs() override {
+    // Does nothing
+  }
+};

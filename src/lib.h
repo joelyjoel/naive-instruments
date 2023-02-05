@@ -26,6 +26,7 @@
 #include "instruments/BreakpointEnvelope.h"
 #include "instruments/BufferWriter.h"
 #include "instruments/ButterworthFilter.h"
+#include "instruments/CDJ.h"
 #include "instruments/Decay.h"
 #include "instruments/FixedPipe.h"
 #include "instruments/Floor.h"
