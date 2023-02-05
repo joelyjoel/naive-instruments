@@ -24,7 +24,11 @@ private:
     else {
       bufferMore();
       out(internalBuffer[int(playhead) % bufferSize]);
+
+      // TODO: This bit could be branchless using modulo?
       playhead += rate;
+      if (looping && playhead > loopEnd)
+        playhead -= loopEnd - loopStart;
     }
   }
 
@@ -41,6 +45,8 @@ private:
   }
 
   // Controls:
+
+  // Play/pause
 private:
   bool paused = false;
 
@@ -50,6 +56,7 @@ public:
   void resume() { paused = false; }
   void togglePause() { paused = !paused; }
 
+  // Playback rate
 private:
   float rate = 1.0;
 
@@ -74,5 +81,58 @@ public:
     float detune = detuneInSemitones();
 
     return std::to_string(detune);
+  }
+
+  // Looping
+private:
+  bool looping = false;
+  float loopStart = 0;
+  float loopEnd;
+
+public:
+  void setLoop(float start = 0, float end = 0) {
+    if (end == 0)
+      end = playhead;
+    loopStart = start;
+    loopEnd = end;
+    looping = true;
+  }
+  bool isLooping() { return looping; }
+  void punchInLoop() {
+    loopStart = playhead;
+    loopPunchState = 1;
+  }
+  void punchOutLoop() {
+    loopEnd = playhead;
+    looping = true;
+    loopPunchState = 2;
+  }
+  void breakOutOfLoop() { looping = false; }
+  char loopPunchState = 0;
+  void punchLoop() {
+    switch (loopPunchState) {
+    case 0:
+      punchInLoop();
+      break;
+    case 1:
+      punchOutLoop();
+      break;
+    case 2:
+      punchInLoop();
+      breakOutOfLoop();
+      break;
+    default:
+      std::cerr << "oh no!\n";
+      break;
+    }
+  }
+
+  std::string describeLoopState() {
+    if (looping)
+      return "\uf01e LOOPING";
+    else if (loopPunchState == 1)
+      return "\uea7c Punching into loop";
+    else
+      return "NO LOOP";
   }
 };

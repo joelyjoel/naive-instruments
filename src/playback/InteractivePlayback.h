@@ -52,6 +52,8 @@ class InteractivePlayback {
           cdj.semitoneFaster(.05);
         else if (c == '_')
           cdj.semitoneSlower(.05);
+        else if (c == 'l')
+          cdj.punchLoop();
 
         render();
       }
@@ -73,6 +75,9 @@ class InteractivePlayback {
     str += "\uf04e x" + std::to_string(cdj.playbackRate()) + "\t";
 
     str += "Detune " + cdj.describeDetune() + "\t";
+
+    str += cdj.describeLoopState() + "\t";
+
     addstr(str.c_str());
   }
 
