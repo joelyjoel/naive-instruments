@@ -44,18 +44,14 @@ class InteractivePlayback {
           cdj.togglePause();
         else if (c == 10)
           bufferedPlayback.resetSignal();
-        /* else if (c == '=') */
-        /*   pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (1
-         * / 12.0))); */
-        /* else if (c == '-') */
-        /*   pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (1
-         * / 12.0))); */
-        /* else if (c == '+') */
-        /*   pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (.05
-         * / 12.0))); */
-        /* else if (c == '_') */
-        /*   pacer.rate << (pacer.rate.currentConstant() / pow(2.0, (.05
-         * / 12.0))); */
+        else if (c == '=')
+          cdj.semitoneFaster();
+        else if (c == '-')
+          cdj.semitoneSlower();
+        else if (c == '+')
+          cdj.semitoneFaster(.05);
+        else if (c == '_')
+          cdj.semitoneSlower(.05);
 
         render();
       }
@@ -68,14 +64,15 @@ class InteractivePlayback {
     clear();
     string str;
     // TODO: Should be a sub function
-    /* str += "Playback rate = " + std::to_string(pacer.rate.currentConstant())
-     * + */
-    /*        "\n"; */
     // TODO: Should be another sub function
     if (cdj.isPaused())
-      str += "\uf04c Paused\n";
+      str += "\uf04c Paused\t";
     else
-      str += "\uf04b Playing\n";
+      str += "\uf04b Playing\t";
+
+    str += "\uf04e x" + std::to_string(cdj.playbackRate()) + "\t";
+
+    str += "Detune " + cdj.describeDetune() + "\t";
     addstr(str.c_str());
   }
 

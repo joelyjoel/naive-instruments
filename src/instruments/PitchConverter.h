@@ -16,13 +16,12 @@ protected:
   void action() override { out(pow(2.0, (interval() / 12.0))); }
 };
 
-
-shared_ptr<IntervalToRatio> intervalToRatio(shared_ptr<Signal<double>> intervalSignal) {
+shared_ptr<IntervalToRatio>
+intervalToRatio(shared_ptr<Signal<double>> intervalSignal) {
   auto converter = IntervalToRatio::create();
   converter->interval << intervalSignal;
   return converter;
 }
-
 
 class PitchConverter : public Signal<double> {
 public:
@@ -38,7 +37,8 @@ private:
   void action() override { out(440 * pow(2.0, ((pitch() - 69) / 12.0))); }
 };
 
-shared_ptr<PitchConverter> pitchToFrequency(shared_ptr<Signal<double>> pitchSignal) {
+shared_ptr<PitchConverter>
+pitchToFrequency(shared_ptr<Signal<double>> pitchSignal) {
   auto converter = PitchConverter::create();
   converter->pitch << pitchSignal;
   return converter;

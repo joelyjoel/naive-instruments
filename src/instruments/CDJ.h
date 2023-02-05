@@ -2,12 +2,13 @@
 
 #include "../core.h"
 #include <iostream>
+#include <string>
 
 class CDJ : public Signal<double> {
 
 public:
   SignalInput<double> input{this, "input"};
-  float t = 0;
+  float playhead = 0.0;
 
   double *internalBuffer;
   int bufferedUntil = 0;
@@ -22,13 +23,13 @@ private:
       out(0.0);
     else {
       bufferMore();
-      out(internalBuffer[int(t) % bufferSize]);
-      ++t;
+      out(internalBuffer[int(playhead) % bufferSize]);
+      playhead += rate;
     }
   }
 
   void bufferMore() {
-    while (bufferedUntil < t + lookAhead) {
+    while (bufferedUntil < playhead + lookAhead) {
       input.sync(bufferedUntil);
       internalBuffer[bufferedUntil % bufferSize] = input();
       ++bufferedUntil;
@@ -48,4 +49,30 @@ public:
   void pause() { paused = true; }
   void resume() { paused = false; }
   void togglePause() { paused = !paused; }
+
+private:
+  float rate = 1.0;
+
+public:
+  float playbackRate() { return rate; }
+  void semitoneFaster(float numberOfSemitones = 1.0) {
+    rate *= pow(2.0, numberOfSemitones / 12.0);
+  }
+  void semitoneSlower(float numberOfSemitones = 1.0) {
+    rate /= pow(2.0, numberOfSemitones / 12.0);
+  }
+
+  float detuneInSemitones() {
+    // rate = 2 ^ (n/12)
+    // ln(rate) = (n/12) * ln(2)
+    // n/12 = ln(rate)/ln(2)
+    // n = 12 * ln(rate) / ln(2)
+    return 12 * log(rate) / log(2);
+  }
+
+  std::string describeDetune() {
+    float detune = detuneInSemitones();
+
+    return std::to_string(detune);
+  }
 };
