@@ -11,16 +11,20 @@ public:
 
   double *internalBuffer;
   int bufferedUntil = 0;
-  int lookAhead = 100;
-  int bufferSize = 44100 * 60;
+  int lookAhead = 100; // samples
+  int bufferSize = sampleRate * 60;
 
   CDJ() { internalBuffer = new double[bufferSize]; }
 
 private:
   void action() override {
-    bufferMore();
-    out(internalBuffer[int(t) % bufferSize]);
-    ++t;
+    if (paused)
+      out(0.0);
+    else {
+      bufferMore();
+      out(internalBuffer[int(t) % bufferSize]);
+      ++t;
+    }
   }
 
   void bufferMore() {
@@ -31,8 +35,17 @@ private:
     }
   }
 
-public:
   void syncInputs() override {
     // Does nothing
   }
+
+  // Controls:
+private:
+  bool paused = false;
+
+public:
+  bool isPaused() { return paused; }
+  void pause() { paused = true; }
+  void resume() { paused = false; }
+  void togglePause() { paused = !paused; }
 };

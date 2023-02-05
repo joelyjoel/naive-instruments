@@ -35,14 +35,15 @@ class InteractivePlayback {
     initscr();
     mouseinterval(0);
     mousemask(BUTTON1_CLICKED | BUTTON4_PRESSED | BUTTON2_PRESSED, NULL);
+    render();
     cursesThread = new std::thread([this]() {
       while (true) {
         int c = getch();
         std::cerr << "Keypress! " << c << "\n";
-        /* if (c == 32) */
-        /*   pauser.toggle(); */
-        /* else if (c == 10) */
-        /*   bufferedPlayback.resetSignal(); */
+        if (c == 32)
+          cdj.togglePause();
+        else if (c == 10)
+          bufferedPlayback.resetSignal();
         /* else if (c == '=') */
         /*   pacer.rate << (pacer.rate.currentConstant() * pow(2.0, (1
          * / 12.0))); */
@@ -64,17 +65,17 @@ class InteractivePlayback {
   void render() {
     // TODO: Separate class for rendering state?
     // TODO: Eventually use a query string or something for UI components
-    /* clear(); */
+    clear();
     string str;
     // TODO: Should be a sub function
     /* str += "Playback rate = " + std::to_string(pacer.rate.currentConstant())
      * + */
     /*        "\n"; */
     // TODO: Should be another sub function
-    /* if (pauser.is_paused()) */
-    /*   str += "Paused\n"; */
-    /* else */
-    /*   str += "Playing\n"; */
+    if (cdj.isPaused())
+      str += "Paused\n";
+    else
+      str += "Playing\n";
     addstr(str.c_str());
   }
 
