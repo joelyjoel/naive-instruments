@@ -43,7 +43,7 @@ class InteractivePlayback {
         if (c == 32)
           cdj.togglePause();
         else if (c == 10)
-          bufferedPlayback.resetSignal();
+          cdj.restart();
         else if (c == '=')
           cdj.semitoneFaster();
         else if (c == '-')
@@ -68,15 +68,17 @@ class InteractivePlayback {
     // TODO: Should be a sub function
     // TODO: Should be another sub function
     if (cdj.isPaused())
-      str += "\uf04c Paused\t";
+      str += "\uf04c";
     else
-      str += "\uf04b Playing\t";
+      str += "\uf04b";
+
+    str += " " + cdj.describeTimeElapsed() + "\t";
 
     str += "\uf04e x" + std::to_string(cdj.playbackRate()) + "\t";
 
     str += "Detune " + cdj.describeDetune() + "\t";
 
-    str += cdj.describeLoopState() + "\t";
+    str += cdj.describeLoopState() + "\t\t";
 
     addstr(str.c_str());
   }

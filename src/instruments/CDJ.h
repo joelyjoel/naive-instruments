@@ -56,6 +56,9 @@ public:
   void resume() { paused = false; }
   void togglePause() { paused = !paused; }
 
+public:
+  void restart() { playhead = 0; }
+
   // Playback rate
 private:
   float rate = 1.0;
@@ -129,10 +132,18 @@ public:
 
   std::string describeLoopState() {
     if (looping)
-      return "\uf01e LOOPING";
+      return "\uf955 LOOPING";
     else if (loopPunchState == 1)
-      return "\uea7c Punching into loop";
+      return "\uf956 Punching into loop";
     else
       return "NO LOOP";
+  }
+
+  // TODO: listen to Connie converse
+  float timeElapsed() { return playhead / sampleRate; }
+
+  std::string describeTimeElapsed() {
+    return std::to_string(int(timeElapsed() / 60)) + ":" +
+           std::to_string(fmod(timeElapsed(), 1.0));
   }
 };
