@@ -7,6 +7,8 @@
 #include <memory>
 #include <ncurses.h>
 
+const float frameRate = 31;
+
 class InteractivePlayback {
   BufferedPlayback bufferedPlayback;
 
@@ -29,17 +31,17 @@ class InteractivePlayback {
     bufferedPlayback.start(async);
   }
 
+  std::thread *renderThread;
+
   std::thread *cursesThread;
   void startCursesThread() {
     setlocale(LC_ALL, "");
     initscr();
     mouseinterval(0);
     mousemask(BUTTON1_CLICKED | BUTTON4_PRESSED | BUTTON2_PRESSED, NULL);
-    render();
     cursesThread = new std::thread([this]() {
       while (true) {
         int c = getch();
-        std::cerr << "Keypress! " << c << "\n";
         if (c == 32)
           cdj.togglePause();
         else if (c == 10)
@@ -54,8 +56,13 @@ class InteractivePlayback {
           cdj.semitoneSlower(.05);
         else if (c == 'l')
           cdj.punchLoop();
-
+      }
+    });
+    renderThread = new std::thread([this]() {
+      while (true) {
         render();
+        refresh();
+        napms(1000.0 / frameRate);
       }
     });
   }

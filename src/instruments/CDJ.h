@@ -144,6 +144,6 @@ public:
 
   std::string describeTimeElapsed() {
     return std::to_string(int(timeElapsed() / 60)) + ":" +
-           std::to_string(fmod(timeElapsed(), 1.0));
+           std::to_string(fmod(timeElapsed(), 60));
   }
 };
