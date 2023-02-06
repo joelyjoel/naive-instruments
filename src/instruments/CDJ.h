@@ -83,9 +83,19 @@ public:
   }
 
   std::string describeDetune() {
-    float detune = detuneInSemitones();
 
-    return std::to_string(detune);
+    float detune = detuneInSemitones();
+    std::string icon;
+    if (detune == 0)
+      icon = "\u266e";
+    else if (detune > 0)
+      icon = "\u266f";
+    else if (detune < 0) {
+      detune = -detune;
+      icon = "\u266d";
+    }
+
+    return icon + std::to_string(detune);
   }
 
   // Looping

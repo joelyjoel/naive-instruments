@@ -87,7 +87,7 @@ class InteractivePlayback {
 
     str += "\uf04e x" + std::to_string(cdj.playbackRate()) + "\t";
 
-    str += "Detune " + cdj.describeDetune() + "\t";
+    str += "(" + cdj.describeDetune() + ")\t";
 
     str += cdj.describeLoopState() + "\t\t";
 
