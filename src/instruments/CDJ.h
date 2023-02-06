@@ -136,7 +136,7 @@ public:
     else if (loopPunchState == 1)
       return "\uf956 Punching into loop";
     else
-      return "NO LOOP";
+      return "\uf956";
   }
 
   // TODO: listen to Connie converse
