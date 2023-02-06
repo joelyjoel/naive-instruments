@@ -59,6 +59,8 @@ public:
 public:
   void restart() { playhead = 0; }
 
+  void skipForward(float seconds) { playhead += seconds * sampleRate; }
+
   // Playback rate
 private:
   float rate = 1.0;

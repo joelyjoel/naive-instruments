@@ -54,8 +54,12 @@ class InteractivePlayback {
           cdj.semitoneFaster(.05);
         else if (c == '_')
           cdj.semitoneSlower(.05);
-        else if (c == 'l')
+        else if (c == '\'')
           cdj.punchLoop();
+        else if (c == 'h')
+          cdj.skipForward(-.250);
+        else if (c == 'l')
+          cdj.skipForward(.250);
       }
     });
     renderThread = new std::thread([this]() {
