@@ -19,7 +19,8 @@ protected:
   UntypedSignal *owner;
 
 public:
-  UntypedSignalInput(UntypedSignal *owner, const std::string &name);
+  UntypedSignalInput(UntypedSignal *owner, const std::string &name,
+                     bool keepSyncedToOwner = true);
 
   virtual void connect(shared_ptr<Signal<double>> signal);
 
@@ -30,6 +31,14 @@ public:
    * Synchronise the plugged instrument with the owner
    */
   void sync(int clock);
+
+  /**
+   * If this is false, the inputs syncronisation should be manually handled by
+   * the owners `action`. This allows for all kind of pausing, rerating, phasing
+   * or buffering of dependency signals.
+   */
+  bool keepSyncedToOwner;
+  void syncToOwner();
 
 protected:
   std::shared_ptr<UntypedSignal> untypedConnection;
@@ -142,7 +151,7 @@ private:
   // intermidiary class?
   virtual void syncInputs() {
     for (auto input : inputs)
-      input->sync(internalClock);
+      input->syncToOwner();
   }
 
 protected:

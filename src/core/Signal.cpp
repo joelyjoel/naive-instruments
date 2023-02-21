@@ -5,8 +5,9 @@
 // --------------------------------------------------------------------------------
 
 UntypedSignalInput::UntypedSignalInput(UntypedSignal *owner,
-                                       const std::string &name)
-    : owner(owner) {
+                                       const std::string &name,
+                                       bool keepSyncedToOwner)
+    : owner(owner), keepSyncedToOwner(keepSyncedToOwner) {
   owner->inputs.push_back(this);
 };
 
@@ -37,6 +38,11 @@ void UntypedSignalInput::reset() {
 void UntypedSignalInput::sync(int clock) {
   if (hasConnection())
     untypedConnection->sync(clock);
+}
+
+void UntypedSignalInput::syncToOwner() {
+  if (hasConnection() && keepSyncedToOwner)
+    untypedConnection->sync(owner->internalClock);
 }
 
 // --------------------------------------------------------------------------------
