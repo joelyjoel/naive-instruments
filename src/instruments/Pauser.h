@@ -3,12 +3,8 @@
 #include "../lib.h"
 
 class Pauser : public Signal<double> {
-  void syncInputs() override {
-    // Does nothing
-  }
-
 public:
-  SignalInput<double> input{this, "input"};
+  SignalInput<double> input{this, "input", false};
 
 private:
   bool paused = false;

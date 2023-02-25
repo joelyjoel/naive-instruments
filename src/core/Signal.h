@@ -59,8 +59,9 @@ private:
   frame constant;
 
 public:
-  SignalInput(UntypedSignal *owner, const std::string &name)
-      : UntypedSignalInput(owner, name), constant(0) {}
+  SignalInput(UntypedSignal *owner, const std::string &name,
+              bool keepSyncedToOwner = true)
+      : UntypedSignalInput(owner, name, keepSyncedToOwner), constant(0) {}
 
 public:
   std::shared_ptr<Signal<frame>> typedConnection() {
@@ -149,7 +150,7 @@ public:
 private:
   // TODO: is using a virtual method the best approach here? Better to use an
   // intermidiary class?
-  virtual void syncInputs() {
+  void syncInputs() {
     for (auto input : inputs)
       input->syncToOwner();
   }

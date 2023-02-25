@@ -40,10 +40,6 @@ private:
     }
   }
 
-  void syncInputs() override {
-    // Does nothing
-  }
-
   // Controls:
 
   // Play/pause
