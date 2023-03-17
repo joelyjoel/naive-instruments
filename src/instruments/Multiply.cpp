@@ -4,11 +4,7 @@
 void operator*=(SignalInput<double> &signalInput,
                 shared_ptr<FrameStream<double>> scale) {
   shared_ptr<Multiply> multiply = make_shared<Multiply>();
-  if (signalInput.hasConnection()) {
-    multiply->a << signalInput.typedConnection();
-  } else {
-    multiply->a << signalInput.currentConstant();
-  }
+  multiply->a << signalInput.typedConnection();
   multiply->b << scale;
   signalInput << multiply;
 }

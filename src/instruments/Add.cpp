@@ -4,11 +4,7 @@
 void operator+=(SignalInput<double> &signalInput,
                 shared_ptr<FrameStream<double>> additionalSignal) {
   shared_ptr<Add> add = make_shared<Add>();
-  if (signalInput.hasConnection()) {
-    add->a << signalInput.typedConnection();
-  } else {
-    add->a << signalInput.currentConstant();
-  }
+  add->a << signalInput.typedConnection();
   add->b << additionalSignal;
   signalInput << add;
 }
