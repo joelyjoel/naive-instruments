@@ -77,12 +77,13 @@ echo "testPack: $testPackDir"
 
 numberOfPassingSamples=${#passed[@]}
 if [ $numberOfPassingSamples -ne 0 ]; then
-  echo -e "passed:"
-  echo "  # Woo! These samples all look correct!"
-  for i in ${!passed[@]}; do
-    name=${passed[$i]}
-    echo "  - $name"
-  done
+  :
+  # echo -e "passed:"
+  # echo "  # Woo! These samples all look correct!"
+  # for i in ${!passed[@]}; do
+  #   name=${passed[$i]}
+  #   echo "  - $name"
+  # done
 fi
 
 numberOfMissingSamples=${#missing[@]}
@@ -124,5 +125,6 @@ if [ $numberOfProblems -ne 0 ]; then
   exit 1
 else 
   echo "success: true"
+  echo "#   All tests passed!"
   exit 0
 fi
