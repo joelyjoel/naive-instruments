@@ -57,4 +57,5 @@ template <typename frame> void SignalInput<frame>::setConstant(frame k) {
 
 void AVOID_LINKING_ERRORS() {
   SignalInput<double> compileItForDoubles(nullptr, "hello", true);
+  SignalInput<bool> compileItForBools(nullptr, "hello", true);
 }
