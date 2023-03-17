@@ -56,12 +56,13 @@ public:
 template <typename frame> class SignalInput : public UntypedSignalInput {
 
 private:
-  frame constant;
-
 public:
+  frame constant;
   SignalInput(AbstractFrameStream *owner, const std::string &name,
               bool keepSyncedToOwner = true)
-      : UntypedSignalInput(owner, name, keepSyncedToOwner), constant(0) {}
+      : UntypedSignalInput(owner, name, keepSyncedToOwner) {
+    setConstant(0);
+  }
 
 public:
   std::shared_ptr<FrameStream<frame>> typedConnection() {

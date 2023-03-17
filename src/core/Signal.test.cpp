@@ -7,13 +7,13 @@ TEST_CASE("listing signal inputs") {
   shared_ptr<Osc> sin1 = Osc::create_sine();
   shared_ptr<Osc> sin2 = Osc::create_sine();
 
-  REQUIRE(adder->inputSignals().size() == 0);
+  REQUIRE(adder->inputSignals().size() == 2);
 
   adder->a << sin1;
 
   auto inputs = adder->inputSignals();
   REQUIRE(inputs[0] == sin1);
-  REQUIRE(inputs.size() == 1);
+  REQUIRE(inputs.size() == 2);
 
   adder->b << sin2;
 
