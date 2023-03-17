@@ -17,6 +17,7 @@ class UntypedSignalInput {
 
 protected:
   AbstractFrameStream *owner;
+  std::string name;
 
 public:
   UntypedSignalInput(AbstractFrameStream *owner, const std::string &name,
@@ -39,6 +40,8 @@ public:
    */
   bool keepSyncedToOwner;
   void syncToOwner();
+
+  std::string label();
 
 protected:
   std::shared_ptr<AbstractFrameStream> untypedConnection;
