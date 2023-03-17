@@ -84,10 +84,7 @@ public:
   void disconnect() { untypedConnection = nullptr; }
 
 public:
-  void setConstant(double k) {
-    disconnect();
-    constant = k;
-  }
+  void setConstant(frame k);
 
   FrameStream<frame> &
   operator<<(std::shared_ptr<FrameStream<frame>> instrument) {

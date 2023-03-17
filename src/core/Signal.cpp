@@ -48,3 +48,13 @@ void UntypedSignalInput::syncToOwner() {
 // --------------------------------------------------------------------------------
 // class SignalInput
 // --------------------------------------------------------------------------------
+
+#include "../instruments/Constant.h"
+
+template <typename frame> void SignalInput<frame>::setConstant(frame k) {
+  connect(make_shared<Constant<frame>>(k));
+}
+
+void AVOID_LINKING_ERRORS() {
+  SignalInput<double> compileItForDoubles(nullptr, "hello", true);
+}
