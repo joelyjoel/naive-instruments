@@ -8,15 +8,13 @@ private:
   /**
    * Pointer to the signal nominated as this patch's output signal.
    */
-  shared_ptr<FrameStream<SignalFrame>> output;
+  shared_ptr<FrameStream<SignalFrame>> outputFrameStream;
 
 public:
-  /* Patch(shared_ptr<Signal<SignalFrame>> output) { exposeOutput(output); } */
-
 public:
   void action() {
-    output->sync(this->internalClock);
-    this->out(output->readFrame());
+    outputFrameStream->sync(this->internalClock);
+    this->writeFrame(outputFrameStream->readFrame());
   }
 
 protected:
@@ -31,7 +29,7 @@ protected:
       std::cerr << "output pointer is null in " << label() << "\n";
       throw 1;
     }
-    output = outputSignal;
+    outputFrameStream = outputSignal;
   }
 
   std::string label() { return "Patch"; }

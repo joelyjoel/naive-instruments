@@ -7,5 +7,5 @@ public:
   Noise(uint64_t seed = 1) : random(seed) {}
 
 private:
-  void action() { out(random.number(-1, 1)); }
+  void action() { writeFrame(random.number(-1, 1)); }
 };

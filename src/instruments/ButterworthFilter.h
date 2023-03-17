@@ -15,7 +15,7 @@ class ButterworthFilter : public FrameStream<double> {
     x2 = x1;
     x1 = x;
 
-    out(y);
+    writeFrame(y);
   }
 
 public:

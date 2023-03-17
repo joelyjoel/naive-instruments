@@ -20,10 +20,10 @@ public:
 private:
   void action() override {
     if (paused)
-      out(0.0);
+      writeFrame(0.0);
     else {
       bufferMore();
-      out(internalBuffer[int(playhead) % bufferSize]);
+      writeFrame(internalBuffer[int(playhead) % bufferSize]);
 
       // TODO: This bit could be branchless using modulo?
       playhead += rate;

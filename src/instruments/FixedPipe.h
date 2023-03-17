@@ -24,7 +24,7 @@ public:
       tapeHeadIndex -= bufferSize;
 
     std::cout << tapeHeadIndex << " " << buffer[tapeHeadIndex] << "\n";
-    out(buffer[tapeHeadIndex]);
+    writeFrame(buffer[tapeHeadIndex]);
   }
 
   std::string label() { return "FixedPipe"; }

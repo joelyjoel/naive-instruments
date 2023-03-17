@@ -26,7 +26,7 @@ public:
     if (writeHead < buffer->numberOfFrames())
       (*buffer)[writeHead] = signal;
     ++writeHead;
-    out(signal);
+    writeFrame(signal);
   }
 
   int currentSize() { return writeHead; }

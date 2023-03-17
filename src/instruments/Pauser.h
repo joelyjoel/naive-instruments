@@ -19,10 +19,10 @@ public:
 
   void action() override {
     if (paused)
-      out(0);
+      writeFrame(0);
     else {
       input.sync(t++);
-      out(input());
+      writeFrame(input());
     }
   }
 };

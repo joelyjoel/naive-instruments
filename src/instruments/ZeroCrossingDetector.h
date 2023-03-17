@@ -22,7 +22,7 @@ public:
     if (next != 0)
       previous = next;
 
-    out(result);
+    writeFrame(result);
   }
 
   void reset() { previous = 0; }

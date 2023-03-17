@@ -17,7 +17,8 @@ public:
   Wavetable(MonoBuffer &waveform = Waveforms::sine()) : waveform(&waveform) {}
 
   void action() {
-    out(waveform->interpolate(phase() * double(waveform->numberOfSamples)));
+    writeFrame(
+        waveform->interpolate(phase() * double(waveform->numberOfSamples)));
   }
 
   void setWaveform(MonoBuffer *buffer) { waveform = buffer; }

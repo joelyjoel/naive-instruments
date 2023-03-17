@@ -21,7 +21,7 @@ private:
         phase = 0;
         stage = H;
       }
-      out(phase);
+      writeFrame(phase);
       break;
 
     case H:
@@ -30,7 +30,7 @@ private:
         phase = 0;
         stage = D;
       }
-      out(1);
+      writeFrame(1);
       break;
 
     case D:
@@ -39,11 +39,11 @@ private:
         phase = 0;
         stage = finished;
       }
-      out(1 - phase);
+      writeFrame(1 - phase);
       break;
 
     case finished:
-      out(0);
+      writeFrame(0);
       break;
     }
   }

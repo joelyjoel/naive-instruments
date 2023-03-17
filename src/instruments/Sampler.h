@@ -24,11 +24,11 @@ public:
   void action() override {
     if (playhead < 0) {
       ++playhead;
-      out(0);
+      writeFrame(0);
     } else if (playhead < buffer->numberOfFrames())
-      out((*buffer)[++playhead]);
+      writeFrame((*buffer)[++playhead]);
     else
-      out(0);
+      writeFrame(0);
   }
 
 protected:

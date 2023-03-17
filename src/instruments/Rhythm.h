@@ -25,13 +25,13 @@ protected:
   void action() override {
     elapsed += bpm() * k;
     if (elapsed > durations[index]) {
-      out(true);
+      writeFrame(true);
       do {
         elapsed -= durations[index];
         index = (index + 1) % durations.size();
       } while (elapsed > durations[index]);
     } else
-      out(false);
+      writeFrame(false);
   }
 
 public:

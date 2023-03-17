@@ -9,5 +9,5 @@ private:
 
 public:
   Constant(double k) : value(k) {}
-  void action() { out(value); }
+  void action() { writeFrame(value); }
 };

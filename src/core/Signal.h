@@ -197,7 +197,7 @@ protected:
   /**
    * Update the latest frame.
    */
-  void out(const frame &y) { output = y; }
+  void writeFrame(const frame &y) { output = y; }
 
 public:
   frame operator[](int clock) {

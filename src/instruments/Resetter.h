@@ -13,6 +13,6 @@ protected:
   void action() override {
     if (trigger())
       input.reset();
-    out(input());
+    writeFrame(input());
   }
 };

@@ -12,11 +12,11 @@ protected:
   void action() override {
     progress += bpm() * k;
     if (progress >= 1) {
-      out(true);
+      writeFrame(true);
       do {
         progress -= 1;
       } while (progress >= 1);
     } else
-      out(false);
+      writeFrame(false);
   }
 };

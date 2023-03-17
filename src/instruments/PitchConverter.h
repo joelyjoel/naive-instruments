@@ -13,7 +13,7 @@ public:
   std::string label() override { return "IntervalToRatio"; }
 
 protected:
-  void action() override { out(pow(2.0, (interval() / 12.0))); }
+  void action() override { writeFrame(pow(2.0, (interval() / 12.0))); }
 };
 
 shared_ptr<IntervalToRatio>
@@ -34,7 +34,9 @@ public:
   std::string label() override { return "PitchConverter"; }
 
 private:
-  void action() override { out(440 * pow(2.0, ((pitch() - 69) / 12.0))); }
+  void action() override {
+    writeFrame(440 * pow(2.0, ((pitch() - 69) / 12.0)));
+  }
 };
 
 shared_ptr<PitchConverter>
