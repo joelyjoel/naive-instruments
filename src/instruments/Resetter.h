@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class Resetter : public Signal<double> {
+class Resetter : public FrameStream<double> {
 public:
   SignalInput<double> input{this, "input"};
   SignalInput<bool> trigger{this, "trigger/bool"};

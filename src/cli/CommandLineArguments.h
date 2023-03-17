@@ -240,12 +240,12 @@ public:
   friend std::ostream &operator<<(std::ostream &os,
                                   const CommandLineArguments &args);
 
-  shared_ptr<Signal<double>> signal(const std::string &key,
-                                    const std::string &fallback = "0") {
+  shared_ptr<FrameStream<double>> signal(const std::string &key,
+                                         const std::string &fallback = "0") {
     return SignalString::parse(string(key, fallback));
   }
-  shared_ptr<Signal<double>> signal(int key,
-                                    const std::string &fallback = "0") {
+  shared_ptr<FrameStream<double>> signal(int key,
+                                         const std::string &fallback = "0") {
     return SignalString::parse(string(key, fallback));
   }
 

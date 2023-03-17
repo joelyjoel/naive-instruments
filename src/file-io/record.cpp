@@ -1,6 +1,6 @@
 #include "record.h"
 
-void record(const std::string &outputFile, Signal<double> &signal,
+void record(const std::string &outputFile, FrameStream<double> &signal,
             float duration) {
 
   std::ofstream outputStream(outputFile, std::ios::binary);
@@ -8,7 +8,8 @@ void record(const std::string &outputFile, Signal<double> &signal,
   record(outputStream, signal, duration);
 }
 
-void record(std::ostream &outputFile, Signal<double> &signal, float duration) {
+void record(std::ostream &outputFile, FrameStream<double> &signal,
+            float duration) {
 
   double attenuation = .5;
 

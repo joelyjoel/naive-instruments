@@ -9,7 +9,7 @@ private:
       make_shared<ZeroCrossingDetector>();
   BangAwaiter waiter;
 
-  shared_ptr<Signal<double>> input;
+  shared_ptr<FrameStream<double>> input;
 
   void assemble() {
     waiter << detector;
@@ -65,7 +65,7 @@ public:
 
   MonoBuffer *operator[](int waveformIndex) { return select(waveformIndex); }
 
-  void operator<<(shared_ptr<Signal<double>> inputSignal) {
+  void operator<<(shared_ptr<FrameStream<double>> inputSignal) {
     bufferer->input << inputSignal;
   }
 };

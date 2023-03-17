@@ -22,9 +22,11 @@ private:
   PaError err;
 
 public:
-  BufferedPlayback(Signal<double> &input) : buffer(1024) { signal = &input; }
+  BufferedPlayback(FrameStream<double> &input) : buffer(1024) {
+    signal = &input;
+  }
   BufferedPlayback() : BufferedPlayback(*new Constant(0)) {}
-  Signal<double> *signal;
+  FrameStream<double> *signal;
   CircularBuffer<double> buffer;
   double shift() { return buffer.shift(); }
   void push(double y) { buffer.push(y); }
@@ -80,7 +82,7 @@ public:
     return float(buffer.size()) / float(sampleRate);
   }
 
-  static void play(Signal<double> &signal) {
+  static void play(FrameStream<double> &signal) {
     BufferedPlayback playback(signal);
     playback.start(false);
   }
@@ -90,7 +92,7 @@ public:
     play(sampler);
   }
 
-  void setSignal(Signal<double> &sound) { signal = &sound; }
+  void setSignal(FrameStream<double> &sound) { signal = &sound; }
   void setSignal(MonoBuffer &sample) {
     // FIXME: Memory leak!
     Sampler *sampler = new Sampler(sample);

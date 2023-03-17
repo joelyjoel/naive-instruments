@@ -1,6 +1,6 @@
 #include "../core.h"
 
-class Noise : public Signal<double> {
+class Noise : public FrameStream<double> {
   Random random;
 
 public:

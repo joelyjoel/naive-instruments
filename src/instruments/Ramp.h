@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class Ramp : public Signal<double> {
+class Ramp : public FrameStream<double> {
 private:
   double phase = 0;
 

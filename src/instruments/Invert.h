@@ -1,6 +1,6 @@
 #include "../core.h"
 
-class Invert : public Signal<double> {
+class Invert : public FrameStream<double> {
 public:
   SignalInput<double> input{this, "input"};
 

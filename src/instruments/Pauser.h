@@ -2,7 +2,7 @@
 
 #include "../lib.h"
 
-class Pauser : public Signal<double> {
+class Pauser : public FrameStream<double> {
 public:
   SignalInput<double> input{this, "input", false};
 

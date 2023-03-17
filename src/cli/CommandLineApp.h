@@ -53,7 +53,7 @@ public:
     }
   }
 
-  void output(Signal<double> &signal) {
+  void output(FrameStream<double> &signal) {
     auto &path = outputPath();
     if (stdoutIsAPipe()) {
       std::cerr << "Piping to stdout\n";

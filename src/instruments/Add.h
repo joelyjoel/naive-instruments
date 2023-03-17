@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-class Add : public Signal<double> {
+class Add : public FrameStream<double> {
 public:
   SignalInput<double> a{this, "a"};
   SignalInput<double> b{this, "b"};
@@ -17,12 +17,12 @@ public:
   std::string label() { return "Add"; }
 
 public:
-  static shared_ptr<Signal<double>>
-  many(std::vector<shared_ptr<Signal<double>>> &inputs) {
+  static shared_ptr<FrameStream<double>>
+  many(std::vector<shared_ptr<FrameStream<double>>> &inputs) {
     if (inputs.size() == 0)
       return std::make_shared<Constant>(0);
     else {
-      shared_ptr<Signal<double>> sum = inputs[0];
+      shared_ptr<FrameStream<double>> sum = inputs[0];
       for (int i = 1; i < inputs.size(); ++i) {
         shared_ptr<Add> newAdd = std::make_shared<Add>();
         newAdd->a << sum;
@@ -34,7 +34,7 @@ public:
   }
 
   friend void operator+=(SignalInput<double> &signalInput,
-                         shared_ptr<Signal<double>>);
+                         shared_ptr<FrameStream<double>>);
   ;
 };
 
@@ -42,7 +42,7 @@ public:
  * Mix an additional signal into an input.
  */
 void operator+=(SignalInput<double> &signalInput,
-                shared_ptr<Signal<double>> &additionalSignal);
+                shared_ptr<FrameStream<double>> &additionalSignal);
 
-shared_ptr<Signal<double>> operator+(shared_ptr<Signal<double>> a,
-                                     shared_ptr<Signal<double>> b);
+shared_ptr<FrameStream<double>> operator+(shared_ptr<FrameStream<double>> a,
+                                          shared_ptr<FrameStream<double>> b);

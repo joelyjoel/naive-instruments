@@ -1,6 +1,6 @@
 #include "../core.h"
 
-class Decay : public Signal<double> {
+class Decay : public FrameStream<double> {
 private:
   double phase = 0;
 

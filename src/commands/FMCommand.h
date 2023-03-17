@@ -10,7 +10,7 @@ public:
 
     // Create the oscs
     std::vector<shared_ptr<Osc>> oscs;
-    std::vector<shared_ptr<Signal<double>>> outputs;
+    std::vector<shared_ptr<FrameStream<double>>> outputs;
 
     for (int i = 0; i < numberOfOscs; ++i) {
       shared_ptr<Osc> osc = Osc::create_sine();
@@ -23,7 +23,8 @@ public:
     }
 
     // Assign the fundamental frequencies
-    shared_ptr<Signal<double>> fundamentalPitch = SignalString::parse(args[0]);
+    shared_ptr<FrameStream<double>> fundamentalPitch =
+        SignalString::parse(args[0]);
     shared_ptr<PitchConverter> fundamentalFrequency =
         pitchToFrequency(fundamentalPitch);
     for (int i = 0; i < numberOfOscs; ++i) {
@@ -32,7 +33,7 @@ public:
       if (i == 0) {
         osc->frequency << fundamentalFrequency;
       } else {
-        shared_ptr<Signal<double>> ratio = SignalString::parse(args[i]);
+        shared_ptr<FrameStream<double>> ratio = SignalString::parse(args[i]);
         osc->frequency << fundamentalFrequency * ratio;
       }
     }
@@ -44,7 +45,7 @@ public:
         const std::string key = std::to_string(modulatorIndex) + "to" +
                                 std::to_string(carrierIndex);
         if (args.exists(key)) {
-          shared_ptr<Signal<double>> modulation = args.signal(key);
+          shared_ptr<FrameStream<double>> modulation = args.signal(key);
 
           shared_ptr<IntervalToRatio> ratio =
               intervalToRatio(outputs[modulatorIndex] * modulation);
@@ -54,12 +55,13 @@ public:
     }
 
     // Create the final mix
-    shared_ptr<Signal<double>> mixdown;
+    shared_ptr<FrameStream<double>> mixdown;
     for (int i = 0; i < numberOfOscs; ++i) {
-      shared_ptr<Signal<double>> oscOutput = outputs[i];
+      shared_ptr<FrameStream<double>> oscOutput = outputs[i];
       const std::string key = std::to_string(i) + "-out";
       if (args.exists(key) || i == 0) {
-        shared_ptr<Signal<double>> level = args.signal(key, i == 0 ? "1" : "0");
+        shared_ptr<FrameStream<double>> level =
+            args.signal(key, i == 0 ? "1" : "0");
 
         if (mixdown)
           mixdown = oscOutput * level;

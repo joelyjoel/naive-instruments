@@ -14,7 +14,7 @@ class BoopCommand : public AudioCommand {
     shared_ptr<Osc> osc = make_shared<Osc>(waveform);
     shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
 
-    shared_ptr<Signal<double>> frequency = inputFrequency();
+    shared_ptr<FrameStream<double>> frequency = inputFrequency();
     shared_ptr<Decay> envelope = make_shared<Decay>();
 
     envelope->duration << inputDuration();

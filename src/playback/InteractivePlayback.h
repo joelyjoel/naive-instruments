@@ -14,14 +14,14 @@ class InteractivePlayback {
 
   CDJ cdj;
 
-  InteractivePlayback(Signal<double> &input) : bufferedPlayback(cdj) {
+  InteractivePlayback(FrameStream<double> &input) : bufferedPlayback(cdj) {
     attachPlaybackControls(input);
   }
 
   // TODO: Use smart pointers insteadh of references
-  void attachPlaybackControls(Signal<double> &input) {
+  void attachPlaybackControls(FrameStream<double> &input) {
     // FIXME: Unsafe!
-    std::shared_ptr<Signal<double>> inputptr(&input);
+    std::shared_ptr<FrameStream<double>> inputptr(&input);
     cdj.input << inputptr;
   }
 
@@ -95,7 +95,7 @@ class InteractivePlayback {
   }
 
 public:
-  static void play(Signal<double> &signal) {
+  static void play(FrameStream<double> &signal) {
     InteractivePlayback playback(signal);
     playback.start(false);
   }

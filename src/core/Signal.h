@@ -10,7 +10,7 @@ using std::shared_ptr, std::make_shared;
 class UntypedSignalInput;
 template <typename frame> class SignalInput;
 class AbstractFrameStream;
-template <typename frame> class Signal;
+template <typename frame> class FrameStream;
 
 class UntypedSignalInput {
   friend AbstractFrameStream;
@@ -22,7 +22,7 @@ public:
   UntypedSignalInput(AbstractFrameStream *owner, const std::string &name,
                      bool keepSyncedToOwner = true);
 
-  virtual void connect(shared_ptr<Signal<double>> signal);
+  virtual void connect(shared_ptr<FrameStream<double>> signal);
 
 public:
   virtual void setConstant(double k);
@@ -64,9 +64,9 @@ public:
       : UntypedSignalInput(owner, name, keepSyncedToOwner), constant(0) {}
 
 public:
-  std::shared_ptr<Signal<frame>> typedConnection() {
+  std::shared_ptr<FrameStream<frame>> typedConnection() {
     // Hmm seems risky
-    return std::dynamic_pointer_cast<Signal<frame>>(untypedConnection);
+    return std::dynamic_pointer_cast<FrameStream<frame>>(untypedConnection);
   }
 
 public:
@@ -77,7 +77,7 @@ public:
       return constant;
   }
 
-  void connect(std::shared_ptr<Signal<frame>> inputSignal) {
+  void connect(std::shared_ptr<FrameStream<frame>> inputSignal) {
     untypedConnection = inputSignal;
   }
 
@@ -89,7 +89,8 @@ public:
     constant = k;
   }
 
-  Signal<frame> &operator<<(std::shared_ptr<Signal<frame>> instrument) {
+  FrameStream<frame> &
+  operator<<(std::shared_ptr<FrameStream<frame>> instrument) {
     connect(instrument);
     return *instrument;
   }
@@ -188,7 +189,7 @@ public:
 /**
  * I think its intuitive to think of audio processes like little machines.
  */
-template <typename frame> class Signal : public AbstractFrameStream {
+template <typename frame> class FrameStream : public AbstractFrameStream {
 protected:
   frame output;
 
@@ -235,4 +236,4 @@ public:
 /**
  * Convenient alias for very freqeuent type.
  */
-typedef shared_ptr<Signal<double>> sigarette;
+typedef shared_ptr<FrameStream<double>> sigarette;

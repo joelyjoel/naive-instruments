@@ -4,7 +4,7 @@
 #include "../core.h"
 #include <string>
 
-class Wavetable : public Signal<double> {
+class Wavetable : public FrameStream<double> {
   int bufferLength;
 
   MonoBuffer *waveform;

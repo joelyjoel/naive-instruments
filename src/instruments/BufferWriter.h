@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class BufferWriter : public Signal<double> {
+class BufferWriter : public FrameStream<double> {
 public:
   SignalInput<double> input = {this, "input"};
 

@@ -11,7 +11,7 @@ UntypedSignalInput::UntypedSignalInput(AbstractFrameStream *owner,
   owner->inputs.push_back(this);
 };
 
-void UntypedSignalInput::connect(shared_ptr<Signal<double>> signal) {
+void UntypedSignalInput::connect(shared_ptr<FrameStream<double>> signal) {
   ;
   std::cerr << "No override for "
                "UntypedSignalInput::connect method\n";

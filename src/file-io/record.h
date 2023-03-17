@@ -7,7 +7,8 @@
 /**
  * Record a signal into a WAV file.
  */
-void record(const std::string &outputFile, Signal<double> &signal,
+void record(const std::string &outputFile, FrameStream<double> &signal,
             float duration);
 
-void record(std::ostream &outputStream, Signal<double> &signal, float duration);
+void record(std::ostream &outputStream, FrameStream<double> &signal,
+            float duration);

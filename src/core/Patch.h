@@ -3,12 +3,12 @@
 #include "Signal.h"
 #include <string>
 
-template <typename SignalFrame> class Patch : public Signal<SignalFrame> {
+template <typename SignalFrame> class Patch : public FrameStream<SignalFrame> {
 private:
   /**
    * Pointer to the signal nominated as this patch's output signal.
    */
-  shared_ptr<Signal<SignalFrame>> output;
+  shared_ptr<FrameStream<SignalFrame>> output;
 
 public:
   /* Patch(shared_ptr<Signal<SignalFrame>> output) { exposeOutput(output); } */
@@ -21,12 +21,12 @@ public:
 
 protected:
   template <typename T> SignalInput<T> &exposeInput(SignalInput<T> &input) {
-    Signal<SignalFrame>::inputs.push_back(&input);
+    FrameStream<SignalFrame>::inputs.push_back(&input);
     return input;
   }
 
 protected:
-  void exposeOutput(shared_ptr<Signal<SignalFrame>> outputSignal) {
+  void exposeOutput(shared_ptr<FrameStream<SignalFrame>> outputSignal) {
     if (!outputSignal) {
       std::cerr << "output pointer is null in " << label() << "\n";
       throw 1;

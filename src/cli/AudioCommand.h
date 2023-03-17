@@ -52,12 +52,12 @@ protected:
         "Frequency of the oscillator expressed as a midi pitch number.");
   }
 
-  shared_ptr<Signal<double>> inputPitch() {
+  shared_ptr<FrameStream<double>> inputPitch() {
     return SignalString::parse(args["pitch"].as<std::string>());
   }
 
-  shared_ptr<Signal<double>> inputFrequency() {
-    shared_ptr<Signal<double>> pitch = inputPitch();
+  shared_ptr<FrameStream<double>> inputFrequency() {
+    shared_ptr<FrameStream<double>> pitch = inputPitch();
     shared_ptr<PitchConverter> converter = make_shared<PitchConverter>();
     converter->pitch << pitch;
     return converter;
@@ -110,7 +110,7 @@ protected:
 
 protected:
   // TODO: Use a shared ptr?
-  void output(Signal<double> &signal) {
+  void output(FrameStream<double> &signal) {
     auto &path = outputFile();
     if (stdoutIsAPipe()) {
       std::cerr << "Piping to stdout\n";

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class BreakpointEnvelope : public Signal<double> {
+class BreakpointEnvelope : public FrameStream<double> {
   void action() override {
     progress += progressPerSample;
     if (progress >= 1)

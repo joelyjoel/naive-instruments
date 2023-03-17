@@ -11,7 +11,7 @@
 
 class SignalString {
 public:
-  static shared_ptr<Signal<double>> parse(const std::string str) {
+  static shared_ptr<FrameStream<double>> parse(const std::string str) {
 
     std::regex wavFileRegex(".wav$");
     if (std::regex_search(str, wavFileRegex)) {

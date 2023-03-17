@@ -3,7 +3,7 @@
 #include "../core.h"
 #include <iostream>
 
-class Constant : public Signal<double> {
+class Constant : public FrameStream<double> {
 private:
   double value = 0;
 

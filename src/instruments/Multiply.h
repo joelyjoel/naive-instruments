@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class Multiply : public Signal<double> {
+class Multiply : public FrameStream<double> {
 public:
   SignalInput<double> a{this, "a"};
   SignalInput<double> b{this, "a"};
@@ -20,7 +20,7 @@ public:
  * Mix an additional signal into a input
  */
 void operator*=(SignalInput<double> &signalInput,
-                shared_ptr<Signal<double>> additionalSignal);
+                shared_ptr<FrameStream<double>> additionalSignal);
 
-shared_ptr<Signal<double>> operator*(shared_ptr<Signal<double>> a,
-                                     shared_ptr<Signal<double>> b);
+shared_ptr<FrameStream<double>> operator*(shared_ptr<FrameStream<double>> a,
+                                          shared_ptr<FrameStream<double>> b);

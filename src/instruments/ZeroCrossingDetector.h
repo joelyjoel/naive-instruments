@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class ZeroCrossingDetector : public Signal<bool> {
+class ZeroCrossingDetector : public FrameStream<bool> {
 private:
   double previous = 0;
   double threshold = 0;

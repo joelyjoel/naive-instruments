@@ -30,13 +30,13 @@ public:
     filter->input << sampler;
 
     if (args.count("frequency")) {
-      shared_ptr<Signal<double>> frequency =
+      shared_ptr<FrameStream<double>> frequency =
           SignalString::parse(args["frequency"].as<std::string>());
       filter->frequency << frequency;
       output(*filter);
     } else if (args.count("pitch")) {
       shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
-      shared_ptr<Signal<double>> pitch =
+      shared_ptr<FrameStream<double>> pitch =
           SignalString::parse(args["pitch"].as<std::string>());
       pitchConverter->pitch << pitch;
       filter->frequency << pitchConverter;

@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class IntervalToRatio : public Signal<double> {
+class IntervalToRatio : public FrameStream<double> {
 public:
   SignalInput<double> interval{this, "interval/st"};
 
@@ -17,13 +17,13 @@ protected:
 };
 
 shared_ptr<IntervalToRatio>
-intervalToRatio(shared_ptr<Signal<double>> intervalSignal) {
+intervalToRatio(shared_ptr<FrameStream<double>> intervalSignal) {
   auto converter = IntervalToRatio::create();
   converter->interval << intervalSignal;
   return converter;
 }
 
-class PitchConverter : public Signal<double> {
+class PitchConverter : public FrameStream<double> {
 public:
   SignalInput<double> pitch{this, "pitch/MIDI"};
 
@@ -38,7 +38,7 @@ private:
 };
 
 shared_ptr<PitchConverter>
-pitchToFrequency(shared_ptr<Signal<double>> pitchSignal) {
+pitchToFrequency(shared_ptr<FrameStream<double>> pitchSignal) {
   auto converter = PitchConverter::create();
   converter->pitch << pitchSignal;
   return converter;

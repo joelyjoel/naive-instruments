@@ -5,10 +5,10 @@
 
 class RMS {
 private:
-  Signal<double> *signal;
+  FrameStream<double> *signal;
 
 public:
-  void operator<<(Signal<double> &input) { signal = &input; }
+  void operator<<(FrameStream<double> &input) { signal = &input; }
 
 public:
   RMS() {}

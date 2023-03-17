@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-class CDJ : public Signal<double> {
+class CDJ : public FrameStream<double> {
 
 public:
   SignalInput<double> input{this, "input"};

@@ -2,7 +2,7 @@
 
 #include "../core.h"
 
-class FixedPipe : public Signal<double> {
+class FixedPipe : public FrameStream<double> {
   double *buffer;
   int bufferSize;
   int tapeHeadIndex = 0;

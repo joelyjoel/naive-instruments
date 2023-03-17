@@ -3,7 +3,7 @@
 #include "../core.h"
 #include <string>
 
-class UnsignedSaw : public Signal<double> {
+class UnsignedSaw : public FrameStream<double> {
 public:
   SignalInput<double> frequency{this, "frequency/Hz"};
   double phase;

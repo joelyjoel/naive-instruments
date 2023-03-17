@@ -1,6 +1,6 @@
 #pragma once
 #include "../core.h"
-class AHD : public Signal<double> {
+class AHD : public FrameStream<double> {
 public:
   SignalInput<double> attack{this, "attack/s"};
   SignalInput<double> hold{this, "hold/s"};

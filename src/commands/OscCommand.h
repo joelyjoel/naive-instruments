@@ -29,7 +29,7 @@ public:
     /* const std::string str = args[0]; */
     /* auto &f = **ControlString::parse(str); */
 
-    shared_ptr<Signal<double>> pitch = inputPitch();
+    shared_ptr<FrameStream<double>> pitch = inputPitch();
 
     vibrato->depth << args["vibrato-amount"].as<std::string>();
     vibrato->frequency << args["vibrato-frequency"].as<std::string>();

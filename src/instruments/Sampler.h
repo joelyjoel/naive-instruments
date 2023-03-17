@@ -4,7 +4,7 @@
 #include "../file-io/WavReader.h"
 #include <iostream>
 
-class Sampler : public Signal<double> {
+class Sampler : public FrameStream<double> {
 private:
   MonoBuffer *buffer;
   int playhead = 0;

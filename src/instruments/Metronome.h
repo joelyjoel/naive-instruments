@@ -1,6 +1,6 @@
 #include "../core.h"
 
-class Metronome : public Signal<bool> {
+class Metronome : public FrameStream<bool> {
 public:
   SignalInput<double> bpm{this, "bpm/bpm"};
 

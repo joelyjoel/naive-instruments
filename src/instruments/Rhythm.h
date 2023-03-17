@@ -7,7 +7,7 @@ using std::vector, std::string;
 // TODO: Refactor as two classes. A rhythm class, and a RhythmPlayer :
 // Signal<bool> class
 
-class Rhythm : public Signal<bool> {
+class Rhythm : public FrameStream<bool> {
 
 public:
   SignalInput<double> bpm{this, "bpm/bpm"};
