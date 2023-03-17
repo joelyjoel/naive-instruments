@@ -63,7 +63,7 @@ public:
         shared_ptr<FrameStream<double>> level =
             args.signal(key, i == 0 ? "1" : "0");
 
-        if (mixdown)
+        if (mixdown == nullptr)
           mixdown = oscOutput * level;
         else
           mixdown = mixdown + (oscOutput * level);
