@@ -60,7 +60,6 @@ template <typename frame> class SignalInput : public UntypedSignalInput {
 
 private:
 public:
-  frame constant;
   SignalInput(AbstractFrameStream *owner, const std::string &name,
               bool keepSyncedToOwner = true)
       : UntypedSignalInput(owner, name, keepSyncedToOwner) {
@@ -77,15 +76,16 @@ public:
   frame readFrame() {
     if (hasConnection()) {
       return typedConnection()->readFrame();
-    } else
-      return constant;
+    } else {
+      std::cerr << "SignalInput::readFrame failed because " << label()
+                << " had no connection\n";
+      throw 1;
+    }
   }
 
   void connect(std::shared_ptr<FrameStream<frame>> inputSignal) {
     untypedConnection = inputSignal;
   }
-
-  void disconnect() { untypedConnection = nullptr; }
 
 public:
   void setConstant(frame k);
