@@ -139,11 +139,14 @@ public:
   }
 
 public:
+  void advanceToNextFrame() {
+    ++internalClock;
+    syncInputs();
+    action();
+  }
   void sync(int clock) {
     while (internalClock < clock) {
-      ++internalClock;
-      syncInputs();
-      action();
+      advanceToNextFrame();
     }
   }
 
@@ -205,7 +208,7 @@ public:
    * Advances signal to the next frame and returns the frame's value
    */
   frame advanceToNextFrameAndRead() {
-    sync(internalClock + 1);
+    advanceToNextFrame();
     return latestFrame;
   }
   frame operator++() { return advanceToNextFrameAndRead(); }
