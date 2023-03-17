@@ -68,7 +68,7 @@ public:
 
   void topUpBuffer() {
     while (buffer.hasFreeSpace())
-      buffer.push(signal->next());
+      buffer.push(signal->advanceToNextFrameAndRead());
   }
 
   void topUpBufferAndSleep() {

@@ -201,11 +201,14 @@ public:
     return latestFrame;
   }
 
-  frame next() {
+  /**
+   * Advances signal to the next frame and returns the frame's value
+   */
+  frame advanceToNextFrameAndRead() {
     sync(internalClock + 1);
     return latestFrame;
   }
-  frame operator++() { return next(); }
+  frame operator++() { return advanceToNextFrameAndRead(); }
 
   frame operator()() { return latestFrame; }
 
