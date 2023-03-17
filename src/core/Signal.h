@@ -94,15 +94,6 @@ public:
   }
 
   void operator<<(double k) { setConstant(k); }
-
-public:
-  double currentConstant() {
-    if (hasConnection()) {
-      std::cerr << "Cannot get constant of non-constant signal input!\n";
-      throw 1;
-    } else
-      return constant;
-  }
 };
 
 /**
