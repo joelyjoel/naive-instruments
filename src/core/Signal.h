@@ -190,18 +190,18 @@ public:
  */
 template <typename frame> class Signal : public UntypedSignal {
 protected:
-  frame latestFrame;
+  frame currentFrame;
 
 protected:
   /**
    * Update the latest frame.
    */
-  void out(const frame &y) { latestFrame = y; }
+  void out(const frame &y) { currentFrame = y; }
 
 public:
   frame operator[](int clock) {
     sync(clock);
-    return latestFrame;
+    return currentFrame;
   }
 
   /**
@@ -209,11 +209,11 @@ public:
    */
   frame advanceToNextFrameAndRead() {
     advanceToNextFrame();
-    return latestFrame;
+    return currentFrame;
   }
   frame operator++() { return advanceToNextFrameAndRead(); }
 
-  frame operator()() { return latestFrame; }
+  frame operator()() { return currentFrame; }
 
   UntypedSignalInput &defaultInput() {
     if (inputs.size() > 0)
@@ -229,7 +229,7 @@ public:
 public:
   std::string summary() override {
     return label() + "[" + std::to_string(internalClock) +
-           "] = " + std::to_string(latestFrame);
+           "] = " + std::to_string(currentFrame);
   }
 };
 
