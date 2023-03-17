@@ -72,7 +72,7 @@ public:
 public:
   frame operator()() {
     if (hasConnection()) {
-      return (*typedConnection())();
+      return typedConnection()->readFrame();
     } else
       return constant;
   }
@@ -213,9 +213,6 @@ public:
     advanceToNextFrame();
     return readFrame();
   }
-  frame operator++() { return advanceToNextFrameAndRead(); }
-
-  frame operator()() { return output; }
 
   UntypedSignalInput &defaultInput() {
     if (inputs.size() > 0)

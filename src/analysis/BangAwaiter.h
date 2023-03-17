@@ -13,7 +13,7 @@ private:
 
 public:
   void next(int limit = 44100) {
-    while (++(*signal) == false)
+    while (signal->advanceToNextFrameAndRead() == false)
       if (--limit > 0)
         continue;
       else

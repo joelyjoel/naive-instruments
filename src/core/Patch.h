@@ -16,7 +16,7 @@ public:
 public:
   void action() {
     output->sync(this->internalClock);
-    this->out((*output)());
+    this->out(output->readFrame());
   }
 
 protected:
