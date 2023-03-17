@@ -9,17 +9,17 @@ using std::shared_ptr, std::make_shared;
 
 class UntypedSignalInput;
 template <typename frame> class SignalInput;
-class UntypedSignal;
+class AbstractFrameStream;
 template <typename frame> class Signal;
 
 class UntypedSignalInput {
-  friend UntypedSignal;
+  friend AbstractFrameStream;
 
 protected:
-  UntypedSignal *owner;
+  AbstractFrameStream *owner;
 
 public:
-  UntypedSignalInput(UntypedSignal *owner, const std::string &name,
+  UntypedSignalInput(AbstractFrameStream *owner, const std::string &name,
                      bool keepSyncedToOwner = true);
 
   virtual void connect(shared_ptr<Signal<double>> signal);
@@ -41,7 +41,7 @@ public:
   void syncToOwner();
 
 protected:
-  std::shared_ptr<UntypedSignal> untypedConnection;
+  std::shared_ptr<AbstractFrameStream> untypedConnection;
 
 public:
   bool hasConnection();
@@ -59,7 +59,7 @@ private:
   frame constant;
 
 public:
-  SignalInput(UntypedSignal *owner, const std::string &name,
+  SignalInput(AbstractFrameStream *owner, const std::string &name,
               bool keepSyncedToOwner = true)
       : UntypedSignalInput(owner, name, keepSyncedToOwner), constant(0) {}
 
@@ -110,7 +110,7 @@ public:
  * This class just exists so that SignalInput's don't have to know the
  * frame type of their owners.
  */
-class UntypedSignal {
+class AbstractFrameStream {
   friend UntypedSignalInput;
 
 public:
@@ -176,8 +176,8 @@ public:
   }
 
 public:
-  std::vector<std::shared_ptr<UntypedSignal>> inputSignals() const {
-    std::vector<std::shared_ptr<UntypedSignal>> list;
+  std::vector<std::shared_ptr<AbstractFrameStream>> inputSignals() const {
+    std::vector<std::shared_ptr<AbstractFrameStream>> list;
     for (auto input : inputs)
       if (input->hasConnection())
         list.push_back(input->untypedConnection);
@@ -188,7 +188,7 @@ public:
 /**
  * I think its intuitive to think of audio processes like little machines.
  */
-template <typename frame> class Signal : public UntypedSignal {
+template <typename frame> class Signal : public AbstractFrameStream {
 protected:
   frame currentFrame;
 

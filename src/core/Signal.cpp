@@ -4,7 +4,7 @@
 // class UntypedSignalInput
 // --------------------------------------------------------------------------------
 
-UntypedSignalInput::UntypedSignalInput(UntypedSignal *owner,
+UntypedSignalInput::UntypedSignalInput(AbstractFrameStream *owner,
                                        const std::string &name,
                                        bool keepSyncedToOwner)
     : owner(owner), keepSyncedToOwner(keepSyncedToOwner) {
@@ -24,7 +24,7 @@ void UntypedSignalInput::setConstant(double k) {
   throw 1;
 }
 
-UntypedSignal *untypedConnection = nullptr;
+AbstractFrameStream *untypedConnection = nullptr;
 
 bool UntypedSignalInput::hasConnection() {
   return untypedConnection != nullptr;
