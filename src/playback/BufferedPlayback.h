@@ -25,7 +25,7 @@ public:
   BufferedPlayback(FrameStream<double> &input) : buffer(1024) {
     signal = &input;
   }
-  BufferedPlayback() : BufferedPlayback(*new Constant(0)) {}
+  BufferedPlayback() : BufferedPlayback(*new Constant<double>(0)) {}
   FrameStream<double> *signal;
   CircularBuffer<double> buffer;
   double shift() { return buffer.shift(); }

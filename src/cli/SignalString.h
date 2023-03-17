@@ -27,10 +27,10 @@ public:
     try {
       double f = std::stoi(str);
       std::cerr << "Got osc " << f << " from " << str << "\n";
-      return make_shared<Constant>(f);
+      return make_shared<Constant<double>>(f);
     } catch (std::invalid_argument err) {
       std::cerr << "Can't parse '" << str << "'\n";
-      return make_shared<Constant>(0);
+      return make_shared<Constant<double>>(0);
     }
   }
 };

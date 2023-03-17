@@ -20,7 +20,7 @@ public:
   static shared_ptr<FrameStream<double>>
   many(std::vector<shared_ptr<FrameStream<double>>> &inputs) {
     if (inputs.size() == 0)
-      return std::make_shared<Constant>(0);
+      return std::make_shared<Constant<double>>(0);
     else {
       shared_ptr<FrameStream<double>> sum = inputs[0];
       for (int i = 1; i < inputs.size(); ++i) {

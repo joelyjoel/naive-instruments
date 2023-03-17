@@ -3,11 +3,11 @@
 #include "../core.h"
 #include <iostream>
 
-class Constant : public FrameStream<double> {
+template <typename Frame> class Constant : public FrameStream<Frame> {
 private:
-  double value = 0;
+  Frame value = 0;
 
 public:
-  Constant(double k) : value(k) {}
-  void action() { writeFrame(value); }
+  Constant(Frame k) : value(k) {}
+  void action() { FrameStream<Frame>::writeFrame(value); }
 };
