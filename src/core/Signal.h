@@ -47,7 +47,7 @@ protected:
   std::shared_ptr<AbstractFrameStream> untypedConnection;
 
 public:
-  bool hasConnection();
+  void checkConnection();
 
 public:
   void reset();
@@ -74,13 +74,8 @@ public:
 
 public:
   frame readFrame() {
-    if (hasConnection()) {
-      return typedConnection()->readFrame();
-    } else {
-      std::cerr << "SignalInput::readFrame failed because " << label()
-                << " had no connection\n";
-      throw 1;
-    }
+    checkConnection();
+    return typedConnection()->readFrame();
   }
 
   void connect(std::shared_ptr<FrameStream<frame>> inputSignal) {
@@ -171,9 +166,10 @@ public:
 public:
   std::vector<std::shared_ptr<AbstractFrameStream>> inputSignals() const {
     std::vector<std::shared_ptr<AbstractFrameStream>> list;
-    for (auto input : inputs)
-      if (input->hasConnection())
-        list.push_back(input->untypedConnection);
+    for (auto input : inputs) {
+      input->checkConnection();
+      list.push_back(input->untypedConnection);
+    }
     return list;
   }
 };

@@ -26,22 +26,26 @@ void UntypedSignalInput::setConstant(double k) {
 
 AbstractFrameStream *untypedConnection = nullptr;
 
-bool UntypedSignalInput::hasConnection() {
-  return untypedConnection != nullptr;
+void UntypedSignalInput::checkConnection() {
+  if (untypedConnection == nullptr) {
+    std::cerr << label() << " has no connection\n";
+    throw 1;
+  }
 }
 
 void UntypedSignalInput::reset() {
-  if (hasConnection())
-    untypedConnection->reset();
+  checkConnection();
+  untypedConnection->reset();
 }
 
 void UntypedSignalInput::sync(int clock) {
-  if (hasConnection())
-    untypedConnection->sync(clock);
+  checkConnection();
+  untypedConnection->sync(clock);
 }
 
 void UntypedSignalInput::syncToOwner() {
-  if (hasConnection() && keepSyncedToOwner)
+  checkConnection();
+  if (keepSyncedToOwner)
     untypedConnection->sync(owner->internalClock);
 }
 
