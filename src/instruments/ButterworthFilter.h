@@ -5,7 +5,7 @@ class ButterworthFilter : public FrameStream<double> {
 
   double x1 = 0, x2 = 0, y = 0, y1 = 0, y2 = 0;
   void action() override {
-    double x = input();
+    double x = input.readFrame();
     calculateCoefficients();
 
     y = a0 * x + a1 * x1 + a2 * x2 - b1 * y1 - b2 * y2;
@@ -37,7 +37,7 @@ private:
     switch (kind) {
 
     case LowPass:
-      lamda = 1.0 / std::tan(M_PI * frequency() / sampleRate);
+      lamda = 1.0 / std::tan(M_PI * frequency.readFrame() / sampleRate);
       lamdaSquared = lamda * lamda;
       a0 = 1.0 / (1.0 + 2.0 * lamda + lamdaSquared);
       a1 = 2.0 * a0;
@@ -47,7 +47,7 @@ private:
       break;
 
     case HighPass:
-      lamda = std::tan(M_PI * frequency() / sampleRate);
+      lamda = std::tan(M_PI * frequency.readFrame() / sampleRate);
       lamdaSquared = lamda * lamda;
       a0 = 1 / (1 + 2 * lamda + lamdaSquared);
       a1 = 2 * a0;
@@ -57,8 +57,8 @@ private:
       break;
 
     case BandPass:
-      lamda = 1 / std::tan(M_PI * bandwidth() / sampleRate);
-      phi = 2 * std::cos(2 * M_PI * frequency() / sampleRate);
+      lamda = 1 / std::tan(M_PI * bandwidth.readFrame() / sampleRate);
+      phi = 2 * std::cos(2 * M_PI * frequency.readFrame() / sampleRate);
       a0 = 1 / (1 + lamda);
       a1 = 0;
       a2 = -a0;
@@ -68,8 +68,8 @@ private:
 
     case BandReduce:
       // TODO: Possibly buggy
-      lamda = std::tan(M_PI * bandwidth() / sampleRate);
-      phi = 2 * std::cos(2 * M_PI * frequency() / sampleRate);
+      lamda = std::tan(M_PI * bandwidth.readFrame() / sampleRate);
+      phi = 2 * std::cos(2 * M_PI * frequency.readFrame() / sampleRate);
       a0 = 1 / (1 + lamda);
       a1 = -phi * a0;
       a2 = a0;

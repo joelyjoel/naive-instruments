@@ -16,8 +16,8 @@ public:
   ~FixedPipe() { delete buffer; }
 
   void action() {
-    buffer[tapeHeadIndex] = input();
-    std::cout << input() << "\n";
+    buffer[tapeHeadIndex] = input.readFrame();
+    std::cout << input.readFrame() << "\n";
 
     ++tapeHeadIndex;
     if (tapeHeadIndex >= bufferSize)

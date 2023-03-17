@@ -35,7 +35,7 @@ private:
   void bufferMore() {
     while (bufferedUntil < playhead + lookAhead) {
       input.sync(bufferedUntil);
-      internalBuffer[bufferedUntil % bufferSize] = input();
+      internalBuffer[bufferedUntil % bufferSize] = input.readFrame();
       ++bufferedUntil;
     }
   }

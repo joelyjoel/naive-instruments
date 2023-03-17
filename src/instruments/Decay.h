@@ -13,7 +13,7 @@ public:
 protected:
   void action() override {
     if (phase < 1.0) {
-      phase += (1.0 / 44100.0) / duration();
+      phase += (1.0 / 44100.0) / duration.readFrame();
       writeFrame(1.0 - phase);
     } else
       writeFrame(0.0);

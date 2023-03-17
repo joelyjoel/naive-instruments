@@ -13,7 +13,7 @@ public:
   bool detectUpwardsZeroCrossings = false;
 
   void action() {
-    double next = input();
+    double next = input.readFrame();
     bool result = (detectDownwardsZeroCrossings && previous > threshold &&
                    next < -threshold) ||
                   (detectUpwardsZeroCrossings && previous < -threshold &&

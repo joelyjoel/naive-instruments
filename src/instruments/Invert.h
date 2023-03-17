@@ -5,5 +5,5 @@ public:
   SignalInput<double> input{this, "input"};
 
 protected:
-  void action() override { writeFrame(-input()); }
+  void action() override { writeFrame(-input.readFrame()); }
 };

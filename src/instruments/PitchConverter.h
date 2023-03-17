@@ -13,7 +13,9 @@ public:
   std::string label() override { return "IntervalToRatio"; }
 
 protected:
-  void action() override { writeFrame(pow(2.0, (interval() / 12.0))); }
+  void action() override {
+    writeFrame(pow(2.0, (interval.readFrame() / 12.0)));
+  }
 };
 
 shared_ptr<IntervalToRatio>
@@ -35,7 +37,7 @@ public:
 
 private:
   void action() override {
-    writeFrame(440 * pow(2.0, ((pitch() - 69) / 12.0)));
+    writeFrame(440 * pow(2.0, ((pitch.readFrame() - 69) / 12.0)));
   }
 };
 

@@ -13,9 +13,9 @@ public:
 
   void action() {
     if (phase < 1) {
-      phase += (1.0 / 44100.0) / duration();
-      writeFrame(phase * end() + (1 - phase) * start());
+      phase += (1.0 / 44100.0) / duration.readFrame();
+      writeFrame(phase * end.readFrame() + (1 - phase) * start.readFrame());
     } else
-      writeFrame(end());
+      writeFrame(end.readFrame());
   }
 };

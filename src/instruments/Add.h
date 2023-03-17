@@ -12,7 +12,7 @@ public:
 
   Add() {}
 
-  void action() { writeFrame(a() + b()); }
+  void action() { writeFrame(a.readFrame() + b.readFrame()); }
 
   std::string label() { return "Add"; }
 

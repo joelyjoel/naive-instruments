@@ -8,7 +8,7 @@ public:
   SignalInput<double> b{this, "a"};
 
 protected:
-  void action() override { writeFrame(a() * b()); }
+  void action() override { writeFrame(a.readFrame() * b.readFrame()); }
 
 public:
   std::string label() override { return "Multiply"; }

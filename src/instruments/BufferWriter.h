@@ -22,7 +22,7 @@ private:
 
 public:
   void action() {
-    double signal = input();
+    double signal = input.readFrame();
     if (writeHead < buffer->numberOfFrames())
       (*buffer)[writeHead] = signal;
     ++writeHead;

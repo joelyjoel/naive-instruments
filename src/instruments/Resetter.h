@@ -11,8 +11,8 @@ public:
 
 protected:
   void action() override {
-    if (trigger())
+    if (trigger.readFrame())
       input.reset();
-    writeFrame(input());
+    writeFrame(input.readFrame());
   }
 };

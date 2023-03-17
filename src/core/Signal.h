@@ -71,7 +71,7 @@ public:
   }
 
 public:
-  frame operator()() {
+  frame readFrame() {
     if (hasConnection()) {
       return typedConnection()->readFrame();
     } else

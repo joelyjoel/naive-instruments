@@ -10,7 +10,7 @@ private:
 
 protected:
   void action() override {
-    progress += bpm() * k;
+    progress += bpm.readFrame() * k;
     if (progress >= 1) {
       writeFrame(true);
       do {

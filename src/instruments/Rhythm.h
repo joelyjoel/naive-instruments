@@ -23,7 +23,7 @@ private:
 
 protected:
   void action() override {
-    elapsed += bpm() * k;
+    elapsed += bpm.readFrame() * k;
     if (elapsed > durations[index]) {
       writeFrame(true);
       do {

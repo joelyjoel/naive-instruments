@@ -16,7 +16,7 @@ private:
     switch (stage) {
 
     case A:
-      phase += 1 / sampleRate / attack();
+      phase += 1 / sampleRate / attack.readFrame();
       if (phase >= 1) {
         phase = 0;
         stage = H;
@@ -25,7 +25,7 @@ private:
       break;
 
     case H:
-      phase += 1 / sampleRate / hold();
+      phase += 1 / sampleRate / hold.readFrame();
       if (phase >= 1) {
         phase = 0;
         stage = D;
@@ -34,7 +34,7 @@ private:
       break;
 
     case D:
-      phase += 1 / sampleRate / decay();
+      phase += 1 / sampleRate / decay.readFrame();
       if (phase >= 1) {
         phase = 0;
         stage = finished;

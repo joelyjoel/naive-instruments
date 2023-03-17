@@ -22,7 +22,7 @@ public:
       writeFrame(0);
     else {
       input.sync(t++);
-      writeFrame(input());
+      writeFrame(input.readFrame());
     }
   }
 };
