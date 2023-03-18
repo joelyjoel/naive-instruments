@@ -174,21 +174,25 @@ public:
 
 template <typename frame> class FrameStream : public AbstractFrameStream {
 protected:
-  frame output;
+  frame *output;
+
+public:
+  FrameStream() { output = new frame; }
+  ~FrameStream() { delete output; }
 
 protected:
   /**
    * Update the latest frame.
    */
-  void writeFrame(const frame &y) { output = y; }
+  void writeFrame(const frame &y) { *output = y; }
 
 public:
   frame operator[](int clock) {
     sync(clock);
-    return output;
+    return readFrame();
   }
 
-  frame readFrame() { return output; }
+  frame readFrame() { return *output; }
 
   frame advanceToNextFrameAndRead() {
     advanceToNextFrame();
@@ -209,7 +213,7 @@ public:
 public:
   std::string summary() override {
     return label() + "[" + std::to_string(internalClock) +
-           "] = " + std::to_string(output);
+           "] = " + std::to_string(*output);
   }
 };
 
