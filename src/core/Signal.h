@@ -139,8 +139,6 @@ public:
   }
 
 private:
-  // TODO: is using a virtual method the best approach here? Better to use an
-  // intermidiary class?
   void syncInputs() {
     for (auto input : inputs)
       input->syncToOwner();
@@ -174,9 +172,6 @@ public:
   }
 };
 
-/**
- * I think its intuitive to think of audio processes like little machines.
- */
 template <typename frame> class FrameStream : public AbstractFrameStream {
 protected:
   frame output;
@@ -195,9 +190,6 @@ public:
 
   frame readFrame() { return output; }
 
-  /**
-   * Advances signal to the next frame and returns the frame's value
-   */
   frame advanceToNextFrameAndRead() {
     advanceToNextFrame();
     return readFrame();
