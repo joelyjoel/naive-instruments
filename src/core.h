@@ -1,4 +1,11 @@
+#pragma once
+
 #define TODO 1000
+
+typedef struct {
+  double left;
+  double right;
+} StereoFrame;
 
 #include "core/Errors.h"
 #include "core/Hopefully.h"

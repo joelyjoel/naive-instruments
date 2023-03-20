@@ -7,11 +7,6 @@
 
 #include "../core.h"
 
-typedef struct {
-  double left;
-  double right;
-} StereoFrame;
-
 class WavReader {
   std::istream &in;
 

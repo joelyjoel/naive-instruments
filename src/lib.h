@@ -33,6 +33,7 @@
 #include "instruments/Invert.h"
 #include "instruments/LFO.h"
 #include "instruments/MetronomicResetter.h"
+#include "instruments/MonoToStereo.h"
 #include "instruments/Multiply.h"
 #include "instruments/Noise.h"
 #include "instruments/Osc.h"
