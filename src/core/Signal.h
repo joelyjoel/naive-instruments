@@ -53,6 +53,9 @@ public:
   void reset();
 };
 
+// TODO: Split into two classes `FrameStreamConsumer` and `FramestreamInput`.
+//       The second extends the first, adding an owner FrameStream which it may
+//       synchronise to.
 /**
  * Abstraction for the inputs to a Signal
  */
