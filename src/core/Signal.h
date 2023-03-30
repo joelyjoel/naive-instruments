@@ -7,61 +7,18 @@
 
 using std::shared_ptr, std::make_shared;
 
-class AbstractFrameStreamConsumer;
-template <typename frame> class FrameStreamConsumer;
-class AbstractFrameStream;
-template <typename frame> class FrameStream;
-
-class AbstractFrameStreamConsumer {
-  friend AbstractFrameStream;
-
-protected:
-  AbstractFrameStream *owner;
-  std::string name;
-
-public:
-  AbstractFrameStreamConsumer(AbstractFrameStream *owner, const std::string &name,
-                     bool keepSyncedToOwner = true);
-
-  virtual void connect(shared_ptr<FrameStream<double>> signal);
-
-public:
-  virtual void setConstant(double k);
-
-  /**
-   * Synchronise the plugged instrument with the owner
-   */
-  void sync(int clock);
-
-  /**
-   * If this is false, the inputs syncronisation should be manually handled by
-   * the owners `action`. This allows for all kind of pausing, rerating, phasing
-   * or buffering of dependency signals.
-   */
-  bool keepSyncedToOwner;
-  void syncToOwner();
-
-  std::string label();
-
-protected:
-  std::shared_ptr<AbstractFrameStream> untypedConnection;
-
-public:
-  void checkConnection();
-
-public:
-  void reset();
-};
+#include "AbstractFrameStreamConsumer.h"
 
 /**
  * Abstraction for the inputs to a Signal
  */
-template <typename frame> class FrameStreamConsumer : public AbstractFrameStreamConsumer {
+template <typename frame>
+class FrameStreamConsumer : public AbstractFrameStreamConsumer {
 
 private:
 public:
   FrameStreamConsumer(AbstractFrameStream *owner, const std::string &name,
-              bool keepSyncedToOwner = true)
+                      bool keepSyncedToOwner = true)
       : AbstractFrameStreamConsumer(owner, name, keepSyncedToOwner) {
     setConstant(0);
   }
