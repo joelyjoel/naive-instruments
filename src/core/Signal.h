@@ -7,12 +7,12 @@
 
 using std::shared_ptr, std::make_shared;
 
-class UntypedSignalInput;
-template <typename frame> class SignalInput;
+class AbstractFrameStreamConsumer;
+template <typename frame> class FrameStreamConsumer;
 class AbstractFrameStream;
 template <typename frame> class FrameStream;
 
-class UntypedSignalInput {
+class AbstractFrameStreamConsumer {
   friend AbstractFrameStream;
 
 protected:
@@ -20,7 +20,7 @@ protected:
   std::string name;
 
 public:
-  UntypedSignalInput(AbstractFrameStream *owner, const std::string &name,
+  AbstractFrameStreamConsumer(AbstractFrameStream *owner, const std::string &name,
                      bool keepSyncedToOwner = true);
 
   virtual void connect(shared_ptr<FrameStream<double>> signal);
@@ -53,19 +53,16 @@ public:
   void reset();
 };
 
-// TODO: Split into two classes `FrameStreamConsumer` and `FramestreamInput`.
-//       The second extends the first, adding an owner FrameStream which it may
-//       synchronise to.
 /**
  * Abstraction for the inputs to a Signal
  */
-template <typename frame> class SignalInput : public UntypedSignalInput {
+template <typename frame> class FrameStreamConsumer : public AbstractFrameStreamConsumer {
 
 private:
 public:
-  SignalInput(AbstractFrameStream *owner, const std::string &name,
+  FrameStreamConsumer(AbstractFrameStream *owner, const std::string &name,
               bool keepSyncedToOwner = true)
-      : UntypedSignalInput(owner, name, keepSyncedToOwner) {
+      : AbstractFrameStreamConsumer(owner, name, keepSyncedToOwner) {
     setConstant(0);
   }
 
@@ -98,17 +95,17 @@ public:
 };
 
 /**
- * This class just exists so that SignalInput's don't have to know the
+ * This class just exists so that FrameStreamConsumer's don't have to know the
  * frame type of their owners.
  */
 class AbstractFrameStream {
-  friend UntypedSignalInput;
+  friend AbstractFrameStreamConsumer;
 
 public:
   int internalClock = 0;
 
 protected:
-  std::vector<UntypedSignalInput *> inputs;
+  std::vector<AbstractFrameStreamConsumer *> inputs;
 
 public:
   virtual std::string label() { return "Signal"; }
@@ -202,7 +199,7 @@ public:
     return readFrame();
   }
 
-  UntypedSignalInput &defaultInput() {
+  AbstractFrameStreamConsumer &defaultInput() {
     if (inputs.size() > 0)
       return *inputs[0];
     else {

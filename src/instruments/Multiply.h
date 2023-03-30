@@ -4,8 +4,8 @@
 
 class Multiply : public FrameStream<double> {
 public:
-  SignalInput<double> a{this, "a"};
-  SignalInput<double> b{this, "a"};
+  FrameStreamConsumer<double> a{this, "a"};
+  FrameStreamConsumer<double> b{this, "a"};
 
 protected:
   void action() override { writeFrame(a.readFrame() * b.readFrame()); }
@@ -19,7 +19,7 @@ public:
 /**
  * Mix an additional signal into a input
  */
-void operator*=(SignalInput<double> &signalInput,
+void operator*=(FrameStreamConsumer<double> &signalInput,
                 shared_ptr<FrameStream<double>> additionalSignal);
 
 shared_ptr<FrameStream<double>> operator*(shared_ptr<FrameStream<double>> a,

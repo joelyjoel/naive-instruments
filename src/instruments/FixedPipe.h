@@ -8,7 +8,7 @@ class FixedPipe : public FrameStream<double> {
   int tapeHeadIndex = 0;
 
 public:
-  SignalInput<double> input{this, "input"};
+  FrameStreamConsumer<double> input{this, "input"};
 
   FixedPipe(double duration) : bufferSize(duration * sampleRate) {
     buffer = new double[bufferSize];

@@ -18,7 +18,8 @@ public:
   }
 
 protected:
-  template <typename T> SignalInput<T> &exposeInput(SignalInput<T> &input) {
+  template <typename T>
+  FrameStreamConsumer<T> &exposeInput(FrameStreamConsumer<T> &input) {
     FrameStream<SignalFrame>::inputs.push_back(&input);
     return input;
   }

@@ -4,7 +4,7 @@
 
 class BufferWriter : public FrameStream<double> {
 public:
-  SignalInput<double> input = {this, "input"};
+  FrameStreamConsumer<double> input = {this, "input"};
 
 private:
   MonoBuffer *buffer;

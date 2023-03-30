@@ -14,7 +14,7 @@ class Osc : public Patch<double> {
   shared_ptr<Wavetable> wavetable{make_shared<Wavetable>()};
 
 public:
-  SignalInput<double> &frequency = exposeInput(phase->frequency);
+  FrameStreamConsumer<double> &frequency = exposeInput(phase->frequency);
 
 public:
   // TODO: Make it a private constructor

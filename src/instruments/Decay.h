@@ -5,7 +5,7 @@ private:
   double phase = 0;
 
 public:
-  SignalInput<double> duration{
+  FrameStreamConsumer<double> duration{
       this,
       "duration/s",
   };

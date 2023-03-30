@@ -1,7 +1,7 @@
 #include "Multiply.h"
 
 // FIXME: This causes a memory leak!
-void operator*=(SignalInput<double> &signalInput,
+void operator*=(FrameStreamConsumer<double> &signalInput,
                 shared_ptr<FrameStream<double>> scale) {
   shared_ptr<Multiply> multiply = make_shared<Multiply>();
   multiply->a << signalInput.typedConnection();

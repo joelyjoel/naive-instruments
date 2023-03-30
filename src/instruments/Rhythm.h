@@ -10,7 +10,7 @@ using std::vector, std::string;
 class Rhythm : public FrameStream<bool> {
 
 public:
-  SignalInput<double> bpm{this, "bpm/bpm"};
+  FrameStreamConsumer<double> bpm{this, "bpm/bpm"};
 
   Rhythm(vector<float> durations) : durations(durations) {}
 

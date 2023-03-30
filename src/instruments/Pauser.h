@@ -4,7 +4,7 @@
 
 class Pauser : public FrameStream<double> {
 public:
-  SignalInput<double> input{this, "input", false};
+  FrameStreamConsumer<double> input{this, "input", false};
 
 private:
   bool paused = false;

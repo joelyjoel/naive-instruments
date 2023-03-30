@@ -7,9 +7,9 @@ private:
   double phase = 0;
 
 public:
-  SignalInput<double> start{this, "start"};
-  SignalInput<double> end{this, "end"};
-  SignalInput<double> duration{this, "duration/s"};
+  FrameStreamConsumer<double> start{this, "start"};
+  FrameStreamConsumer<double> end{this, "end"};
+  FrameStreamConsumer<double> duration{this, "duration/s"};
 
   void action() {
     if (phase < 1) {

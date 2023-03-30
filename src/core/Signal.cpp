@@ -1,55 +1,55 @@
 #include "Signal.h"
 
 // --------------------------------------------------------------------------------
-// class UntypedSignalInput
+// class AbstractFrameStreamConsumer
 // --------------------------------------------------------------------------------
 
-UntypedSignalInput::UntypedSignalInput(AbstractFrameStream *owner,
-                                       const std::string &name,
-                                       bool keepSyncedToOwner)
+AbstractFrameStreamConsumer::AbstractFrameStreamConsumer(
+    AbstractFrameStream *owner, const std::string &name, bool keepSyncedToOwner)
     : owner(owner), keepSyncedToOwner(keepSyncedToOwner), name(name) {
   owner->inputs.push_back(this);
 };
 
-void UntypedSignalInput::connect(shared_ptr<FrameStream<double>> signal) {
+void AbstractFrameStreamConsumer::connect(
+    shared_ptr<FrameStream<double>> signal) {
   ;
   std::cerr << "No override for "
-               "UntypedSignalInput::connect method\n";
+               "AbstractFrameStreamConsumer::connect method\n";
   throw 1;
 }
 
-void UntypedSignalInput::setConstant(double k) {
-  std::cerr
-      << "No override for UntypedSignalInput::setConstant(double) method\n";
+void AbstractFrameStreamConsumer::setConstant(double k) {
+  std::cerr << "No override for "
+               "AbstractFrameStreamConsumer::setConstant(double) method\n";
   throw 1;
 }
 
 AbstractFrameStream *untypedConnection = nullptr;
 
-void UntypedSignalInput::checkConnection() {
+void AbstractFrameStreamConsumer::checkConnection() {
   if (untypedConnection == nullptr) {
     std::cerr << label() << " has no connection\n";
     throw 1;
   }
 }
 
-void UntypedSignalInput::reset() {
+void AbstractFrameStreamConsumer::reset() {
   checkConnection();
   untypedConnection->reset();
 }
 
-void UntypedSignalInput::sync(int clock) {
+void AbstractFrameStreamConsumer::sync(int clock) {
   checkConnection();
   untypedConnection->sync(clock);
 }
 
-void UntypedSignalInput::syncToOwner() {
+void AbstractFrameStreamConsumer::syncToOwner() {
   checkConnection();
   if (keepSyncedToOwner)
     untypedConnection->sync(owner->internalClock);
 }
 
-std::string UntypedSignalInput::label() {
+std::string AbstractFrameStreamConsumer::label() {
   return owner->label() + "." + this->name;
 }
 
@@ -59,11 +59,12 @@ std::string UntypedSignalInput::label() {
 
 #include "../instruments/Constant.h"
 
-template <typename frame> void SignalInput<frame>::setConstant(frame k) {
+template <typename frame>
+void FrameStreamConsumer<frame>::setConstant(frame k) {
   connect(make_shared<Constant<frame>>(k));
 }
 
 void AVOID_LINKING_ERRORS() {
-  SignalInput<double> compileItForDoubles(nullptr, "hello", true);
-  SignalInput<bool> compileItForBools(nullptr, "hello", true);
+  FrameStreamConsumer<bool> compileItForBools(nullptr, "hello", true);
+  FrameStreamConsumer<double> FrameStreamConsumer(nullptr, "hello", true);
 }

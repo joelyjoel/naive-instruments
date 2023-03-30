@@ -21,7 +21,7 @@ public:
 
   std::string label() { return "LFO"; }
 
-  SignalInput<double> &frequency = exposeInput(osc->frequency);
-  SignalInput<double> &depth = exposeInput(modulation->b);
-  SignalInput<double> &center = exposeInput(sum->a);
+  FrameStreamConsumer<double> &frequency = exposeInput(osc->frequency);
+  FrameStreamConsumer<double> &depth = exposeInput(modulation->b);
+  FrameStreamConsumer<double> &center = exposeInput(sum->a);
 };

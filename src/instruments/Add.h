@@ -7,8 +7,8 @@
 
 class Add : public FrameStream<double> {
 public:
-  SignalInput<double> a{this, "a"};
-  SignalInput<double> b{this, "b"};
+  FrameStreamConsumer<double> a{this, "a"};
+  FrameStreamConsumer<double> b{this, "b"};
 
   Add() {}
 
@@ -33,7 +33,7 @@ public:
     }
   }
 
-  friend void operator+=(SignalInput<double> &signalInput,
+  friend void operator+=(FrameStreamConsumer<double> &signalInput,
                          shared_ptr<FrameStream<double>>);
   ;
 };
@@ -41,7 +41,7 @@ public:
 /**
  * Mix an additional signal into an input.
  */
-void operator+=(SignalInput<double> &signalInput,
+void operator+=(FrameStreamConsumer<double> &signalInput,
                 shared_ptr<FrameStream<double>> &additionalSignal);
 
 shared_ptr<FrameStream<double>> operator+(shared_ptr<FrameStream<double>> a,

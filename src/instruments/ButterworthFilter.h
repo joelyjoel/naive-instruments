@@ -25,9 +25,9 @@ public:
   FilterKind kind = LowPass;
 
 public:
-  SignalInput<double> input{this, "input/audio"};
-  SignalInput<double> frequency{this, "frequency/Hz"};
-  SignalInput<double> bandwidth{this, "bandwidth/Hz"};
+  FrameStreamConsumer<double> input{this, "input/audio"};
+  FrameStreamConsumer<double> frequency{this, "frequency/Hz"};
+  FrameStreamConsumer<double> bandwidth{this, "bandwidth/Hz"};
 
 private:
   double a0, a1, a2, b1, b2;

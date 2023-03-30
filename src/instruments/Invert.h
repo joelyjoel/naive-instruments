@@ -2,7 +2,7 @@
 
 class Invert : public FrameStream<double> {
 public:
-  SignalInput<double> input{this, "input"};
+  FrameStreamConsumer<double> input{this, "input"};
 
 protected:
   void action() override { writeFrame(-input.readFrame()); }

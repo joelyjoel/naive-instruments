@@ -4,7 +4,7 @@
 
 class IntervalToRatio : public FrameStream<double> {
 public:
-  SignalInput<double> interval{this, "interval/st"};
+  FrameStreamConsumer<double> interval{this, "interval/st"};
 
   static shared_ptr<IntervalToRatio> create() {
     return make_shared<IntervalToRatio>();
@@ -27,7 +27,7 @@ intervalToRatio(shared_ptr<FrameStream<double>> intervalSignal) {
 
 class PitchConverter : public FrameStream<double> {
 public:
-  SignalInput<double> pitch{this, "pitch/MIDI"};
+  FrameStreamConsumer<double> pitch{this, "pitch/MIDI"};
 
   static shared_ptr<PitchConverter> create() {
     return make_shared<PitchConverter>();

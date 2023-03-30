@@ -8,8 +8,8 @@ private:
   shared_ptr<Resetter> resetter = make_shared<Resetter>();
 
 public:
-  SignalInput<double> &input = exposeInput(resetter->input);
-  SignalInput<double> &bpm = exposeInput(metronome->bpm);
+  FrameStreamConsumer<double> &input = exposeInput(resetter->input);
+  FrameStreamConsumer<double> &bpm = exposeInput(metronome->bpm);
 
   MetronomicResetter() {
     resetter->trigger << metronome;

@@ -1,7 +1,7 @@
 #include "Add.h"
 
 // TODO: Refactor to use the + operator overloads
-void operator+=(SignalInput<double> &signalInput,
+void operator+=(FrameStreamConsumer<double> &signalInput,
                 shared_ptr<FrameStream<double>> additionalSignal) {
   shared_ptr<Add> add = make_shared<Add>();
   add->a << signalInput.typedConnection();

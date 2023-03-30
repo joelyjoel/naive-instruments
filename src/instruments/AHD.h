@@ -2,9 +2,9 @@
 #include "../core.h"
 class AHD : public FrameStream<double> {
 public:
-  SignalInput<double> attack{this, "attack/s"};
-  SignalInput<double> hold{this, "hold/s"};
-  SignalInput<double> decay{this, "decay/s"};
+  FrameStreamConsumer<double> attack{this, "attack/s"};
+  FrameStreamConsumer<double> hold{this, "hold/s"};
+  FrameStreamConsumer<double> decay{this, "decay/s"};
 
 private:
   enum AHDStage { A, H, D, finished };

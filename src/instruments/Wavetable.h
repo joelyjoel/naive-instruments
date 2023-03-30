@@ -12,7 +12,7 @@ class Wavetable : public FrameStream<double> {
 public:
   std::string label() { return "Wavetable"; }
 
-  SignalInput<double> phase{this, "phase/0-1"};
+  FrameStreamConsumer<double> phase{this, "phase/0-1"};
 
   Wavetable(MonoBuffer &waveform = Waveforms::sine()) : waveform(&waveform) {}
 

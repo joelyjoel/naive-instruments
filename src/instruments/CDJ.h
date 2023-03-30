@@ -7,7 +7,7 @@
 class CDJ : public FrameStream<double> {
 
 public:
-  SignalInput<double> input{this, "input"};
+  FrameStreamConsumer<double> input{this, "input"};
   float playhead = 0.0;
 
   double *internalBuffer;

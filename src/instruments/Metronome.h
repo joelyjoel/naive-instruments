@@ -2,7 +2,7 @@
 
 class Metronome : public FrameStream<bool> {
 public:
-  SignalInput<double> bpm{this, "bpm/bpm"};
+  FrameStreamConsumer<double> bpm{this, "bpm/bpm"};
 
 private:
   const double k = 1.0 / (60.0 * sampleRate);
