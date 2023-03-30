@@ -5,8 +5,19 @@ protected:
   frame *output;
 
 public:
-  FrameStream() { output = new frame; }
-  ~FrameStream() { delete output; }
+  FrameStream() { allocateOutputFrame(); }
+  ~FrameStream() { deallocateOutputFrame(); }
+
+private:
+  /**
+   * Allocates heap memory used for writing ouptut frames.
+   */
+  void allocateOutputFrame() { output = new frame; };
+
+  /**
+   * Releases heap memory used for writing to the output.
+   */
+  void deallocateOutputFrame() { delete output; };
 
 protected:
   /**
