@@ -41,4 +41,6 @@ public:
   }
 
   void operator<<(double k) { setConstant(k); }
+
+  short numberOfChannels() { return typedConnection().numberOfChannels(); }
 };
