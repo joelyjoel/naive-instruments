@@ -2,27 +2,42 @@
 
 #include "../lib.h"
 
-class Pauser : public FrameStream<double> {
+class Pauser : public FrameStream<double>
+{
 public:
-  FrameStreamConsumer<double> input{this, "input", false};
+    FrameStreamConsumer<double> input{ this, "input", false };
 
 private:
-  bool paused = false;
-  int t = 0;
+    bool paused = false;
+    int  t      = 0;
 
 public:
-  void pause() { paused = true; }
-  void resume() { paused = false; }
-  void toggle() { paused = !paused; }
-
-  bool is_paused() { return paused == true; }
-
-  void action() override {
-    if (paused)
-      writeFrame(0);
-    else {
-      input.sync(t++);
-      writeFrame(input.readFrame());
+    void pause()
+    {
+        paused = true;
     }
-  }
+    void resume()
+    {
+        paused = false;
+    }
+    void toggle()
+    {
+        paused = !paused;
+    }
+
+    bool is_paused()
+    {
+        return paused == true;
+    }
+
+    void action() override
+    {
+        if ( paused )
+            writeFrame( 0 );
+        else
+        {
+            input.sync( t++ );
+            writeFrame( input.readFrame() );
+        }
+    }
 };

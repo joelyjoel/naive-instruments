@@ -5,23 +5,28 @@
 #include "Multiply.h"
 #include "Osc.h"
 
-class LFO : public Patch<double> {
+class LFO : public Patch<double>
+{
 private:
-  // TODO: Make the waveform customisable
-  shared_ptr<Osc> osc = Osc::create_sine();
-  shared_ptr<Multiply> modulation = Multiply::create();
-  shared_ptr<Add> sum = make_shared<Add>();
+    // TODO: Make the waveform customisable
+    shared_ptr<Osc>      osc        = Osc::create_sine();
+    shared_ptr<Multiply> modulation = Multiply::create();
+    shared_ptr<Add>      sum        = make_shared<Add>();
 
 public:
-  LFO() {
-    modulation->a << osc;
-    sum->b << modulation;
-    exposeOutput(sum);
-  }
+    LFO()
+    {
+        modulation->a << osc;
+        sum->b << modulation;
+        exposeOutput( sum );
+    }
 
-  std::string label() { return "LFO"; }
+    std::string label()
+    {
+        return "LFO";
+    }
 
-  FrameStreamConsumer<double> &frequency = exposeInput(osc->frequency);
-  FrameStreamConsumer<double> &depth = exposeInput(modulation->b);
-  FrameStreamConsumer<double> &center = exposeInput(sum->a);
+    FrameStreamConsumer<double>& frequency = exposeInput( osc->frequency );
+    FrameStreamConsumer<double>& depth     = exposeInput( modulation->b );
+    FrameStreamConsumer<double>& center    = exposeInput( sum->a );
 };

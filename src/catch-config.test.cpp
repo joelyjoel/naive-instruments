@@ -3,4 +3,7 @@
 
 #include "../dependencies/catch.hpp"
 
-TEST_CASE("Need a dummy test case to make catch work") { REQUIRE(true); }
+TEST_CASE( "Need a dummy test case to make catch work" )
+{
+    REQUIRE( true );
+}

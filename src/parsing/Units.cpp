@@ -1,3 +1,3 @@
 #include "Units.h"
 
-LazyRegex Units::pattern("[\%A-Za-z]+");
+LazyRegex Units::pattern( "[\%A-Za-z]+" );

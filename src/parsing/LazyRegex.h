@@ -13,80 +13,121 @@ using std::string, std::regex;
  *  - It won't construct the regex until you try to use it.
  *  - It adds some conveniences that make using regex a bit more like js.
  */
-class LazyRegex {
+class LazyRegex
+{
 
 private:
-  const string _src;
-  const regex *_pattern = nullptr;
+    const string _src;
+    const regex* _pattern = nullptr;
 
 public:
-  LazyRegex(const string &src) : _src(src) {}
+    LazyRegex( const string& src )
+    : _src( src )
+    {
+    }
 
-  /**
-   * Get the string source of the regex
-   */
-  const string &src() const { return _src; }
-  const regex &pattern() {
-    if (_pattern == nullptr) {
-      try {
-        _pattern = new regex(src());
-        return *_pattern;
-      } catch (std::exception err) {
-        std::cerr << "There was a problem creating a LazyRegex from source: "
-                  << src() << "\n";
-        throw err;
-      }
-    } else
-      return *_pattern;
-  }
+    /**
+     * Get the string source of the regex
+     */
+    const string& src() const
+    {
+        return _src;
+    }
+    const regex& pattern()
+    {
+        if ( _pattern == nullptr )
+        {
+            try
+            {
+                _pattern = new regex( src() );
+                return *_pattern;
+            }
+            catch ( std::exception err )
+            {
+                std::cerr << "There was a problem creating a LazyRegex from source: " << src() << "\n";
+                throw err;
+            }
+        }
+        else
+            return *_pattern;
+    }
 
-  /**
-   * Operator shortcut for getting the regex object from the LazyRegex
-   * container.
-   */
-  const regex &operator*() { return pattern(); }
+    /**
+     * Operator shortcut for getting the regex object from the LazyRegex
+     * container.
+     */
+    const regex& operator*()
+    {
+        return pattern();
+    }
 
-  bool test(const string &str) { return std::regex_match(str, pattern()); }
+    bool test( const string& str )
+    {
+        return std::regex_match( str, pattern() );
+    }
 
-  // Functions for regex composition
+    // Functions for regex composition
 
-  LazyRegex operator+(const string &operand) const { return src() + operand; }
+    LazyRegex operator+( const string& operand ) const
+    {
+        return src() + operand;
+    }
 
-  LazyRegex operator+(const LazyRegex &operand) const {
-    return src() + operand.src();
-  }
+    LazyRegex operator+( const LazyRegex& operand ) const
+    {
+        return src() + operand.src();
+    }
 
-  LazyRegex bracket() const { return "(?:" + src() + ")"; }
+    LazyRegex bracket() const
+    {
+        return "(?:" + src() + ")";
+    }
 
-  LazyRegex capture() const { return "(" + src() + ")"; }
+    LazyRegex capture() const
+    {
+        return "(" + src() + ")";
+    }
 
-  LazyRegex optional() const { return bracket() + "?"; }
-  LazyRegex disjunction(const LazyRegex &operand) const {
-    return bracket() + "|" + operand.bracket();
-  }
-  LazyRegex operator|(const LazyRegex &operand) const {
-    return disjunction(operand);
-  }
+    LazyRegex optional() const
+    {
+        return bracket() + "?";
+    }
+    LazyRegex disjunction( const LazyRegex& operand ) const
+    {
+        return bracket() + "|" + operand.bracket();
+    }
+    LazyRegex operator|( const LazyRegex& operand ) const
+    {
+        return disjunction( operand );
+    }
 
-  LazyRegex kleene() const { return bracket() + "*"; }
+    LazyRegex kleene() const
+    {
+        return bracket() + "*";
+    }
 
-  // Commonly used patterns:
-  //
-  static LazyRegex ignoreWhitespace;
+    // Commonly used patterns:
+    //
+    static LazyRegex ignoreWhitespace;
 
-  int count(const std::string &str) {
-    auto iterator = std::sregex_iterator(str.begin(), str.end(), pattern());
-    int n = std::distance(iterator, std::sregex_iterator());
-    return n;
-  }
+    int count( const std::string& str )
+    {
+        auto iterator = std::sregex_iterator( str.begin(), str.end(), pattern() );
+        int  n        = std::distance( iterator, std::sregex_iterator() );
+        return n;
+    }
 
 public:
-  int countCaptures() const { return LazyRegex("\\([^?]").count(src()); }
+    int countCaptures() const
+    {
+        return LazyRegex( "\\([^?]" ).count( src() );
+    }
 
-  LazyRegex noCaptures() {
-    std::regex e("\\((?=[^?])");
-    return std::regex_replace(src(), e, "(?:");
-  }
+    LazyRegex noCaptures()
+    {
+        std::regex e( "\\((?=[^?])" );
+        return std::regex_replace( src(), e, "(?:" );
+    }
 };
 
-LazyRegex operator+(const string &a, const LazyRegex &b);
+LazyRegex operator+( const string& a, const LazyRegex& b );

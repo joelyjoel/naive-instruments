@@ -2,28 +2,31 @@
 
 #include "../core.h"
 
-class ZeroCrossingDetector : public FrameStream<bool> {
+class ZeroCrossingDetector : public FrameStream<bool>
+{
 private:
-  double previous = 0;
-  double threshold = 0;
+    double previous  = 0;
+    double threshold = 0;
 
 public:
-  FrameStreamConsumer<double> input{this, "input/audio"};
-  bool detectDownwardsZeroCrossings = true;
-  bool detectUpwardsZeroCrossings = false;
+    FrameStreamConsumer<double> input{ this, "input/audio" };
+    bool                        detectDownwardsZeroCrossings = true;
+    bool                        detectUpwardsZeroCrossings   = false;
 
-  void action() {
-    double next = input.readFrame();
-    bool result = (detectDownwardsZeroCrossings && previous > threshold &&
-                   next < -threshold) ||
-                  (detectUpwardsZeroCrossings && previous < -threshold &&
-                   next > threshold);
+    void action()
+    {
+        double next   = input.readFrame();
+        bool   result = ( detectDownwardsZeroCrossings && previous > threshold && next < -threshold )
+                      || ( detectUpwardsZeroCrossings && previous < -threshold && next > threshold );
 
-    if (next != 0)
-      previous = next;
+        if ( next != 0 )
+            previous = next;
 
-    writeFrame(result);
-  }
+        writeFrame( result );
+    }
 
-  void reset() { previous = 0; }
+    void reset()
+    {
+        previous = 0;
+    }
 };

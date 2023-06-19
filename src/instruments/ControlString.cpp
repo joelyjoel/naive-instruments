@@ -2,12 +2,11 @@
 
 // Control Signals
 
-LazyRegex ControlString::TempoInstruction::pattern(
-    NumberWithUnit::pattern.bracket() + ":");
+LazyRegex ControlString::TempoInstruction::pattern( NumberWithUnit::pattern.bracket() + ":" );
 
-LazyRegex ControlString::ValueInstruction::pattern(NumberWithUnit::pattern);
+LazyRegex ControlString::ValueInstruction::pattern( NumberWithUnit::pattern );
 
-LazyRegex ControlString::SustainStepInstruction::pattern("[~_]");
+LazyRegex ControlString::SustainStepInstruction::pattern( "[~_]" );
 
 /* LazyRegex ControlString::anyInstructionPattern((TempoInstruction::pattern |
  */
@@ -17,12 +16,9 @@ LazyRegex ControlString::SustainStepInstruction::pattern("[~_]");
  */
 /*                                                    .noCaptures()); */
 
-LazyRegex ControlString::anyInstructionPattern(
-    "(?:[-+]?(?:\\d*\\.)?\\d+[a-zA-Z%]*:?)|[~_]");
+LazyRegex ControlString::anyInstructionPattern( "(?:[-+]?(?:\\d*\\.)?\\d+[a-zA-Z%]*:?)|[~_]" );
 
-LazyRegex ControlString::firstInstructionPattern(
-    "^" + ControlString::anyInstructionPattern.capture() +
-    LazyRegex::ignoreWhitespace);
+LazyRegex ControlString::firstInstructionPattern( "^" + ControlString::anyInstructionPattern.capture()
+                                                  + LazyRegex::ignoreWhitespace );
 
-LazyRegex ControlString::pattern(
-    (anyInstructionPattern.capture() + LazyRegex::ignoreWhitespace).kleene());
+LazyRegex ControlString::pattern( ( anyInstructionPattern.capture() + LazyRegex::ignoreWhitespace ).kleene() );

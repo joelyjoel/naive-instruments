@@ -4,39 +4,56 @@
 #include "../file-io/WavReader.h"
 #include <iostream>
 
-class Sampler : public FrameStream<double> {
+class Sampler : public FrameStream<double>
+{
 private:
-  MonoBuffer *buffer;
-  int playhead = 0;
+    MonoBuffer* buffer;
+    int         playhead = 0;
 
 public:
-  /**
-   * deprecated
-   * TODO: Remove and replace with static method.
-   */
-  Sampler(const std::string &filePath) {
-    buffer = WavReader::readMonoFile(filePath);
-  }
+    /**
+     * deprecated
+     * TODO: Remove and replace with static method.
+     */
+    Sampler( const std::string& filePath )
+    {
+        buffer = WavReader::readMonoFile( filePath );
+    }
 
-  Sampler(MonoBuffer &sharedBuffer) { buffer = &sharedBuffer; }
+    Sampler( MonoBuffer& sharedBuffer )
+    {
+        buffer = &sharedBuffer;
+    }
 
 public:
-  void action() override {
-    if (playhead < 0) {
-      ++playhead;
-      writeFrame(0);
-    } else if (playhead < buffer->numberOfFrames())
-      writeFrame((*buffer)[++playhead]);
-    else
-      writeFrame(0);
-  }
+    void action() override
+    {
+        if ( playhead < 0 )
+        {
+            ++playhead;
+            writeFrame( 0 );
+        }
+        else if ( playhead < buffer->numberOfFrames() )
+            writeFrame( ( *buffer )[++playhead] );
+        else
+            writeFrame( 0 );
+    }
 
 protected:
-  void resetState() override { playhead = 0; }
+    void resetState() override
+    {
+        playhead = 0;
+    }
 
 public:
-  void skipTo(int frame) { playhead = frame; }
+    void skipTo( int frame )
+    {
+        playhead = frame;
+    }
 
 public:
-  int numberOfFrames() { return buffer->numberOfFrames(); }
+    int numberOfFrames()
+    {
+        return buffer->numberOfFrames();
+    }
 };

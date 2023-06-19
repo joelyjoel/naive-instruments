@@ -1,27 +1,29 @@
 #include "../lib.h"
 
-class ZxSelectCommand : public CommandLineApp {
+class ZxSelectCommand : public CommandLineApp
+{
 public:
-  using CommandLineApp::CommandLineApp;
+    using CommandLineApp::CommandLineApp;
 
-  void run() override {
-    const std::string &outputPath = args["o"];
-    bool normalize = args.boolean("normalize");
-    std::cerr << "Normalize: " << normalize << "\n";
+    void run() override
+    {
+        const std::string& outputPath = args["o"];
+        bool               normalize  = args.boolean( "normalize" );
+        std::cerr << "Normalize: " << normalize << "\n";
 
-    MonoBuffer *inputBuffer = mainInputAsBuffer();
-    shared_ptr<Sampler> sampler = make_shared<Sampler>(*inputBuffer);
-    WaveformBufferer bufferer;
-    bufferer.minNumberOfFrames = args.integer("min-frames", 100);
+        MonoBuffer*         inputBuffer = mainInputAsBuffer();
+        shared_ptr<Sampler> sampler     = make_shared<Sampler>( *inputBuffer );
+        WaveformBufferer    bufferer;
+        bufferer.minNumberOfFrames = args.integer( "min-frames", 100 );
 
-    bufferer << sampler;
+        bufferer << sampler;
 
-    auto indexToSelect = args.requireInt("index");
+        auto indexToSelect = args.requireInt( "index" );
 
-    MonoBuffer *waveform = bufferer[indexToSelect];
+        MonoBuffer* waveform = bufferer[indexToSelect];
 
-    output(waveform);
+        output( waveform );
 
-    delete inputBuffer;
-  }
+        delete inputBuffer;
+    }
 };

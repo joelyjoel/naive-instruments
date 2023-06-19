@@ -1,29 +1,31 @@
 #include "../lib.h"
 
-class RulerCommand : public CommandLineApp {
+class RulerCommand : public CommandLineApp
+{
 public:
-  using CommandLineApp::CommandLineApp;
+    using CommandLineApp::CommandLineApp;
 
-  void run() {
-    setlocale(LC_ALL, "");
-    initscr();
-    keypad(stdscr, TRUE);
-    cbreak();
+    void run()
+    {
+        setlocale( LC_ALL, "" );
+        initscr();
+        keypad( stdscr, TRUE );
+        cbreak();
 
-    refresh();
+        refresh();
 
-    NCursesWindow canvas(2, 80, 3, 2);
-    Ruler ruler(canvas);
+        NCursesWindow canvas( 2, 80, 3, 2 );
+        Ruler         ruler( canvas );
 
-    ruler.from = args.number("from", 0);
-    ruler.to = args.number("to", 1);
+        ruler.from = args.number( "from", 0 );
+        ruler.to   = args.number( "to", 1 );
 
-    ruler.draw();
+        ruler.draw();
 
-    int c;
-    while ((c = getch()) != 'q')
-      continue;
+        int c;
+        while ( ( c = getch() ) != 'q' )
+            continue;
 
-    endwin();
-  }
+        endwin();
+    }
 };

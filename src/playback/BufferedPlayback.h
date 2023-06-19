@@ -11,93 +11,124 @@
 #include "../instruments/Sampler.h"
 #include "./CircularBuffer.h"
 
-static int audioCallback(const void *inputBuffer, void *outputBuffer,
-                         unsigned long framesPerBuffer,
-                         const PaStreamCallbackTimeInfo *timeInfo,
-                         PaStreamCallbackFlags statusFlags, void *userData);
+static int audioCallback( const void*                     inputBuffer,
+                          void*                           outputBuffer,
+                          unsigned long                   framesPerBuffer,
+                          const PaStreamCallbackTimeInfo* timeInfo,
+                          PaStreamCallbackFlags           statusFlags,
+                          void*                           userData );
 
-class BufferedPlayback {
+class BufferedPlayback
+{
 private:
-  PaStream *stream;
-  PaError err;
+    PaStream* stream;
+    PaError   err;
 
 public:
-  BufferedPlayback(FrameStream<double> &input) : buffer(1024) {
-    signal = &input;
-  }
-  BufferedPlayback() : BufferedPlayback(*new Constant<double>(0)) {}
-  FrameStream<double> *signal;
-  CircularBuffer<double> buffer;
-  double shift() { return buffer.shift(); }
-  void push(double y) { buffer.push(y); }
-
-  void assertNotError() {
-    if (err != paNoError) {
-      std::cerr << "Port audio error:" << Pa_GetErrorText(err) << "\n";
-      throw 1;
+    BufferedPlayback( FrameStream<double>& input )
+    : buffer( 1024 )
+    {
+        signal = &input;
     }
-  }
+    BufferedPlayback()
+    : BufferedPlayback( *new Constant<double>( 0 ) )
+    {
+    }
+    FrameStream<double>*   signal;
+    CircularBuffer<double> buffer;
+    double                 shift()
+    {
+        return buffer.shift();
+    }
+    void push( double y )
+    {
+        buffer.push( y );
+    }
 
-  void startAudioThread();
+    void assertNotError()
+    {
+        if ( err != paNoError )
+        {
+            std::cerr << "Port audio error:" << Pa_GetErrorText( err ) << "\n";
+            throw 1;
+        }
+    }
 
-  std::thread *topUpThread;
-  void startTopUpThread() {
-    topUpThread = new std::thread([this]() {
-      while (true)
-        this->topUpBufferAndSleep();
-    });
-  }
+    void startAudioThread();
 
-  void start(bool async = false) {
-    topUpBuffer();
-    startAudioThread();
-    startTopUpThread();
-    if (async)
-      topUpThread->detach();
-    else
-      topUpThread->join();
-  }
+    std::thread* topUpThread;
+    void         startTopUpThread()
+    {
+        topUpThread = new std::thread( [this]() {
+            while ( true )
+                this->topUpBufferAndSleep();
+        } );
+    }
 
-  void stop() {
-    std::cout << "Stopping stream\n";
-    err = Pa_StopStream(stream);
-    assertNotError();
+    void start( bool async = false )
+    {
+        topUpBuffer();
+        startAudioThread();
+        startTopUpThread();
+        if ( async )
+            topUpThread->detach();
+        else
+            topUpThread->join();
+    }
 
-    std::cout << "Terminating port audio\n";
-    err = Pa_Terminate();
-    assertNotError();
-  }
+    void stop()
+    {
+        std::cout << "Stopping stream\n";
+        err = Pa_StopStream( stream );
+        assertNotError();
 
-  void topUpBuffer() {
-    while (buffer.hasFreeSpace())
-      buffer.push(signal->advanceToNextFrameAndRead());
-  }
+        std::cout << "Terminating port audio\n";
+        err = Pa_Terminate();
+        assertNotError();
+    }
 
-  void topUpBufferAndSleep() {
-    topUpBuffer();
-    Pa_Sleep(idealTopUpInterval() * 1000 * .25);
-  }
+    void topUpBuffer()
+    {
+        while ( buffer.hasFreeSpace() )
+            buffer.push( signal->advanceToNextFrameAndRead() );
+    }
 
-  double idealTopUpInterval() {
-    return float(buffer.size()) / float(sampleRate);
-  }
+    void topUpBufferAndSleep()
+    {
+        topUpBuffer();
+        Pa_Sleep( idealTopUpInterval() * 1000 * .25 );
+    }
 
-  static void play(FrameStream<double> &signal) {
-    BufferedPlayback playback(signal);
-    playback.start(false);
-  }
+    double idealTopUpInterval()
+    {
+        return float( buffer.size() ) / float( sampleRate );
+    }
 
-  static void play(MonoBuffer &audio) {
-    Sampler sampler(audio);
-    play(sampler);
-  }
+    static void play( FrameStream<double>& signal )
+    {
+        BufferedPlayback playback( signal );
+        playback.start( false );
+    }
 
-  void setSignal(FrameStream<double> &sound) { signal = &sound; }
-  void setSignal(MonoBuffer &sample) {
-    // FIXME: Memory leak!
-    Sampler *sampler = new Sampler(sample);
-    setSignal(*sampler);
-  }
+    static void play( MonoBuffer& audio )
+    {
+        Sampler sampler( audio );
+        play( sampler );
+    }
 
-  void resetSignal() { signal->reset(); }
+    void setSignal( FrameStream<double>& sound )
+    {
+        signal = &sound;
+    }
+    void setSignal( MonoBuffer& sample )
+    {
+        // FIXME: Memory leak!
+        Sampler* sampler = new Sampler( sample );
+        setSignal( *sampler );
+    }
+
+    void resetSignal()
+    {
+        signal->reset();
+    }
 };

@@ -1,9 +1,13 @@
 #include "../core.h"
 
-class Invert : public FrameStream<double> {
+class Invert : public FrameStream<double>
+{
 public:
-  FrameStreamConsumer<double> input{this, "input"};
+    FrameStreamConsumer<double> input{ this, "input" };
 
 protected:
-  void action() override { writeFrame(-input.readFrame()); }
+    void action() override
+    {
+        writeFrame( -input.readFrame() );
+    }
 };

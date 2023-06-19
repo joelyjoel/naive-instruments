@@ -3,9 +3,13 @@
 #include "../core.h"
 #include <cmath>
 
-class Floor : public FrameStream<double> {
+class Floor : public FrameStream<double>
+{
 public:
-  FrameStreamConsumer<double> input{this, "input"};
+    FrameStreamConsumer<double> input{ this, "input" };
 
-  void action() { writeFrame(floor(input.readFrame())); }
+    void action()
+    {
+        writeFrame( floor( input.readFrame() ) );
+    }
 };
