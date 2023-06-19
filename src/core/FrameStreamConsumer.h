@@ -28,6 +28,7 @@ public:
   }
 
   void connect(std::shared_ptr<FrameStream<frame>> inputSignal) {
+    handleConnectionChange();
     untypedConnection = inputSignal;
   }
 

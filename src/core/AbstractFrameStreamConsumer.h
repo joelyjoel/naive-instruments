@@ -48,4 +48,7 @@ public:
 
 public:
   void reset();
+
+protected:
+  void handleConnectionChange();
 };

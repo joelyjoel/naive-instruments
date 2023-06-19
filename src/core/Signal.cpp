@@ -53,6 +53,10 @@ std::string AbstractFrameStreamConsumer::label() {
   return owner->label() + "." + this->name;
 }
 
+void AbstractFrameStreamConsumer::handleConnectionChange() {
+  owner->handleConnectionChange(this);
+}
+
 // --------------------------------------------------------------------------------
 // class SignalInput
 // --------------------------------------------------------------------------------

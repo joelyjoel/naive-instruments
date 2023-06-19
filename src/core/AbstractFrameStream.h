@@ -33,6 +33,8 @@ public:
     throw 1;
   }
 
+  virtual void handleConnectionChange(AbstractFrameStreamConsumer *input) = 0;
+
 public:
   void advanceToNextFrame() {
     ++internalClock;
