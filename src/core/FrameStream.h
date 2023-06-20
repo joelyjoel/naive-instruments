@@ -29,7 +29,7 @@ private:
         output                 = new frame[numberOfOutputChannels];
     }
 
-    short getNumberOfOuptutChannels()
+    short getNumberOfOutputChannels()
     {
         return numberOfOutputChannels;
     }
