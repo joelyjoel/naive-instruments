@@ -76,6 +76,14 @@ void FrameStreamConsumer<frame>::setConstant( frame k )
     connect( make_shared<Constant<frame>>( k ) );
 }
 
+
+template <typename frame>
+void FrameStreamConsumer<frame>::connect( std::shared_ptr<FrameStream<frame>> inputSignal )
+{
+    untypedConnection = inputSignal;
+    owner->handleConnectionChange();
+}
+
 void AVOID_LINKING_ERRORS()
 {
     FrameStreamConsumer<bool>   compileItForBools( nullptr, "hello", true );

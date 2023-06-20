@@ -67,7 +67,11 @@ protected:
      */
     virtual void resetState()
     {
-        // noop
+    }
+
+public:
+    virtual void handleConnectionChange()
+    {
     }
 
 public:

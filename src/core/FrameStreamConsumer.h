@@ -1,4 +1,4 @@
-
+#pragma once
 #include "AbstractFrameStreamConsumer.h"
 
 /**
@@ -7,8 +7,6 @@
 template <typename frame>
 class FrameStreamConsumer : public AbstractFrameStreamConsumer
 {
-
-private:
 public:
     FrameStreamConsumer( AbstractFrameStream* owner, const std::string& name, bool keepSyncedToOwner = true )
     : AbstractFrameStreamConsumer( owner, name, keepSyncedToOwner )
@@ -30,10 +28,7 @@ public:
         return typedConnection()->readFrame();
     }
 
-    void connect( std::shared_ptr<FrameStream<frame>> inputSignal )
-    {
-        untypedConnection = inputSignal;
-    }
+    void connect( std::shared_ptr<FrameStream<frame>> inputSignal );
 
 public:
     void setConstant( frame k );
