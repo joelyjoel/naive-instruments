@@ -13,6 +13,6 @@ public:
 private:
     void action()
     {
-        writeFrame( random.number( -1, 1 ) );
+        output[0] = random.number( -1, 1 );
     }
 };

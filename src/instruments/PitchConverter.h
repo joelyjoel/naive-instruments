@@ -20,7 +20,7 @@ public:
 protected:
     void action() override
     {
-        writeFrame( pow( 2.0, ( interval.readFrame() / 12.0 ) ) );
+        output[0] = pow( 2.0, ( interval.readFrame() / 12.0 ) );
     }
 };
 
@@ -49,7 +49,7 @@ public:
 private:
     void action() override
     {
-        writeFrame( 440 * pow( 2.0, ( ( pitch.readFrame() - 69 ) / 12.0 ) ) );
+        output[0] = 440 * pow( 2.0, ( ( pitch.readFrame() - 69 ) / 12.0 ) );
     }
 };
 

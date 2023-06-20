@@ -11,7 +11,7 @@ public:
 protected:
     void action() override
     {
-        writeFrame( a.readFrame() * b.readFrame() );
+        output[0] = a.readFrame() * b.readFrame();
     }
 
 public:

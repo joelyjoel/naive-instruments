@@ -25,7 +25,7 @@ public:
 
     void action()
     {
-        writeFrame( waveform->interpolate( phase.readFrame() * double( waveform->numberOfSamples ) ) );
+        output[0] = waveform->interpolate( phase.readFrame() * double( waveform->numberOfSamples ) );
     }
 
     void setWaveform( MonoBuffer* buffer )

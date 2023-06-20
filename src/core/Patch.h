@@ -17,7 +17,7 @@ public:
     void action()
     {
         outputFrameStream->sync( this->internalClock );
-        this->writeFrame( outputFrameStream->readFrame() );
+        this->output[0] = outputFrameStream->readFrame();
     }
 
 protected:

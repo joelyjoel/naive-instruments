@@ -12,7 +12,7 @@ class BreakpointEnvelope : public FrameStream<double>
         progress += progressPerSample;
         if ( progress >= 1 )
             advanceToNextSection();
-        writeFrame( progress * endValue + ( 1.0 - progress ) * startValue );
+        output[0] = progress * endValue + ( 1.0 - progress ) * startValue;
     }
 
 public:

@@ -10,6 +10,6 @@ public:
 
     void action()
     {
-        writeFrame( floor( input.readFrame() ) );
+        output[0] = floor( input.readFrame() );
     }
 };

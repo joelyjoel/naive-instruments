@@ -31,12 +31,12 @@ public:
         if ( playhead < 0 )
         {
             ++playhead;
-            writeFrame( 0 );
+            output[0] = 0;
         }
         else if ( playhead < buffer->numberOfFrames() )
-            writeFrame( ( *buffer )[++playhead] );
+            output[0] = ( *buffer )[++playhead];
         else
-            writeFrame( 0 );
+            output[0] = 0;
     }
 
 protected:

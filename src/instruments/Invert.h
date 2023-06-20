@@ -8,6 +8,6 @@ public:
 protected:
     void action() override
     {
-        writeFrame( -input.readFrame() );
+        output[0] = -input.readFrame();
     }
 };

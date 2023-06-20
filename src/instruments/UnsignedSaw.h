@@ -16,7 +16,7 @@ public:
             phase -= 1.0;
         while ( phase < 0 )
             phase += 1.0;
-        writeFrame( phase );
+        output[0] = phase;
     }
 
     void resetState() override

@@ -33,11 +33,11 @@ public:
     void action() override
     {
         if ( paused )
-            writeFrame( 0 );
+            output[0] = 0;
         else
         {
             input.sync( t++ );
-            writeFrame( input.readFrame() );
+            output[0] = input.readFrame();
         }
     }
 };

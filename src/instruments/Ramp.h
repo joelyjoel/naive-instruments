@@ -17,9 +17,9 @@ public:
         if ( phase < 1 )
         {
             phase += ( 1.0 / 44100.0 ) / duration.readFrame();
-            writeFrame( phase * end.readFrame() + ( 1 - phase ) * start.readFrame() );
+            output[0] = phase * end.readFrame() + ( 1 - phase ) * start.readFrame();
         }
         else
-            writeFrame( end.readFrame() );
+            output[0] = end.readFrame();
     }
 };

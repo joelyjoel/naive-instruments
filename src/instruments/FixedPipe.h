@@ -31,7 +31,7 @@ public:
             tapeHeadIndex -= bufferSize;
 
         std::cout << tapeHeadIndex << " " << buffer[tapeHeadIndex] << "\n";
-        writeFrame( buffer[tapeHeadIndex] );
+        output[0] = buffer[tapeHeadIndex];
     }
 
     std::string label()

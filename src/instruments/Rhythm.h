@@ -31,7 +31,7 @@ protected:
         elapsed += bpm.readFrame() * k;
         if ( elapsed > durations[index] )
         {
-            writeFrame( true );
+            output[0] = true;
             do
             {
                 elapsed -= durations[index];
@@ -39,7 +39,7 @@ protected:
             } while ( elapsed > durations[index] );
         }
         else
-            writeFrame( false );
+            output[0] = false;
     }
 
 public:

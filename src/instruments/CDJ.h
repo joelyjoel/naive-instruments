@@ -25,11 +25,11 @@ private:
     void action() override
     {
         if ( paused )
-            writeFrame( 0.0 );
+            output[0] = 0.0;
         else
         {
             bufferMore();
-            writeFrame( internalBuffer[int( playhead ) % bufferSize] );
+            output[0] = internalBuffer[int( playhead ) % bufferSize];
 
             // TODO: This bit could be branchless using modulo?
             playhead += rate;

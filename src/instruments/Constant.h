@@ -16,6 +16,6 @@ public:
     }
     void action()
     {
-        FrameStream<Frame>::writeFrame( value );
+        FrameStream<Frame>::output[0] = value;
     }
 };

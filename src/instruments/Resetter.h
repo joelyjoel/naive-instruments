@@ -18,6 +18,6 @@ protected:
     {
         if ( trigger.readFrame() )
             input.reset();
-        writeFrame( input.readFrame() );
+        output[0] = input.readFrame();
     }
 };

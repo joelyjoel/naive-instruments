@@ -15,13 +15,13 @@ protected:
         progress += bpm.readFrame() * k;
         if ( progress >= 1 )
         {
-            writeFrame( true );
+            output[0] = true;
             do
             {
                 progress -= 1;
             } while ( progress >= 1 );
         }
         else
-            writeFrame( false );
+            output[0] = false;
     }
 };

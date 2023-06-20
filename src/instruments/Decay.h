@@ -17,10 +17,10 @@ protected:
         if ( phase < 1.0 )
         {
             phase += ( 1.0 / 44100.0 ) / duration.readFrame();
-            writeFrame( 1.0 - phase );
+            output[0] = 1.0 - phase;
         }
         else
-            writeFrame( 0.0 );
+            output[0] = 0.0;
     }
 
 public:

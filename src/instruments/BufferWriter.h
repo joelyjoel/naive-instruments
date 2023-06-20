@@ -32,7 +32,7 @@ public:
         if ( writeHead < buffer->numberOfFrames() )
             ( *buffer )[writeHead] = signal;
         ++writeHead;
-        writeFrame( signal );
+        output[0] = signal;
     }
 
     int currentSize()
