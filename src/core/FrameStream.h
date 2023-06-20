@@ -4,34 +4,36 @@ template <typename frame>
 class FrameStream : public AbstractFrameStream
 {
 protected:
-    frame* output;
+    frame* output                 = nullptr;
+    short  numberOfOutputChannels = 0;
+
 
 public:
     FrameStream()
     {
-        allocateOutputFrame();
+        setNumberOfOutputChannels( 1 );
     }
     ~FrameStream()
     {
-        deallocateOutputFrame();
+        delete output;
+        output = nullptr;
     }
 
 private:
-    /**
-     * Allocates heap memory used for writing ouptut frames.
-     */
-    void allocateOutputFrame()
+    void setNumberOfOutputChannels( int numberOfChannels )
     {
-        output = new frame;
-    };
+        // Deallocate if it its already been set
+        if ( output != nullptr )
+            delete output;
+        numberOfOutputChannels = numberOfChannels;
+        output                 = new frame[numberOfOutputChannels];
+    }
 
-    /**
-     * Releases heap memory used for writing to the output.
-     */
-    void deallocateOutputFrame()
+    short getNumberOfOuptutChannels()
     {
-        delete output;
-    };
+        return numberOfOutputChannels;
+    }
+
 
 protected:
     /**
