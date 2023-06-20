@@ -35,15 +35,6 @@ private:
     }
 
 
-protected:
-    /**
-     * Update the latest frame.
-     */
-    [[deprecated( "You should just write to the `output` buffer directly" )]] void writeFrame( const frame& y )
-    {
-        *output = y;
-    }
-
 public:
     frame operator[]( int clock )
     {
