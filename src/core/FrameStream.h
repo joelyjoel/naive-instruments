@@ -18,12 +18,15 @@ public:
         output = nullptr;
     }
 
-private:
+protected:
     void setNumberOfOutputChannels( int numberOfChannels )
     {
         // Deallocate if it its already been set
         if ( output != nullptr )
+        {
             delete output;
+            output = nullptr;
+        }
 
         if ( numberOfChannels != numberOfOutputChannels )
         {
