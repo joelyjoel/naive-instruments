@@ -37,7 +37,10 @@ private:
             {
                 output = new frame[numberOfOutputChannels];
             }
-            // TODO: Inform the down stream objects so they can handleConnectionChange
+            for ( auto stream : readingStreams() )
+            {
+                stream->handleConnectionChange();
+            }
         }
     }
 
