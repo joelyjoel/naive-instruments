@@ -4,8 +4,7 @@ template <typename frame>
 class FrameStream : public AbstractFrameStream
 {
 protected:
-    frame* output                 = nullptr;
-    short  numberOfOutputChannels = 0;
+    frame* output = nullptr;
 
 
 public:
@@ -42,11 +41,6 @@ private:
                 stream->handleConnectionChange();
             }
         }
-    }
-
-    short getNumberOfOutputChannels()
-    {
-        return numberOfOutputChannels;
     }
 
 

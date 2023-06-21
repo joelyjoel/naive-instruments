@@ -10,6 +10,13 @@ class AbstractFrameStream
 {
     friend AbstractFrameStreamConsumer;
 
+protected:
+    short numberOfOutputChannels = 0;
+
+    short getNumberOfOutputChannels()
+    {
+        return numberOfOutputChannels;
+    }
 
 public:
     int internalClock = 0;

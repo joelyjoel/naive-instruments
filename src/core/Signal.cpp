@@ -63,6 +63,15 @@ std::string AbstractFrameStreamConsumer::label()
     return owner->label() + "." + this->name;
 }
 
+short AbstractFrameStreamConsumer::numberOfChannels()
+{
+    if ( untypedConnection != nullptr )
+        return untypedConnection->getNumberOfOutputChannels();
+    else
+        // TODO: Not sure what to do here. Throw exception? return 0?
+        return -1;
+}
+
 // --------------------------------------------------------------------------------
 // class SignalInput
 // --------------------------------------------------------------------------------

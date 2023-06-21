@@ -47,6 +47,9 @@ protected:
 public:
     void checkConnection();
 
+    short numberOfChannels();
+
+
 public:
     void reset();
 };
