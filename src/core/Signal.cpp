@@ -16,7 +16,6 @@ AbstractFrameStreamConsumer::AbstractFrameStreamConsumer( AbstractFrameStream* o
 
 void AbstractFrameStreamConsumer::connect( shared_ptr<FrameStream<double>> signal )
 {
-    ;
     std::cerr << "No override for "
                  "AbstractFrameStreamConsumer::connect method\n";
     throw 1;
@@ -80,7 +79,12 @@ void FrameStreamConsumer<frame>::setConstant( frame k )
 template <typename frame>
 void FrameStreamConsumer<frame>::connect( std::shared_ptr<FrameStream<frame>> inputSignal )
 {
+    if ( untypedConnection != nullptr )
+    {
+        untypedConnection->removeReader( this );
+    }
     untypedConnection = inputSignal;
+    inputSignal->addReader( this );
     owner->handleConnectionChange();
 }
 

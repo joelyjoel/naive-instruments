@@ -1,5 +1,6 @@
 
 #include "FrameStreamConsumer.h"
+#include <set>
 
 /**
  * This class just exists so that FrameStreamConsumer's don't have to know the
@@ -8,6 +9,7 @@
 class AbstractFrameStream
 {
     friend AbstractFrameStreamConsumer;
+
 
 public:
     int internalClock = 0;
@@ -93,5 +95,33 @@ public:
             list.push_back( input->untypedConnection );
         }
         return list;
+    }
+
+    // TODO: Could probable use multiple inheritance to seperate out the readers section.
+private:
+    std::set<AbstractFrameStreamConsumer*> readers;
+
+public:
+    void addReader( AbstractFrameStreamConsumer* newReader )
+    {
+        readers.insert( newReader );
+    }
+    void removeReader( AbstractFrameStreamConsumer* oldReader )
+    {
+        readers.erase( oldReader );
+    }
+
+    /**
+     * List the streams that are reading this stream via a readers. (not recursive)
+     */
+    std::set<AbstractFrameStream*> readingStreams()
+    {
+        // TODO: Check that std::set has move semantics
+        std::set<AbstractFrameStream*> streams;
+        for ( auto reader : readers )
+        {
+            streams.insert( reader->owner );
+        }
+        return streams;
     }
 };
