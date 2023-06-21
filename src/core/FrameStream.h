@@ -25,8 +25,20 @@ private:
         // Deallocate if it its already been set
         if ( output != nullptr )
             delete output;
-        numberOfOutputChannels = numberOfChannels;
-        output                 = new frame[numberOfOutputChannels];
+
+        if ( numberOfChannels != numberOfOutputChannels )
+        {
+            numberOfOutputChannels = numberOfChannels;
+            if ( numberOfOutputChannels == 0 )
+            {
+                output = nullptr;
+            }
+            else
+            {
+                output = new frame[numberOfOutputChannels];
+            }
+            // TODO: Inform the down stream objects so they can handleConnectionChange
+        }
     }
 
     short getNumberOfOutputChannels()
