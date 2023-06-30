@@ -25,3 +25,25 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
 
     // TODO: Should assert behaviour for syncing backwards. What should that be?
 }
+
+TEST_CASE( "Accessing a signal using a SignalReader" )
+{
+    /// Comprised signal that writes the frame position to the output field
+    class Clock : public Signal<int>
+    {
+    public:
+        Clock()
+        {
+            output = 0;
+        }
+        void action() override
+        {
+            *output = t;
+        }
+    };
+
+    SignalReader<int> clockReader;
+    clockReader = std::make_shared<Clock>();
+
+    /* REQUIRE( clockReader[0] == 0 ); */
+}
