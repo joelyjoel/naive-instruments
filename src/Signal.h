@@ -8,7 +8,10 @@ public:
     typedef int    frame_position;
     frame_position t = 0;
 
-    virtual void action() = 0;
+    virtual void action()
+    {
+        // This must remain no-op for constant signals to work!
+    }
 
     void sync( frame_position until )
     {
@@ -31,24 +34,6 @@ public:
 
 
 // NOTE: Define constants before readers for handy operator overload for assigning constants to readers
-
-template <typename T>
-class Constant : Signal<T>
-{
-public:
-    T value;
-
-    Constant( T k )
-    : value( k )
-    , Signal<T>()
-    {
-    }
-
-    void action() override
-    {
-        *Signal<T>::output = value;
-    }
-};
 
 
 template <typename T>
@@ -74,7 +59,7 @@ public:
     /// Assigning a constant to a signal reader
     void operator=( T constantValue )
     {
-        auto k = std::make_shared<Constant<T>>( constantValue );
+        auto k = std::make_shared<Signal<T>>( constantValue );
         // FIXME: This part I've not tested...
         ptr = std::static_pointer_cast<Signal<T>>( k );
     }
@@ -84,7 +69,6 @@ public:
 
 typedef double                      MonoFrame;
 typedef Signal<MonoFrame>           MonoSignal;
-typedef Constant<MonoFrame>         MonoConstant;
 typedef SignalReader<MonoFrame>     MonoReader;
 typedef std::shared_ptr<MonoSignal> MonoPtr, Mono;
 
@@ -94,7 +78,6 @@ struct StereoFrame
     double left, right;
 };
 typedef Signal<StereoFrame>           StereoSignal;
-typedef Constant<StereoFrame>         StereoConstant;
 typedef SignalReader<StereoFrame>     StereoReader;
 typedef std::shared_ptr<StereoSignal> StereoPtr, Stereo;
 
