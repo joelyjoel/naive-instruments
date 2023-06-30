@@ -26,7 +26,7 @@ class Signal : public UnknownOutputSignal
     // For now everything is public
 public:
     /// write signal output data to this
-    T* output = new T;
+    T output;
 };
 
 
@@ -62,7 +62,7 @@ public:
     T operator[]( UnknownOutputSignal::frame_position t )
     {
         ptr->sync( t );
-        return *( ptr->output );
+        return ptr->output;
     }
 
     /// Assigning another signal to a signal reader
@@ -112,7 +112,7 @@ public:
     void action() override
     {
         phase += frequency[t] / sampleRate;
-        *output = phase * 2.0 - 1.0;
+        output = phase * 2.0 - 1.0;
     }
 };
 
@@ -125,7 +125,7 @@ public:
 
     void action() override
     {
-        *output = a[t] + b[t];
+        output = a[t] + b[t];
     }
 };
 
@@ -138,8 +138,8 @@ public:
     void action() override
     {
         // TODO: Coulde be optimised in a couple of ways to reduce risk and processing
-        output->left  = a[t].left + b[t].left;
-        output->right = a[t].right + b[t].right;
+        output.left  = a[t].left + b[t].left;
+        output.right = a[t].right + b[t].right;
     }
 };
 
@@ -150,7 +150,7 @@ public:
 
     void action() override
     {
-        output->left  = input[t];
-        output->right = input[t];
+        output.left  = input[t];
+        output.right = input[t];
     };
 };
