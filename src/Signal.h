@@ -5,7 +5,7 @@ class UnknownOutputSignal
 {
 public:
     typedef int    frame_position;
-    frame_position t = -1;
+    frame_position t = 0;
 
     virtual void action() = 0;
 
@@ -153,12 +153,3 @@ public:
         output->right = input[t];
     };
 };
-
-// Main
-
-// TODO: Replace with unit tests
-int main()
-{
-    auto osc       = std::make_shared<Sawtooth>();
-    osc->frequency = 440;
-}
