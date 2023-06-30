@@ -34,7 +34,7 @@ TEST_CASE( "Accessing a signal using a SignalReader" )
     public:
         Clock()
         {
-            output = 0;
+            *output = t;
         }
         void action() override
         {
@@ -45,5 +45,7 @@ TEST_CASE( "Accessing a signal using a SignalReader" )
     SignalReader<int> clockReader;
     clockReader = std::make_shared<Clock>();
 
-    /* REQUIRE( clockReader[0] == 0 ); */
+    REQUIRE( clockReader[0] == 0 );
+    REQUIRE( clockReader[1] == 1 );
+    REQUIRE( clockReader[100] == 100 );
 }
