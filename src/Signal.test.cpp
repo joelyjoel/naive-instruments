@@ -49,3 +49,12 @@ TEST_CASE( "Accessing a signal using a SignalReader" )
     REQUIRE( clockReader[1] == 1 );
     REQUIRE( clockReader[100] == 100 );
 }
+
+TEST_CASE( "Using constant signals" )
+{
+    Constant<double> a;
+    a.output = 10.0;
+    REQUIRE( a.t == 0 );
+    REQUIRE( a.output == 10 );
+    a.sync( 1 );
+}
