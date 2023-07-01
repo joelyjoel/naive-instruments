@@ -158,3 +158,19 @@ public:
         this->output = this->t;
     }
 };
+
+class Accumulator : public Signal<double>
+{
+public:
+    SignalReader<double> input;
+
+    Accumulator()
+    {
+        output = 0;
+    }
+
+    void action() override
+    {
+        output += input[t];
+    }
+};

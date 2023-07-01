@@ -94,3 +94,25 @@ TEST_CASE( "Adding constant signals together" )
     add->sync( 1 );
     REQUIRE( add->output == 122 );
 }
+
+TEST_CASE( "A constant -> accumulator is like a clock" )
+{
+    auto accumulator   = std::make_shared<Accumulator>();
+    accumulator->input = 1;
+    accumulator->sync( 2 );
+    REQUIRE( accumulator->output == 2 );
+}
+
+TEST_CASE( "Feeding a clock into an accumulator" )
+{
+
+    auto                 clock       = std::make_shared<Clock<double>>();
+    auto                 accumulator = std::make_shared<Accumulator>();
+    SignalReader<double> reader;
+    accumulator->input = clock;
+    reader             = accumulator;
+    REQUIRE( reader[1] == 1 );
+    REQUIRE( reader[2] == 3 );
+    REQUIRE( reader[3] == 6 );
+    REQUIRE( reader[4] == 10 );
+}
