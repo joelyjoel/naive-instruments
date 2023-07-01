@@ -58,3 +58,13 @@ TEST_CASE( "Instantiating constant signals" )
     REQUIRE( a.output == 10 );
     a.sync( 1 );
 }
+
+TEST_CASE( "Assigning constant signal to a signal reader, and then reading from it" )
+{
+    SignalReader<double> myReader;
+    myReader = 10;
+    REQUIRE( myReader[1] == 10 );
+    REQUIRE( myReader[3] == 10 );
+    myReader = 20;
+    REQUIRE( myReader[10] == 20 );
+}
