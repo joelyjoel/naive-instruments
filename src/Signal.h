@@ -131,3 +131,17 @@ public:
         output.right = input[t];
     };
 };
+
+/// signal that writes the frame position to the output field
+class Clock : public Signal<int>
+{
+public:
+    Clock()
+    {
+        output = t;
+    }
+    void action() override
+    {
+        output = t;
+    }
+};

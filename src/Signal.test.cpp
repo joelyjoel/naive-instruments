@@ -29,20 +29,6 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
 
 TEST_CASE( "Accessing a signal using a SignalReader" )
 {
-    /// Comprised signal that writes the frame position to the output field
-    class Clock : public Signal<int>
-    {
-    public:
-        Clock()
-        {
-            output = t;
-        }
-        void action() override
-        {
-            output = t;
-        }
-    };
-
     SignalReader<int> clockReader;
     clockReader = std::make_shared<Clock>();
 
@@ -70,6 +56,15 @@ TEST_CASE( "Assigning constant signal to a signal reader, and then reading from 
     REQUIRE( myReader[10] == 20 );
 }
 
+TEST_CASE( "Assigning non constant signal to a signal reader" )
+{
+    std::shared_ptr<Signal<int>> clock = std::make_shared<Clock>();
+    SignalReader<int>            reader;
+    reader = clock;
+    REQUIRE( reader[1] == 1 );
+    REQUIRE( reader[22] == 22 );
+}
+
 TEST_CASE( "Assigning a constant signal to a signal reader member on another signal" )
 {
     class Repeater : public Signal<double>
@@ -88,6 +83,7 @@ TEST_CASE( "Assigning a constant signal to a signal reader member on another sig
     repeater->sync( 1 );
     REQUIRE( repeater->output == 10 );
 }
+
 
 TEST_CASE( "Adding constant signals together" )
 {
