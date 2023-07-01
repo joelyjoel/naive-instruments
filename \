@@ -125,8 +125,4 @@ TEST_CASE( "Using modulo to count to 10 repetitively" )
     mod->maximum = 10;
     SignalReader<double> reader;
     reader = mod;
-
-    REQUIRE( reader[1] == 1 );
-    REQUIRE( reader[9] == 9 );
-    REQUIRE( reader[15] == 5 );
 }

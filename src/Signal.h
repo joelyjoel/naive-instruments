@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <memory>
 
@@ -172,5 +173,17 @@ public:
     void action() override
     {
         output += input[t];
+    }
+};
+
+class Modulo : public Signal<double>
+{
+public:
+    SignalReader<double> input;
+    SignalReader<double> maximum;
+
+    void action() override
+    {
+        output = fmod( input[t], maximum[t] );
     }
 };
