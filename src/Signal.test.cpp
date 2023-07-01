@@ -1,5 +1,6 @@
 #include "./Signal.h"
 #include "../dependencies/catch.hpp"
+#include <memory>
 
 TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clock" )
 {
@@ -67,4 +68,23 @@ TEST_CASE( "Assigning constant signal to a signal reader, and then reading from 
     REQUIRE( myReader[3] == 10 );
     myReader = 20;
     REQUIRE( myReader[10] == 20 );
+}
+
+TEST_CASE( "Assigning a constant signal to a signal reader member on another signal" )
+{
+    class Repeater : public Signal<double>
+    {
+    public:
+        SignalReader<double> input;
+
+        void action() override
+        {
+            output = input[t];
+        }
+    };
+
+    auto repeater   = std::make_shared<Repeater>();
+    repeater->input = 10;
+    repeater->sync( 1 );
+    REQUIRE( repeater->output == 10 );
 }
