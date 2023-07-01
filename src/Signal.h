@@ -10,7 +10,7 @@ public:
 
     virtual void action()
     {
-        // This must remain no-op for constant signals to work!
+        // This must remain no-op for constant signals to work.
     }
 
     void sync( frame_position until )
@@ -132,7 +132,20 @@ public:
     };
 };
 
+template <typename T>
+class Repeater : public Signal<T>
+{
+public:
+    SignalReader<T> input;
+
+    void action() override
+    {
+        this->output = input[this->t];
+    }
+};
+
 /// signal that writes the frame position to the output field
+// TODO: Make template
 class Clock : public Signal<int>
 {
 public:

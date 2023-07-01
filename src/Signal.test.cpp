@@ -58,8 +58,8 @@ TEST_CASE( "Assigning constant signal to a signal reader, and then reading from 
 
 TEST_CASE( "Assigning non constant signal to a signal reader" )
 {
-    std::shared_ptr<Signal<int>> clock = std::make_shared<Clock>();
-    SignalReader<int>            reader;
+    auto              clock = std::make_shared<Clock>();
+    SignalReader<int> reader;
     reader = clock;
     REQUIRE( reader[1] == 1 );
     REQUIRE( reader[22] == 22 );
@@ -67,21 +67,22 @@ TEST_CASE( "Assigning non constant signal to a signal reader" )
 
 TEST_CASE( "Assigning a constant signal to a signal reader member on another signal" )
 {
-    class Repeater : public Signal<double>
-    {
-    public:
-        SignalReader<double> input;
 
-        void action() override
-        {
-            output = input[t];
-        }
-    };
-
-    auto repeater   = std::make_shared<Repeater>();
+    auto repeater   = std::make_shared<Repeater<double>>();
     repeater->input = 10;
     repeater->sync( 1 );
     REQUIRE( repeater->output == 10 );
+}
+
+TEST_CASE( "Assigning a non constant signal to a signal reader member on another signal" )
+{
+    auto clock      = std::make_shared<Clock>();
+    auto repeater   = std::make_shared<Repeater<int>>();
+    repeater->input = clock;
+    repeater->sync( 1 );
+    REQUIRE( repeater->output == 1 );
+    repeater->sync( 20 );
+    REQUIRE( repeater->output == 20 );
 }
 
 
