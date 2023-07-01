@@ -39,8 +39,9 @@ public:
 template <typename T>
 class SignalReader
 {
-private:
+public:
     std::shared_ptr<Signal<T>> ptr;
+
 
 public:
     // Read a value by index from the signal
@@ -59,8 +60,10 @@ public:
     /// Assigning a constant to a signal reader
     void operator=( T constantValue )
     {
-        ptr         = std::make_shared<Signal<T>>();
-        ptr->output = constantValue;
+
+        std::shared_ptr<Signal<T>> newSignal = std::make_shared<Signal<T>>();
+        newSignal->output                    = constantValue;
+        ptr                                  = newSignal;
     }
 };
 
@@ -99,15 +102,15 @@ public:
 };
 
 // TODO: Use a template for Add
-class Add : public MonoSignal
+class Sum : public Signal<double>
 {
 public:
-    MonoReader a;
-    MonoReader b;
+    SignalReader<double> input1;
+    SignalReader<double> input2;
 
     void action() override
     {
-        output = a[t] + b[t];
+        output = input1[t] + input2[t];
     }
 };
 
