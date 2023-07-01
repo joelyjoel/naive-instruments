@@ -91,7 +91,7 @@ TEST_CASE( "Assigning a constant signal to a signal reader member on another sig
 
 TEST_CASE( "Adding constant signals together" )
 {
-    auto add    = std::make_shared<Sum>();
+    auto add    = std::make_shared<Sum<double>>();
     add->input1 = 100;
     add->input2 = 22;
     add->sync( 1 );

@@ -101,32 +101,24 @@ public:
     }
 };
 
-// TODO: Use a template for Add
-class Sum : public Signal<double>
+/**
+ * Add two signals together.
+ *
+ * Uses the `+` operator to define what adding signal frames means.
+ */
+template <typename T>
+class Sum : public Signal<T>
 {
 public:
-    SignalReader<double> input1;
-    SignalReader<double> input2;
+    SignalReader<T> input1;
+    SignalReader<T> input2;
 
     void action() override
     {
-        output = input1[t] + input2[t];
+        this->output = this->input1[this->t] + this->input2[this->t];
     }
 };
 
-class StereoAdd : public StereoSignal
-{
-public:
-    StereoReader a;
-    StereoReader b;
-
-    void action() override
-    {
-        // TODO: Coulde be optimised in a couple of ways to reduce risk and processing
-        output.left  = a[t].left + b[t].left;
-        output.right = a[t].right + b[t].right;
-    }
-};
 
 class MonoToStereo : public StereoSignal
 {
