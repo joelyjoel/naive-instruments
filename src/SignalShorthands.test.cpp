@@ -1,11 +1,10 @@
 #include "./SignalShorthands.h"
-#include "../dependencies/catch.hpp"
+#include "./test-framework/custom-assertions.h"
 
 using namespace SignalShorthands;
 
 TEST_CASE( "creating a clock" )
 {
     auto clock = t();
-    clock->sync( 1 );
-    REQUIRE( clock->output == 1 );
+    CHECK_SIGNAL( clock, { 0, 1, 2, 3, 4, 5 } );
 }
