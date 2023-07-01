@@ -2,9 +2,10 @@
 #include "../dependencies/catch.hpp"
 #include <memory>
 
-void REQUIRE_SEQUENCE( std::shared_ptr<Signal<double>> signal, std::vector<double> expectedSequence )
+template <typename T>
+void REQUIRE_SEQUENCE( std::shared_ptr<Signal<T>> signal, std::vector<T> expectedSequence )
 {
-    SignalReader<double> reader;
+    SignalReader<T> reader;
     reader = signal;
     for ( int i = 0; i < expectedSequence.size(); ++i )
         SECTION( "Comparing frame " + std::to_string( i ) )
@@ -42,7 +43,7 @@ TEST_CASE( "Check that REQUIRE_SEQUENCE works for happy case" )
 {
     auto signal    = std::make_shared<Signal<double>>();
     signal->output = 10;
-    REQUIRE_SEQUENCE( signal, { 10, 10, 10, 10 } );
+    REQUIRE_SEQUENCE<double>( signal, { 10, 10, 10, 10 } );
 }
 
 // TODO: Check that REQUIRE_SEQUENCE fails correctly
@@ -55,6 +56,12 @@ TEST_CASE( "Accessing a signal using a SignalReader" )
     REQUIRE( clockReader[0] == 0 );
     REQUIRE( clockReader[1] == 1 );
     REQUIRE( clockReader[100] == 100 );
+}
+
+TEST_CASE( "REQUIRE_SEQUENCE works for other types of signals" )
+{
+    auto clock = std::make_shared<Clock<int>>();
+    REQUIRE_SEQUENCE<int>( clock, { 0, 1, 2, 3, 4 } );
 }
 
 TEST_CASE( "Instantiating constant signals" )
@@ -129,7 +136,7 @@ TEST_CASE( "Feeding a clock into an accumulator" )
     auto clock         = std::make_shared<Clock<double>>();
     auto accumulator   = std::make_shared<Accumulator>();
     accumulator->input = clock;
-    REQUIRE_SEQUENCE( accumulator, { 0, 1, 3, 6, 10, 15 } );
+    REQUIRE_SEQUENCE<double>( accumulator, { 0, 1, 3, 6, 10, 15 } );
 }
 
 TEST_CASE( "Using modulo to count to 10 repetitively" )
