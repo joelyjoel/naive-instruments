@@ -10,4 +10,5 @@ typedef std::shared_ptr<Signal<StereoFrame>> stereo;
 
 mono t();
 mono add( mono a, mono b );
+
 }; // namespace SignalShorthands
