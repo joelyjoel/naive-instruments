@@ -30,7 +30,7 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
 TEST_CASE( "Accessing a signal using a SignalReader" )
 {
     SignalReader<int> clockReader;
-    clockReader = std::make_shared<Clock>();
+    clockReader = std::make_shared<Clock<int>>();
 
     REQUIRE( clockReader[0] == 0 );
     REQUIRE( clockReader[1] == 1 );
@@ -58,7 +58,7 @@ TEST_CASE( "Assigning constant signal to a signal reader, and then reading from 
 
 TEST_CASE( "Assigning non constant signal to a signal reader" )
 {
-    auto              clock = std::make_shared<Clock>();
+    auto              clock = std::make_shared<Clock<int>>();
     SignalReader<int> reader;
     reader = clock;
     REQUIRE( reader[1] == 1 );
@@ -76,7 +76,7 @@ TEST_CASE( "Assigning a constant signal to a signal reader member on another sig
 
 TEST_CASE( "Assigning a non constant signal to a signal reader member on another signal" )
 {
-    auto clock      = std::make_shared<Clock>();
+    auto clock      = std::make_shared<Clock<int>>();
     auto repeater   = std::make_shared<Repeater<int>>();
     repeater->input = clock;
     repeater->sync( 1 );

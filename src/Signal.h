@@ -10,7 +10,7 @@ public:
 
     virtual void action()
     {
-        // This must remain no-op for constant signals to work.
+        // This must remain no-op on base class for constant signals to work.
     }
 
     void sync( frame_position until )
@@ -145,16 +145,16 @@ public:
 };
 
 /// signal that writes the frame position to the output field
-// TODO: Make template
-class Clock : public Signal<int>
+template <typename T>
+class Clock : public Signal<T>
 {
 public:
     Clock()
     {
-        output = t;
+        this->output = this->t;
     }
     void action() override
     {
-        output = t;
+        this->output = this->t;
     }
 };
