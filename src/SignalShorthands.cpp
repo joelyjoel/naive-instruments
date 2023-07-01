@@ -1,7 +1,7 @@
 #include "./SignalShorthands.h"
 #include <memory>
 
-using namespace SignalShorthands;
+using SignalShorthands::mono;
 
 mono SignalShorthands::t()
 {
@@ -14,4 +14,9 @@ mono SignalShorthands::add( mono a, mono b )
     adder->input1 = a;
     adder->input2 = b;
     return adder;
+}
+
+mono SignalShorthands::operator+( mono a, mono b )
+{
+    return add( a, b );
 }
