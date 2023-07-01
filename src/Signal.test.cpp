@@ -2,6 +2,17 @@
 #include "../dependencies/catch.hpp"
 #include <memory>
 
+void REQUIRE_SEQUENCE( std::shared_ptr<Signal<double>> signal, std::vector<double> expectedSequence )
+{
+    SignalReader<double> reader;
+    reader = signal;
+    for ( int i = 0; i < expectedSequence.size(); ++i )
+        SECTION( "Comparing frame " + std::to_string( i ) )
+        {
+            CHECK( reader[i] == expectedSequence[i] );
+        }
+}
+
 TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clock" )
 {
     class PowersOfTwo : public Signal<double>
@@ -26,6 +37,15 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
 
     // TODO: Should assert behaviour for syncing backwards. What should that be?
 }
+
+TEST_CASE( "Check that REQUIRE_SEQUENCE works for happy case" )
+{
+    auto signal    = std::make_shared<Signal<double>>();
+    signal->output = 10;
+    REQUIRE_SEQUENCE( signal, { 10, 10, 10, 10 } );
+}
+
+// TODO: Check that REQUIRE_SEQUENCE fails correctly
 
 TEST_CASE( "Accessing a signal using a SignalReader" )
 {
@@ -106,15 +126,10 @@ TEST_CASE( "A constant -> accumulator is like a clock" )
 TEST_CASE( "Feeding a clock into an accumulator" )
 {
 
-    auto                 clock       = std::make_shared<Clock<double>>();
-    auto                 accumulator = std::make_shared<Accumulator>();
-    SignalReader<double> reader;
+    auto clock         = std::make_shared<Clock<double>>();
+    auto accumulator   = std::make_shared<Accumulator>();
     accumulator->input = clock;
-    reader             = accumulator;
-    REQUIRE( reader[1] == 1 );
-    REQUIRE( reader[2] == 3 );
-    REQUIRE( reader[3] == 6 );
-    REQUIRE( reader[4] == 10 );
+    REQUIRE_SEQUENCE( accumulator, { 0, 1, 3, 6, 10, 15 } );
 }
 
 TEST_CASE( "Using modulo to count to 10 repetitively" )
