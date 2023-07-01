@@ -59,9 +59,8 @@ public:
     /// Assigning a constant to a signal reader
     void operator=( T constantValue )
     {
-        auto k = std::make_shared<Signal<T>>( constantValue );
-        // FIXME: This part I've not tested...
-        ptr = std::static_pointer_cast<Signal<T>>( k );
+        ptr         = std::make_shared<Signal<T>>();
+        ptr->output = constantValue;
     }
 };
 
