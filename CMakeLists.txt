@@ -75,6 +75,7 @@ INCLUDE_DIRECTORIES( "/opt/homebrew/Cellar/portaudio/19.7.0/include" )
 set(NaiveSourcFiles 
   src/file-io/record.cpp 
   src/core/Signal.cpp 
+  src/SignalShorthands.cpp
   src/playback/BufferedPlayback.cpp 
   src/parsing/Parse.cpp 
   src/parsing/LazyRegex.cpp 
@@ -113,6 +114,7 @@ target_include_directories(naive PUBLIC dependencies)
    ${NaiveSourcFiles}
    # TODO: It actually probably is a bit safer to use a glob here
    src/Signal.test.cpp
+   src/SignalShorthands.test.cpp
    src/generative/Random.test.cpp 
    src/instruments/BreakpointEnvelope.test.cpp 
    src/instruments/ControlString.test.cpp 
