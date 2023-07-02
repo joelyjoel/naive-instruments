@@ -114,6 +114,7 @@ target_include_directories(naive PUBLIC dependencies)
    ${NaiveSourcFiles}
    # TODO: It actually probably is a bit safer to use a glob here
    src/Signal.test.cpp
+   src/signal-processors.test.cpp
    src/SignalShorthands.test.cpp
    src/generative/Random.test.cpp 
    src/instruments/BreakpointEnvelope.test.cpp 

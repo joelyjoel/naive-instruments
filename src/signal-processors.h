@@ -1,4 +1,5 @@
 #include "Signal.h"
+#include "core/MonoBuffer.h"
 
 namespace NaiveInstruments
 {
@@ -117,6 +118,36 @@ public:
     void action() override
     {
         output = random.number( -1.0, 1.0 );
+    }
+};
+
+class Sampler : public Signal<double>
+{
+    // TODO: Refactor this class, its been lazily adapted from the old version
+
+    // TODO: should this really be a c ptr?
+    MonoBuffer* buffer;
+    int         playhead = 0;
+
+public:
+    Sampler( MonoBuffer& sharedBuffer )
+    {
+        buffer = &sharedBuffer;
+        output = ( *buffer )[playhead];
+    }
+
+public:
+    void action() override
+    {
+        if ( playhead < 0 )
+        {
+            ++playhead;
+            output = 0;
+        }
+        else if ( playhead < buffer->numberOfFrames() )
+            output = ( *buffer )[++playhead];
+        else
+            output = 0;
     }
 };
 
