@@ -1,4 +1,4 @@
-#include "signal-processors.h"
+#include "signal-processes.h"
 #include "./test-framework/custom-assertions.h"
 #include "core/MonoBuffer.h"
 

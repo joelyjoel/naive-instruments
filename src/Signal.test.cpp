@@ -1,7 +1,9 @@
 #include "./Signal.h"
-#include "./signal-processors.h"
 #include "test-framework/custom-assertions.h"
 #include <memory>
+
+// TODO: Move the tests that depend on this to the right test file!
+#include "./signal-processes.h"
 
 using namespace NaiveInstruments;
 
