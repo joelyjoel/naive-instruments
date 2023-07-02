@@ -2,6 +2,8 @@
 #include "test-framework/custom-assertions.h"
 #include <memory>
 
+using namespace NaiveInstruments;
+
 TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clock" )
 {
     class PowersOfTwo : public Signal<double>

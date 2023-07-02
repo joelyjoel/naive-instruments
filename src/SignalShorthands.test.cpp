@@ -1,7 +1,7 @@
 #include "./SignalShorthands.h"
 #include "./test-framework/custom-assertions.h"
 
-using namespace SignalShorthands;
+using namespace NaiveInstruments::SignalShorthands;
 
 TEST_CASE( "creating a clock" )
 {

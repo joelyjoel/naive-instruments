@@ -2,6 +2,8 @@
 #include <ctime>
 #include <memory>
 
+namespace NaiveInstruments
+{
 namespace SignalShorthands
 {
 
@@ -15,3 +17,4 @@ mono add( mono a, mono b );
 mono operator+( mono a, mono b );
 
 }; // namespace SignalShorthands
+} // namespace NaiveInstruments

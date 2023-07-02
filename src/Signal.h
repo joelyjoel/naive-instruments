@@ -4,6 +4,8 @@
 #include <iostream>
 #include <memory>
 
+namespace NaiveInstruments
+{
 
 class UnknownOutputSignal
 {
@@ -189,3 +191,5 @@ public:
         output = fmod( input[t], maximum[t] );
     }
 };
+
+} // namespace NaiveInstruments

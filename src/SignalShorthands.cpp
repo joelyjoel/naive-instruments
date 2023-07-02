@@ -1,6 +1,7 @@
 #include "./SignalShorthands.h"
 #include <memory>
 
+using namespace NaiveInstruments;
 using SignalShorthands::mono;
 
 mono SignalShorthands::t()
