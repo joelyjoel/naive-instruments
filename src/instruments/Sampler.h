@@ -12,10 +12,10 @@ private:
 
 public:
     /**
-     * deprecated
+
      * TODO: Remove and replace with static method.
      */
-    Sampler( const std::string& filePath )
+    [[deprecated]] Sampler( const std::string& filePath )
     {
         buffer = WavReader::readMonoFile( filePath );
     }
