@@ -146,4 +146,31 @@ protected:
             std::cout << *path << "\n";
         }
     }
+
+    void output( NaiveInstruments::SignalShorthands::mono signal )
+    {
+        auto& path = outputFile();
+        if ( stdoutIsAPipe() )
+        {
+            std::cerr << "Piping to stdout\n";
+            record( std::cout, signal, outputDuration() );
+        }
+        else if ( interactiveModeEnabled() )
+        {
+            // TODO: InteractivePlayback::play( signal );
+            std::cerr << "intercative mode not implemented yet for new signals.";
+            throw 1;
+        }
+        else if ( !path.success() )
+        {
+            // TODO: BufferedPlayback::play( signal );
+            std::cerr << "live playback not implemented yet for new signals.";
+            throw 1;
+        }
+        else
+        {
+            record( *path, signal, outputDuration() );
+            std::cout << *path << "\n";
+        }
+    }
 };
