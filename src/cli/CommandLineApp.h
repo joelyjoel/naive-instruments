@@ -8,7 +8,7 @@
 #include "CommandLineArguments.h"
 #include <iostream>
 
-class CommandLineApp
+class [[deprecated( "Use Command or sub-class (probably AudioCommand) instead" )]] CommandLineApp
 {
 public:
     CommandLineArguments args;
@@ -18,12 +18,12 @@ public:
     : args( argc, argv )
     {
     }
-    CommandLineApp( MainArgs& args )
+    CommandLineApp( MainArgs & args )
     : args( args )
     {
     }
 
-    void output( MonoBuffer& buffer )
+    void output( MonoBuffer & buffer )
     {
         if ( args.boolean( "normalise" ) )
             buffer.normalise();
@@ -76,7 +76,7 @@ public:
         }
     }
 
-    void output( FrameStream<double>& signal )
+    void output( FrameStream<double> & signal )
     {
         auto& path = outputPath();
         if ( stdoutIsAPipe() )
@@ -93,7 +93,7 @@ public:
         }
     }
 
-    void output( MonoBuffer* buffer )
+    void output( MonoBuffer * buffer )
     {
         output( *buffer );
     }
