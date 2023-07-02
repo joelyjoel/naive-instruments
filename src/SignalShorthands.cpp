@@ -1,4 +1,5 @@
 #include "./SignalShorthands.h"
+#include "core/MonoBuffer.h"
 #include <memory>
 
 using namespace NaiveInstruments;
@@ -33,4 +34,9 @@ mono SignalShorthands::constant( double value )
     auto signal    = std::make_shared<Signal<double>>();
     signal->output = value;
     return signal;
+}
+
+mono SignalShorthands::sampler( MonoBuffer* buffer )
+{
+    return std::make_shared<NaiveInstruments::Sampler>( buffer );
 }

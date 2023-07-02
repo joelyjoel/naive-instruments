@@ -12,6 +12,6 @@ TEST_CASE( "Creating a Sampler using a contrived MonoBuffer" )
     buffer[2]                               = 3;
     buffer[3]                               = 2;
     buffer[4]                               = 1;
-    std::shared_ptr<Signal<double>> sampler = std::make_shared<NaiveInstruments::Sampler>( buffer );
+    std::shared_ptr<Signal<double>> sampler = std::make_shared<NaiveInstruments::Sampler>( &buffer );
     CHECK_SIGNAL( sampler, { 5, 4, 3, 2, 1 } );
 }

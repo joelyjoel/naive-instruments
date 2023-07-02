@@ -23,3 +23,16 @@ TEST_CASE( "Adding two clocks together with operator overload" )
 
     CHECK_SIGNAL( t() + t(), { 0, 2, 4, 6 } );
 }
+
+TEST_CASE( "Creating a sampler with a contrived buffer using a shorthand" )
+{
+    MonoBuffer buffer( 10 );
+    buffer[0] = 5;
+    buffer[1] = 4;
+    buffer[2] = 3;
+    buffer[3] = 2;
+    buffer[4] = 1;
+
+    auto signal = sampler( &buffer );
+    CHECK_SIGNAL( signal, { 5, 4, 3, 2, 1 } );
+}

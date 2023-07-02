@@ -22,5 +22,7 @@ mono noise( uint64_t seed = 1 );
 
 mono constant( double value );
 
+mono sampler( MonoBuffer* buffer );
+
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

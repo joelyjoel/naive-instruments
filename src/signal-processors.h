@@ -130,9 +130,9 @@ class Sampler : public Signal<double>
     int         playhead = 0;
 
 public:
-    Sampler( MonoBuffer& sharedBuffer )
+    Sampler( MonoBuffer* sharedBuffer )
     {
-        buffer = &sharedBuffer;
+        buffer = sharedBuffer;
         output = ( *buffer )[playhead];
     }
 
