@@ -3,6 +3,11 @@
 
 using namespace NaiveInstruments::SignalShorthands;
 
+TEST_CASE( "Using a shorthand to create a constant" )
+{
+    CHECK_SIGNAL( constant( 10 ), { 10, 10, 10 } );
+}
+
 TEST_CASE( "creating a clock" )
 {
     CHECK_SIGNAL( t(), { 0, 1, 2, 3, 4, 5 } );

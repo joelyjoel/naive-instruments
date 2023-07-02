@@ -27,3 +27,10 @@ mono SignalShorthands::noise( uint64_t seed )
 {
     return std::make_shared<Noise>( seed );
 }
+
+mono SignalShorthands::constant( double value )
+{
+    auto signal    = std::make_shared<Signal<double>>();
+    signal->output = value;
+    return signal;
+}

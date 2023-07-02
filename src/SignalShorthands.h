@@ -1,3 +1,5 @@
+#pragma once
+
 #include "./Signal.h"
 #include <ctime>
 #include <memory>
@@ -17,6 +19,8 @@ mono add( mono a, mono b );
 mono operator+( mono a, mono b );
 
 mono noise( uint64_t seed = 1 );
+
+mono constant( double value );
 
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments
