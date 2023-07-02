@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./Signal.h"
+#include "./signal-processors.h"
 #include <ctime>
 #include <memory>
 

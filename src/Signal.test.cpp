@@ -1,4 +1,5 @@
 #include "./Signal.h"
+#include "./signal-processors.h"
 #include "test-framework/custom-assertions.h"
 #include <memory>
 
