@@ -16,5 +16,7 @@ mono add( mono a, mono b );
 
 mono operator+( mono a, mono b );
 
+mono noise( uint64_t seed = 1 );
+
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

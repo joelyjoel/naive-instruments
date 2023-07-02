@@ -33,8 +33,7 @@ protected:
     void action() override
     {
 
-        // Create a `Noise` signal (a subclass of `Signal` which outputs white noise
-        Noise noise;
+        auto noise = NaiveInstruments::SignalShorthands::noise();
 
         // We send our signal straight to the output. The `output` method will work
         // out where to send the audio depending on the user's command line options.

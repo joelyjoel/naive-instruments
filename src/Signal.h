@@ -1,8 +1,10 @@
 #pragma once
 
+#include "./generative/Random.h"
 #include <cmath>
 #include <iostream>
 #include <memory>
+
 
 namespace NaiveInstruments
 {
@@ -189,6 +191,23 @@ public:
     void action() override
     {
         output = fmod( input[t], maximum[t] );
+    }
+};
+
+class Noise : public Signal<double>
+{
+    Random random;
+
+public:
+    Noise( u_int64_t seed = 1 )
+    : random( seed )
+    {
+        output = random.number( -1.0, 1.0 );
+    }
+
+    void action() override
+    {
+        output = random.number( -1.0, 1.0 );
     }
 };
 

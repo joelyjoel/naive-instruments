@@ -21,3 +21,9 @@ mono SignalShorthands::operator+( mono a, mono b )
 {
     return add( a, b );
 }
+
+
+mono SignalShorthands::noise( uint64_t seed )
+{
+    return std::make_shared<Noise>( seed );
+}
