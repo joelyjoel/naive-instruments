@@ -163,9 +163,7 @@ protected:
         }
         else if ( !path.success() )
         {
-            // TODO: BufferedPlayback::play( signal );
-            std::cerr << "live playback not implemented yet for new signals.";
-            throw 1;
+            BufferedSignalPlayback::play( signal );
         }
         else
         {
