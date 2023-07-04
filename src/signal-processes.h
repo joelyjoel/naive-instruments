@@ -6,18 +6,27 @@ namespace NaiveInstruments
 {
 
 
-class Sawtooth : public MonoSignal
+/**
+ * Unsigned sawtooth wave
+ */
+class USaw : public Signal<double>
 {
 public:
-    MonoReader frequency;
-    double     phase;
+    SignalReader<double> frequency;
+
+    USaw()
+    {
+        output = 0;
+    }
 
     void action() override
     {
-        phase += frequency[t] / sampleRate;
-        output = phase * 2.0 - 1.0;
+        // TODO: At some point we need figure out the right way to handle sample rate
+        output += frequency[t] / 44100;
+        output = fmod( output, 1.0 );
     }
 };
+
 
 /**
  * Add two signals together.

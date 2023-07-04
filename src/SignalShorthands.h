@@ -14,6 +14,8 @@ typedef std::shared_ptr<Signal<StereoFrame>> stereo;
 
 mono t();
 
+mono usaw( mono frequency );
+
 mono add( mono a, mono b );
 
 mono operator+( mono a, mono b );
@@ -23,6 +25,7 @@ mono noise( uint64_t seed = 1 );
 mono constant( double value );
 
 mono sampler( MonoBuffer* buffer );
+
 
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

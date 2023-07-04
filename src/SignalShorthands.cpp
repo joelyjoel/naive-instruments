@@ -10,6 +10,13 @@ mono SignalShorthands::t()
     return std::make_shared<Clock<double>>();
 }
 
+mono SignalShorthands::usaw( mono frequency )
+{
+    auto saw       = std::make_shared<USaw>();
+    saw->frequency = frequency;
+    return saw;
+}
+
 mono SignalShorthands::add( mono a, mono b )
 {
     auto adder    = std::make_shared<Sum<double>>();

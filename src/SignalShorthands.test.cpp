@@ -13,6 +13,13 @@ TEST_CASE( "creating a clock" )
     CHECK_SIGNAL( t(), { 0, 1, 2, 3, 4, 5 } );
 }
 
+TEST_CASE( "Creating an unsigned sawtooth wave" )
+{
+    CHECK_SIGNAL( usaw( constant( 0 ) ), { 0, 0, 0, 0, 0, 0 } );
+    CHECK_SIGNAL( usaw( constant( 1 ) ), { 0, 1.0 / 44100, 2.0 / 44100, 3.0 / 44100 } );
+    CHECK_SIGNAL( usaw( constant( 22050 ) ), { 0, .5, 0, .5 } );
+}
+
 TEST_CASE( "Adding two clocks together with function" )
 {
     CHECK_SIGNAL( add( t(), t() ), { 0, 2, 4, 6 } );
