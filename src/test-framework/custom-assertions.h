@@ -25,3 +25,12 @@ inline void CHECK_SIGNAL( std::shared_ptr<NaiveInstruments::Signal<NaiveInstrume
             CHECK( reader[i].right == expectedSequence[i].right );
         }
 }
+
+inline void CHECK_FRAME( std::shared_ptr<NaiveInstruments::Signal<double>> signal, int frame, double expectedValue )
+{
+    SECTION( "Checking frame " + std::to_string( frame ) )
+    {
+        signal->sync( frame );
+        CHECK( signal->output == expectedValue );
+    }
+}

@@ -28,5 +28,7 @@ mono sampler( MonoBuffer* buffer );
 
 mono sineWavetable( mono phase );
 
+mono sine( mono frequency );
+
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

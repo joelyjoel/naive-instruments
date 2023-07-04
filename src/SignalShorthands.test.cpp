@@ -52,3 +52,9 @@ TEST_CASE( "Constructing a sineWavetable" )
     table->sync( 1 );
     CHECK( table->output == sin( M_PI * 2 * 1 / 44100.0 ) );
 }
+
+TEST_CASE( "shorthand for sine waves" )
+{
+    auto signal = sine( constant( 1 ) );
+    CHECK_FRAME( signal, 1, sin( M_PI * 2 * 1 / 44100.0 ) );
+}

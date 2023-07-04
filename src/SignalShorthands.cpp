@@ -55,3 +55,8 @@ mono SignalShorthands::sineWavetable( mono phase )
     signal->phase = phase;
     return signal;
 }
+
+mono SignalShorthands::sine( mono frequency )
+{
+    return sineWavetable( usaw( frequency ) );
+}
