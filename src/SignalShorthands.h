@@ -189,6 +189,10 @@ inline mono oscWithWavetableFromFile( const std::string& filePath, mono frequenc
     return wavetableFromFile( filePath, usaw( frequency ) );
 }
 
+inline mono lfo( mono centre, mono range, mono frequency = constant( 5 ) )
+{
+    return centre + triangle( frequency ) * range;
+}
 
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

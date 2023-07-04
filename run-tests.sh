@@ -1,3 +1,4 @@
+#! /bin/bash
 
 # This script will run all the scripts in the tests/* directory which create a
 # sample pack, called the 'test-pack'. This newly generated sample pack is then
@@ -13,12 +14,13 @@
 # more performant.
 
 
-if which naive ; then
-  echo "Found naive executable";
-else
-  echo "Couldn't find naive executable, have you added it to PATH?"
-  exit 1
-fi
+# if which naive ; then
+#   :
+#   # echo "Found naive executable";
+# else
+#   echo "Couldn't find naive executable, have you added it to PATH?"
+#   exit 1
+# fi
 
 # 1. Run the tests, creating the test-pack
 
@@ -29,7 +31,7 @@ mkdir -p "$testPackDir"
 
 for testScript in tests/*.sh ; do
   absoluteScriptPath="$(pwd)/$testScript"
-  echo "Running $absoluteScriptPath"
+  # echo "Running $absoluteScriptPath"
   logs=$(
     cd $testPackDir 
     bash "$absoluteScriptPath" 2> /dev/null
@@ -88,7 +90,7 @@ fi
 
 numberOfMissingSamples=${#missing[@]}
 if [ $numberOfMissingSamples -ne 0 ]; then
-  echo -e "missing:"
+  echo "missing:"
   echo "  # These samples exist in the stable-pack, but were missing in the test-pack."
   for i in ${!missing[@]}; do 
     name=${missing[$i]}
@@ -109,8 +111,8 @@ fi
 
 numberOfExtraSamples=${#created[@]}
 if [ $numberOfExtraSamples -ne 0 ]; then 
-  echo -e "created:"
-  echo -e "  # These samples need to be auditioned and added to the stable-pack if they pass review."
+  echo "created:"
+  echo "  # These samples need to be auditioned and added to the stable-pack if they pass review."
   for i in ${!created[@]}; do
     name=${created[$i]}
     echo "  - $name"

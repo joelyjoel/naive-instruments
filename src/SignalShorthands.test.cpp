@@ -132,3 +132,13 @@ TEST_CASE( "shorthand for triangle waves" )
     CHECK_FRAME( signal, 4, 0 );
 }
 // TODO: test oscWithWavetableFromFile()
+
+TEST_CASE( "shorthand for lfo" )
+{
+    auto signal = lfo( constant( 10 ), constant( 2 ), constant( 44100.0 / 4 ) );
+    /* CHECK_FRAME( signal, 0, 0 ); */
+    CHECK_FRAME( signal, 1, 12 );
+    CHECK_FRAME( signal, 2, 10 );
+    CHECK_FRAME( signal, 3, 8 );
+    CHECK_FRAME( signal, 4, 10 );
+}

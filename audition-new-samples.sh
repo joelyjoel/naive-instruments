@@ -1,4 +1,4 @@
-#! /usr/local/bin/bash
+#! /bin/bash
 
 # Interactive script for auditioning new samples created by tests and adding
 # them to the stable-pack if they pass review.
