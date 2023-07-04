@@ -1,5 +1,6 @@
 #include "./SignalShorthands.h"
 #include "./test-framework/custom-assertions.h"
+#include "Waveforms.h"
 
 using namespace NaiveInstruments::SignalShorthands;
 
@@ -98,6 +99,11 @@ TEST_CASE( "Creating a sampler with a contrived buffer using a shorthand" )
     CHECK_SIGNAL( signal, { 5, 4, 3, 2, 1 } );
 }
 
+TEST_CASE( "unsigned sawtooth waves" )
+{
+    CHECK_SIGNAL( usaw( constant( 4410 ) ), { 0, .1, .2, .3 } );
+}
+
 TEST_CASE( "Constructing a sineWavetable" )
 {
     auto table = NaiveInstruments::SignalShorthands::sineWavetable( usaw( constant( 1 ) ) );
@@ -125,20 +131,20 @@ TEST_CASE( "short hand for square waves" )
 TEST_CASE( "shorthand for triangle waves" )
 {
     auto signal = triangle( constant( 44100.0 / 4 ) );
-    /* CHECK_FRAME( signal, 0, 0 ); */
-    CHECK_FRAME( signal, 1, 1 );
-    CHECK_FRAME( signal, 2, 0 );
-    CHECK_FRAME( signal, 3, -1 );
-    CHECK_FRAME( signal, 4, 0 );
+    CHECK_SIGNAL( signal, { 0, 1, 0, -1, 0 } );
+}
+
+TEST_CASE( "The first frame in the triangle waveform should be 0" )
+{
+    auto signal = triangleWavetable( constant( 0 ) );
+    CHECK_FRAME( signal, 1, 0 );
+    CHECK( Waveforms::triangle()[0] == 0 );
 }
 // TODO: test oscWithWavetableFromFile()
 
 TEST_CASE( "shorthand for lfo" )
 {
     auto signal = lfo( constant( 10 ), constant( 2 ), constant( 44100.0 / 4 ) );
-    /* CHECK_FRAME( signal, 0, 0 ); */
-    CHECK_FRAME( signal, 1, 12 );
-    CHECK_FRAME( signal, 2, 10 );
-    CHECK_FRAME( signal, 3, 8 );
-    CHECK_FRAME( signal, 4, 10 );
+    CHECK( signal->t == -1 );
+    CHECK_SIGNAL( signal, { 10, 12, 10, 8, 10 } );
 }

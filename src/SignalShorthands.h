@@ -143,7 +143,7 @@ inline mono sampler( MonoBuffer* buffer )
 
 inline mono wavetable( MonoBuffer* buffer, mono phase )
 {
-    auto signal   = std::make_shared<Wavetable>( buffer );
+    auto signal   = std::make_shared<NaiveInstruments::Wavetable>( buffer );
     signal->phase = phase;
     return signal;
 }
@@ -161,6 +161,11 @@ inline mono squareWavetable( mono phase )
 inline mono sineWavetable( mono phase )
 {
     return wavetable( &Waveforms::sine(), phase );
+}
+
+inline mono triangleWavetable( mono phase )
+{
+    return wavetable( &Waveforms::triangle(), phase );
 }
 
 inline mono square( mono frequency )

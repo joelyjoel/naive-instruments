@@ -267,11 +267,14 @@ public:
 
     Wavetable( MonoBuffer* buffer )
     : buffer( buffer )
+
     {
+        t = -1;
     }
 
     void action() override
     {
+
         output = buffer->interpolate( phase[t] * double( buffer->numberOfSamples ) );
     }
 };
