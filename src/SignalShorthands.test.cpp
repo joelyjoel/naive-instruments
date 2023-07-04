@@ -58,3 +58,15 @@ TEST_CASE( "shorthand for sine waves" )
     auto signal = sine( constant( 1 ) );
     CHECK_FRAME( signal, 1, sin( M_PI * 2 * 1 / 44100.0 ) );
 }
+
+TEST_CASE( "short hand for square waves" )
+{
+    auto signal = square( constant( 1 ) );
+    CHECK_FRAME( signal, 1, 1 );
+    CHECK_FRAME( signal, 44099, -1.0 );
+    CHECK_FRAME( signal, 44101, 1.0 );
+}
+
+// TODO: test saw()
+// TODO: test triangle();
+// TODO: test oscWithWavetableFromFile()

@@ -57,17 +57,54 @@ inline mono sampler( MonoBuffer* buffer )
     return std::make_shared<NaiveInstruments::Sampler>( buffer );
 }
 
-inline mono sineWavetable( mono phase )
+inline mono wavetable( MonoBuffer* buffer, mono phase )
 {
-    auto signal   = std::make_shared<NaiveInstruments::Wavetable>( &Waveforms::sine() );
+    auto signal   = std::make_shared<Wavetable>( buffer );
     signal->phase = phase;
     return signal;
 }
 
+inline mono wavetableFromFile( const std::string& filePath, mono phase )
+{
+    return wavetable( &Waveforms::fromFile( filePath ), phase );
+}
+
+inline mono squareWavetable( mono phase )
+{
+    return wavetable( &Waveforms::square(), phase );
+}
+
+inline mono sineWavetable( mono phase )
+{
+    return wavetable( &Waveforms::sine(), phase );
+}
+
+inline mono square( mono frequency )
+{
+    return wavetable( &Waveforms::square(), usaw( frequency ) );
+}
+
 inline mono sine( mono frequency )
 {
-    return sineWavetable( usaw( frequency ) );
+    return wavetable( &Waveforms::sine(), usaw( frequency ) );
 }
+
+inline mono saw( mono frequency )
+{
+    return wavetable( &Waveforms::saw(), usaw( frequency ) );
+}
+
+inline mono triangle( mono frequency )
+{
+    return wavetable( &Waveforms::triangle(), usaw( frequency ) );
+}
+
+
+inline mono oscWithWavetableFromFile( const std::string& filePath, mono frequency )
+{
+    return wavetableFromFile( filePath, usaw( frequency ) );
+}
+
 
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments
