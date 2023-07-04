@@ -122,5 +122,13 @@ TEST_CASE( "short hand for square waves" )
 }
 
 // TODO: test saw()
-// TODO: test triangle();
+TEST_CASE( "shorthand for triangle waves" )
+{
+    auto signal = triangle( constant( 44100.0 / 4 ) );
+    /* CHECK_FRAME( signal, 0, 0 ); */
+    CHECK_FRAME( signal, 1, 1 );
+    CHECK_FRAME( signal, 2, 0 );
+    CHECK_FRAME( signal, 3, -1 );
+    CHECK_FRAME( signal, 4, 0 );
+}
 // TODO: test oscWithWavetableFromFile()
