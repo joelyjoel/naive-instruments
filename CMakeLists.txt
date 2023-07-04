@@ -75,7 +75,6 @@ INCLUDE_DIRECTORIES( "/opt/homebrew/Cellar/portaudio/19.7.0/include" )
 set(NaiveSourcFiles 
   src/file-io/record.cpp 
   src/core/Signal.cpp 
-  src/SignalShorthands.cpp
   src/playback/BufferedPlayback.cpp 
   src/parsing/Parse.cpp 
   src/parsing/LazyRegex.cpp 
