@@ -40,9 +40,45 @@ public:
     SignalReader<T> input1;
     SignalReader<T> input2;
 
+    Sum()
+    {
+        // Forces it to perfarm action once after inputs are assigned.
+        this->t = -1;
+    }
+
     void action() override
     {
         this->output = this->input1[this->t] + this->input2[this->t];
+    }
+};
+
+template <typename T>
+class Subtract : public Signal<T>
+{
+public:
+    SignalReader<T> a;
+    SignalReader<T> b;
+
+    Subtract()
+    {
+        // Forces it to perfarm action once after inputs are assigned.
+        this->t = -1;
+    }
+
+    void action() override
+    {
+        this->output = this->a[this->t] - this->b[this->t];
+    }
+};
+
+class SignFlip : public Signal<double>
+{
+public:
+    SignalReader<double> input;
+
+    void action()
+    {
+        output = -input[t];
     }
 };
 
@@ -199,5 +235,6 @@ public:
         output = buffer->interpolate( phase[t] * double( buffer->numberOfSamples ) );
     }
 };
+
 
 } // namespace NaiveInstruments

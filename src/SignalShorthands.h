@@ -13,6 +13,13 @@ namespace SignalShorthands
 typedef std::shared_ptr<Signal<double>>      mono;
 typedef std::shared_ptr<Signal<StereoFrame>> stereo;
 
+inline mono constant( double value )
+{
+    auto signal    = std::make_shared<Signal<double>>();
+    signal->output = value;
+    return signal;
+}
+
 inline mono t()
 {
     return std::make_shared<Clock<double>>();
@@ -38,17 +45,48 @@ inline mono operator+( mono a, mono b )
     return add( a, b );
 }
 
+inline mono operator+( mono a, double b )
+{
+    return add( a, constant( b ) );
+}
+inline mono operator+( double a, mono b )
+{
+    return add( constant( a ), b );
+}
+
+inline mono subtract( mono a, mono b )
+{
+    auto subtracter = std::make_shared<NaiveInstruments::Subtract<double>>();
+    subtracter->a   = a;
+    subtracter->b   = b;
+    return subtracter;
+}
+
+inline mono operator-( mono a, mono b )
+{
+    return subtract( a, b );
+}
+
+inline mono operator-( mono a, double b )
+{
+    return subtract( a, constant( b ) );
+}
+
+inline mono operator-( double a, mono b )
+{
+    return subtract( constant( a ), b );
+}
+
+inline mono operator-( mono a )
+{
+    auto flip   = std::make_shared<SignFlip>();
+    flip->input = a;
+    return flip;
+}
+
 inline mono noise( uint64_t seed = 1 )
 {
     return std::make_shared<Noise>( seed );
-}
-
-
-inline mono constant( double value )
-{
-    auto signal    = std::make_shared<Signal<double>>();
-    signal->output = value;
-    return signal;
 }
 
 
