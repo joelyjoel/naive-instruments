@@ -34,11 +34,14 @@ public:
     static MonoBuffer& triangle()
     {
         MonoBuffer& buffer = *( new MonoBuffer( 44100 ) );
-        for ( int i = 0; i < buffer.numberOfSamples; ++i )
-        {
-            double saw     = float( i ) / float( buffer.numberOfSamples ) * 2 - 1;
-            buffer.data[i] = abs( saw ) * 2 - 1;
-        }
+        for ( int i = 0; i < buffer.numberOfSamples / 4; ++i )
+            buffer.data[i] = i * 4.0 / buffer.numberOfSamples;
+        for ( int i = buffer.numberOfSamples / 4; i < .75 * buffer.numberOfSamples; ++i )
+            buffer.data[i] = 1.0 - ( i - ( buffer.numberOfSamples / 4.0 ) ) / ( buffer.numberOfSamples / 4.0 );
+        for ( int i = buffer.numberOfSamples * .75; i < buffer.numberOfSamples; ++i )
+            buffer.data[i] = -1 + ( i - .75 * buffer.numberOfSamples ) / ( buffer.numberOfSamples / 4.0 );
+
+
         return buffer;
     }
 

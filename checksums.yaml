@@ -24,3 +24,7 @@ Slightly longer boop.wav:
   checksum: SHA256=9b6b1b00365e01f214a73cd507805fe0d1d111818811f27810dfb2239d185ffb
 120bpm metronome.wav:
   checksum: SHA256=5bf073ce7ea82732d4fbe47acc336ae11359e5183a3a9253ce951dc30373e1c6
+Triangle wave on middle C lasting one second.wav:
+  checksum: SHA256=c54dc6ce7fd43bb75a28bbf3c4debce14a344f3aec47a6dfe2f2cbf2be1aca79
+Trianglular boop.wav:
+  checksum: SHA256=5abc70cfbba3facd71eed72de0d1543d2074b8cd02cc4509cfb7aaa04bee9d96
