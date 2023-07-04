@@ -15,7 +15,7 @@ TEST_CASE( "creating a clock" )
 
 TEST_CASE( "Adding two clocks together with function" )
 {
-    CHECK_SIGNAL<double>( add( t(), t() ), { 0, 2, 4, 6 } );
+    CHECK_SIGNAL( add( t(), t() ), { 0, 2, 4, 6 } );
 }
 
 TEST_CASE( "Adding two clocks together with operator overload" )

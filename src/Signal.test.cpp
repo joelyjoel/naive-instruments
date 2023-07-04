@@ -36,7 +36,7 @@ TEST_CASE( "Check that CHECK_SIGNAL works for happy case" )
 {
     auto signal    = std::make_shared<Signal<double>>();
     signal->output = 10;
-    CHECK_SIGNAL<double>( signal, { 10, 10, 10, 10 } );
+    CHECK_SIGNAL( signal, { 10, 10, 10, 10 } );
 }
 
 // TODO: Check that CHECK_SIGNAL fails correctly
@@ -51,11 +51,6 @@ TEST_CASE( "Accessing a signal using a SignalReader" )
     REQUIRE( clockReader[100] == 100 );
 }
 
-TEST_CASE( "CHECK_SIGNAL works for other types of signals" )
-{
-    auto clock = std::make_shared<Clock<int>>();
-    CHECK_SIGNAL<int>( clock, { 0, 1, 2, 3, 4 } );
-}
 
 TEST_CASE( "Instantiating constant signals" )
 {
@@ -129,7 +124,7 @@ TEST_CASE( "Feeding a clock into an accumulator" )
     auto clock         = std::make_shared<Clock<double>>();
     auto accumulator   = std::make_shared<Accumulator>();
     accumulator->input = clock;
-    CHECK_SIGNAL<double>( accumulator, { 0, 1, 3, 6, 10, 15 } );
+    CHECK_SIGNAL( accumulator, { 0, 1, 3, 6, 10, 15 } );
 }
 
 TEST_CASE( "Using modulo to count to 10 repetitively" )

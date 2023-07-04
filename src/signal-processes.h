@@ -122,22 +122,23 @@ public:
     }
 };
 
-class VectorSignal : public Signal<double>
+template <typename T>
+class VectorSignal : public Signal<T>
 {
 public:
-    std::shared_ptr<std::vector<double>> buffer;
+    std::shared_ptr<std::vector<T>> buffer;
 
-    VectorSignal( std::shared_ptr<std::vector<double>> v )
+    VectorSignal( std::shared_ptr<std::vector<T>> v )
 
     {
-        buffer = v;
-        output = ( *buffer )[0];
+        buffer       = v;
+        this->output = ( *buffer )[0];
     }
 
     void action() override
     {
-        if ( t < buffer->size() )
-            output = ( *buffer )[t];
+        if ( this->t < buffer->size() )
+            this->output = ( *buffer )[this->t];
     }
 };
 
