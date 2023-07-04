@@ -76,12 +76,52 @@ class SignFlip : public Signal<double>
 public:
     SignalReader<double> input;
 
+    SignFlip()
+    {
+        // Forces it to perfarm action once after inputs are assigned.
+        t = -1;
+    }
+
     void action()
     {
         output = -input[t];
     }
 };
 
+class Multiply : public Signal<double>
+{
+public:
+    SignalReader<double> a;
+    SignalReader<double> b;
+
+    Multiply()
+    {
+        // Forces it to perfarm action once after inputs are assigned.
+        t = -1;
+    }
+
+    void action() override
+    {
+        output = a[t] * b[t];
+    }
+};
+
+class Divide : public Signal<double>
+{
+public:
+    SignalReader<double> numerator;
+    SignalReader<double> denominator;
+
+    Divide()
+    {
+        t = -1;
+    }
+
+    void action() override
+    {
+        output = numerator[t] / denominator[t];
+    }
+};
 
 class MonoToStereo : public StereoSignal
 {

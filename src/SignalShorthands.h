@@ -84,6 +84,52 @@ inline mono operator-( mono a )
     return flip;
 }
 
+inline mono multiply( mono a, mono b )
+{
+    auto multiplied = std::make_shared<NaiveInstruments::Multiply>();
+    multiplied->a   = a;
+    multiplied->b   = b;
+    return multiplied;
+}
+
+inline mono operator*( mono a, mono b )
+{
+    return multiply( a, b );
+}
+
+inline mono operator*( mono a, double b )
+{
+    return a * constant( b );
+}
+
+inline mono operator*( double a, mono b )
+{
+    return constant( a ) * b;
+}
+
+inline mono divide( mono a, mono b )
+{
+    auto divided         = std::make_shared<NaiveInstruments::Divide>();
+    divided->numerator   = a;
+    divided->denominator = b;
+    return divided;
+}
+
+inline mono operator/( mono a, mono b )
+{
+    return divide( a, b );
+}
+
+inline mono operator/( mono a, double b )
+{
+    return a / constant( b );
+}
+
+inline mono operator/( double a, mono b )
+{
+    return constant( a ) / b;
+}
+
 inline mono noise( uint64_t seed = 1 )
 {
     return std::make_shared<Noise>( seed );

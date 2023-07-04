@@ -58,6 +58,33 @@ TEST_CASE( "Adding two clocks together with operator overload" )
     CHECK_SIGNAL( t() + t(), { 0, 2, 4, 6 } );
 }
 
+TEST_CASE( "Multiplying two signals together" )
+{
+    CHECK_SIGNAL( t() * t(), { 0, 1, 4, 9, 16 } );
+}
+
+TEST_CASE( "Multiply a signal by a constant" )
+{
+    CHECK_SIGNAL( t() * 2, { 0, 2, 4, 6, 8 } );
+}
+TEST_CASE( "multiplying a constant by a signal" )
+{
+    CHECK_SIGNAL( 3 * t(), { 0, 3, 6, 9, 12 } );
+}
+TEST_CASE( "dividing one signal by another" )
+{
+    CHECK_SIGNAL( t() / ( t() + 1 ), { 0, 1.0 / 2, 2.0 / 3, 3.0 / 4 } );
+}
+TEST_CASE( "dividing a signal by a consntant" )
+{
+    CHECK_SIGNAL( t() / 2, { 0, .5, 1, 1.5, 2 } );
+}
+TEST_CASE( "dividing a constant by a signal" )
+{
+    CHECK_SIGNAL( 1 / ( t() + 1 ), { 1.0 / 1, 1 / 2.0, 1 / 3.0, 1 / 4.0 } );
+}
+
+
 TEST_CASE( "Creating a sampler with a contrived buffer using a shorthand" )
 {
     MonoBuffer buffer( 10 );
