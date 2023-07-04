@@ -1,5 +1,6 @@
 #include "Signal.h"
 #include "core/MonoBuffer.h"
+#include <vector>
 
 namespace NaiveInstruments
 {
@@ -118,6 +119,25 @@ public:
     void action() override
     {
         output = random.number( -1.0, 1.0 );
+    }
+};
+
+class VectorSignal : public Signal<double>
+{
+public:
+    std::shared_ptr<std::vector<double>> buffer;
+
+    VectorSignal( std::shared_ptr<std::vector<double>> v )
+
+    {
+        buffer = v;
+        output = ( *buffer )[0];
+    }
+
+    void action() override
+    {
+        if ( t < buffer->size() )
+            output = ( *buffer )[t];
     }
 };
 
