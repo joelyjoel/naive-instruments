@@ -26,6 +26,7 @@ mono constant( double value );
 
 mono sampler( MonoBuffer* buffer );
 
+mono sineWavetable( mono phase );
 
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

@@ -1,4 +1,5 @@
 #include "./SignalShorthands.h"
+#include "./Waveforms.h"
 #include "core/MonoBuffer.h"
 #include <memory>
 
@@ -46,4 +47,11 @@ mono SignalShorthands::constant( double value )
 mono SignalShorthands::sampler( MonoBuffer* buffer )
 {
     return std::make_shared<NaiveInstruments::Sampler>( buffer );
+}
+
+mono SignalShorthands::sineWavetable( mono phase )
+{
+    auto signal   = std::make_shared<NaiveInstruments::Wavetable>( &Waveforms::sine() );
+    signal->phase = phase;
+    return signal;
 }

@@ -43,3 +43,12 @@ TEST_CASE( "Creating a sampler with a contrived buffer using a shorthand" )
     auto signal = sampler( &buffer );
     CHECK_SIGNAL( signal, { 5, 4, 3, 2, 1 } );
 }
+
+TEST_CASE( "Constructing a sineWavetable" )
+{
+    auto table = NaiveInstruments::SignalShorthands::sineWavetable( usaw( constant( 1 ) ) );
+
+    // TODO: Hard to write a test now..
+    table->sync( 1 );
+    CHECK( table->output == sin( M_PI * 2 * 1 / 44100.0 ) );
+}

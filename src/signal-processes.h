@@ -181,4 +181,23 @@ public:
     }
 };
 
+class Wavetable : public Signal<double>
+{
+public:
+    // TODO: make it multi channel
+    MonoBuffer* buffer;
+
+    SignalReader<double> phase;
+
+    Wavetable( MonoBuffer* buffer )
+    : buffer( buffer )
+    {
+    }
+
+    void action() override
+    {
+        output = buffer->interpolate( phase[t] * double( buffer->numberOfSamples ) );
+    }
+};
+
 } // namespace NaiveInstruments
