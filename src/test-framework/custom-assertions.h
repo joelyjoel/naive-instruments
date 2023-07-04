@@ -9,7 +9,7 @@ inline void CHECK_SIGNAL( std::shared_ptr<NaiveInstruments::Signal<double>> sign
     for ( int i = 0; i < expectedSequence.size(); ++i )
         SECTION( "Comparing frame " + std::to_string( i ) )
         {
-            CHECK( reader[i] == expectedSequence[i] );
+            CHECK( reader[i] == Approx( expectedSequence[i] ) );
         }
 }
 
@@ -21,8 +21,8 @@ inline void CHECK_SIGNAL( std::shared_ptr<NaiveInstruments::Signal<NaiveInstrume
     for ( int i = 0; i < expectedSequence.size(); ++i )
         SECTION( "Comparing frame " + std::to_string( i ) )
         {
-            CHECK( reader[i].left == expectedSequence[i].left );
-            CHECK( reader[i].right == expectedSequence[i].right );
+            CHECK( reader[i].left == Approx( expectedSequence[i].left ) );
+            CHECK( reader[i].right == Approx( expectedSequence[i].right ) );
         }
 }
 
@@ -31,6 +31,6 @@ inline void CHECK_FRAME( std::shared_ptr<NaiveInstruments::Signal<double>> signa
     SECTION( "Checking frame " + std::to_string( frame ) )
     {
         signal->sync( frame );
-        CHECK( signal->output == expectedValue );
+        CHECK( signal->output == Approx( expectedValue ) );
     }
 }
