@@ -325,6 +325,43 @@ public:
     }
 };
 
+class IntervalToRatio : public Signal<double>
+{
+public:
+    SignalReader<double> interval;
+
+    IntervalToRatio()
+    {
+        t = -1;
+    }
+
+    void action() override
+    {
+        output = pow( 2.0, interval[t] / 12.0 );
+    }
+};
+
+
+class BufferLooper : public Signal<double>
+{
+public:
+    std::vector<double> buffer;
+
+    SignalReader<double> input;
+
+    BufferLooper( int durationInSamples )
+    : buffer( durationInSamples )
+    {
+        t = -1;
+    }
+
+    void action() override
+    {
+        if ( t < buffer.size() )
+            buffer[t] = input[t];
+        output = buffer[t % buffer.size()];
+    }
+};
 // TODO: Pace
 // TODO: Pipe delay
 // TODO: LinearRamp

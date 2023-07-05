@@ -234,5 +234,32 @@ inline mono skip( double skipTimeInSeconds, mono input )
     return skipSeconds( skipTimeInSeconds, input );
 }
 
+inline mono interval( mono interval )
+{
+    auto signal      = std::make_shared<IntervalToRatio>();
+    signal->interval = interval;
+    return signal;
+}
+
+inline mono midiPitch( mono pitch )
+{
+    return 440 * interval( pitch - 69 );
+}
+
+inline mono bufferLoopInSamples( mono input, int loopDurationInSamples )
+{
+    auto looper   = std::make_shared<BufferLooper>( loopDurationInSamples );
+    looper->input = input;
+    return looper;
+}
+
+inline mono fixedLoop( mono input, double loopDurationInSeconds )
+{
+    return bufferLoopInSamples( input, loopDurationInSeconds * 44100 );
+}
+
+// TODO: ratioToInterval
+// TODO: frequencyToMidiPitch
+
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments

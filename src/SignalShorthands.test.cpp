@@ -168,4 +168,16 @@ TEST_CASE( "Skipping the start of signals" )
     CHECK_SIGNAL( skip( 1, t() ), { 44100, 44101, 44102, 44103, 44104, 44105 } );
 }
 
+TEST_CASE( "Converting intervals to frequency ratios" )
+{
+    CHECK_SIGNAL( interval( constant( 7 ) ), { pow( 2, 7 / 12.0 ), pow( 2, 7 / 12.0 ) } );
+    CHECK_SIGNAL( interval( constant( 0 ) ), { 1, 1, 1, 1, 1 } );
+    CHECK_SIGNAL( interval( constant( 12 ) ), { 2, 2, 2, 2, 2, 2, 2 } );
+}
+
+TEST_CASE( "Using a buffer loop" )
+{
+    CHECK_SIGNAL( bufferLoopInSamples( t(), 5 ), { 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 } );
+    CHECK_SIGNAL( fixedLoop( t(), 5 / 44100.0 ), { 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 } );
+}
 // TODO: Test Wait with stereo signals
