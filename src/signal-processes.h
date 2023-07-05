@@ -279,5 +279,36 @@ public:
     }
 };
 
+template <typename T>
+class Wait : public Signal<T>
+{
+public:
+    int             countdown;
+    SignalReader<T> input;
+
+    Wait( int countdown )
+    : countdown( countdown )
+    {
+        this->t = -1;
+    }
+
+    void action()
+    {
+        if ( this->t > countdown )
+            this->output = input[this->t - countdown];
+        else
+        {
+            this->output = input[0]; // ?
+            // output = 0 ?
+            // noop ?
+            // Whats best?
+        }
+    }
+};
+
+
+// TODO: Skip
+// TODO: Pace
+
 
 } // namespace NaiveInstruments

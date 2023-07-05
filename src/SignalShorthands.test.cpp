@@ -148,3 +148,15 @@ TEST_CASE( "shorthand for lfo" )
     CHECK( signal->t == -1 );
     CHECK_SIGNAL( signal, { 10, 12, 10, 8, 10 } );
 }
+
+TEST_CASE( "Waiting before starting a signal" )
+{
+    // Oh dear, mixing units of seconds and samples even in the first unit test
+    CHECK_SIGNAL( wait( 5, triangle( constant( 44100.0 / 4.0 ) ) ), { 0, 0, 0, 0, 0, 0, 1, 0, -1, 0 } );
+
+    auto signal = waitSeconds( 1, square( constant( 1 ) ) );
+    CHECK_FRAME( signal, 0, 1 );
+    CHECK_FRAME( signal, 44100 - 1, 1 );
+    CHECK_FRAME( signal, 44100, 1 );
+    CHECK_FRAME( signal, 44100 * 1.5 + 1, -1 );
+}

@@ -199,5 +199,17 @@ inline mono lfo( mono centre, mono range, mono frequency = constant( 5 ) )
     return centre + triangle( frequency ) * range;
 }
 
+inline mono wait( int waitTimeInSamples, mono input )
+{
+    auto signal   = std::make_shared<Wait<double>>( waitTimeInSamples );
+    signal->input = input;
+    return signal;
+}
+
+inline mono waitSeconds( double waitTimeInSeconds, mono input )
+{
+    return wait( waitTimeInSeconds * 44100, input );
+}
+
 }; // namespace SignalShorthands
 } // namespace NaiveInstruments
