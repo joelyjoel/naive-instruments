@@ -3,6 +3,7 @@
 #include "commands/FilterCommand.h"
 #include "commands/GraphCommand.h"
 #include "commands/HelloCommand.h"
+#include "commands/JamCommand.h"
 #include "commands/MetronomeCommand.h"
 #include "commands/MixCommand.h"
 #include "commands/NoiseCommand.h"
@@ -77,6 +78,11 @@ int main( int argc, char** argv )
     else if ( command == "noise" )
     {
         NoiseCommand app( args.argc, args.argv );
+        app();
+    }
+    else if ( command == "jam" )
+    {
+        JamCommand app( args.argc, args.argv );
         app();
     }
     else if ( command == "random" )
