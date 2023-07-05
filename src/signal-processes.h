@@ -283,19 +283,19 @@ template <typename T>
 class Wait : public Signal<T>
 {
 public:
-    int             countdown;
+    int             waitTime;
     SignalReader<T> input;
 
     Wait( int countdown )
-    : countdown( countdown )
+    : waitTime( countdown )
     {
         this->t = -1;
     }
 
     void action()
     {
-        if ( this->t > countdown )
-            this->output = input[this->t - countdown];
+        if ( this->t > waitTime )
+            this->output = input[this->t - waitTime];
         else
         {
             this->output = input[0]; // ?
@@ -306,9 +306,32 @@ public:
     }
 };
 
+template <typename T>
+class Skip : public Signal<T>
+{
+public:
+    int             skipTime;
+    SignalReader<T> input;
 
-// TODO: Skip
+    Skip( int skipTime )
+    : skipTime( skipTime )
+    {
+        this->t = -1;
+    }
+
+    void action()
+    {
+        this->output = input[this->t + skipTime];
+    }
+};
+
 // TODO: Pace
+// TODO: Pipe delay
+// TODO: LinearRamp
+// TODO: LinearDecay
+// TODO: Decay using half life
+// TODO: FadeIn
+// TODO: FadeOut ? not sure how this one will work?
 
 
 } // namespace NaiveInstruments

@@ -199,7 +199,7 @@ inline mono lfo( mono centre, mono range, mono frequency = constant( 5 ) )
     return centre + triangle( frequency ) * range;
 }
 
-inline mono wait( int waitTimeInSamples, mono input )
+inline mono waitSamples( int waitTimeInSamples, mono input )
 {
     auto signal   = std::make_shared<Wait<double>>( waitTimeInSamples );
     signal->input = input;
@@ -208,7 +208,30 @@ inline mono wait( int waitTimeInSamples, mono input )
 
 inline mono waitSeconds( double waitTimeInSeconds, mono input )
 {
-    return wait( waitTimeInSeconds * 44100, input );
+    return waitSamples( waitTimeInSeconds * 44100, input );
+}
+
+inline mono wait( double waitTimeInSeconds, mono input )
+{
+    return waitSeconds( waitTimeInSeconds, input );
+}
+
+
+inline mono skipSamples( int skipTimeInSamples, mono input )
+{
+    auto signal   = std::make_shared<Skip<double>>( skipTimeInSamples );
+    signal->input = input;
+    return signal;
+}
+
+inline mono skipSeconds( double skipTimeInSeconds, mono input )
+{
+    return skipSamples( skipTimeInSeconds * 44100, input );
+}
+
+inline mono skip( double skipTimeInSeconds, mono input )
+{
+    return skipSeconds( skipTimeInSeconds, input );
 }
 
 }; // namespace SignalShorthands

@@ -152,7 +152,7 @@ TEST_CASE( "shorthand for lfo" )
 TEST_CASE( "Waiting before starting a signal" )
 {
     // Oh dear, mixing units of seconds and samples even in the first unit test
-    CHECK_SIGNAL( wait( 5, triangle( constant( 44100.0 / 4.0 ) ) ), { 0, 0, 0, 0, 0, 0, 1, 0, -1, 0 } );
+    CHECK_SIGNAL( waitSamples( 5, triangle( constant( 44100.0 / 4.0 ) ) ), { 0, 0, 0, 0, 0, 0, 1, 0, -1, 0 } );
 
     auto signal = waitSeconds( 1, square( constant( 1 ) ) );
     CHECK_FRAME( signal, 0, 1 );
@@ -160,3 +160,12 @@ TEST_CASE( "Waiting before starting a signal" )
     CHECK_FRAME( signal, 44100, 1 );
     CHECK_FRAME( signal, 44100 * 1.5 + 1, -1 );
 }
+
+TEST_CASE( "Skipping the start of signals" )
+{
+    CHECK_SIGNAL( skipSamples( 5, t() ), { 5, 6, 7, 8, 9, 10 } );
+
+    CHECK_SIGNAL( skip( 1, t() ), { 44100, 44101, 44102, 44103, 44104, 44105 } );
+}
+
+// TODO: Test Wait with stereo signals
