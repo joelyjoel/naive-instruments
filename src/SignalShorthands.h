@@ -258,6 +258,20 @@ inline mono fixedLoop( mono input, double loopDurationInSeconds )
     return bufferLoopInSamples( input, loopDurationInSeconds * 44100 );
 }
 
+inline mono clip( mono input )
+{
+    auto clipper   = std::make_shared<HardClip<double>>();
+    clipper->input = input;
+    return clipper;
+}
+
+inline stereo clip( stereo input )
+{
+    auto clipper   = std::make_shared<HardClip<StereoFrame>>();
+    clipper->input = input;
+    return clipper;
+}
+
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
 

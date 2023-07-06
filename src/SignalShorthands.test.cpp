@@ -180,4 +180,18 @@ TEST_CASE( "Using a buffer loop" )
     CHECK_SIGNAL( bufferLoopInSamples( t(), 5 ), { 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 } );
     CHECK_SIGNAL( fixedLoop( t(), 5 / 44100.0 ), { 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 } );
 }
+
+TEST_CASE( "Hard clipping a mono signal" )
+{
+    CHECK_SIGNAL( clip( t() / 4 ), { 00, .25, .5, .75, 1, 1, 1, 1 } );
+    CHECK_SIGNAL( clip( -t() / 4 ), { 00, -.25, -.5, -.75, -1, -1, -1, -1 } );
+}
+
+// TODO: Test hard clipping stereo signals
+/* TEST_CASE( "Hard clipping a stereo signal" ) */
+/* { */
+/*     CHECK_SIGNAL( clip( vectorSignal<StereoFrame>( { { 0, 0 }, { 0, 10 }, { -10, 0 } } ) ), */
+/*                   { { 0, 0 }, { 0, 1 }, { 0, -1 } } ); */
+/* } */
+
 // TODO: Test Wait with stereo signals

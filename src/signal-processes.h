@@ -362,6 +362,41 @@ public:
         output = buffer[t % buffer.size()];
     }
 };
+
+template <typename T>
+class HardClip : public Signal<T>
+{
+public:
+    HardClip()
+    {
+        this->t = -1;
+    }
+
+    SignalReader<T> input;
+
+    void action() override
+    {
+        // FIXME: Repeatedly using [] operator does cause some overhead (syncing input every time)
+        this->output = clip( input[this->t] );
+    }
+
+    static double clip( double input )
+    {
+        if ( input > 1.0 )
+            return 1.0;
+        if ( input < -1.0 )
+            return -1.0;
+        else
+            return input;
+    }
+
+    static StereoFrame clip( StereoFrame input )
+    {
+        return { clip( input.left ), clip( input.right ) };
+    }
+};
+
+
 // TODO: Pace
 // TODO: Pipe delay
 // TODO: LinearRamp
