@@ -4,16 +4,23 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 
 namespace NaiveInstruments
 {
+
+class AbstractSignalReader
+{
+};
 
 class UnknownOutputSignal
 {
 public:
     typedef int    frame_position;
     frame_position t = 0;
+
+    std::vector<AbstractSignalReader*> inputs;
 
     virtual void action()
     {
@@ -44,11 +51,19 @@ public:
 
 
 template <typename T>
-class SignalReader
+class SignalReader : public AbstractSignalReader
 {
 public:
     std::shared_ptr<Signal<T>> ptr;
 
+    SignalReader()
+    {
+    }
+
+    SignalReader( UnknownOutputSignal* owner )
+    {
+        owner->inputs.push_back( this );
+    }
 
 public:
     // Read a value by index from the signal
