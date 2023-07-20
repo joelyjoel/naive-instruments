@@ -12,7 +12,7 @@ namespace NaiveInstruments
 class USaw : public Signal<double>
 {
 public:
-    SignalReader<double> frequency;
+    SignalReader<double> frequency{ this };
 
     USaw()
     {
@@ -37,8 +37,8 @@ template <typename T>
 class Sum : public Signal<T>
 {
 public:
-    SignalReader<T> input1;
-    SignalReader<T> input2;
+    SignalReader<T> input1{ this };
+    SignalReader<T> input2{ this };
 
     Sum()
     {
@@ -56,8 +56,8 @@ template <typename T>
 class Subtract : public Signal<T>
 {
 public:
-    SignalReader<T> a;
-    SignalReader<T> b;
+    SignalReader<T> a{ this };
+    SignalReader<T> b{ this };
 
     Subtract()
     {
@@ -74,7 +74,7 @@ public:
 class SignFlip : public Signal<double>
 {
 public:
-    SignalReader<double> input;
+    SignalReader<double> input{ this };
 
     SignFlip()
     {
@@ -91,8 +91,8 @@ public:
 class Multiply : public Signal<double>
 {
 public:
-    SignalReader<double> a;
-    SignalReader<double> b;
+    SignalReader<double> a{ this };
+    SignalReader<double> b{ this };
 
     Multiply()
     {
@@ -109,8 +109,8 @@ public:
 class Divide : public Signal<double>
 {
 public:
-    SignalReader<double> numerator;
-    SignalReader<double> denominator;
+    SignalReader<double> numerator{ this };
+    SignalReader<double> denominator{ this };
 
     Divide()
     {
@@ -126,7 +126,7 @@ public:
 class MonoToStereo : public StereoSignal
 {
 public:
-    MonoReader input;
+    SignalReader<double> input{ this };
 
     void action() override
     {
@@ -139,7 +139,7 @@ template <typename T>
 class Repeater : public Signal<T>
 {
 public:
-    SignalReader<T> input;
+    SignalReader<T> input{ this };
 
     void action() override
     {
@@ -165,7 +165,7 @@ public:
 class Accumulator : public Signal<double>
 {
 public:
-    SignalReader<double> input;
+    SignalReader<double> input{ this };
 
     Accumulator()
     {
@@ -181,8 +181,8 @@ public:
 class Modulo : public Signal<double>
 {
 public:
-    SignalReader<double> input;
-    SignalReader<double> maximum;
+    SignalReader<double> input{ this };
+    SignalReader<double> maximum{ this };
 
     void action() override
     {
@@ -263,7 +263,7 @@ public:
     // TODO: make it multi channel
     MonoBuffer* buffer;
 
-    SignalReader<double> phase;
+    SignalReader<double> phase{ this };
 
     Wavetable( MonoBuffer* buffer )
     : buffer( buffer )
@@ -284,7 +284,7 @@ class Wait : public Signal<T>
 {
 public:
     int             waitTime;
-    SignalReader<T> input;
+    SignalReader<T> input{ this };
 
     Wait( int countdown )
     : waitTime( countdown )
@@ -311,7 +311,7 @@ class Skip : public Signal<T>
 {
 public:
     int             skipTime;
-    SignalReader<T> input;
+    SignalReader<T> input{ this };
 
     Skip( int skipTime )
     : skipTime( skipTime )
@@ -328,7 +328,7 @@ public:
 class IntervalToRatio : public Signal<double>
 {
 public:
-    SignalReader<double> interval;
+    SignalReader<double> interval{ this };
 
     IntervalToRatio()
     {
@@ -347,7 +347,7 @@ class BufferLooper : public Signal<double>
 public:
     std::vector<double> buffer;
 
-    SignalReader<double> input;
+    SignalReader<double> input{ this };
 
     BufferLooper( int durationInSamples )
     : buffer( durationInSamples )
@@ -372,7 +372,7 @@ public:
         this->t = -1;
     }
 
-    SignalReader<T> input;
+    SignalReader<T> input{ this };
 
     void action() override
     {

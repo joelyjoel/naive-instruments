@@ -19,6 +19,35 @@ TEST_CASE( "Creating a vector signal" )
     CHECK_SIGNAL( signal, { 5, 4, 3, 2, 1 } );
 }
 
+TEST_CASE( "signals all have the expected number of inputs" )
+{
+    auto exampleBuffer = new MonoBuffer( 10 );
+    REQUIRE( USaw().inputs.size() == 1 );
+    REQUIRE( Sum<double>().inputs.size() == 2 );
+    REQUIRE( Subtract<double>().inputs.size() == 2 );
+    REQUIRE( SignFlip().inputs.size() == 1 );
+    REQUIRE( Multiply().inputs.size() == 2 );
+    REQUIRE( Divide().inputs.size() == 2 );
+    REQUIRE( MonoToStereo().inputs.size() == 1 );
+    REQUIRE( Repeater<double>().inputs.size() == 1 );
+    REQUIRE( Clock<double>().inputs.size() == 0 );
+    REQUIRE( Accumulator().inputs.size() == 1 );
+    REQUIRE( Modulo().inputs.size() == 2 );
+    REQUIRE( Noise().inputs.size() == 0 );
+
+    // TODO: fix causing runtime exception
+    /* REQUIRE( VectorSignal<double>( {} ).inputs.size() == 0 ); */
+
+    REQUIRE( Sampler( exampleBuffer ).inputs.size() == 0 );
+    REQUIRE( Wavetable( exampleBuffer ).inputs.size() == 1 );
+    REQUIRE( Wait<double>( 44100 ).inputs.size() == 1 );
+    REQUIRE( Skip<double>( 44100 ).inputs.size() == 1 );
+    REQUIRE( IntervalToRatio().inputs.size() == 1 );
+    REQUIRE( BufferLooper( 44100 ).inputs.size() == 1 );
+    REQUIRE( HardClip<double>().inputs.size() == 1 );
+    delete exampleBuffer;
+}
+
 TEST_CASE( "Creating a stereo vector signal" )
 {
     auto buffer    = std::make_shared<std::vector<StereoFrame>>( 5 );
