@@ -10,9 +10,9 @@
 namespace NaiveInstruments
 {
 
-class AbstractSignalReader
-{
-};
+
+class AbstractSignalReader;
+
 
 class UnknownOutputSignal
 {
@@ -37,6 +37,16 @@ public:
     }
 };
 
+class AbstractSignalReader
+{
+public:
+    AbstractSignalReader( UnknownOutputSignal* owner = nullptr )
+    {
+        if ( owner )
+            owner->inputs.push_back( this );
+    }
+};
+
 template <typename T>
 class Signal : public UnknownOutputSignal
 {
@@ -56,14 +66,6 @@ class SignalReader : public AbstractSignalReader
 public:
     std::shared_ptr<Signal<T>> ptr;
 
-    SignalReader()
-    {
-    }
-
-    SignalReader( UnknownOutputSignal* owner )
-    {
-        owner->inputs.push_back( this );
-    }
 
 public:
     // Read a value by index from the signal
