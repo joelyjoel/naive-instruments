@@ -9,3 +9,5 @@ a.out
 most-recent-test-results/
 stable-test-results/
 /build
+expected-samples/*.wav
+audition/*.wav

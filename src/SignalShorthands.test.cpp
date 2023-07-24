@@ -9,6 +9,7 @@ TEST_CASE( "Using a shorthand to create a constant" )
     CHECK_SIGNAL( constant( 10 ), { 10, 10, 10 } );
 }
 
+
 TEST_CASE( "creating a clock" )
 {
     CHECK_SIGNAL( t(), { 0, 1, 2, 3, 4, 5 } );
@@ -127,6 +128,11 @@ TEST_CASE( "short hand for square waves" )
     CHECK_FRAME( signal, 44101, 1.0 );
 }
 
+TEST_CASE( "checksum test for square wave" )
+{
+    AUDIO_TEST( "440Hz square wave", square( constant( 44 ) ) );
+}
+
 // TODO: test saw()
 TEST_CASE( "shorthand for triangle waves" )
 {
@@ -186,6 +192,7 @@ TEST_CASE( "Hard clipping a mono signal" )
     CHECK_SIGNAL( clip( t() / 4 ), { 00, .25, .5, .75, 1, 1, 1, 1 } );
     CHECK_SIGNAL( clip( -t() / 4 ), { 00, -.25, -.5, -.75, -1, -1, -1, -1 } );
 }
+
 
 // TODO: Test hard clipping stereo signals
 /* TEST_CASE( "Hard clipping a stereo signal" ) */
