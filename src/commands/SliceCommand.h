@@ -7,13 +7,13 @@ class SliceCommand : public CommandLineApp
 public:
     void run()
     {
-        MonoBuffer* buffer = mainInputAsBuffer();
+        auto buffer = mainInputAsBuffer();
 
         // TODO: support time units: s, samp, zx, onset etc
         const float from = args.number( "from", 0 );
         const float to   = args.number( "to", buffer->duration() );
 
-        MonoBuffer* sliced = buffer->slice( from, to );
+        auto sliced = buffer->slice( from, to );
 
         // TODO: refactor using move semantics
         const float numberOfRepetitions = args.number( "repeat", 1 );
@@ -21,8 +21,7 @@ public:
         {
             std::cerr << "repeating\n";
             auto repeated = sliced->repeat( numberOfRepetitions );
-            delete sliced;
-            sliced = repeated;
+            sliced        = repeated;
             // TODO: Configurable crossfades
         }
 

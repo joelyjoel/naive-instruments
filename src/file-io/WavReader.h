@@ -3,6 +3,7 @@
 #include "WAV_HEADER.h"
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <string>
 
 #include "../core.h"
@@ -15,14 +16,14 @@ typedef struct
 
 class WavReader
 {
-    std::istream& in;
+    std::istream* in;
 
 private:
     WAV_HEADER header;
     void       readHeader()
     {
         // TODO: How to detect failure?
-        in.read( reinterpret_cast<char*>( &header ), sizeof( header ) );
+        in->read( reinterpret_cast<char*>( &header ), sizeof( header ) );
 
         assertStandardCDAudio();
     }
@@ -45,13 +46,13 @@ private:
 
 public:
     WavReader( const std::string& filePath )
-    : in( *new std::ifstream( filePath, std::ios::binary ) )
+    : in( new std::ifstream( filePath, std::ios::binary ) )
     {
         // TODO: Check the file exists
         readHeader();
     }
 
-    WavReader( std::istream& inputStream )
+    WavReader( std::istream* inputStream )
     : in( inputStream )
     {
         readHeader();
@@ -62,14 +63,14 @@ public:
         if ( numberOfChannels() == 2 )
         {
             int16_t l16bit, r16bit;
-            in.read( reinterpret_cast<char*>( &l16bit ), sizeof( l16bit ) );
-            in.read( reinterpret_cast<char*>( &r16bit ), sizeof( r16bit ) );
+            in->read( reinterpret_cast<char*>( &l16bit ), sizeof( l16bit ) );
+            in->read( reinterpret_cast<char*>( &r16bit ), sizeof( r16bit ) );
             return { int16ToDouble( l16bit ), int16ToDouble( r16bit ) };
         }
         else if ( numberOfChannels() == 1 )
         {
             int16_t sig16bit;
-            in.read( reinterpret_cast<char*>( &sig16bit ), sizeof( sig16bit ) );
+            in->read( reinterpret_cast<char*>( &sig16bit ), sizeof( sig16bit ) );
             double signal = int16ToDouble( sig16bit );
             return { signal, signal };
         }
@@ -100,23 +101,23 @@ public:
         return float( numberOfFrames() ) / float( sampleRate() );
     }
 
-    static MonoBuffer* readMonoFile( const std::string& filePath )
+    static std::shared_ptr<MonoBuffer> readMonoFile( const std::string& filePath )
     {
-        std::ifstream inputStream( filePath, std::ios::binary );
+        std::ifstream* inputStream = new std::ifstream( filePath, std::ios::binary );
         return readStream( inputStream );
     }
 
-    static MonoBuffer* readStream( std::istream& inputStream )
+    static std::shared_ptr<MonoBuffer> readStream( std::istream* inputStream )
     {
-        WavReader   file( inputStream );
-        int         numberOfFrames = file.numberOfFrames();
-        MonoBuffer& buffer         = *( new MonoBuffer( numberOfFrames ) );
+        WavReader file( inputStream );
+        int       numberOfFrames = file.numberOfFrames();
+        auto      buffer         = std::make_shared<MonoBuffer>( numberOfFrames );
         for ( int i = 0; i < numberOfFrames; ++i )
         {
-            double y  = file.readNextFrame().left;
-            buffer[i] = y;
+            double y       = file.readNextFrame().left;
+            ( *buffer )[i] = y;
         }
 
-        return &buffer;
+        return buffer;
     }
 };

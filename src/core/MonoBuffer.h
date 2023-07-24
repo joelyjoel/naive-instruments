@@ -1,8 +1,8 @@
 #pragma once
 
 #include <exception>
-#include <iostream>
 #include <math.h>
+#include <memory>
 
 class MonoBuffer
 {
@@ -130,20 +130,20 @@ public:
         return MonoBuffer( data + from, until - from );
     }
 
-    MonoBuffer* slice( int from = 0, int until = 0 )
+    std::shared_ptr<MonoBuffer> slice( int from = 0, int until = 0 )
     {
         return view( from, until ).copy();
     }
-    MonoBuffer* slice( float from = 0, float to = 0 )
+    std::shared_ptr<MonoBuffer> slice( float from = 0, float to = 0 )
     {
         int fromInt = from * sampleRate;
         int toInt   = to * sampleRate;
         return slice( fromInt, toInt );
     }
 
-    MonoBuffer* copy()
+    std::shared_ptr<MonoBuffer> copy()
     {
-        MonoBuffer* newbuffer = new MonoBuffer( numberOfSamples );
+        auto newbuffer = std::make_shared<MonoBuffer>( numberOfSamples );
         for ( int i = 0; i < numberOfSamples; ++i )
             newbuffer->data[i] = data[i];
         return newbuffer;
@@ -182,11 +182,11 @@ public:
         fadeOut( fadeOutDuration );
     }
 
-    MonoBuffer* repeat( float numberOfRepetitions )
+    std::shared_ptr<MonoBuffer> repeat( float numberOfRepetitions )
     {
         // TODO: Return using move semantics
 
-        MonoBuffer* newbuffer = new MonoBuffer( numberOfSamples * numberOfRepetitions );
+        auto newbuffer = std::make_shared<MonoBuffer>( numberOfSamples * numberOfRepetitions );
 
         for ( int i = 0; i < newbuffer->numberOfSamples; ++i )
             newbuffer->data[i] = data[i % numberOfSamples];

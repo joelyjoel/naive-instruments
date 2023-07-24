@@ -42,6 +42,6 @@ public:
         gain->a << osc;
         gain->b << args["volume"].as<std::string>();
 
-        output( *gain );
+        output( gain );
     }
 };

@@ -11,8 +11,8 @@ public:
         bool               normalize  = args.boolean( "normalize" );
         std::cerr << "Normalize: " << normalize << "\n";
 
-        MonoBuffer*         inputBuffer = mainInputAsBuffer();
-        shared_ptr<Sampler> sampler     = make_shared<Sampler>( *inputBuffer );
+        auto                inputBuffer = mainInputAsBuffer();
+        shared_ptr<Sampler> sampler     = make_shared<Sampler>( inputBuffer );
         WaveformBufferer    bufferer;
         bufferer.minNumberOfFrames = args.integer( "min-frames", 100 );
 
@@ -20,10 +20,8 @@ public:
 
         auto indexToSelect = args.requireInt( "index" );
 
-        MonoBuffer* waveform = bufferer[indexToSelect];
+        auto waveform = bufferer[indexToSelect];
 
         output( waveform );
-
-        delete inputBuffer;
     }
 };

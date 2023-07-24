@@ -2,6 +2,7 @@
 
 #include <exception>
 #include <iostream>
+#include <memory>
 #include <portaudio.h>
 #include <thread>
 
@@ -36,21 +37,24 @@ private:
     PaError   err;
 
 public:
-    BufferedPlayback( FrameStream<double>& input )
+    BufferedPlayback( std::shared_ptr<FrameStream<double>> input )
     : buffer( 1024 )
     {
-        signal = &input;
+        signal = input;
     }
     BufferedPlayback()
-    : BufferedPlayback( *new Constant<double>( 0 ) )
+    : BufferedPlayback( make_shared<Constant<double>>( 0 ) )
     {
     }
-    FrameStream<double>*   signal;
-    CircularBuffer<double> buffer;
-    double                 shift()
+
+    std::shared_ptr<FrameStream<double>> signal;
+    CircularBuffer<double>               buffer;
+
+    double shift()
     {
         return buffer.shift();
     }
+
     void push( double y )
     {
         buffer.push( y );
@@ -115,27 +119,26 @@ public:
         return float( buffer.size() ) / float( sampleRate );
     }
 
-    static void play( FrameStream<double>& signal )
+    static void play( std::shared_ptr<FrameStream<double>> signal )
     {
         BufferedPlayback playback( signal );
         playback.start( false );
     }
 
-    static void play( MonoBuffer& audio )
+    static void play( std::shared_ptr<MonoBuffer> audio )
     {
-        Sampler sampler( audio );
+        auto sampler = std::make_shared<Sampler>( audio );
         play( sampler );
     }
 
-    void setSignal( FrameStream<double>& sound )
+    void setSignal( std::shared_ptr<FrameStream<double>> sound )
     {
-        signal = &sound;
+        signal = sound;
     }
-    void setSignal( MonoBuffer& sample )
+    void setSignal( std::shared_ptr<MonoBuffer> sample )
     {
-        // FIXME: Memory leak!
-        Sampler* sampler = new Sampler( sample );
-        setSignal( *sampler );
+        auto sampler = std::make_shared<Sampler>( sample );
+        setSignal( sampler );
     }
 
     void resetSignal()

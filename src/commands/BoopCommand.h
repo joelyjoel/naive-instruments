@@ -24,6 +24,6 @@ class BoopCommand : public AudioCommand
 
         osc->frequency << frequency;
 
-        output( *( osc * envelope ) );
+        output( ( osc * envelope ) );
     }
 };

@@ -77,7 +77,7 @@ public:
         }
 
         if ( mixdown != nullptr )
-            output( *mixdown );
+            output( mixdown );
         else
             std::cerr << "Mixdown is null\n";
     }

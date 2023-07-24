@@ -21,9 +21,9 @@ public:
     void action() override
     {
         // TODO: This needs to be shared too
-        MonoBuffer* input = inputAsBuffer();
+        auto input = inputAsBuffer();
 
-        shared_ptr<Sampler>           sampler = make_shared<Sampler>( *input );
+        shared_ptr<Sampler>           sampler = make_shared<Sampler>( input );
         shared_ptr<ButterworthFilter> filter  = make_shared<ButterworthFilter>();
 
         filter->kind = getFilterKind();
@@ -34,7 +34,7 @@ public:
         {
             shared_ptr<FrameStream<double>> frequency = SignalString::parse( args["frequency"].as<std::string>() );
             filter->frequency << frequency;
-            output( *filter );
+            output( filter );
         }
         else if ( args.count( "pitch" ) )
         {
@@ -42,7 +42,7 @@ public:
             shared_ptr<FrameStream<double>> pitch          = SignalString::parse( args["pitch"].as<std::string>() );
             pitchConverter->pitch << pitch;
             filter->frequency << pitchConverter;
-            output( *filter );
+            output( filter );
         }
         else
         {

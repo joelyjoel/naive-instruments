@@ -39,7 +39,7 @@ public:
     {
         return writeHead;
     }
-    MonoBuffer* copyBuffer()
+    std::shared_ptr<MonoBuffer> copyBuffer()
     {
         return buffer->slice( 0, currentSize() );
     }
@@ -49,7 +49,7 @@ public:
         writeHead = 0;
     }
 
-    MonoBuffer* copyAndReset()
+    std::shared_ptr<MonoBuffer> copyAndReset()
     {
         auto ptr = copyBuffer();
         reset();

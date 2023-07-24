@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../lib.h"
+#include <memory>
 
 class WaveformBufferer
 {
@@ -28,8 +29,9 @@ public:
     int minNumberOfFrames = 0;
 
 private:
-    int         index = -1;
-    MonoBuffer* copyNextWaveform()
+    int index = -1;
+
+    std::shared_ptr<MonoBuffer> copyNextWaveform()
     {
         do
         {
@@ -66,13 +68,13 @@ private:
     }
 
 public:
-    MonoBuffer* select( int waveformIndex )
+    std::shared_ptr<MonoBuffer> select( int waveformIndex )
     {
         skipTo( waveformIndex );
         return copyNextWaveform();
     }
 
-    MonoBuffer* operator[]( int waveformIndex )
+    std::shared_ptr<MonoBuffer> operator[]( int waveformIndex )
     {
         return select( waveformIndex );
     }

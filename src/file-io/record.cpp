@@ -1,6 +1,6 @@
 #include "record.h"
 
-void record( const std::string& outputFile, FrameStream<double>& signal, float duration )
+void record( const std::string& outputFile, std::shared_ptr<FrameStream<double>> signal, float duration )
 {
 
     std::ofstream outputStream( outputFile, std::ios::binary );
@@ -12,11 +12,10 @@ void record( const std::string& outputFile, NaiveInstruments::SignalShorthands::
 {
 
     std::ofstream outputStream( outputFile, std::ios::binary );
-
     record( outputStream, signal, duration );
 }
 
-void record( std::ostream& outputFile, FrameStream<double>& signal, float duration )
+void record( std::ostream& outputFile, std::shared_ptr<FrameStream<double>> signal, float duration )
 {
 
     double attenuation = .5;
@@ -26,7 +25,7 @@ void record( std::ostream& outputFile, FrameStream<double>& signal, float durati
     WavWriter recorder( outputFile, numberOfFrames );
     for ( int i = 0; i < numberOfFrames; ++i )
     {
-        recorder << signal[i] * attenuation;
+        recorder << ( *signal )[i] * attenuation;
     }
 }
 

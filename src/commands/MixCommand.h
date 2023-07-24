@@ -34,6 +34,6 @@ public:
 
         shared_ptr<FrameStream<double>> sum = Add::many( samplers );
 
-        output( *sum );
+        output( sum );
     }
 };

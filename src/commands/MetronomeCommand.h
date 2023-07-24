@@ -41,6 +41,6 @@ class MetronomeCommand : public AudioCommand
             tracks.push_back( resetter );
         }
 
-        output( *Add::many( tracks ) );
+        output( Add::many( tracks ) );
     }
 };

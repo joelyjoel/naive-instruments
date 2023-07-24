@@ -83,7 +83,7 @@ protected:
     /**
      * Get the primary audio input as a buffer.
      */
-    MonoBuffer* inputAsBuffer()
+    std::shared_ptr<MonoBuffer> inputAsBuffer()
     {
         if ( args.count( "input" ) )
         {
@@ -92,7 +92,7 @@ protected:
         }
         else if ( stdinIsAPipe() )
         {
-            return WavReader::readStream( std::cin );
+            return WavReader::readStream( &std::cin );
         }
         else
         {
@@ -126,7 +126,7 @@ protected:
 
 protected:
     // TODO: Use a shared ptr?
-    void output( FrameStream<double>& signal )
+    void output( std::shared_ptr<FrameStream<double>> signal )
     {
         auto& path = outputFile();
         if ( stdoutIsAPipe() )

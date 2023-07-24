@@ -92,8 +92,8 @@ public:
             if ( scrub )
             {
                 // TODO: Fix this memory leak!
-                MonoBuffer* toPlay = sample.slice( float( from ), float( to ) );
-                playback.setSignal( *toPlay );
+                auto toPlay = sample.slice( float( from ), float( to ) );
+                playback.setSignal( toPlay );
             }
         }
         endwin();

@@ -13,20 +13,18 @@ class InteractivePlayback
 {
     BufferedPlayback bufferedPlayback;
 
-    CDJ cdj;
+    std::shared_ptr<CDJ> cdj;
 
-    InteractivePlayback( FrameStream<double>& input )
-    : bufferedPlayback( cdj )
+    InteractivePlayback( std::shared_ptr<FrameStream<double>> input )
+    : cdj( make_shared<CDJ>() )
+    , bufferedPlayback( cdj )
     {
         attachPlaybackControls( input );
     }
 
-    // TODO: Use smart pointers insteadh of references
-    void attachPlaybackControls( FrameStream<double>& input )
+    void attachPlaybackControls( std::shared_ptr<FrameStream<double>> input )
     {
-        // FIXME: Unsafe!
-        std::shared_ptr<FrameStream<double>> inputptr( &input );
-        cdj.input << inputptr;
+        cdj->input << input;
     }
 
     void start( bool async = false )
@@ -50,23 +48,23 @@ class InteractivePlayback
             {
                 int c = getch();
                 if ( c == 32 )
-                    cdj.togglePause();
+                    cdj->togglePause();
                 else if ( c == 10 )
-                    cdj.restart();
+                    cdj->restart();
                 else if ( c == '=' )
-                    cdj.semitoneFaster();
+                    cdj->semitoneFaster();
                 else if ( c == '-' )
-                    cdj.semitoneSlower();
+                    cdj->semitoneSlower();
                 else if ( c == '+' )
-                    cdj.semitoneFaster( .05 );
+                    cdj->semitoneFaster( .05 );
                 else if ( c == '_' )
-                    cdj.semitoneSlower( .05 );
+                    cdj->semitoneSlower( .05 );
                 else if ( c == '\'' )
-                    cdj.punchLoop();
+                    cdj->punchLoop();
                 else if ( c == 'h' )
-                    cdj.skipForward( -.250 );
+                    cdj->skipForward( -.250 );
                 else if ( c == 'l' )
-                    cdj.skipForward( .250 );
+                    cdj->skipForward( .250 );
             }
         } );
         renderThread = new std::thread( [this]() {
@@ -87,33 +85,32 @@ class InteractivePlayback
         string str;
         // TODO: Should be a sub function
         // TODO: Should be another sub function
-        if ( cdj.isPaused() )
+        if ( cdj->isPaused() )
             str += "\uf04c";
         else
             str += "\uf04b";
 
-        str += " " + cdj.describeTimeElapsed() + "\t";
+        str += " " + cdj->describeTimeElapsed() + "\t";
 
-        str += "\uf04e x" + std::to_string( cdj.playbackRate() ) + "\t";
+        str += "\uf04e x" + std::to_string( cdj->playbackRate() ) + "\t";
 
-        str += "(" + cdj.describeDetune() + ")\t";
+        str += "(" + cdj->describeDetune() + ")\t";
 
-        str += cdj.describeLoopState() + "\t\t";
+        str += cdj->describeLoopState() + "\t\t";
 
         addstr( str.c_str() );
     }
 
 public:
-    static void play( FrameStream<double>& signal )
+    static void play( std::shared_ptr<FrameStream<double>> signal )
     {
         InteractivePlayback playback( signal );
         playback.start( false );
     }
 
-    static void play( MonoBuffer& audio )
+    static void play( std::shared_ptr<MonoBuffer> audio )
     {
-        // FIXME: Memory leak!
-        Sampler* sampler = new Sampler( audio );
-        play( *sampler );
+        auto sampler = std::make_shared<Sampler>( audio );
+        play( sampler );
     }
 };

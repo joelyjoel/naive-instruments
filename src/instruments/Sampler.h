@@ -7,8 +7,8 @@
 class Sampler : public FrameStream<double>
 {
 private:
-    MonoBuffer* buffer;
-    int         playhead = 0;
+    std::shared_ptr<MonoBuffer> buffer;
+    int                         playhead = 0;
 
 public:
     /**
@@ -20,9 +20,9 @@ public:
         buffer = WavReader::readMonoFile( filePath );
     }
 
-    Sampler( MonoBuffer& sharedBuffer )
+    Sampler( std::shared_ptr<MonoBuffer> sharedBuffer )
     {
-        buffer = &sharedBuffer;
+        buffer = sharedBuffer;
     }
 
 public:

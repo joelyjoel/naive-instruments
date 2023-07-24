@@ -7,6 +7,7 @@
 #include "../playback/BufferedPlayback.h"
 #include "CommandLineArguments.h"
 #include <iostream>
+#include <memory>
 
 class [[deprecated( "Use Command or sub-class (probably AudioCommand) instead" )]] CommandLineApp
 {
@@ -23,15 +24,15 @@ public:
     {
     }
 
-    void output( MonoBuffer & buffer )
+    void output( std::shared_ptr<MonoBuffer> buffer )
     {
         if ( args.boolean( "normalise" ) )
-            buffer.normalise();
+            buffer->normalise();
 
         if ( stdoutIsAPipe() )
         {
             std::cerr << "Piping to stdout\n";
-            WavWriter::write( std::cout, buffer );
+            WavWriter::write( std::cout, *buffer );
         }
         else if ( outputPath().empty() )
         {
@@ -39,11 +40,11 @@ public:
         }
         else
         {
-            WavWriter::write( outputPath(), buffer );
+            WavWriter::write( outputPath(), *buffer );
         }
     }
 
-    MonoBuffer* mainInputAsBuffer()
+    std::shared_ptr<MonoBuffer> mainInputAsBuffer()
     {
         if ( args.exists( "input" ) )
         {
@@ -52,7 +53,7 @@ public:
         }
         else if ( stdinIsAPipe() )
         {
-            return WavReader::readStream( std::cin );
+            return WavReader::readStream( &std::cin );
         }
         else
         {
@@ -76,7 +77,7 @@ public:
         }
     }
 
-    void output( FrameStream<double> & signal )
+    void output( std::shared_ptr<FrameStream<double>> signal )
     {
         auto& path = outputPath();
         if ( stdoutIsAPipe() )
@@ -93,10 +94,6 @@ public:
         }
     }
 
-    void output( MonoBuffer * buffer )
-    {
-        output( *buffer );
-    }
 
     const std::string outputPath()
     {
