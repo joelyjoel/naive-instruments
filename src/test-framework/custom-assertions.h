@@ -40,24 +40,43 @@ inline void CHECK_FRAME( std::shared_ptr<NaiveInstruments::Signal<double>> signa
     }
 }
 
+class Hasher
+{
+public:
+    unsigned long checksum = 0;
+
+
+    void operator()( double value )
+    {
+        char* recast = (char*) &value;
+        for ( int i = 0; i < sizeof( double ); ++i )
+        {
+            checksum = checksum << 1;
+            checksum += recast[i];
+        }
+    }
+};
+
+
 inline std::string record_and_checksum( const std::string                                 outputPath,
                                         std::shared_ptr<NaiveInstruments::Signal<double>> signal,
                                         int                                               durationInSamples )
 {
     WavWriter                              writer( outputPath, durationInSamples );
-    double                                 sum = 0;
     NaiveInstruments::SignalReader<double> reader;
     reader = signal;
 
+    Hasher hasher;
+
     for ( int t = 0; t < durationInSamples; ++t )
     {
-        // TODO: This part needs re rewriting
         writer << reader[t];
-        sum += reader[t];
+        hasher( reader[t] );
     }
-    sum = fmod( sum, 1.0 );
-    return std::to_string( sum );
+
+    return std::to_string( hasher.checksum );
 }
+
 
 inline void AUDIO_TEST( const std::string&                                name,
                         std::shared_ptr<NaiveInstruments::Signal<double>> signal,
