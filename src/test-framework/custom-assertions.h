@@ -92,6 +92,7 @@ inline void AUDIO_TEST( const std::string&                                name,
     }
 
     std::string auditionSamplePath = "./audition/" + name + ".wav";
+    std::string expectedSamplePath = "./expected-samples/" + name + ".wav";
     std::string actualChecksum     = record_and_checksum( auditionSamplePath, signal, duration * 44100 );
 
     if ( expectedChecksum == "?" )
@@ -107,6 +108,11 @@ inline void AUDIO_TEST( const std::string&                                name,
     {
         REQUIRE( actualChecksum == expectedChecksum );
         if ( actualChecksum == expectedChecksum )
+
+        {
+            if ( !std::filesystem::exists( expectedSamplePath ) )
+                std::filesystem::rename( auditionSamplePath, expectedSamplePath );
             std::filesystem::remove( auditionSamplePath );
+        }
     }
 }
