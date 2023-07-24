@@ -23,7 +23,7 @@ public:
         int fromSample = from * sampleRate;
         int toSample   = to * sampleRate;
 
-        Sampler sampler( filePath );
+        Sampler sampler( WavReader::readMonoFile( filePath ) );
         sampler.skipTo( fromSample );
 
         RMS loudness;

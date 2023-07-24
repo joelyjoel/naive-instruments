@@ -12,13 +12,13 @@ private:
 
 public:
     /**
-
      * TODO: Remove and replace with static method.
      */
-    [[deprecated]] Sampler( const std::string& filePath )
-    {
-        buffer = WavReader::readMonoFile( filePath );
-    }
+    /* [[deprecated( "Use Sampler(WavReader::readMonoFile(filepath)) instead" )]] Sampler( const std::string& filePath )
+     */
+    /* { */
+    /*     buffer = WavReader::readMonoFile( filePath ); */
+    /* } */
 
     Sampler( std::shared_ptr<MonoBuffer> sharedBuffer )
     {

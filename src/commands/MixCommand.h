@@ -29,7 +29,7 @@ public:
         for ( int i = 0; i < inputFiles.size(); ++i )
         {
             // TODO: Use getSample instead
-            samplers.push_back( make_shared<Sampler>( inputFiles[i] ) );
+            samplers.push_back( make_shared<Sampler>( WavReader::readMonoFile( inputFiles[i] ) ) );
         }
 
         shared_ptr<FrameStream<double>> sum = Add::many( samplers );
