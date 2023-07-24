@@ -40,6 +40,25 @@ inline void CHECK_FRAME( std::shared_ptr<NaiveInstruments::Signal<double>> signa
     }
 }
 
+inline std::string record_and_checksum( const std::string                                 outputPath,
+                                        std::shared_ptr<NaiveInstruments::Signal<double>> signal,
+                                        int                                               durationInSamples )
+{
+    WavWriter                              writer( outputPath, durationInSamples );
+    double                                 sum = 0;
+    NaiveInstruments::SignalReader<double> reader;
+    reader = signal;
+
+    for ( int t = 0; t < durationInSamples; ++t )
+    {
+        // TODO: This part needs re rewriting
+        writer << reader[t];
+        sum += reader[t];
+    }
+    sum = fmod( sum, 1.0 );
+    return std::to_string( sum );
+}
+
 inline void AUDIO_TEST( const std::string&                                name,
                         std::shared_ptr<NaiveInstruments::Signal<double>> signal,
                         double                                            duration = .1 )
@@ -54,19 +73,7 @@ inline void AUDIO_TEST( const std::string&                                name,
     }
 
     std::string auditionSamplePath = "./audition/" + name + ".wav";
-
-    WavWriter                              writer( auditionSamplePath, duration * 44100 );
-    double                                 sum = 0;
-    NaiveInstruments::SignalReader<double> reader;
-    reader = signal;
-    for ( int t = 0; t < 44100 * duration; ++t )
-    {
-        // TODO: This part needs re rewriting
-        writer << reader[t];
-        sum += reader[t];
-    }
-    sum                        = fmod( sum, 1.0 );
-    std::string actualChecksum = std::to_string( sum );
+    std::string actualChecksum     = record_and_checksum( auditionSamplePath, signal, duration * 44100 );
 
     if ( expectedChecksum == "?" )
     {
