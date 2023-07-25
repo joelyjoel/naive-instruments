@@ -287,6 +287,16 @@ inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
     return signal / numberOfHarmonics;
 }
 
+inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step_duration )
+{
+    mono signal = sine( fundamental );
+    for ( int i = 0; i < numberOfHarmonics; ++i )
+    {
+        signal = signal + wait( step_duration * i, sine( fundamental * i ) );
+    }
+    return signal / numberOfHarmonics;
+}
+
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
 

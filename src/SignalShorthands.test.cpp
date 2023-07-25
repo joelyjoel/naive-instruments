@@ -2,6 +2,7 @@
 #include "./test-framework/custom-assertions.h"
 #include "Signal.h"
 #include "Waveforms.h"
+#include <string>
 
 using namespace NaiveInstruments::SignalShorthands;
 
@@ -214,6 +215,16 @@ TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" )
 {
     auto freq = GENERATE( range( 100, 1000, 50 ) );
     AUDIO_TEST( "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ) );
+}
+
+TEST_CASE( "harmonic_spread()" )
+{
+    auto fundamental       = GENERATE( 200, 20, 50, 440, 30, 40 );
+    auto numberOfHarmonics = GENERATE( 9, 17, 65 );
+    auto step_duration     = .1;
+    AUDIO_TEST( std::to_string( numberOfHarmonics ) + " harmonic spread on " + std::to_string( fundamental ) + "Hz",
+                harmonic_spread( constant( fundamental ), numberOfHarmonics, step_duration ),
+                2 * numberOfHarmonics * step_duration );
 }
 
 
