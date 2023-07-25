@@ -54,6 +54,11 @@ inline mono operator+( double a, mono b )
     return add( constant( a ), b );
 }
 
+inline void operator+=( SignalReader<double>& a, mono b )
+{
+    a = a.ptr + b;
+}
+
 inline mono subtract( mono a, mono b )
 {
     auto subtracter = std::make_shared<NaiveInstruments::Subtract<double>>();

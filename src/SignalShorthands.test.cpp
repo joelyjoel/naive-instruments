@@ -1,5 +1,6 @@
 #include "./SignalShorthands.h"
 #include "./test-framework/custom-assertions.h"
+#include "Signal.h"
 #include "Waveforms.h"
 
 using namespace NaiveInstruments::SignalShorthands;
@@ -192,6 +193,21 @@ TEST_CASE( "Hard clipping a mono signal" )
 {
     CHECK_SIGNAL( clip( t() / 4 ), { 00, .25, .5, .75, 1, 1, 1, 1 } );
     CHECK_SIGNAL( clip( -t() / 4 ), { 00, -.25, -.5, -.75, -1, -1, -1, -1 } );
+}
+
+TEST_CASE( "Harmonic series" )
+{
+    auto                                   fundamental         = constant( 200 );
+    int                                    numberOfHarmonics   = 17;
+    double                                 arpegiationInterval = .2;
+    NaiveInstruments::SignalReader<double> reader;
+    reader = sine( fundamental );
+    for ( int i = 1; i < numberOfHarmonics; ++i )
+    {
+        reader += wait( i * arpegiationInterval, sine( fundamental * i ) );
+    }
+    AUDIO_TEST(
+        "17 harmonic series on 200Hz", reader.ptr / numberOfHarmonics, numberOfHarmonics * arpegiationInterval + 1.6 );
 }
 
 
