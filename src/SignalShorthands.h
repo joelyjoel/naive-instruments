@@ -277,6 +277,16 @@ inline stereo clip( stereo input )
     return clipper;
 }
 
+inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
+{
+    mono signal = sine( fundamental );
+    for ( int i = 1; i < numberOfHarmonics; ++i )
+    {
+        signal = signal + sine( fundamental * i );
+    }
+    return signal / numberOfHarmonics;
+}
+
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
 

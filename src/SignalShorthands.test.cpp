@@ -119,7 +119,7 @@ TEST_CASE( "shorthand for sine waves" )
 {
     auto signal = sine( constant( 1 ) );
     CHECK_FRAME( signal, 1, sin( M_PI * 2 * 1 / 44100.0 ) );
-    AUDIO_TEST( "440Hz Sine", sine( constant( 440 ) ) );
+    AUDIO_TEST( "440Hz Sine", sine( constant( 440 ) ), .1 );
 }
 
 TEST_CASE( "short hand for square waves" )
@@ -132,7 +132,7 @@ TEST_CASE( "short hand for square waves" )
 
 TEST_CASE( "checksum test for square wave" )
 {
-    AUDIO_TEST( "440Hz square wave", square( constant( 44 ) ) );
+    AUDIO_TEST( "440Hz square wave", square( constant( 44 ) ), .1 );
 }
 
 // TODO: test saw()
@@ -195,7 +195,7 @@ TEST_CASE( "Hard clipping a mono signal" )
     CHECK_SIGNAL( clip( -t() / 4 ), { 00, -.25, -.5, -.75, -1, -1, -1, -1 } );
 }
 
-TEST_CASE( "Harmonic series" )
+TEST_CASE( "signal reader += operator" )
 {
     auto                                   fundamental         = constant( 200 );
     int                                    numberOfHarmonics   = 17;
@@ -208,6 +208,12 @@ TEST_CASE( "Harmonic series" )
     }
     AUDIO_TEST(
         "17 harmonic series on 200Hz", reader.ptr / numberOfHarmonics, numberOfHarmonics * arpegiationInterval + 1.6 );
+}
+
+TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" )
+{
+    auto freq = GENERATE( range( 100, 1000, 50 ) );
+    AUDIO_TEST( "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ) );
 }
 
 

@@ -80,7 +80,7 @@ inline std::string record_and_checksum( const std::string                       
 
 inline void AUDIO_TEST( const std::string&                                name,
                         std::shared_ptr<NaiveInstruments::Signal<double>> signal,
-                        double                                            duration = .1 )
+                        double                                            duration = .5 )
 {
     std::filesystem::create_directory( "./expected-samples" );
     std::string expectedChecksumPath = "./expected-samples/" + name + ".checksum.txt";
@@ -106,7 +106,7 @@ inline void AUDIO_TEST( const std::string&                                name,
     }
     else
     {
-        REQUIRE( actualChecksum == expectedChecksum );
+        CHECK( actualChecksum == expectedChecksum );
         if ( actualChecksum == expectedChecksum )
 
         {
