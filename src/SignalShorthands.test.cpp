@@ -227,6 +227,11 @@ TEST_CASE( "harmonic_spread()" )
                 2 * numberOfHarmonics * step_duration );
 }
 
+TEST_CASE( "ramp as an envelope" )
+{
+    AUDIO_TEST( "440Hz Sine boop", sine( constant( 440 ) ) * ramp( 1, 1, 0 ), 1 );
+}
+
 
 // TODO: Test hard clipping stereo signals
 /* TEST_CASE( "Hard clipping a stereo signal" ) */

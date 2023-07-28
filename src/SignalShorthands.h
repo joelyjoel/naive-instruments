@@ -270,6 +270,21 @@ inline mono clip( mono input )
     return clipper;
 }
 
+inline mono ramp( mono before, mono duration, mono after )
+{
+    auto signal      = std::make_shared<LinearRamp>();
+    signal->before   = before;
+    signal->duration = duration;
+    signal->after    = after;
+    return signal;
+}
+
+inline mono ramp( double before, double duration, double after )
+{
+
+    return ramp( constant( before ), constant( duration ), constant( after ) );
+}
+
 inline stereo clip( stereo input )
 {
     auto clipper   = std::make_shared<HardClip<StereoFrame>>();

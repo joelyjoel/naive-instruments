@@ -1,5 +1,6 @@
 #include "Signal.h"
 #include "core/MonoBuffer.h"
+#include <algorithm>
 #include <vector>
 
 namespace NaiveInstruments
@@ -396,7 +397,24 @@ public:
     }
 };
 
+class LinearRamp : public Signal<double>
+{
+public:
+    SignalReader<double> before{ this }, duration{ this }, after{ this };
 
+    float phase = 0;
+
+    void action() override
+    {
+        phase  = std::clamp( phase + 1.0 / ( duration[t] * 44100 ), 0.0, 1.0 );
+        output = before[t] * ( 1 - phase ) + after[t] * phase;
+    }
+};
+
+
+// TODO: Clamp
+// TODO: Min
+// TODO: Max
 // TODO: Pace
 // TODO: Pipe delay
 // TODO: LinearRamp
