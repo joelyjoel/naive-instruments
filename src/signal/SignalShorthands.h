@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./Waveforms.h"
+#include "../Waveforms.h"
 #include "./signal-processes.h"
 #include <ctime>
 #include <memory>

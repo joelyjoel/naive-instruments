@@ -8,9 +8,9 @@
 
 #include "../core.h"
 
-#include "../SignalShorthands.h"
 #include "../instruments/Constant.h"
 #include "../instruments/Sampler.h"
+#include "../signal/SignalShorthands.h"
 #include "./CircularBuffer.h"
 
 using NaiveInstruments::SignalShorthands::mono;

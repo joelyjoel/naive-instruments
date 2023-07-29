@@ -1,5 +1,5 @@
-#include "Signal.h"
-#include "core/MonoBuffer.h"
+#include "../core/MonoBuffer.h"
+#include "./Signal.h"
 #include <algorithm>
 #include <vector>
 

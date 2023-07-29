@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./generative/Random.h"
+#include "../generative/Random.h"
 #include <cmath>
 #include <iostream>
 #include <memory>

@@ -1,6 +1,6 @@
 #include "signal-processes.h"
-#include "./test-framework/custom-assertions.h"
-#include "core/MonoBuffer.h"
+#include "../core/MonoBuffer.h"
+#include "../test-framework/custom-assertions.h"
 
 using namespace NaiveInstruments;
 

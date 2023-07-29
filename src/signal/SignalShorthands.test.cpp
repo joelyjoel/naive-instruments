@@ -1,7 +1,7 @@
 #include "./SignalShorthands.h"
-#include "./test-framework/custom-assertions.h"
+#include "../Waveforms.h"
+#include "../test-framework/custom-assertions.h"
 #include "Signal.h"
-#include "Waveforms.h"
 #include <string>
 
 using namespace NaiveInstruments::SignalShorthands;

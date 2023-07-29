@@ -1,6 +1,6 @@
 #include "../../dependencies/catch.hpp"
-#include "../Signal.h"
 #include "../file-io/WavWriter.h"
+#include "../signal/Signal.h"
 #include <filesystem>
 #include <fstream>
 #include <math.h>

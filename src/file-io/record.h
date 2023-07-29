@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../SignalShorthands.h"
 #include "../core/Signal.h"
+#include "../signal/SignalShorthands.h"
 #include "WavWriter.h"
 #include <string>
 
