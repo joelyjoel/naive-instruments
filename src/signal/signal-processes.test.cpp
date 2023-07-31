@@ -76,3 +76,27 @@ TEST_CASE( "Creating a Sampler using a contrived MonoBuffer" )
     std::shared_ptr<Signal<double>> sampler = std::make_shared<NaiveInstruments::Sampler>( &buffer );
     CHECK_SIGNAL( sampler, { 5, 4, 3, 2, 1 } );
 }
+
+TEST_CASE( "Signal processes know their own names at runtime" )
+{
+    REQUIRE( Sum().label() == "Sum" );
+    REQUIRE( Subtract().label() == "Subtract" );
+    REQUIRE( SignFlip().label() == "SignFlip" );
+    REQUIRE( Multiply().label() == "Multiply" );
+    REQUIRE( Divide().label() == "Divide" );
+    REQUIRE( MonoToStereo().label() == "MonoToStereo" );
+    REQUIRE( Repeater().label() == "Repeater" );
+    REQUIRE( Clock().label() == "Clock" );
+    REQUIRE( Accumulator().label() == "Accumulator" );
+    REQUIRE( Modulo().label() == "Modulo" );
+    REQUIRE( Noise().label() == "Noise" );
+    REQUIRE( VectorSignal().label() == "VectorSignal" );
+    REQUIRE( Sampler().label() == "Sampler" );
+    REQUIRE( Wavetable().label() == "Wavetable" );
+    REQUIRE( Wait().label() == "Wait" );
+    REQUIRE( Skip().label() == "Skip" );
+    REQUIRE( IntervalToRatio().label() == "IntervalToRatio" );
+    REQUIRE( BufferLooper().label() == "BufferLooper" );
+    REQUIRE( HardClip().label() == "HardClip" );
+    REQUIRE( LinearRamp().label() == "LinearRamp" );
+}
