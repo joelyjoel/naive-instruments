@@ -112,6 +112,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/catch-config.test.cpp 
    ${NaiveSourcFiles}
    # TODO: It actually probably is a bit safer to use a glob here
+   src/signal/naming.test.cpp
    src/signal/Signal.test.cpp
    src/signal/signal-processes.test.cpp
    src/signal/SignalShorthands.test.cpp
