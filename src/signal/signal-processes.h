@@ -1,5 +1,6 @@
 #include "../core/MonoBuffer.h"
 #include "./Signal.h"
+#include "./naming.h"
 #include <algorithm>
 #include <vector>
 
@@ -10,7 +11,7 @@ namespace NaiveInstruments
 /**
  * Unsigned sawtooth wave
  */
-class USaw : public Signal<double>
+class USaw : public Signal<double>, public WithName<"USaw">
 {
 public:
     SignalReader<double> frequency{ this };
@@ -35,7 +36,7 @@ public:
  * Uses the `+` operator to define what adding signal frames means.
  */
 template <typename T>
-class Sum : public Signal<T>
+class Sum : public Signal<T>, public WithName<"Sum">
 {
 public:
     SignalReader<T> input1{ this };
@@ -49,7 +50,7 @@ public:
 };
 
 template <typename T>
-class Subtract : public Signal<T>
+class Subtract : public Signal<T>, public WithName<"Subtract">
 {
 public:
     SignalReader<T> a{ this };
@@ -61,7 +62,7 @@ public:
     }
 };
 
-class SignFlip : public Signal<double>
+class SignFlip : public Signal<double>, public WithName<"SignFlip">
 {
 public:
     SignalReader<double> input{ this };
@@ -73,7 +74,7 @@ public:
     }
 };
 
-class Multiply : public Signal<double>
+class Multiply : public Signal<double>, public WithName<"Multiply">
 {
 public:
     SignalReader<double> a{ this };
@@ -86,7 +87,7 @@ public:
     }
 };
 
-class Divide : public Signal<double>
+class Divide : public Signal<double>, public WithName<"Divide">
 {
 public:
     SignalReader<double> numerator{ this };
@@ -99,7 +100,7 @@ public:
     }
 };
 
-class MonoToStereo : public StereoSignal
+class MonoToStereo : public StereoSignal, public WithName<"MonoToStereo">
 {
 public:
     SignalReader<double> input{ this };
@@ -112,7 +113,7 @@ public:
 };
 
 template <typename T>
-class Repeater : public Signal<T>
+class Repeater : public Signal<T>, public WithName<"Repeater">
 {
 public:
     SignalReader<T> input{ this };
@@ -125,7 +126,7 @@ public:
 
 /// signal that writes the frame position to the output field
 template <typename T>
-class Clock : public Signal<T>
+class Clock : public Signal<T>, public WithName<"Clock">
 {
 public:
     Clock()
@@ -138,7 +139,7 @@ public:
     }
 };
 
-class Accumulator : public Signal<double>
+class Accumulator : public Signal<double>, public WithName<"Accumulator">
 {
 public:
     SignalReader<double> input{ this };
@@ -154,7 +155,7 @@ public:
     }
 };
 
-class Modulo : public Signal<double>
+class Modulo : public Signal<double>, public WithName<"Modulo">
 {
 public:
     SignalReader<double> input{ this };
@@ -166,7 +167,7 @@ public:
     }
 };
 
-class Noise : public Signal<double>
+class Noise : public Signal<double>, public WithName<"Noise">
 {
     Random random;
 
@@ -184,7 +185,7 @@ public:
 };
 
 template <typename T>
-class VectorSignal : public Signal<T>
+class VectorSignal : public Signal<T>, public WithName<"VectorSignal">
 {
 public:
     std::shared_ptr<std::vector<T>> buffer;
@@ -203,7 +204,7 @@ public:
     }
 };
 
-class Sampler : public Signal<double>
+class Sampler : public Signal<double>, WithName<"Sampler">
 {
     // TODO: Refactor this class, its been lazily adapted from the old version
 
@@ -243,7 +244,7 @@ private:
     }
 };
 
-class Wavetable : public Signal<double>
+class Wavetable : public Signal<double>, WithName<"Wavetable">
 {
 public:
     // TODO: make it multi channel
@@ -265,7 +266,7 @@ public:
 };
 
 template <typename T>
-class Wait : public Signal<T>
+class Wait : public Signal<T>, public WithName<"Wait">
 {
 public:
     int             waitTime;
@@ -291,7 +292,7 @@ public:
 };
 
 template <typename T>
-class Skip : public Signal<T>
+class Skip : public Signal<T>, public WithName<"Skip">
 {
 public:
     int             skipTime;
@@ -309,7 +310,7 @@ public:
 };
 
 template <typename T>
-class Elapse : public Signal<T>
+class Elapse : public Signal<T>, public WithName<"Elapse">
 {
 public:
     int             elapseTime;
@@ -327,7 +328,7 @@ public:
     }
 };
 
-class IntervalToRatio : public Signal<double>
+class IntervalToRatio : public Signal<double>, public WithName<"IntervalToRatio">
 {
 public:
     SignalReader<double> interval{ this };
@@ -340,7 +341,7 @@ public:
 };
 
 
-class BufferLooper : public Signal<double>
+class BufferLooper : public Signal<double>, public WithName<"BufferLooper">
 {
 public:
     std::vector<double> buffer;
@@ -361,7 +362,7 @@ public:
 };
 
 template <typename T>
-class HardClip : public Signal<T>
+class HardClip : public Signal<T>, public WithName<"HardClip">
 {
 public:
     SignalReader<T> input{ this };
@@ -388,7 +389,7 @@ public:
     }
 };
 
-class LinearRamp : public Signal<double>
+class LinearRamp : public Signal<double>, public WithName<"LinearRamp">
 {
 public:
     SignalReader<double> before{ this }, duration{ this }, after{ this };
