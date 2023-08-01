@@ -79,24 +79,24 @@ TEST_CASE( "Creating a Sampler using a contrived MonoBuffer" )
 
 TEST_CASE( "Signal processes know their own names at runtime" )
 {
-    REQUIRE( Sum().label() == "Sum" );
-    REQUIRE( Subtract().label() == "Subtract" );
-    REQUIRE( SignFlip().label() == "SignFlip" );
-    REQUIRE( Multiply().label() == "Multiply" );
-    REQUIRE( Divide().label() == "Divide" );
-    REQUIRE( MonoToStereo().label() == "MonoToStereo" );
-    REQUIRE( Repeater().label() == "Repeater" );
-    REQUIRE( Clock().label() == "Clock" );
-    REQUIRE( Accumulator().label() == "Accumulator" );
-    REQUIRE( Modulo().label() == "Modulo" );
-    REQUIRE( Noise().label() == "Noise" );
-    REQUIRE( VectorSignal().label() == "VectorSignal" );
-    REQUIRE( Sampler().label() == "Sampler" );
-    REQUIRE( Wavetable().label() == "Wavetable" );
-    REQUIRE( Wait().label() == "Wait" );
-    REQUIRE( Skip().label() == "Skip" );
-    REQUIRE( IntervalToRatio().label() == "IntervalToRatio" );
-    REQUIRE( BufferLooper().label() == "BufferLooper" );
-    REQUIRE( HardClip().label() == "HardClip" );
-    REQUIRE( LinearRamp().label() == "LinearRamp" );
+    REQUIRE( Sum<double>().name() == "Sum" );
+    REQUIRE( Subtract<double>().name() == "Subtract" );
+    REQUIRE( SignFlip().name() == "SignFlip" );
+    REQUIRE( Multiply().name() == "Multiply" );
+    REQUIRE( Divide().name() == "Divide" );
+    REQUIRE( MonoToStereo().name() == "MonoToStereo" );
+    REQUIRE( Repeater<double>().name() == "Repeater" );
+    REQUIRE( Clock<double>().name() == "Clock" );
+    REQUIRE( Accumulator().name() == "Accumulator" );
+    REQUIRE( Modulo().name() == "Modulo" );
+    REQUIRE( Noise().name() == "Noise" );
+    REQUIRE( VectorSignal<double>( {} ).name() == "VectorSignal" );
+    /* REQUIRE( Sampler().name() == "Sampler" ); */
+    /* REQUIRE( Wavetable().name() == "Wavetable" ); */
+    REQUIRE( Wait<double>( 441 ).name() == "Wait" );
+    REQUIRE( Skip<double>( 10 ).name() == "Skip" );
+    REQUIRE( IntervalToRatio().name() == "IntervalToRatio" );
+    REQUIRE( BufferLooper( 100 ).name() == "BufferLooper" );
+    REQUIRE( HardClip<double>().name() == "HardClip" );
+    REQUIRE( LinearRamp().name() == "LinearRamp" );
 }

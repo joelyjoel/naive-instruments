@@ -10,7 +10,7 @@ namespace NaiveInstruments
 /**
  * Unsigned sawtooth wave
  */
-class USaw : public Signal<double>
+class USaw : public NamedSignal<double, "USaw">
 {
 public:
     SignalReader<double> frequency{ this };
@@ -35,7 +35,7 @@ public:
  * Uses the `+` operator to define what adding signal frames means.
  */
 template <typename T>
-class Sum : public Signal<T>
+class Sum : public NamedSignal<T, "Sum">
 {
 public:
     SignalReader<T> input1{ this };
@@ -54,7 +54,7 @@ public:
 };
 
 template <typename T>
-class Subtract : public Signal<T>
+class Subtract : public NamedSignal<T, "Subtract">
 {
 public:
     SignalReader<T> a{ this };
@@ -72,7 +72,7 @@ public:
     }
 };
 
-class SignFlip : public Signal<double>
+class SignFlip : public NamedSignal<double, "SignFlip">
 {
 public:
     SignalReader<double> input{ this };
@@ -89,7 +89,7 @@ public:
     }
 };
 
-class Multiply : public Signal<double>
+class Multiply : public NamedSignal<double, "Multiply">
 {
 public:
     SignalReader<double> a{ this };
@@ -107,7 +107,7 @@ public:
     }
 };
 
-class Divide : public Signal<double>
+class Divide : public NamedSignal<double, "Divide">
 {
 public:
     SignalReader<double> numerator{ this };
@@ -124,7 +124,7 @@ public:
     }
 };
 
-class MonoToStereo : public StereoSignal
+class MonoToStereo : public NamedSignal<StereoFrame, "MonoToStereo">
 {
 public:
     SignalReader<double> input{ this };
@@ -137,7 +137,7 @@ public:
 };
 
 template <typename T>
-class Repeater : public Signal<T>
+class Repeater : public NamedSignal<T, "Repeater">
 {
 public:
     SignalReader<T> input{ this };
@@ -150,7 +150,7 @@ public:
 
 /// signal that writes the frame position to the output field
 template <typename T>
-class Clock : public Signal<T>
+class Clock : public NamedSignal<T, "Clock">
 {
 public:
     Clock()
@@ -163,7 +163,7 @@ public:
     }
 };
 
-class Accumulator : public Signal<double>
+class Accumulator : public NamedSignal<double, "Accumulator">
 {
 public:
     SignalReader<double> input{ this };
@@ -179,7 +179,7 @@ public:
     }
 };
 
-class Modulo : public Signal<double>
+class Modulo : public NamedSignal<double, "Modulo">
 {
 public:
     SignalReader<double> input{ this };
@@ -191,7 +191,7 @@ public:
     }
 };
 
-class Noise : public Signal<double>
+class Noise : public NamedSignal<double, "Noise">
 {
     Random random;
 
@@ -209,7 +209,7 @@ public:
 };
 
 template <typename T>
-class VectorSignal : public Signal<T>
+class VectorSignal : public NamedSignal<T, "VectorSignal">
 {
 public:
     std::shared_ptr<std::vector<T>> buffer;
@@ -228,7 +228,7 @@ public:
     }
 };
 
-class Sampler : public Signal<double>
+class Sampler : public NamedSignal<double, "Sampler">
 {
     // TODO: Refactor this class, its been lazily adapted from the old version
 
@@ -258,7 +258,7 @@ public:
     }
 };
 
-class Wavetable : public Signal<double>
+class Wavetable : public NamedSignal<double, "Wavetable">
 {
 public:
     // TODO: make it multi channel
@@ -281,7 +281,7 @@ public:
 };
 
 template <typename T>
-class Wait : public Signal<T>
+class Wait : public NamedSignal<T, "Wait">
 {
 public:
     int             waitTime;
@@ -308,7 +308,7 @@ public:
 };
 
 template <typename T>
-class Skip : public Signal<T>
+class Skip : public NamedSignal<T, "Skip">
 {
 public:
     int             skipTime;
@@ -326,7 +326,7 @@ public:
     }
 };
 
-class IntervalToRatio : public Signal<double>
+class IntervalToRatio : public NamedSignal<double, "IntervalToRatio">
 {
 public:
     SignalReader<double> interval{ this };
@@ -343,7 +343,7 @@ public:
 };
 
 
-class BufferLooper : public Signal<double>
+class BufferLooper : public NamedSignal<double, "BufferLooper">
 {
 public:
     std::vector<double> buffer;
@@ -365,7 +365,7 @@ public:
 };
 
 template <typename T>
-class HardClip : public Signal<T>
+class HardClip : public NamedSignal<T, "HardClip">
 {
 public:
     HardClip()
@@ -397,7 +397,7 @@ public:
     }
 };
 
-class LinearRamp : public Signal<double>
+class LinearRamp : public NamedSignal<double, "LinearRamp">
 {
 public:
     SignalReader<double> before{ this }, duration{ this }, after{ this };

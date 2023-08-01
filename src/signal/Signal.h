@@ -4,6 +4,7 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include <string>
 #include <vector>
 
 
@@ -34,6 +35,11 @@ public:
             ++t;
             action();
         }
+    }
+
+    virtual const std::string name()
+    {
+        return "?";
     }
 };
 
@@ -88,6 +94,29 @@ public:
         std::shared_ptr<Signal<T>> newSignal = std::make_shared<Signal<T>>();
         newSignal->output                    = constantValue;
         ptr                                  = newSignal;
+    }
+};
+
+// LabelledSignal shortdhand
+template <size_t N>
+struct StringLiteral
+{
+    constexpr StringLiteral( const char ( &str )[N] )
+    {
+        std::copy_n( str, N, value );
+    }
+
+    char value[N];
+};
+
+
+template <typename T, StringLiteral runtime_name>
+class NamedSignal : public Signal<T>
+{
+public:
+    const std::string name()
+    {
+        return runtime_name.value;
     }
 };
 

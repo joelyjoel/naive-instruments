@@ -15,7 +15,7 @@ typedef std::shared_ptr<Signal<StereoFrame>> stereo;
 
 inline mono constant( double value )
 {
-    auto signal    = std::make_shared<Signal<double>>();
+    auto signal    = std::make_shared<NamedSignal<double, "Constant">>();
     signal->output = value;
     return signal;
 }

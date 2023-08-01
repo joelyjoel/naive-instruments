@@ -140,3 +140,12 @@ TEST_CASE( "Using modulo to count to 10 repetitively" )
     REQUIRE( reader[9] == 9 );
     REQUIRE( reader[15] == 5 );
 }
+
+TEST_CASE( "Using LabelledSignal as shorthand for providing the name of a signal at runtime" )
+{
+    class HelloSignal : public NamedSignal<double, "HelloSignal">
+    {
+    };
+
+    REQUIRE( HelloSignal().name() == "HelloSignal" );
+}
