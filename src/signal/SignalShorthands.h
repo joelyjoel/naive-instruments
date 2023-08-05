@@ -320,6 +320,29 @@ inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step
     return signal / numberOfHarmonics;
 }
 
+inline mono fm_series(
+    /**
+     * Interleaved {frequency, feedforward, frequency, ... etc} control signals couplets.
+     */
+    std::vector<mono> frequencyFeedforwards )
+{
+    mono current = sine( frequencyFeedforwards[0] );
+    for ( int i = 1; i < frequencyFeedforwards.size(); ++i )
+    {
+        if ( i % 2 == 0 )
+        {
+            // frequency
+            current = sine( interval( current ) * frequencyFeedforwards[i] );
+        }
+        else
+        {
+            // feedfoward
+            current = current * frequencyFeedforwards[i];
+        }
+    }
+    return current;
+}
+
 
 // TODO: /* inline mono fm( std::vector<std::vector<mono>> rows ) */
 

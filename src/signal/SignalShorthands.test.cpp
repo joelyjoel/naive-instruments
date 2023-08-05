@@ -237,6 +237,11 @@ TEST_CASE( "ramp as an envelope" )
     AUDIO_TEST( "440Hz Sine boop", sine( constant( 440 ) ) * ramp( 1, 1, 0 ), 1 );
 }
 
+TEST_CASE( "Frequency modulation in series" )
+{
+    AUDIO_TEST( "440 into 220 fm series", fm_series( { constant( 440 ), constant( 6 ), constant( 220 ) } ), 1 );
+}
+
 
 // TODO: Test hard clipping stereo signals
 /* TEST_CASE( "Hard clipping a stereo signal" ) */
