@@ -29,6 +29,11 @@ TEST_CASE( "Adding two clocks together with function" )
     CHECK_SIGNAL( add( t(), t() ), { 0, 2, 4, 6 } );
 }
 
+TEST_CASE( "Adding together n number of signals using add" )
+{
+    CHECK_SIGNAL( add( { t(), t(), t() } ), { 0, 3, 6, 9 } );
+}
+
 TEST_CASE( "Adding a constant to a clock" )
 {
     CHECK_SIGNAL( t() + 10, { 10, 11, 12, 13 } );

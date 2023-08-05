@@ -40,6 +40,14 @@ inline mono add( mono a, mono b )
     return adder;
 }
 
+inline mono add( std::vector<mono> signals )
+{
+    mono total = signals[0];
+    for ( int i = 1; i < signals.size(); ++i )
+        total = add( total, signals[i] );
+    return total;
+}
+
 inline mono operator+( mono a, mono b )
 {
     return add( a, b );
@@ -311,6 +319,12 @@ inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step
     }
     return signal / numberOfHarmonics;
 }
+
+
+// TODO: /* inline mono fm( std::vector<std::vector<mono>> rows ) */
+
+
+// TODO: inline mono fm( mono fundamental, std::vector<mono> ratios, std::vector<mono> interactions );
 
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
