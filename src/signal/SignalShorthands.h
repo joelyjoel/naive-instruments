@@ -191,6 +191,11 @@ inline mono sine( mono frequency )
     return wavetable( &Waveforms::sine(), usaw( frequency ) );
 }
 
+inline mono sine( double frequency )
+{
+    return sine( constant( frequency ) );
+}
+
 inline mono saw( mono frequency )
 {
     return wavetable( &Waveforms::saw(), usaw( frequency ) );
@@ -291,6 +296,16 @@ inline mono ramp( double before, double duration, double after )
 {
 
     return ramp( constant( before ), constant( duration ), constant( after ) );
+}
+
+inline mono decay( mono duration )
+{
+    return ramp( constant( 1 ), duration, constant( 0 ) );
+}
+
+inline mono decay( double duration )
+{
+    return decay( constant( duration ) );
 }
 
 inline stereo clip( stereo input )
