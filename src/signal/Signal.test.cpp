@@ -34,7 +34,7 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
 
 TEST_CASE( "Check that CHECK_SIGNAL works for happy case" )
 {
-    auto signal    = std::make_shared<Signal<double>>();
+    auto signal    = std::make_shared<Constant<double>>();
     signal->output = 10;
     CHECK_SIGNAL( signal, { 10, 10, 10, 10 } );
 }
@@ -54,7 +54,7 @@ TEST_CASE( "Accessing a signal using a SignalReader" )
 
 TEST_CASE( "Instantiating constant signals" )
 {
-    Signal<double> a;
+    Constant<double> a;
     a.output = 10.0;
     REQUIRE( a.t == 0 );
     REQUIRE( a.output == 10 );

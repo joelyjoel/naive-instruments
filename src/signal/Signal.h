@@ -22,10 +22,7 @@ public:
 
     std::vector<AbstractSignalReader*> inputs;
 
-    virtual void action()
-    {
-        // This must remain no-op on base class for constant signals to work.
-    }
+    virtual void action() = 0;
 
     void sync( frame_position until )
     {
@@ -58,6 +55,14 @@ public:
 
 
 // NOTE: Define constants before readers for handy operator overload for assigning constants to readers
+template <typename T>
+class Constant : public Signal<T>
+{
+    void action() override
+    {
+        // no-op, you just set the output directly
+    }
+};
 
 
 template <typename T>
@@ -85,7 +90,7 @@ public:
     void operator=( T constantValue )
     {
 
-        std::shared_ptr<Signal<T>> newSignal = std::make_shared<Signal<T>>();
+        std::shared_ptr<Signal<T>> newSignal = std::make_shared<Constant<T>>();
         newSignal->output                    = constantValue;
         ptr                                  = newSignal;
     }
