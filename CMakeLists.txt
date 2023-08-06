@@ -90,6 +90,7 @@ set(NaiveSourcFiles
   src/instruments/Rhythm.cpp
   src/cli/SignalString.cpp
   src/instruments/Osc.cpp
+  src/signal/recordMonoBuffer.cpp
 )
 
 
@@ -116,6 +117,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/signal/Signal.test.cpp
    src/signal/signal-processes.test.cpp
    src/signal/SignalShorthands.test.cpp
+   src/signal/recordMonoBuffer.test.cpp
    src/generative/Random.test.cpp 
    src/instruments/BreakpointEnvelope.test.cpp 
    src/instruments/ControlString.test.cpp 
