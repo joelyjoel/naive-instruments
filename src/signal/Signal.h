@@ -57,7 +57,7 @@ public:
 
 // NOTE: Define constants before readers for handy operator overload for assigning constants to readers
 template <typename T>
-class Constant : public Signal<T>
+class Constant : public Signal<T>, public WithName<"Constant">
 {
     void action() override
     {
