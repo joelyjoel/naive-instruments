@@ -14,7 +14,7 @@ namespace NaiveInstruments
 class USaw : public Signal<double>, public WithName<"USaw">
 {
 public:
-    SignalReader<double> frequency{ this };
+    SignalReaderWithName<"frequency", double> frequency{ this };
 
     void init() override
     {
@@ -39,13 +39,13 @@ template <typename T>
 class Sum : public Signal<T>, public WithName<"Sum">
 {
 public:
-    SignalReader<T> input1{ this };
-    SignalReader<T> input2{ this };
+    SignalReaderWithName<"a", T> a{ this };
+    SignalReaderWithName<"b", T> b{ this };
 
 
     void action() override
     {
-        this->output = this->input1[this->t] + this->input2[this->t];
+        this->output = this->a[this->t] + this->b[this->t];
     }
 };
 
@@ -53,8 +53,8 @@ template <typename T>
 class Subtract : public Signal<T>, public WithName<"Subtract">
 {
 public:
-    SignalReader<T> a{ this };
-    SignalReader<T> b{ this };
+    SignalReaderWithName<"a", T> a{ this };
+    SignalReaderWithName<"b", T> b{ this };
 
     void action() override
     {
@@ -65,7 +65,7 @@ public:
 class SignFlip : public Signal<double>, public WithName<"SignFlip">
 {
 public:
-    SignalReader<double> input{ this };
+    SignalReaderWithName<"input", double> input{ this };
 
 
     void action()
@@ -77,8 +77,8 @@ public:
 class Multiply : public Signal<double>, public WithName<"Multiply">
 {
 public:
-    SignalReader<double> a{ this };
-    SignalReader<double> b{ this };
+    SignalReaderWithName<"a", double> a{ this };
+    SignalReaderWithName<"b", double> b{ this };
 
 
     void action() override
@@ -90,8 +90,8 @@ public:
 class Divide : public Signal<double>, public WithName<"Divide">
 {
 public:
-    SignalReader<double> numerator{ this };
-    SignalReader<double> denominator{ this };
+    SignalReaderWithName<"numerator", double>   numerator{ this };
+    SignalReaderWithName<"denominator", double> denominator{ this };
 
 
     void action() override
@@ -103,7 +103,7 @@ public:
 class MonoToStereo : public StereoSignal, public WithName<"MonoToStereo">
 {
 public:
-    SignalReader<double> input{ this };
+    SignalReaderWithName<"input", double> input{ this };
 
     void action() override
     {
@@ -116,7 +116,7 @@ template <typename T>
 class Repeater : public Signal<T>, public WithName<"Repeater">
 {
 public:
-    SignalReader<T> input{ this };
+    SignalReaderWithName<"input", T> input{ this };
 
     void action() override
     {
@@ -142,7 +142,7 @@ public:
 class Accumulator : public Signal<double>, public WithName<"Accumulator">
 {
 public:
-    SignalReader<double> input{ this };
+    SignalReaderWithName<"input", double> input{ this };
 
     void init() override
     {
@@ -158,8 +158,8 @@ public:
 class Modulo : public Signal<double>, public WithName<"Modulo">
 {
 public:
-    SignalReader<double> input{ this };
-    SignalReader<double> maximum{ this };
+    SignalReaderWithName<"input", double>   input{ this };
+    SignalReaderWithName<"maximum", double> maximum{ this };
 
     void action() override
     {
@@ -250,7 +250,7 @@ public:
     // TODO: make it multi channel
     MonoBuffer* buffer;
 
-    SignalReader<double> phase{ this };
+    SignalReaderWithName<"phase", double> phase{ this };
 
     Wavetable( MonoBuffer* buffer )
     : buffer( buffer )
@@ -269,8 +269,8 @@ template <typename T>
 class Wait : public Signal<T>, public WithName<"Wait">
 {
 public:
-    int             waitTime;
-    SignalReader<T> input{ this };
+    int                              waitTime;
+    SignalReaderWithName<"input", T> input{ this };
 
     Wait( int countdown )
     : waitTime( countdown )
@@ -295,8 +295,8 @@ template <typename T>
 class Skip : public Signal<T>, public WithName<"Skip">
 {
 public:
-    int             skipTime;
-    SignalReader<T> input{ this };
+    int                              skipTime;
+    SignalReaderWithName<"input", T> input{ this };
 
     Skip( int skipTime )
     : skipTime( skipTime )
@@ -331,7 +331,7 @@ public:
 class IntervalToRatio : public Signal<double>, public WithName<"IntervalToRatio">
 {
 public:
-    SignalReader<double> interval{ this };
+    SignalReaderWithName<"interval", double> interval{ this };
 
 
     void action() override
@@ -346,7 +346,7 @@ class BufferLooper : public Signal<double>, public WithName<"BufferLooper">
 public:
     std::vector<double> buffer;
 
-    SignalReader<double> input{ this };
+    SignalReaderWithName<"input", double> input{ this };
 
     BufferLooper( int durationInSamples )
     : buffer( durationInSamples )
@@ -365,7 +365,7 @@ template <typename T>
 class HardClip : public Signal<T>, public WithName<"HardClip">
 {
 public:
-    SignalReader<T> input{ this };
+    SignalReaderWithName<"input", T> input{ this };
 
     void action() override
     {
@@ -392,7 +392,9 @@ public:
 class LinearRamp : public Signal<double>, public WithName<"LinearRamp">
 {
 public:
-    SignalReader<double> before{ this }, duration{ this }, after{ this };
+    SignalReaderWithName<"before", double>   before{ this };
+    SignalReaderWithName<"duration", double> duration{ this };
+    SignalReaderWithName<"after", double>    after{ this };
 
     float phase = 0;
 

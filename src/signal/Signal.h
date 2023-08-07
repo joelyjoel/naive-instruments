@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../generative/Random.h"
+#include "./naming.h"
 #include <cmath>
 #include <iostream>
 #include <memory>
@@ -121,6 +122,14 @@ public:
     {
         return ptr;
     }
+};
+
+template <StringLiteral name, typename T = double>
+class SignalReaderWithName : public SignalReader<T>, public WithName<name>
+{
+public:
+    using SignalReader<T>::SignalReader;
+    using SignalReader<T>::operator=;
 };
 
 // Mono and stereo typedefs:
