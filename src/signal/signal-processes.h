@@ -326,6 +326,25 @@ public:
     }
 };
 
+template <typename T>
+class Elapse : public Signal<T>
+{
+public:
+    int elapseTime;
+
+    SignalReader<T> input{ this };
+    Elapse( int elapseTime )
+    : elapseTime( elapseTime )
+    {
+        this->t = -1;
+    }
+
+    void action()
+    {
+        this->output = input[std::min( elapseTime, this->t )];
+    }
+};
+
 class IntervalToRatio : public Signal<double>
 {
 public:
