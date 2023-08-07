@@ -182,6 +182,16 @@ TEST_CASE( "Skipping the start of signals" )
     CHECK_SIGNAL( skip( 1, t() ), { 44100, 44101, 44102, 44103, 44104, 44105 } );
 }
 
+TEST_CASE( "Elapsing a signal" )
+{
+    CHECK_SIGNAL( elapseFrames( t(), 5 ), { 0, 1, 2, 3, 4, 5, 5, 5, 5, 5 } );
+}
+
+TEST_CASE( "Slicing a simple clock signal" )
+{
+    CHECK_SIGNAL( slice( t(), 5, 10 ), { 5, 6, 7, 8, 9, 10, 10, 10, 10 } );
+}
+
 TEST_CASE( "Converting intervals to frequency ratios" )
 {
     CHECK_SIGNAL( interval( constant( 7 ) ), { pow( 2, 7 / 12.0 ), pow( 2, 7 / 12.0 ) } );

@@ -235,6 +235,7 @@ inline mono wait( double waitTimeInSeconds, mono input )
 }
 
 
+// TODO: Change to skipFrames
 inline mono skipSamples( int skipTimeInSamples, mono input )
 {
     auto signal   = std::make_shared<Skip<double>>( skipTimeInSamples );
@@ -250,6 +251,28 @@ inline mono skipSeconds( double skipTimeInSeconds, mono input )
 inline mono skip( double skipTimeInSeconds, mono input )
 {
     return skipSeconds( skipTimeInSeconds, input );
+}
+
+inline mono elapseFrames( mono input, int elapseTimeInFrames )
+{
+    auto signal   = std::make_shared<Elapse<double>>( elapseTimeInFrames );
+    signal->input = input;
+    return signal;
+}
+
+inline mono elapseSeconds( mono input, double elapseTimeInSeconds )
+{
+    return elapseFrames( input, elapseTimeInSeconds * 44100 );
+}
+
+inline mono elapse( mono input, double elapseTimeInSeconds )
+{
+    return elapseSeconds( input, elapseTimeInSeconds );
+}
+
+inline mono slice( mono input, double fromInSeconds, double toInSeconds )
+{
+    return elapse( skip( fromInSeconds, input ), toInSeconds - fromInSeconds );
 }
 
 inline mono interval( mono interval )
