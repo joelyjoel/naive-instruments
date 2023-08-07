@@ -21,6 +21,8 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
             // No-op
             output *= 2;
         }
+
+        use_name( "PowersOfTwo" );
     };
 
     PowersOfTwo a;
