@@ -2,6 +2,7 @@
 
 #include <string>
 
+
 class NamedThing
 {
 public:
@@ -28,3 +29,9 @@ public:
         return NAME.value;
     }
 };
+
+#define use_name( NAME )              \
+    const std::string name() override \
+    {                                 \
+        return NAME;                  \
+    };

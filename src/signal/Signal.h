@@ -15,7 +15,7 @@ namespace NaiveInstruments
 class AbstractSignalReader;
 
 
-class UnknownOutputSignal
+class UnknownOutputSignal : public NamedThing
 {
 public:
     typedef int    frame_position;
@@ -78,11 +78,16 @@ public:
 
 // NOTE: Define constants before readers for handy operator overload for assigning constants to readers
 template <typename T>
-class Constant : public Signal<T>, public WithName<"Constant">
+class Constant : public Signal<T>
 {
     void action() override
     {
         // no-op, output should be set by the user of this class
+    }
+
+    const std::string name() override
+    {
+        return std::to_string( this->output );
     }
 };
 
