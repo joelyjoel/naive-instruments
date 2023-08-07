@@ -270,6 +270,11 @@ inline mono elapse( mono input, double elapseTimeInSeconds )
     return elapseSeconds( input, elapseTimeInSeconds );
 }
 
+inline mono slice( mono input, double fromInSeconds, double toInSeconds )
+{
+    return elapse( skip( fromInSeconds, input ), toInSeconds - fromInSeconds );
+}
+
 inline mono interval( mono interval )
 {
     auto signal      = std::make_shared<IntervalToRatio>();

@@ -341,7 +341,10 @@ public:
 
     void action()
     {
-        this->output = input[std::min( elapseTime, this->t )];
+        if ( elapseTime > this->t )
+            this->output = input[this->t];
+        else
+            this->output = input[elapseTime];
     }
 };
 
