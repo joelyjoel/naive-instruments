@@ -103,9 +103,9 @@ TEST_CASE( "Assigning a non constant signal to a signal reader member on another
 
 TEST_CASE( "Adding constant signals together" )
 {
-    auto add    = std::make_shared<Sum<double>>();
-    add->input1 = 100;
-    add->input2 = 22;
+    auto add = std::make_shared<Sum<double>>();
+    add->a   = 100;
+    add->b   = 22;
     add->sync( 1 );
     REQUIRE( add->output == 122 );
 }

@@ -99,3 +99,47 @@ TEST_CASE( "Signal processes know their own names at runtime" )
     REQUIRE( HardClip<double>().name() == "HardClip" );
     REQUIRE( LinearRamp().name() == "LinearRamp" );
 }
+
+TEST_CASE( "Signal processes know their own input names at runtime" )
+{
+    REQUIRE( Sum<double>().a.name() == "a" );
+    REQUIRE( Sum<double>().b.name() == "b" );
+
+    REQUIRE( Subtract<double>().a.name() == "a" );
+    REQUIRE( Subtract<double>().b.name() == "b" );
+
+    REQUIRE( SignFlip().input.name() == "input" );
+
+    REQUIRE( Multiply().a.name() == "a" );
+    REQUIRE( Multiply().b.name() == "b" );
+
+    REQUIRE( Divide().numerator.name() == "numerator" );
+    REQUIRE( Divide().denominator.name() == "denominator" );
+
+    REQUIRE( MonoToStereo().input.name() == "input" );
+
+    REQUIRE( Repeater<double>().input.name() == "input" );
+
+    REQUIRE( Accumulator().input.name() == "input" );
+
+    REQUIRE( Modulo().input.name() == "input" );
+    REQUIRE( Modulo().maximum.name() == "maximum" );
+
+    /* REQUIRE( Sampler().name() == "Sampler" ); */
+    /* REQUIRE( Wavetable().name() == "Wavetable" ); */
+
+    REQUIRE( Wait<double>( 441 ).input.name() == "input" );
+
+    REQUIRE( Skip<double>( 10 ).input.name() == "input" );
+
+    REQUIRE( IntervalToRatio().interval.name() == "interval" );
+
+    REQUIRE( BufferLooper( 100 ).input.name() == "input" );
+
+    REQUIRE( HardClip<double>().input.name() == "input" );
+
+
+    REQUIRE( LinearRamp().before.name() == "before" );
+    REQUIRE( LinearRamp().duration.name() == "duration" );
+    REQUIRE( LinearRamp().after.name() == "after" );
+}
