@@ -43,6 +43,8 @@ public:
         if ( owner )
             owner->inputs.push_back( this );
     }
+
+    virtual std::shared_ptr<UnknownOutputSignal> abstract_ptr() = 0;
 };
 
 template <typename T>
@@ -76,6 +78,11 @@ class SignalReader : public AbstractSignalReader
 {
 public:
     std::shared_ptr<Signal<T>> ptr;
+
+    std::shared_ptr<UnknownOutputSignal> abstract_ptr()
+    {
+        return ptr;
+    }
 
     using AbstractSignalReader::AbstractSignalReader;
 
