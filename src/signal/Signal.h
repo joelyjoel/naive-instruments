@@ -22,10 +22,29 @@ public:
 
     std::vector<AbstractSignalReader*> inputs;
 
+    /**
+     * Override this method to initialise state for your signal.
+     * NOTE: State includes the output field.
+     *
+     * The default behavior is to call `action()` so only stateful signals
+     * (those which update state besides the output field) need to override
+     * this method.
+     */
+    virtual void init()
+    {
+        action();
+    }
+
+    /**
+     * Override this method to update state from one frame to the next.
+     * NOTE: State includes the output field.
+     */
     virtual void action() = 0;
 
     void sync( frame_position until )
     {
+        if ( t == 0 )
+            init();
         while ( t < until )
         {
             ++t;
@@ -60,7 +79,7 @@ class Constant : public Signal<T>
 {
     void action() override
     {
-        // no-op, you just set the output directly
+        // no-op, output should be set by the user of this class
     }
 };
 
