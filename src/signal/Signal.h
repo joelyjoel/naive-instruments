@@ -51,6 +51,8 @@ public:
             action();
         }
     }
+
+    void reset();
 };
 
 class AbstractSignalReader
@@ -64,6 +66,20 @@ public:
 
     virtual std::shared_ptr<UnknownOutputSignal> abstract_ptr() = 0;
 };
+
+// TODO: Should probably use a .cpp file
+inline void UnknownOutputSignal::reset()
+{
+
+    if ( t != 0 )
+    {
+        t = 0;
+        for ( auto input : inputs )
+        {
+            input->abstract_ptr()->reset();
+        }
+    }
+}
 
 template <typename T>
 class Signal : public UnknownOutputSignal
