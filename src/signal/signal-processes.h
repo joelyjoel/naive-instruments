@@ -15,7 +15,7 @@ class USaw : public Signal<double>
 public:
     SignalReader<double> frequency{ this };
 
-    USaw()
+    void init() override
     {
         output = 0;
     }
@@ -168,7 +168,7 @@ class Accumulator : public Signal<double>
 public:
     SignalReader<double> input{ this };
 
-    Accumulator()
+    void init() override
     {
         output = 0;
     }
@@ -240,19 +240,29 @@ public:
     Sampler( MonoBuffer* sharedBuffer )
     {
         buffer = sharedBuffer;
-        output = ( *buffer )[playhead];
+    }
+
+    void init() override
+    {
+        writeOutput();
     }
 
 public:
     void action() override
     {
+        ++playhead;
+        writeOutput();
+    }
+
+private:
+    void writeOutput()
+    {
         if ( playhead < 0 )
         {
-            ++playhead;
             output = 0;
         }
         else if ( playhead < buffer->numberOfFrames() )
-            output = ( *buffer )[++playhead];
+            output = ( *buffer )[playhead];
         else
             output = 0;
     }
@@ -403,6 +413,11 @@ public:
     SignalReader<double> before{ this }, duration{ this }, after{ this };
 
     float phase = 0;
+
+    void init() override
+    {
+        output = before[t] * ( 1 - phase ) + after[t] * phase;
+    }
 
     void action() override
     {

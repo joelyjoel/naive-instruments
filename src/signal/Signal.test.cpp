@@ -12,10 +12,11 @@ TEST_CASE( "Overload Signal, instantiate and check that syncing advances the clo
     class PowersOfTwo : public Signal<double>
     {
     public:
-        PowersOfTwo()
+        void init() override
         {
             output = 1;
         }
+
         void action() override
         {
             // No-op
