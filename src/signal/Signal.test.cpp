@@ -57,7 +57,6 @@ TEST_CASE( "Instantiating constant signals" )
 {
     Constant<double> a;
     a.output = 10.0;
-    REQUIRE( a.t == 0 );
     REQUIRE( a.output == 10 );
     a.sync( 1 );
 }

@@ -18,6 +18,9 @@ public:
     void init() override
     {
         output = 0;
+
+        // You must notify the upstream signals so that they will initialise.
+        frequency[0];
     }
 
     void action() override

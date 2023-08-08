@@ -18,7 +18,7 @@ class UnknownOutputSignal
 {
 public:
     typedef int    frame_position;
-    frame_position t = 0;
+    frame_position t = -1;
 
     std::vector<AbstractSignalReader*> inputs;
 
@@ -43,8 +43,11 @@ public:
 
     void sync( frame_position until )
     {
-        if ( t == 0 )
+        if ( t == -1 || until < t )
+        {
+            t = 0;
             init();
+        }
         while ( t < until )
         {
             ++t;
