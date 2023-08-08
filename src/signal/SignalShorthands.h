@@ -694,6 +694,23 @@ inline mono fixed_delay( double durationInSeconds, mono input )
     return fixed_sample_delay( durationInSeconds * 44100, input );
 }
 
+/**
+ * Evenly spaced sawtooth waves all summed together for a dramatic sound.
+ */
+inline mono super_saw( mono pitch, mono width, int numberOfOscs = 3 )
+{
+    // TODO: Add options for other waveforms
+    // TODO: Add rall off
+    auto              spacing = width / numberOfOscs;
+    auto              bottom  = pitch - width / 2;
+    std::vector<mono> oscs;
+    for ( int i = 0; i < numberOfOscs; ++i )
+    {
+        oscs.push_back( saw( midiPitch( pitch + width * ( float( i ) / numberOfOscs - .5 ) ) ) );
+    }
+    return add( oscs ) / numberOfOscs;
+}
+
 
 // TODO: /* inline mono fm( std::vector<std::vector<mono>> rows ) */
 

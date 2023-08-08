@@ -285,6 +285,11 @@ TEST_CASE( "Various signals are resettable and repeat the same sequence" )
 }
 
 
+TEST_CASE( "super saws!" )
+{
+    AUDIO_TEST( "super saw", super_saw( ramp( 60, 1, 72 ), constant( 10 ) ), 1 );
+}
+
 // TODO: Test hard clipping stereo signals
 /* TEST_CASE( "Hard clipping a stereo signal" ) */
 /* { */
