@@ -61,6 +61,8 @@ public:
         if ( owner )
             owner->inputs.push_back( this );
     }
+
+    virtual std::shared_ptr<UnknownOutputSignal> abstract_ptr() = 0;
 };
 
 template <typename T>
@@ -90,6 +92,7 @@ class SignalReader : public AbstractSignalReader
 public:
     std::shared_ptr<Signal<T>> ptr;
 
+    using AbstractSignalReader::AbstractSignalReader;
 
 public:
     // Read a value by index from the signal
@@ -112,6 +115,11 @@ public:
         std::shared_ptr<Signal<T>> newSignal = std::make_shared<Constant<T>>();
         newSignal->output                    = constantValue;
         ptr                                  = newSignal;
+    }
+
+    std::shared_ptr<UnknownOutputSignal> abstract_ptr() override
+    {
+        return ptr;
     }
 };
 
