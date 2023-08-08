@@ -41,11 +41,6 @@ public:
     SignalReader<T> input1{ this };
     SignalReader<T> input2{ this };
 
-    Sum()
-    {
-        // Forces it to perfarm action once after inputs are assigned.
-        this->t = -1;
-    }
 
     void action() override
     {
@@ -60,12 +55,6 @@ public:
     SignalReader<T> a{ this };
     SignalReader<T> b{ this };
 
-    Subtract()
-    {
-        // Forces it to perfarm action once after inputs are assigned.
-        this->t = -1;
-    }
-
     void action() override
     {
         this->output = this->a[this->t] - this->b[this->t];
@@ -77,11 +66,6 @@ class SignFlip : public Signal<double>
 public:
     SignalReader<double> input{ this };
 
-    SignFlip()
-    {
-        // Forces it to perfarm action once after inputs are assigned.
-        t = -1;
-    }
 
     void action()
     {
@@ -95,11 +79,6 @@ public:
     SignalReader<double> a{ this };
     SignalReader<double> b{ this };
 
-    Multiply()
-    {
-        // Forces it to perfarm action once after inputs are assigned.
-        t = -1;
-    }
 
     void action() override
     {
@@ -113,10 +92,6 @@ public:
     SignalReader<double> numerator{ this };
     SignalReader<double> denominator{ this };
 
-    Divide()
-    {
-        t = -1;
-    }
 
     void action() override
     {
@@ -280,7 +255,6 @@ public:
     : buffer( buffer )
 
     {
-        t = -1;
     }
 
     void action() override
@@ -300,7 +274,6 @@ public:
     Wait( int countdown )
     : waitTime( countdown )
     {
-        this->t = -1;
     }
 
     void action()
@@ -327,7 +300,6 @@ public:
     Skip( int skipTime )
     : skipTime( skipTime )
     {
-        this->t = -1;
     }
 
     void action()
@@ -341,10 +313,6 @@ class IntervalToRatio : public Signal<double>
 public:
     SignalReader<double> interval{ this };
 
-    IntervalToRatio()
-    {
-        t = -1;
-    }
 
     void action() override
     {
@@ -363,7 +331,6 @@ public:
     BufferLooper( int durationInSamples )
     : buffer( durationInSamples )
     {
-        t = -1;
     }
 
     void action() override
@@ -378,11 +345,6 @@ template <typename T>
 class HardClip : public Signal<T>
 {
 public:
-    HardClip()
-    {
-        this->t = -1;
-    }
-
     SignalReader<T> input{ this };
 
     void action() override

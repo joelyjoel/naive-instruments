@@ -159,7 +159,6 @@ TEST_CASE( "The first frame in the triangle waveform should be 0" )
 TEST_CASE( "shorthand for lfo" )
 {
     auto signal = lfo( constant( 10 ), constant( 2 ), constant( 44100.0 / 4 ) );
-    CHECK( signal->t == -1 );
     CHECK_SIGNAL( signal, { 10, 12, 10, 8, 10 } );
 }
 
