@@ -552,7 +552,7 @@ inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
  * `fundamental` frequency. The onsets of the harmonics are staggered to create
  * an arpegiated "spread" chord effect.
  */
-inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step_duration )
+inline mono harmonic_spread( double fundamental, int numberOfHarmonics, float step_duration )
 {
     mono signal = sine( fundamental );
     for ( int i = 0; i < numberOfHarmonics; ++i )

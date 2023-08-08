@@ -215,7 +215,7 @@ TEST_CASE( "Hard clipping a mono signal" )
 // TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
 /* TEST_CASE( "signal reader += operator" ) */
 /* { */
-/*     auto                                   fundamental         = constant( 200 ); */
+/*     auto                                   fundamental         = 200; */
 /*     int                                    numberOfHarmonics   = 17; */
 /*     double                                 arpegiationInterval = .2; */
 /*     NaiveInstruments::SignalReader<double> reader; */
@@ -243,7 +243,7 @@ TEST_CASE( "Hard clipping a mono signal" )
 /*     auto numberOfHarmonics = GENERATE( 9, 17, 65 ); */
 /*     auto step_duration     = .1; */
 /*     AUDIO_TEST( std::to_string( numberOfHarmonics ) + " harmonic spread on " + std::to_string( fundamental ) + "Hz", */
-/*                 harmonic_spread( constant( fundamental ), numberOfHarmonics, step_duration ), */
+/*                 harmonic_spread( fundamental, numberOfHarmonics, step_duration ), */
 /*                 2 * numberOfHarmonics * step_duration ); */
 /* } */
 
