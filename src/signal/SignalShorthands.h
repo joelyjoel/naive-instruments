@@ -232,6 +232,15 @@ inline mono operator/( double numerator, mono denominator )
 }
 
 /**
+ * Sum a vector of signals together, applying attenuation to avoid clipping.
+ * In other words, take the mean average (frame-by-frame) of a vector of signals.
+ */
+inline mono mix( std::vector<mono> signals )
+{
+    return add( signals ) / signals.size();
+}
+
+/**
  * Create a seeded white noise signal.
  */
 inline mono noise( uint64_t seed = 1 )
@@ -708,7 +717,23 @@ inline mono super_saw( mono pitch, mono width, int numberOfOscs = 3 )
     {
         oscs.push_back( saw( midiPitch( pitch + width * ( float( i ) / numberOfOscs - .5 ) ) ) );
     }
-    return add( oscs ) / numberOfOscs;
+    return mix( oscs );
+}
+
+inline mono super_saws( std::vector<mono> pitches, mono width, int numberOfOscs = 3 )
+{
+    std::vector<mono> saws;
+    for ( auto pitch : pitches )
+    {
+        saws.push_back( super_saw( pitch, width, numberOfOscs ) );
+    }
+
+    return mix( saws );
+}
+
+inline std::vector<mono> minor_triad( mono rootNote )
+{
+    return { rootNote, rootNote + 3, rootNote + 7 };
 }
 
 
