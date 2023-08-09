@@ -492,6 +492,10 @@ inline stereo clip( stereo input )
     return clipper;
 }
 
+/**
+ * Performing additive synthesis using sine waves that are harmonics of the
+ * `fundamental` frequency control signal.
+ */
 inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
 {
     mono signal = sine( fundamental );
@@ -502,6 +506,11 @@ inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
     return signal / numberOfHarmonics;
 }
 
+/**
+ * Performing additive synthesis using sine waves that are harmonics of the
+ * `fundamental` frequency. The onsets of the harmonics are staggered to create
+ * an arpegiated "spread" chord effect.
+ */
 inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step_duration )
 {
     mono signal = sine( fundamental );
@@ -512,6 +521,11 @@ inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step
     return signal / numberOfHarmonics;
 }
 
+/**
+ * Perform frequency modulation ("FM") synthesis with the oscillators in parallel.
+ *
+ * i.e. osc1 modulates osc2 modulase osc3 which is the output (carrier) signal.
+ */
 inline mono fm_series(
     /**
      * Interleaved {frequency, feedforward, frequency, ... etc} control signals couplets.
