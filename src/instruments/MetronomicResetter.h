@@ -5,8 +5,8 @@
 class MetronomicResetter : public Patch<double>
 {
 private:
-    shared_ptr<Metronome> metronome = make_shared<Metronome>();
-    shared_ptr<Resetter>  resetter  = make_shared<Resetter>();
+    std::shared_ptr<Metronome> metronome = std::make_shared<Metronome>();
+    std::shared_ptr<Resetter>  resetter  = std::make_shared<Resetter>();
 
 public:
     FrameStreamConsumer<double>& input = exposeInput( resetter->input );

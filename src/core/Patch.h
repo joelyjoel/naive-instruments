@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Signal.h"
+#include "FrameStream.h"
 #include <string>
 
 template <typename SignalFrame>
@@ -10,7 +10,7 @@ private:
     /**
      * Pointer to the signal nominated as this patch's output signal.
      */
-    shared_ptr<FrameStream<SignalFrame>> outputFrameStream;
+    std::shared_ptr<FrameStream<SignalFrame>> outputFrameStream;
 
 public:
 public:
@@ -29,7 +29,7 @@ protected:
     }
 
 protected:
-    void exposeOutput( shared_ptr<FrameStream<SignalFrame>> outputSignal )
+    void exposeOutput( std::shared_ptr<FrameStream<SignalFrame>> outputSignal )
     {
         if ( !outputSignal )
         {

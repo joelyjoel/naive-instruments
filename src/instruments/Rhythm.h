@@ -43,7 +43,7 @@ protected:
     }
 
 public:
-    static shared_ptr<Rhythm> parse( const string& str )
+    static std::shared_ptr<Rhythm> parse( const string& str )
     {
         // TODO: Use a dictionary for named rhythms instead?
         if ( str == "son" || str == "son32" )

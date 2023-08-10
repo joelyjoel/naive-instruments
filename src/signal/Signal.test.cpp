@@ -144,7 +144,7 @@ TEST_CASE( "Using modulo to count to 10 repetitively" )
 
 TEST_CASE( "Can get the abstract_ptr of a signal reader" )
 {
-    auto                 my_signal = make_shared<Constant<double>>();
+    auto                 my_signal = std::make_shared<Constant<double>>();
     SignalReader<double> my_reader;
     my_reader = my_signal;
 

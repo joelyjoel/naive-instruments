@@ -1,4 +1,4 @@
-#include "Signal.h"
+#include "FrameStream.h"
 
 // --------------------------------------------------------------------------------
 // class AbstractFrameStreamConsumer
@@ -14,7 +14,7 @@ AbstractFrameStreamConsumer::AbstractFrameStreamConsumer( AbstractFrameStream* o
     owner->inputs.push_back( this );
 };
 
-void AbstractFrameStreamConsumer::connect( shared_ptr<FrameStream<double>> signal )
+void AbstractFrameStreamConsumer::connect( std::shared_ptr<FrameStream<double>> signal )
 {
     std::cerr << "No override for "
                  "AbstractFrameStreamConsumer::connect method\n";
@@ -81,7 +81,7 @@ short AbstractFrameStreamConsumer::numberOfChannels()
 template <typename frame>
 void FrameStreamConsumer<frame>::setConstant( frame k )
 {
-    connect( make_shared<Constant<frame>>( k ) );
+    connect( std::make_shared<Constant<frame>>( k ) );
 }
 
 

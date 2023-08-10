@@ -6,11 +6,11 @@
 class WaveformBufferer
 {
 private:
-    shared_ptr<BufferWriter>         bufferer;
-    shared_ptr<ZeroCrossingDetector> detector = make_shared<ZeroCrossingDetector>();
-    BangAwaiter                      waiter;
+    std::shared_ptr<BufferWriter>         bufferer;
+    std::shared_ptr<ZeroCrossingDetector> detector = std::make_shared<ZeroCrossingDetector>();
+    BangAwaiter                           waiter;
 
-    shared_ptr<FrameStream<double>> input;
+    std::shared_ptr<FrameStream<double>> input;
 
     void assemble()
     {
@@ -21,7 +21,7 @@ private:
 public:
     WaveformBufferer()
     {
-        bufferer = make_shared<BufferWriter>( 4096 );
+        bufferer = std::make_shared<BufferWriter>( 4096 );
         assemble();
     }
 
@@ -79,7 +79,7 @@ public:
         return select( waveformIndex );
     }
 
-    void operator<<( shared_ptr<FrameStream<double>> inputSignal )
+    void operator<<( std::shared_ptr<FrameStream<double>> inputSignal )
     {
         bufferer->input << inputSignal;
     }

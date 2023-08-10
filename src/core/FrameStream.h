@@ -1,4 +1,7 @@
+#pragma once
+
 #include "AbstractFrameStream.h"
+#include "constants.h"
 
 template <typename frame>
 class FrameStream : public AbstractFrameStream

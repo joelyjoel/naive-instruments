@@ -12,7 +12,7 @@
 class SignalString
 {
 public:
-    static shared_ptr<FrameStream<double>> parse( const std::string str )
+    static std::shared_ptr<FrameStream<double>> parse( const std::string str )
     {
 
         std::regex wavFileRegex( ".wav$" );
@@ -23,7 +23,7 @@ public:
         }
 
         // TODO: use empty shared_ptr for failure?
-        Hopefully<shared_ptr<ControlString>> cs = ControlString::parse( str );
+        Hopefully<std::shared_ptr<ControlString>> cs = ControlString::parse( str );
         if ( cs.success() )
             return *cs;
 
@@ -31,12 +31,12 @@ public:
         {
             double f = std::stoi( str );
             std::cerr << "Got osc " << f << " from " << str << "\n";
-            return make_shared<Constant<double>>( f );
+            return std::make_shared<Constant<double>>( f );
         }
         catch ( std::invalid_argument err )
         {
             std::cerr << "Can't parse '" << str << "'\n";
-            return make_shared<Constant<double>>( 0 );
+            return std::make_shared<Constant<double>>( 0 );
         }
     }
 };

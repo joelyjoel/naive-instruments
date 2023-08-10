@@ -26,16 +26,16 @@ public:
     }
 
 public:
-    static shared_ptr<FrameStream<double>> many( std::vector<shared_ptr<FrameStream<double>>>& inputs )
+    static std::shared_ptr<FrameStream<double>> many( std::vector<std::shared_ptr<FrameStream<double>>>& inputs )
     {
         if ( inputs.size() == 0 )
             return std::make_shared<Constant<double>>( 0 );
         else
         {
-            shared_ptr<FrameStream<double>> sum = inputs[0];
+            std::shared_ptr<FrameStream<double>> sum = inputs[0];
             for ( int i = 1; i < inputs.size(); ++i )
             {
-                shared_ptr<Add> newAdd = std::make_shared<Add>();
+                std::shared_ptr<Add> newAdd = std::make_shared<Add>();
                 newAdd->a << sum;
                 newAdd->b << inputs[i];
                 sum = newAdd;
@@ -44,13 +44,14 @@ public:
         }
     }
 
-    friend void operator+=( FrameStreamConsumer<double>& signalInput, shared_ptr<FrameStream<double>> );
+    friend void operator+=( FrameStreamConsumer<double>& signalInput, std::shared_ptr<FrameStream<double>> );
     ;
 };
 
 /**
  * Mix an additional signal into an input.
  */
-void operator+=( FrameStreamConsumer<double>& signalInput, shared_ptr<FrameStream<double>>& additionalSignal );
+void operator+=( FrameStreamConsumer<double>& signalInput, std::shared_ptr<FrameStream<double>>& additionalSignal );
 
-shared_ptr<FrameStream<double>> operator+( shared_ptr<FrameStream<double>> a, shared_ptr<FrameStream<double>> b );
+std::shared_ptr<FrameStream<double>> operator+( std::shared_ptr<FrameStream<double>> a,
+                                                std::shared_ptr<FrameStream<double>> b );

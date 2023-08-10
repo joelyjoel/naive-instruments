@@ -10,7 +10,7 @@ const int LIMIT_EXCEEDED = 99;
 class BangAwaiter
 {
 private:
-    shared_ptr<FrameStream<bool>> signal;
+    std::shared_ptr<FrameStream<bool>> signal;
 
 public:
     void next( int limit = 44100 )
@@ -22,7 +22,7 @@ public:
                 throw LIMIT_EXCEEDED;
     }
 
-    void operator<<( shared_ptr<FrameStream<bool>> input )
+    void operator<<( std::shared_ptr<FrameStream<bool>> input )
     {
         signal = input;
     }

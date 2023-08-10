@@ -72,6 +72,6 @@ TEST_CASE( "ControlString::pattern has only one capture group" )
 
 TEST_CASE( "Parsing a whole (simple) control string" )
 {
-    shared_ptr<ControlString> parsed = *ControlString::parse( "55___" );
+    std::shared_ptr<ControlString> parsed = *ControlString::parse( "55___" );
     REQUIRE( parsed->duration() > 0 );
 }

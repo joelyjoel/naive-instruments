@@ -11,9 +11,9 @@ public:
         bool               normalize  = args.boolean( "normalize" );
         std::cerr << "Normalize: " << normalize << "\n";
 
-        auto                inputBuffer = mainInputAsBuffer();
-        shared_ptr<Sampler> sampler     = make_shared<Sampler>( inputBuffer );
-        WaveformBufferer    bufferer;
+        auto                     inputBuffer = mainInputAsBuffer();
+        std::shared_ptr<Sampler> sampler     = make_shared<Sampler>( inputBuffer );
+        WaveformBufferer         bufferer;
         bufferer.minNumberOfFrames = args.integer( "min-frames", 100 );
 
         bufferer << sampler;

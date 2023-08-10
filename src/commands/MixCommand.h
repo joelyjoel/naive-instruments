@@ -23,7 +23,7 @@ public:
             return;
         }
 
-        std::vector<shared_ptr<FrameStream<double>>> samplers;
+        std::vector<std::shared_ptr<FrameStream<double>>> samplers;
 
         auto inputFiles = args["input"].as<std::vector<std::string>>();
         for ( int i = 0; i < inputFiles.size(); ++i )
@@ -32,7 +32,7 @@ public:
             samplers.push_back( make_shared<Sampler>( WavReader::readMonoFile( inputFiles[i] ) ) );
         }
 
-        shared_ptr<FrameStream<double>> sum = Add::many( samplers );
+        std::shared_ptr<FrameStream<double>> sum = Add::many( samplers );
 
         output( sum );
     }

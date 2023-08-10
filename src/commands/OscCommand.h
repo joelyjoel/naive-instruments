@@ -20,18 +20,18 @@ public:
     void action() override
     {
 
-        MonoBuffer&                waveform       = *inputWaveform();
-        shared_ptr<Osc>            osc            = make_shared<Osc>( waveform );
-        shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
-        shared_ptr<Multiply>       gain           = make_shared<Multiply>();
-        shared_ptr<Add>            pitchSum       = make_shared<Add>();
+        MonoBuffer&                     waveform       = *inputWaveform();
+        std::shared_ptr<Osc>            osc            = std::make_shared<Osc>( waveform );
+        std::shared_ptr<PitchConverter> pitchConverter = std::make_shared<PitchConverter>();
+        std::shared_ptr<Multiply>       gain           = std::make_shared<Multiply>();
+        std::shared_ptr<Add>            pitchSum       = std::make_shared<Add>();
 
-        shared_ptr<LFO> vibrato = make_shared<LFO>();
+        std::shared_ptr<LFO> vibrato = std::make_shared<LFO>();
 
         /* const std::string str = args[0]; */
         /* auto &f = **ControlString::parse(str); */
 
-        shared_ptr<FrameStream<double>> pitch = inputPitch();
+        std::shared_ptr<FrameStream<double>> pitch = inputPitch();
 
         vibrato->depth << args["vibrato-amount"].as<std::string>();
         vibrato->frequency << args["vibrato-frequency"].as<std::string>();
