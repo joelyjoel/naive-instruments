@@ -13,6 +13,9 @@ namespace SignalShorthands
 typedef std::shared_ptr<Signal<double>>      mono;
 typedef std::shared_ptr<Signal<StereoFrame>> stereo;
 
+/**
+ * Create a `Constant` signal - Every frame is `value`.
+ */
 inline mono constant( double value )
 {
     auto signal    = std::make_shared<Constant<double>>();
@@ -20,11 +23,18 @@ inline mono constant( double value )
     return signal;
 }
 
+/**
+ * Create a `Clock` signal - writes the current frame index into each frame.
+ */
 inline mono t()
 {
     return std::make_shared<Clock<double>>();
 }
 
+/**
+ * Create a `USaw` unsigned sawtooth wave signal with the given `frequency`.
+ * Slides from 0 to 1 `frequency` times per second.
+ */
 inline mono usaw( mono frequency )
 {
     auto saw       = std::make_shared<USaw>();
@@ -32,6 +42,10 @@ inline mono usaw( mono frequency )
     return saw;
 }
 
+/**
+ * Add two signals together. Creates an `Add` process adding together `a` and
+ * `b`.
+ */
 inline mono add( mono a, mono b )
 {
     auto adder    = std::make_shared<Sum<double>>();
@@ -40,6 +54,9 @@ inline mono add( mono a, mono b )
     return adder;
 }
 
+/**
+ * Add any number of signals together.
+ */
 inline mono add( std::vector<mono> signals )
 {
     mono total = signals[0];
@@ -48,25 +65,43 @@ inline mono add( std::vector<mono> signals )
     return total;
 }
 
+/**
+ * Add two signals together using the `+` operator.
+ * Alias for `add(a, b)`
+ */
 inline mono operator+( mono a, mono b )
 {
     return add( a, b );
 }
 
+/**
+ * Add a constant value to a signal.
+ */
 inline mono operator+( mono a, double b )
 {
     return add( a, constant( b ) );
 }
+
+/**
+ * Add a signal to a constant value.
+ */
 inline mono operator+( double a, mono b )
 {
     return add( constant( a ), b );
 }
 
+/**
+ * Add a signal to a SignalReader in place
+ */
 inline void operator+=( SignalReader<double>& a, mono b )
 {
     a = a.ptr + b;
 }
 
+/**
+ * Subtract one signal from another. Creates a `Subtract` signal process
+ * subtracting `b` from `a`.
+ */
 inline mono subtract( mono a, mono b )
 {
     auto subtracter = std::make_shared<NaiveInstruments::Subtract<double>>();
@@ -75,21 +110,35 @@ inline mono subtract( mono a, mono b )
     return subtracter;
 }
 
+/**
+ * Subtract one signal from another.
+ * Alias for `subtract(a,b)`
+ */
 inline mono operator-( mono a, mono b )
 {
     return subtract( a, b );
 }
 
+/**
+ * Subtract a constant value from a signal.
+ */
 inline mono operator-( mono a, double b )
 {
     return subtract( a, constant( b ) );
 }
 
+/**
+ * Subtract a signal from a constant value.
+ */
 inline mono operator-( double a, mono b )
 {
     return subtract( constant( a ), b );
 }
 
+/**
+ * Flip the sign on a signal. Creates a `SignFlip` signal process flipping the
+ * sign on `a`.
+ */
 inline mono operator-( mono a )
 {
     auto flip   = std::make_shared<SignFlip>();
@@ -97,6 +146,10 @@ inline mono operator-( mono a )
     return flip;
 }
 
+/**
+ * Multiply two signals together. Creates a `Multiply` signal process
+ * multiplying `a` and `b`.
+ */
 inline mono multiply( mono a, mono b )
 {
     auto multiplied = std::make_shared<NaiveInstruments::Multiply>();
@@ -105,118 +158,194 @@ inline mono multiply( mono a, mono b )
     return multiplied;
 }
 
+/**
+ * Multiply two signals together using the `*` operator.
+ * alias for `multiply(a,b)`.
+ */
 inline mono operator*( mono a, mono b )
 {
     return multiply( a, b );
 }
 
+/**
+ * Multiply a signal by a constant value.
+ */
 inline mono operator*( mono a, double b )
 {
     return a * constant( b );
 }
 
+/**
+ * Multiply a constant value by a signal.
+ */
 inline mono operator*( double a, mono b )
 {
     return constant( a ) * b;
 }
 
-inline mono divide( mono a, mono b )
+/**
+ * Divide one signal by another. Creates a `Divide` signal process.
+ */
+inline mono divide( mono numerator, mono denominator )
 {
     auto divided         = std::make_shared<NaiveInstruments::Divide>();
-    divided->numerator   = a;
-    divided->denominator = b;
+    divided->numerator   = numerator;
+    divided->denominator = denominator;
     return divided;
 }
 
-inline mono operator/( mono a, mono b )
+/**
+ * Divide one signal by another using the `/` operator.
+ * Alias for `divide(numerator, denominator)`
+ */
+inline mono operator/( mono numerator, mono denominator )
 {
-    return divide( a, b );
+    return divide( numerator, denominator );
 }
 
-inline mono operator/( mono a, double b )
+/**
+ * Divide a signal by a constant value.
+ */
+inline mono operator/( mono numerator, double denominator )
 {
-    return a / constant( b );
+    return numerator / constant( denominator );
 }
 
-inline mono operator/( double a, mono b )
+/**
+ * Divide a constant value by a signal.
+ */
+inline mono operator/( double numerator, mono denominator )
 {
-    return constant( a ) / b;
+    return constant( numerator ) / denominator;
 }
 
+/**
+ * Create a seeded white noise signal.
+ */
 inline mono noise( uint64_t seed = 1 )
 {
     return std::make_shared<Noise>( seed );
 }
 
 
+/**
+ * Create a sampler playing the given MonoBuffer sample.
+ */
 inline mono sampler( MonoBuffer* buffer )
 {
+    // TODO: How do we feel about the raw pointer here?
     return std::make_shared<NaiveInstruments::Sampler>( buffer );
 }
 
+/**
+ * Create a wavetable using the given `buffer` as a wavetable. The `phase`
+ * signal is used to select which frames are read from the wavetable and
+ * written to the output.
+ */
 inline mono wavetable( MonoBuffer* buffer, mono phase )
 {
+    // TODO: How do we feel about the raw pointer here?
     auto signal   = std::make_shared<NaiveInstruments::Wavetable>( buffer );
     signal->phase = phase;
     return signal;
 }
 
+/**
+ * Use an audio file as a wavetable. The `phase` signal is used to select which
+ * frames are read from the wavetable and written to the output.
+ */
 inline mono wavetableFromFile( const std::string& filePath, mono phase )
 {
     return wavetable( &Waveforms::fromFile( filePath ), phase );
 }
 
+/**
+ * Create a wavetable for a square wave, using the `phase` lookup signal.
+ */
 inline mono squareWavetable( mono phase )
 {
     return wavetable( &Waveforms::square(), phase );
 }
 
+/**
+ * Create a wavetable for a sine wave, using the `phase` lookup signal.
+ */
 inline mono sineWavetable( mono phase )
 {
     return wavetable( &Waveforms::sine(), phase );
 }
 
+/**
+ * Create a wavetable for a triangle wave, using the `phase` lookup signal.
+ */
 inline mono triangleWavetable( mono phase )
 {
     return wavetable( &Waveforms::triangle(), phase );
 }
 
+/**
+ * Create a square wave using the given `frequency` control signal.
+ */
 inline mono square( mono frequency )
 {
     return wavetable( &Waveforms::square(), usaw( frequency ) );
 }
 
+/**
+ * Create a sine wave using the given `frequency` control signal.
+ */
 inline mono sine( mono frequency )
 {
     return wavetable( &Waveforms::sine(), usaw( frequency ) );
 }
 
+/**
+ * Create a sine wave with a constant `frequency`
+ */
 inline mono sine( double frequency )
 {
     return sine( constant( frequency ) );
 }
 
+/**
+ * Create a saw wave with the given `frequency` control signal.
+ */
 inline mono saw( mono frequency )
 {
     return wavetable( &Waveforms::saw(), usaw( frequency ) );
 }
 
+/**
+ * Create a triangle wave with the given `frequency` control signal.
+ */
 inline mono triangle( mono frequency )
 {
     return wavetable( &Waveforms::triangle(), usaw( frequency ) );
 }
 
 
+/**
+ * Create an oscillator with the given `frequency` control signal using a
+ * wavetable from an audio file.
+ */
 inline mono oscWithWavetableFromFile( const std::string& filePath, mono frequency )
 {
     return wavetableFromFile( filePath, usaw( frequency ) );
 }
 
+/**
+ * Create a low frequency oscillator (LFO) control signal which osciallates
+ * ± `range` around a `centre` control signal at `frequency` times per second.
+ */
 inline mono lfo( mono centre, mono range, mono frequency = constant( 5 ) )
 {
     return centre + triangle( frequency ) * range;
 }
 
+/**
+ * Create a signal which waits the given number of frames before writing the
+ * `input` (from its beginning).
+ */
 inline mono waitSamples( int waitTimeInSamples, mono input )
 {
     auto signal   = std::make_shared<Wait<double>>( waitTimeInSamples );
@@ -224,17 +353,27 @@ inline mono waitSamples( int waitTimeInSamples, mono input )
     return signal;
 }
 
+/**
+ * Create a signal which waits the given number of seconds before writing the
+ * `input` (from its beginning).
+ */
 inline mono waitSeconds( double waitTimeInSeconds, mono input )
 {
     return waitSamples( waitTimeInSeconds * 44100, input );
 }
 
+/**
+ * Alias for wait seconds.
+ */
 inline mono wait( double waitTimeInSeconds, mono input )
 {
     return waitSeconds( waitTimeInSeconds, input );
 }
 
 
+/**
+ * Skip for first `skipTimeInSamples` samples of the `input` signal.
+ */
 inline mono skipSamples( int skipTimeInSamples, mono input )
 {
     auto signal   = std::make_shared<Skip<double>>( skipTimeInSamples );
@@ -242,16 +381,26 @@ inline mono skipSamples( int skipTimeInSamples, mono input )
     return signal;
 }
 
+/**
+ * Skip for first `skipTimeInSamples` seconds of the `input` signal.
+ */
 inline mono skipSeconds( double skipTimeInSeconds, mono input )
 {
     return skipSamples( skipTimeInSeconds * 44100, input );
 }
 
+/**
+ * Skip for first `skipTimeInSamples` seconds of the `input` signal.
+ * Alias for `skipSeconds`
+ */
 inline mono skip( double skipTimeInSeconds, mono input )
 {
     return skipSeconds( skipTimeInSeconds, input );
 }
 
+/**
+ * Convert the given `interval` control signal (in semitones) to a frequency ratio control signal.
+ */
 inline mono interval( mono interval )
 {
     auto signal      = std::make_shared<IntervalToRatio>();
@@ -259,11 +408,17 @@ inline mono interval( mono interval )
     return signal;
 }
 
+/**
+ * Convert the given midi `pitch` control signal into a frequency control signal.
+ */
 inline mono midiPitch( mono pitch )
 {
     return 440 * interval( pitch - 69 );
 }
 
+/**
+ * Loop the first `loopDurationInSamples` frames of the `input` signal using a memory buffer.
+ */
 inline mono bufferLoopInSamples( mono input, int loopDurationInSamples )
 {
     auto looper   = std::make_shared<BufferLooper>( loopDurationInSamples );
@@ -271,11 +426,17 @@ inline mono bufferLoopInSamples( mono input, int loopDurationInSamples )
     return looper;
 }
 
+/**
+ * Loop the first `loopDurationInSeconds` seconds of the `input` signal using a memory buffer.
+ */
 inline mono fixedLoop( mono input, double loopDurationInSeconds )
 {
     return bufferLoopInSamples( input, loopDurationInSeconds * 44100 );
 }
 
+/**
+ * Clip the `input` signal within the range -1.0 to 1.0
+ */
 inline mono clip( mono input )
 {
     auto clipper   = std::make_shared<HardClip<double>>();
@@ -283,6 +444,10 @@ inline mono clip( mono input )
     return clipper;
 }
 
+/**
+ * Linear crossfade (no law) from `before` signal to `after` signal over the
+ * course of `duration` seconds.
+ */
 inline mono ramp( mono before, mono duration, mono after )
 {
     auto signal      = std::make_shared<LinearRamp>();
@@ -292,22 +457,34 @@ inline mono ramp( mono before, mono duration, mono after )
     return signal;
 }
 
+/**
+ * Linear ramp from `before` to `after` over `duration seconds
+ */
 inline mono ramp( double before, double duration, double after )
 {
 
     return ramp( constant( before ), constant( duration ), constant( after ) );
 }
 
+/**
+ * Linear decay envelope (from 1.0 to 0.0) lasting `duration` seconds.
+ */
 inline mono decay( mono duration )
 {
     return ramp( constant( 1 ), duration, constant( 0 ) );
 }
 
+/**
+ * Linear decay envelope (from 1.0 to 0.0) lasting `duration` seconds.
+ */
 inline mono decay( double duration )
 {
     return decay( constant( duration ) );
 }
 
+/**
+ * Hard clip a stereo 'input` signal within the range -1.0 to 1.0
+ */
 inline stereo clip( stereo input )
 {
     auto clipper   = std::make_shared<HardClip<StereoFrame>>();
@@ -315,6 +492,10 @@ inline stereo clip( stereo input )
     return clipper;
 }
 
+/**
+ * Performing additive synthesis using sine waves that are harmonics of the
+ * `fundamental` frequency control signal.
+ */
 inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
 {
     mono signal = sine( fundamental );
@@ -325,6 +506,11 @@ inline mono harmonic_series( mono fundamental, int numberOfHarmonics )
     return signal / numberOfHarmonics;
 }
 
+/**
+ * Performing additive synthesis using sine waves that are harmonics of the
+ * `fundamental` frequency. The onsets of the harmonics are staggered to create
+ * an arpegiated "spread" chord effect.
+ */
 inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step_duration )
 {
     mono signal = sine( fundamental );
@@ -335,6 +521,11 @@ inline mono harmonic_spread( mono fundamental, int numberOfHarmonics, float step
     return signal / numberOfHarmonics;
 }
 
+/**
+ * Perform frequency modulation ("FM") synthesis with the oscillators in parallel.
+ *
+ * i.e. osc1 modulates osc2 modulase osc3 which is the output (carrier) signal.
+ */
 inline mono fm_series(
     /**
      * Interleaved {frequency, feedforward, frequency, ... etc} control signals couplets.
