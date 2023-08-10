@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/Signal.h"
+#include "../core/FrameStream.h"
 #include "../signal/SignalShorthands.h"
 #include "WavWriter.h"
 #include <string>

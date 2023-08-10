@@ -16,7 +16,7 @@ class InteractivePlayback
     std::shared_ptr<CDJ> cdj;
 
     InteractivePlayback( std::shared_ptr<FrameStream<double>> input )
-    : cdj( make_shared<CDJ>() )
+    : cdj( std::make_shared<CDJ>() )
     , bufferedPlayback()
     {
         attachPlaybackControls( input );

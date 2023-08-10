@@ -13,12 +13,12 @@ class BoopCommand : public AudioCommand
 
     void action() override
     {
-        MonoBuffer&                waveform       = *inputWaveform();
-        shared_ptr<Osc>            osc            = make_shared<Osc>( waveform );
-        shared_ptr<PitchConverter> pitchConverter = make_shared<PitchConverter>();
+        MonoBuffer&                     waveform       = *inputWaveform();
+        std::shared_ptr<Osc>            osc            = std::make_shared<Osc>( waveform );
+        std::shared_ptr<PitchConverter> pitchConverter = std::make_shared<PitchConverter>();
 
-        shared_ptr<FrameStream<double>> frequency = inputFrequency();
-        shared_ptr<Decay>               envelope  = make_shared<Decay>();
+        std::shared_ptr<FrameStream<double>> frequency = inputFrequency();
+        std::shared_ptr<Decay>               envelope  = std::make_shared<Decay>();
 
         envelope->duration << inputDuration();
 

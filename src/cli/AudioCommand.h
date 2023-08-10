@@ -55,15 +55,15 @@ protected:
                                "Frequency of the oscillator expressed as a midi pitch number." );
     }
 
-    shared_ptr<FrameStream<double>> inputPitch()
+    std::shared_ptr<FrameStream<double>> inputPitch()
     {
         return SignalString::parse( args["pitch"].as<std::string>() );
     }
 
-    shared_ptr<FrameStream<double>> inputFrequency()
+    std::shared_ptr<FrameStream<double>> inputFrequency()
     {
-        shared_ptr<FrameStream<double>> pitch     = inputPitch();
-        shared_ptr<PitchConverter>      converter = make_shared<PitchConverter>();
+        std::shared_ptr<FrameStream<double>> pitch     = inputPitch();
+        std::shared_ptr<PitchConverter>      converter = std::make_shared<PitchConverter>();
         converter->pitch << pitch;
         return converter;
     }

@@ -8,9 +8,9 @@ public:
     FrameStreamConsumer<double> input{ this, "input" };
     FrameStreamConsumer<bool>   trigger{ this, "trigger/bool" };
 
-    static shared_ptr<Resetter> create()
+    static std::shared_ptr<Resetter> create()
     {
-        return make_shared<Resetter>();
+        return std::make_shared<Resetter>();
     }
 
 protected:

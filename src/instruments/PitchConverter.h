@@ -7,9 +7,9 @@ class IntervalToRatio : public FrameStream<double>
 public:
     FrameStreamConsumer<double> interval{ this, "interval/st" };
 
-    static shared_ptr<IntervalToRatio> create()
+    static std::shared_ptr<IntervalToRatio> create()
     {
-        return make_shared<IntervalToRatio>();
+        return std::make_shared<IntervalToRatio>();
     }
 
     std::string label() override
@@ -24,7 +24,7 @@ protected:
     }
 };
 
-shared_ptr<IntervalToRatio> intervalToRatio( shared_ptr<FrameStream<double>> intervalSignal )
+std::shared_ptr<IntervalToRatio> intervalToRatio( std::shared_ptr<FrameStream<double>> intervalSignal )
 {
     auto converter = IntervalToRatio::create();
     converter->interval << intervalSignal;
@@ -36,9 +36,9 @@ class PitchConverter : public FrameStream<double>
 public:
     FrameStreamConsumer<double> pitch{ this, "pitch/MIDI" };
 
-    static shared_ptr<PitchConverter> create()
+    static std::shared_ptr<PitchConverter> create()
     {
-        return make_shared<PitchConverter>();
+        return std::make_shared<PitchConverter>();
     }
 
     std::string label() override
@@ -53,7 +53,7 @@ private:
     }
 };
 
-shared_ptr<PitchConverter> pitchToFrequency( shared_ptr<FrameStream<double>> pitchSignal )
+std::shared_ptr<PitchConverter> pitchToFrequency( std::shared_ptr<FrameStream<double>> pitchSignal )
 {
     auto converter = PitchConverter::create();
     converter->pitch << pitchSignal;

@@ -20,15 +20,16 @@ public:
         return "Multiply";
     }
 
-    static shared_ptr<Multiply> create()
+    static std::shared_ptr<Multiply> create()
     {
-        return make_shared<Multiply>();
+        return std::make_shared<Multiply>();
     }
 };
 
 /**
  * Mix an additional signal into a input
  */
-void operator*=( FrameStreamConsumer<double>& signalInput, shared_ptr<FrameStream<double>> additionalSignal );
+void operator*=( FrameStreamConsumer<double>& signalInput, std::shared_ptr<FrameStream<double>> additionalSignal );
 
-shared_ptr<FrameStream<double>> operator*( shared_ptr<FrameStream<double>> a, shared_ptr<FrameStream<double>> b );
+std::shared_ptr<FrameStream<double>> operator*( std::shared_ptr<FrameStream<double>> a,
+                                                std::shared_ptr<FrameStream<double>> b );

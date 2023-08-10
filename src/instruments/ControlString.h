@@ -179,10 +179,10 @@ public:
     static LazyRegex firstInstructionPattern;
     static LazyRegex pattern;
 
-    static Hopefully<shared_ptr<ControlString>> parse( const std::string& str )
+    static Hopefully<std::shared_ptr<ControlString>> parse( const std::string& str )
     {
-        shared_ptr<ControlString> instance   = make_shared<ControlString>();
-        auto                      successful = instance->append( str );
+        std::shared_ptr<ControlString> instance   = std::make_shared<ControlString>();
+        auto                           successful = instance->append( str );
         if ( !successful )
         {
             std::cerr << "Couldn't parse control string: \"" << str << "\"n";

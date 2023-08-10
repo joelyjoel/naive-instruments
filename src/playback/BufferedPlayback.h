@@ -43,7 +43,7 @@ public:
         signal = input;
     }
     BufferedPlayback()
-    : BufferedPlayback( make_shared<Constant<double>>( 0 ) )
+    : BufferedPlayback( std::make_shared<Constant<double>>( 0 ) )
     {
     }
 

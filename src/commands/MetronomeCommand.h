@@ -17,24 +17,24 @@ class MetronomeCommand : public AudioCommand
     void action() override
     {
 
-        sigarette             bpm = SignalString::parse( args["bpm"].as<string>() );
-        vector<sigarette>     tracks;
-        const vector<string>& patternStrings =
+        std::shared_ptr<FrameStream<double>>         bpm = SignalString::parse( args["bpm"].as<string>() );
+        vector<std::shared_ptr<FrameStream<double>>> tracks;
+        const vector<string>&                        patternStrings =
             args.count( "pattern" ) ? args["pattern"].as<vector<string>>() : vector<string>( { "10" } );
 
         for ( int i = 0; i < patternStrings.size(); ++i )
         {
             const string& patternStr = patternStrings[i];
 
-            sigarette                 osc        = sine( ( i + 1 ) * 500.0 );
-            shared_ptr<ControlString> envelope   = *ControlString::parse( "100ms:1~0" );
-            sigarette                 attenuator = osc * envelope;
+            std::shared_ptr<FrameStream<double>> osc        = sine( ( i + 1 ) * 500.0 );
+            std::shared_ptr<ControlString>       envelope   = *ControlString::parse( "100ms:1~0" );
+            std::shared_ptr<FrameStream<double>> attenuator = osc * envelope;
 
             cerr << "Pattern: " << patternStr << "\n";
-            shared_ptr<Rhythm> rhythm = Rhythm::parse( patternStr );
+            std::shared_ptr<Rhythm> rhythm = Rhythm::parse( patternStr );
             rhythm->bpm << bpm;
             cerr << *rhythm << "\n";
-            shared_ptr<Resetter> resetter = Resetter::create();
+            std::shared_ptr<Resetter> resetter = Resetter::create();
             resetter->input << attenuator;
             resetter->trigger << rhythm;
 

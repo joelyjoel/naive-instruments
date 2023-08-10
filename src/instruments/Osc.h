@@ -11,8 +11,8 @@
 // pointers are fully adopted
 class Osc : public Patch<double>
 {
-    shared_ptr<UnsignedSaw> phase{ make_shared<UnsignedSaw>() };
-    shared_ptr<Wavetable>   wavetable{ make_shared<Wavetable>() };
+    std::shared_ptr<UnsignedSaw> phase{ std::make_shared<UnsignedSaw>() };
+    std::shared_ptr<Wavetable>   wavetable{ std::make_shared<Wavetable>() };
 
 public:
     FrameStreamConsumer<double>& frequency = exposeInput( phase->frequency );
@@ -31,30 +31,30 @@ public:
         return "Osc";
     }
 
-    static shared_ptr<Osc> create( MonoBuffer& waveform )
+    static std::shared_ptr<Osc> create( MonoBuffer& waveform )
     {
-        return make_shared<Osc>( waveform );
+        return std::make_shared<Osc>( waveform );
     }
-    static shared_ptr<Osc> create_sine()
+    static std::shared_ptr<Osc> create_sine()
     {
         return create( Waveforms::sine() );
     }
-    static shared_ptr<Osc> create_square()
+    static std::shared_ptr<Osc> create_square()
     {
         return create( Waveforms::square() );
     }
-    static shared_ptr<Osc> create_saw()
+    static std::shared_ptr<Osc> create_saw()
     {
         return create( Waveforms::saw() );
     }
-    static shared_ptr<Osc> create_triangle()
+    static std::shared_ptr<Osc> create_triangle()
     {
         return create( Waveforms::triangle() );
     }
 };
 
-sigarette sine( sigarette frequency );
-sigarette sine( double frequency );
-sigarette saw( sigarette frequency );
-sigarette square( sigarette frequency );
-sigarette triangle( sigarette frequency );
+std::shared_ptr<FrameStream<double>> sine( std::shared_ptr<FrameStream<double>> frequency );
+std::shared_ptr<FrameStream<double>> sine( double frequency );
+std::shared_ptr<FrameStream<double>> saw( std::shared_ptr<FrameStream<double>> frequency );
+std::shared_ptr<FrameStream<double>> square( std::shared_ptr<FrameStream<double>> frequency );
+std::shared_ptr<FrameStream<double>> triangle( std::shared_ptr<FrameStream<double>> frequency );
