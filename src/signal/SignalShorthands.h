@@ -399,6 +399,47 @@ inline mono skip( double skipTimeInSeconds, mono input )
 }
 
 /**
+ * Play only the first `numberOfFrames` frames of a signal, then repeat the
+ * last frame ad infinitum.
+ */
+inline mono elapseFrames( mono input, int numberOfFrames )
+{
+    auto signal   = std::make_shared<Elapse<double>>( numberOfFrames );
+    signal->input = input;
+    return signal;
+}
+
+/**
+ * Play only the first `duration` seconds of a signal, then repeat the
+ * last frame ad infinitum.
+ */
+inline mono elapseSeconds( mono input, double duration )
+{
+    return elapseFrames( input, duration * 44100 );
+}
+
+
+/**
+ * Play only the first `duration` seconds of a signal, then repeat the
+ * last frame ad infinitum.
+ * Alias for `elapseSeconds`.
+ */
+inline mono elapse( mono input, double duration )
+{
+    return elapseSeconds( input, duration );
+}
+
+/**
+ * Play a portion of the `input` signal starting from `to` seconds, ending at
+ * `from` seconds.
+ */
+inline mono slice( mono input, double from, double to )
+{
+    // TODO: Could it handle negative duration?
+    return elapse( skip( from, input ), to - from );
+}
+
+/**
  * Convert the given `interval` control signal (in semitones) to a frequency ratio control signal.
  */
 inline mono interval( mono interval )
