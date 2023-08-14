@@ -2,6 +2,7 @@
 #include "../Waveforms.h"
 #include "../test-framework/custom-assertions.h"
 #include "Signal.h"
+#include <iostream>
 #include <string>
 
 using namespace NaiveInstruments::SignalShorthands;
@@ -264,6 +265,34 @@ TEST_CASE( "Hard clipping a mono signal" )
 /* { */
 /*     AUDIO_TEST( "440 into 220 fm series", fm_series( { constant( 440 ), constant( 6 ), constant( 220 ) } ), 1 ); */
 /* } */
+
+TEST_CASE( "Various signals are resettable and repeat the same sequence" )
+{
+    std::vector<mono> signalsToTest = { t(),
+                                        constant( 1 ),
+                                        noise(),
+                                        sine( 440 ),
+                                        fm_series( { constant( 440 ), constant( 6 ), constant( 220 ) } ),
+                                        sine( 100 ) * decay( 2 ),
+                                        wait( 100, sine( 440 ) )
+
+    };
+    // TODO: Resetting signals which include feed back
+
+    for ( int i = 0; i < signalsToTest.size(); ++i )
+    {
+        auto signal = signalsToTest[i];
+        INFO( typeid( *signal ).name() );
+        int                                    numberOfFramesToCheck = 100;
+        NaiveInstruments::SignalReader<double> reader;
+        double                                 firstPass[numberOfFramesToCheck];
+        reader = signal;
+        for ( int frame = 0; frame < numberOfFramesToCheck; ++frame )
+            firstPass[frame] = reader[frame];
+        for ( int frame = 0; frame < numberOfFramesToCheck; ++frame )
+            CHECK( reader[frame] == firstPass[frame] );
+    }
+}
 
 
 // TODO: Test hard clipping stereo signals
