@@ -24,6 +24,7 @@ public:
 class SignalShorthander
 {
 public:
+    // BUG: Memory leak here with the pointers!!
     std::map<std::string, AbstractSignalConstructor*> map;
 
     SignalShorthander* add( std::string shorthand, AbstractSignalConstructor* constructor )
@@ -32,10 +33,17 @@ public:
         return this;
     }
 
+    template <typename T>
+    SignalShorthander* add( std::string shorthand )
+    {
+        add( shorthand, new SimpleSignalConstructor<T> );
+    }
+
     std::shared_ptr<NaiveInstruments::Signal<double>> construct( std::string shorthand )
     {
         return map[shorthand]->construct();
     }
+
 
     std::shared_ptr<NaiveInstruments::Signal<double>> operator()( std::string shorthand )
     {
@@ -49,8 +57,8 @@ public:
     StandardSignalShorthands()
     {
         using namespace NaiveInstruments;
-        add( "usaw", new SimpleSignalConstructor<USaw> );
-        add( "+", new SimpleSignalConstructor<Sum<double>> );
-        add( "-", new SimpleSignalConstructor<Subtract<double>> );
+        add<USaw>( "usaw" );
+        add<Sum<double>>( "+" );
+        add<Subtract<double>>( "-" );
     }
 };
