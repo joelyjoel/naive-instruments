@@ -405,6 +405,7 @@ public:
 
     void init() override
     {
+        phase  = 0;
         output = before[t] * ( 1 - phase ) + after[t] * phase;
     }
 
