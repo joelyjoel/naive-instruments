@@ -177,7 +177,12 @@ public:
     Noise( u_int64_t seed = 1 )
     : random( seed )
     {
-        output = random.number( -1.0, 1.0 );
+    }
+
+    void init() override
+    {
+        random.reset();
+        action();
     }
 
     void action() override

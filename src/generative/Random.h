@@ -43,6 +43,11 @@ public:
         latest = seed;
     }
 
+    void reset()
+    {
+        latest = seed;
+    }
+
     uint64_t next()
     {
         latest = xorshift( latest );
