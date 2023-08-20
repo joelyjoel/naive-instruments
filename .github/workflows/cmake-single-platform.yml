@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: sudo apt-get install libsndfile
+      - run: sudo apt-get install libsndfile-dev
       - uses: actions/checkout@v3
 
       - name: Configure CMake
