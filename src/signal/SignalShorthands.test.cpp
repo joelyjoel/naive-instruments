@@ -225,9 +225,23 @@ TEST_CASE( "signal reader += operator" )
         "17 harmonic series on 200Hz", reader.ptr / numberOfHarmonics, numberOfHarmonics * arpegiationInterval + 1.6 );
 }
 
+TEST_CASE( "Butterworth signal filters" )
+{
+    AUDIO_TEST( "Filtered square wave", lowpass( square( constant( 50 ) ), 300 ) );
+    AUDIO_TEST( "Square wave with signal envelope", lowpass( square( constant( 50 ) ), decay( .5 ) * 1000 ), .5 );
+
+
+    // BUG: This test produces bad results
+    AUDIO_TEST( "High pass filtered square wave", highpass( square( constant( 50 ) ), decay( .5 ) * 1000 ), .5 );
+}
+// TODO: High pass with constant
+// TODO: High pass with control signal
+// TODO: Band pass filter
+
 TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" )
 {
     auto freq = GENERATE( range( 100, 1000, 50 ) );
+
     AUDIO_TEST( "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ) );
 }
 
@@ -260,7 +274,6 @@ TEST_CASE( "Frequency modulation in series" )
 {
     AUDIO_TEST( "440 into 220 fm series", fm_series( { constant( 440 ), constant( 6 ), constant( 220 ) } ), 1 );
 }
-
 
 // TODO: Test hard clipping stereo signals
 /* TEST_CASE( "Hard clipping a stereo signal" ) */
