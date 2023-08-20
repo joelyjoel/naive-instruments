@@ -407,6 +407,96 @@ public:
     }
 };
 
+class ButterworthFilter : public Signal<double>
+{
+    void action() override
+    {
+        double x = input[t];
+        calculateCoefficients( frequency[t], bandwidth[t] );
+
+        y = a0 * x + a1 * x1 + a2 * x2 - b1 * y1 - b2 * y2;
+
+        y2 = y1;
+        y1 = y;
+        x2 = x1;
+        x1 = x;
+
+        output = y;
+    }
+
+public:
+    typedef enum
+    {
+        LowPass,
+        HighPass,
+        BandPass,
+        BandReduce
+    } FilterKind;
+
+    FilterKind kind = LowPass;
+
+    SignalReader<double> input{ this };
+    SignalReader<double> frequency{ this };
+    SignalReader<double> bandwidth{ this };
+
+private:
+    // Delays
+    double x1 = 0, x2 = 0, y = 0, y1 = 0, y2 = 0;
+
+    /// coefficients
+    double a0, a1, a2, b1, b2;
+
+    void calculateCoefficients( double frequency, double bandwidth )
+    {
+
+        double lamda, lamdaSquared, phi;
+        switch ( kind )
+        {
+
+            case LowPass:
+                lamda        = 1.0 / std::tan( M_PI * frequency / sampleRate );
+                lamdaSquared = lamda * lamda;
+                a0           = 1.0 / ( 1.0 + 2.0 * lamda + lamdaSquared );
+                a1           = 2.0 * a0;
+                a2           = a0;
+                b1           = 2.0 * a0 * ( 1.0 - lamdaSquared );
+                b2           = a0 * ( 1.0 - 2.0 * lamda + lamdaSquared );
+                break;
+
+            case HighPass:
+                lamda        = std::tan( M_PI * frequency / sampleRate );
+                lamdaSquared = lamda * lamda;
+                a0           = 1 / ( 1 + 2 * lamda + lamdaSquared );
+                a1           = 2 * a0;
+                a2           = a0;
+                b1           = 2 * a0 * ( lamdaSquared - 1 );
+                b2           = a0 * ( 1 - 2 * lamda + lamdaSquared );
+                break;
+
+            case BandPass:
+                lamda = 1 / std::tan( M_PI * bandwidth / sampleRate );
+                phi   = 2 * std::cos( 2 * M_PI * frequency / sampleRate );
+                a0    = 1 / ( 1 + lamda );
+                a1    = 0;
+                a2    = -a0;
+                b1    = -lamda * phi * a0;
+                b2    = a0 * ( lamda - 1 );
+                break;
+
+            case BandReduce:
+                // TODO: Possibly buggy
+                lamda = std::tan( M_PI * bandwidth / sampleRate );
+                phi   = 2 * std::cos( 2 * M_PI * frequency / sampleRate );
+                a0    = 1 / ( 1 + lamda );
+                a1    = -phi * a0;
+                a2    = a0;
+                b1    = -phi * a0;
+                b2    = a0 * ( lamda - 1 );
+                break;
+        }
+    }
+};
+
 
 // TODO: Clamp
 // TODO: Min

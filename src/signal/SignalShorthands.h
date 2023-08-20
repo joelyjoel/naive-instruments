@@ -498,6 +498,7 @@ inline mono ramp( mono before, mono duration, mono after )
     return signal;
 }
 
+
 /**
  * Linear ramp from `before` to `after` over `duration seconds
  */
@@ -535,6 +536,61 @@ inline mono decay( double duration )
 {
     return decay( constant( duration ) );
 }
+
+
+/**
+ * Butterworth filter, specifying the filter-kind (LowPass, HighPass, BandPass, BandReduce) at runtime
+ */
+inline mono butterworth( mono input, ButterworthFilter::FilterKind kind, mono frequency, mono bandwidth )
+{
+    auto filter       = std::make_shared<NaiveInstruments::ButterworthFilter>();
+    filter->kind      = kind;
+    filter->input     = input;
+    filter->frequency = frequency;
+    filter->bandwidth = bandwidth;
+    return filter;
+};
+
+/**
+ * Low pass butterworth filter with cut-off frequency control signal.
+ */
+inline mono lowpass( mono input, mono frequency )
+{
+    return butterworth( input, NaiveInstruments::ButterworthFilter::LowPass, frequency, constant( 1 ) );
+}
+
+/**
+ * Low pass butterworth filter with constant cut off frequency.
+ */
+inline mono lowpass( mono input, double frequency )
+{
+    return lowpass( input, constant( frequency ) );
+}
+
+/**
+ * High pass butterworth filter with cut off frequency control signal.
+ */
+inline mono highpass( mono input, mono frequency )
+{
+    return butterworth( input, ButterworthFilter::FilterKind::HighPass, frequency, constant( 1 ) );
+}
+
+/**
+ * High pass butterworth filter with constant cut off frequency.
+ */
+inline mono highpass( mono input, double frequency )
+{
+    return highpass( input, constant( frequency ) );
+}
+
+/**
+ * Band pass butterworth filter with control signals for cut-off frequency and bandwidth
+ */
+inline mono bandpass( mono input, mono frequency, mono bandwidth )
+{
+    return butterworth( input, ButterworthFilter::FilterKind::BandPass, frequency, bandwidth );
+}
+
 
 /**
  * Hard clip a stereo 'input` signal within the range -1.0 to 1.0
