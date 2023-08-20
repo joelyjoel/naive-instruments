@@ -22,6 +22,7 @@ jobs:
     steps:
       - run: brew install libsndfile
       - run: brew install boost
+      - run: brew install portaudio
       - uses: actions/checkout@v3
 
       - name: Configure CMake
