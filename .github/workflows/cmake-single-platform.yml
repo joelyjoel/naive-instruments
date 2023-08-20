@@ -21,6 +21,7 @@ jobs:
 
     steps:
       - run: sudo apt-get install libsndfile-dev
+      - run: sudo apt-get install libboost-all-dev
       - uses: actions/checkout@v3
 
       - name: Configure CMake
