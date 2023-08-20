@@ -101,8 +101,8 @@ inline void AUDIO_TEST( const std::string&                                name,
         std::string   auditionChecksumPath = "./audition/" + name + ".checksum.txt";
         std::ofstream auditionChecksumFile( auditionChecksumPath );
         auditionChecksumFile << actualChecksum;
-        FAIL( "No expected checksum for " + name + ". Please review `" + auditionChecksumPath
-              + "` and move to `./expected-samples` if satisfied." );
+        FAIL_CHECK( "No expected checksum for " + name + ". Please review `" + auditionChecksumPath
+                    + "` and move to `./expected-samples` if satisfied." );
     }
     else
     {
