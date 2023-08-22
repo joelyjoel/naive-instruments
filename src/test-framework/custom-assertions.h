@@ -85,20 +85,26 @@ inline void AUDIO_TEST( const std::string&                                name,
     std::filesystem::create_directory( "./expected-samples" );
     std::string expectedChecksumPath = "./expected-samples/" + name + ".checksum.txt";
     std::string expectedChecksum     = "?";
+    INFO( "expectedChecksumPath: " + expectedChecksumPath );
     if ( std::filesystem::exists( expectedChecksumPath ) )
     {
         std::ifstream expectedChecksumFile( expectedChecksumPath );
         getline( expectedChecksumFile, expectedChecksum );
     }
+    INFO( "expectedChecksum: " + expectedChecksum );
 
     std::string auditionSamplePath = "./audition/" + name + ".wav";
+    INFO( "auditionSamplePath: " + auditionSamplePath );
     std::string expectedSamplePath = "./expected-samples/" + name + ".wav";
-    std::string actualChecksum     = record_and_checksum( auditionSamplePath, signal, duration * 44100 );
+    INFO( "expectedSamplePath: " + expectedSamplePath );
+    std::string actualChecksum = record_and_checksum( auditionSamplePath, signal, duration * 44100 );
+    INFO( "actualChecksum: " + actualChecksum );
 
     if ( expectedChecksum == "?" )
     {
         std::filesystem::create_directory( "./audition" );
-        std::string   auditionChecksumPath = "./audition/" + name + ".checksum.txt";
+        std::string auditionChecksumPath = "./audition/" + name + ".checksum.txt";
+        INFO( "auditionChecksumPath = " + auditionChecksumPath );
         std::ofstream auditionChecksumFile( auditionChecksumPath );
         auditionChecksumFile << actualChecksum;
         FAIL( "No expected checksum for " + name + ". Please review `" + auditionChecksumPath
