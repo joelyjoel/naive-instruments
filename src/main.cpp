@@ -81,7 +81,7 @@ int main( int argc, char** argv )
     }
     else if ( command == "random" )
     {
-        RandomCommand app( args );
+        RandomCommand app( args.argc, args.argv );
         app();
     }
     else if ( command == "zx-select" )

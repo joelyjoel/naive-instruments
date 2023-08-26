@@ -2,38 +2,35 @@
 #include "../lib.h"
 #include "./RandomEnvelopeCommand.h"
 
-class RandomCommand : public CommandLineApp
+class RandomCommand : public AudioCommand
 {
-    using CommandLineApp::CommandLineApp;
 
-    float randomFloat()
-    {
-        return static_cast<float>( rand() ) / static_cast<float>( RAND_MAX );
-    }
-
-    float randomFloat( float max )
-    {
-        return randomFloat() * max;
-    }
-    float randomFloat( float min, float max )
-    {
-        return randomFloat() * ( max - min ) + min;
-    }
+    using AudioCommand ::AudioCommand;
 
 public:
-    void run()
+    void describeOptions() override
+    {
+        options.add_options()(
+            "command", po::value<std::string>(), "What kind of data would you like to randomly generate?" )(
+            "seed", po::value<long>() )( "min", po::value<float>(), "Minimum, when generating random numeric data" )(
+            "max", po::value<float>(), "Maximum, when generating random numeric data" );
+        positionalOptions.add( "command", 1 );
+        describeOutputOptions();
+    }
+
+    void action() override
     {
 
-        if ( !args.exists( 0 ) )
+        if ( !args.count( "command" ) )
         {
             std::cerr << "A random what?\n";
             return;
         }
-        const std::string& command = args[0];
+        const std::string& command = args["command"].as<std::string>();
 
         if ( command == "envelope" )
         {
-            MainArgs              subArgs = args.subCommandArguments();
+            MainArgs              subArgs = subCommandArguments();
             RandomEnvelopeCommand app( subArgs );
             app.run();
         }
@@ -48,8 +45,8 @@ public:
 private:
     uint64_t seed()
     {
-        if ( args.exists( "seed" ) )
-            return args.number( "seed" );
+        if ( args.count( "seed" ) )
+            return args["seed"].as<long>();
         else
             return Random::clockSeed();
     }
@@ -58,15 +55,15 @@ private:
 
     void frequency()
     {
-        double min = args.number( "min", 20 );
-        double max = args.number( "max", 20000 );
+        double min = args.count( "min" ) ? args["min"].as<float>() : 20;
+        double max = args.count( "max" ) ? args["max"].as<float>() : 20000;
         std::cout << random.number( min, max ) << "Hz\n";
     }
 
     void pitch()
     {
-        double min = args.number( "min", 21 );
-        double max = args.number( "max", 108 );
+        double min = args.count( "min" ) ? args["min"].as<float>() : 20;
+        double max = args.count( "max" ) ? args["max"].as<float>() : 108;
         std::cout << random.number( min, max ) << "MIDI\n";
     }
 };
