@@ -21,6 +21,7 @@ public:
         using namespace NaiveInstruments::SignalShorthands;
         map["frequency"] = [this]() { return constant( this->random( 20, 20000 ) ); };
         map["sine_wave"] = [this]() { return sine( this->create( "frequency" ) ); };
+        map["boop"]      = [this]() { return this->boop(); };
     }
 
     std::shared_ptr<NaiveInstruments::Signal<double>> create( std::string shorthand )

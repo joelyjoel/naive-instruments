@@ -30,3 +30,15 @@ TEST_CASE( "Random class generates consistent numbers when using matching seed" 
             REQUIRE( random1.next() == random2.next() );
     }
 }
+
+TEST_CASE( "random item from vector of strings should always be a member of the input vector" )
+{
+    Random r;
+    for ( int i = 0; i < 10; ++i )
+    {
+        auto result = r( { "a", "b", "c" } );
+        CAPTURE( i, result );
+        if ( result != "a" && result != "b" && result != "c" )
+            FAIL( "Expected \"a\", \"b\" or \"c\"" );
+    }
+}
