@@ -1,4 +1,5 @@
 #include "../generative/Random.h"
+#include "../generative/RandomSignal.h"
 #include "../lib.h"
 #include "./RandomEnvelopeCommand.h"
 
@@ -27,6 +28,18 @@ public:
             return;
         }
         const std::string& command = args["command"].as<std::string>();
+
+        try
+        {
+            NaiveInstruments::RandomSignal r;
+            auto                           signal = r.create( command );
+            output( signal );
+            return;
+        }
+        catch ( ... )
+        {
+            // noop
+        }
 
         if ( command == "envelope" )
         {
