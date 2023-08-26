@@ -498,6 +498,16 @@ inline mono ramp( mono before, mono duration, mono after )
     return signal;
 }
 
+
+/**
+ * Linear crossfade (no law) from `before` signal to `after` signal over the
+ * course of `duration` seconds.
+ */
+inline mono ramp( double before, mono duration, double after )
+{
+    return ramp( constant( before ), duration, constant( after ) );
+}
+
 /**
  * Linear ramp from `before` to `after` over `duration seconds
  */
@@ -505,6 +515,22 @@ inline mono ramp( double before, double duration, double after )
 {
 
     return ramp( constant( before ), constant( duration ), constant( after ) );
+}
+
+/**
+ * Linear attack envelope (from 0.0 to 1.0) lasting `durition` seconds.
+ */
+inline mono attack( mono duration )
+{
+    return ramp( 0, duration, 1 );
+}
+
+/**
+ * Linear attack envelope (from 0.0 to 1.0) lasting `durition` seconds.
+ */
+inline mono attack( double duration )
+{
+    return ramp( 0, duration, 1 );
 }
 
 /**
