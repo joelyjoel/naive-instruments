@@ -1,10 +1,19 @@
 #include <string>
 
+namespace NaiveInstruments
+{
+class UnknownOutputSignal;
+
 class AbstractManagedAccessor
 {
 public:
     bool has_been_set_manually = false;
     bool has_been_set          = false;
+
+    virtual std::shared_ptr<UnknownOutputSignal> get_signal()
+    {
+        return nullptr;
+    }
 };
 
 template <typename T>
@@ -28,3 +37,4 @@ public:
         resource              = value;
     }
 };
+} // namespace NaiveInstruments

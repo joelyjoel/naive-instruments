@@ -115,6 +115,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/signal/signal-processes.test.cpp
    src/signal/SignalShorthands.test.cpp
    src/Signal/Constructors.test.cpp
+   src/Signal/SignalGraphExplorer.test.cpp
    src/generative/Random.test.cpp 
    src/file-io/WavWriter.test.cpp
    src/instruments/BreakpointEnvelope.test.cpp 

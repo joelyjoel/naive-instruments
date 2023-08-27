@@ -89,6 +89,7 @@ template <typename T>
 class SignalReader : public ManagedAccessor<std::shared_ptr<Signal<T>>>
 {
 
+private:
     std::shared_ptr<Signal<T>> ptr;
 
 public:
@@ -118,6 +119,11 @@ public:
         std::shared_ptr<Signal<T>> newSignal = std::make_shared<Constant<T>>();
         newSignal->output                    = constantValue;
         this->assign_manually( newSignal );
+    }
+
+    std::shared_ptr<UnknownOutputSignal> get_signal() override
+    {
+        return ptr;
     }
 };
 
