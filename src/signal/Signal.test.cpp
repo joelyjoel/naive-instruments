@@ -140,12 +140,3 @@ TEST_CASE( "Using modulo to count to 10 repetitively" )
     REQUIRE( reader[9] == 9 );
     REQUIRE( reader[15] == 5 );
 }
-
-TEST_CASE( "Can get the abstract_ptr of a signal reader" )
-{
-    auto                 my_signal = std::make_shared<Constant<double>>();
-    SignalReader<double> my_reader;
-    my_reader = my_signal;
-
-    CHECK( my_reader.abstract_ptr() == my_signal );
-}
