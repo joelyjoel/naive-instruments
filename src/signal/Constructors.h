@@ -17,7 +17,8 @@ public:
     {
     }
 
-    virtual std::shared_ptr<NaiveInstruments::UnknownOutputSignal> construct() = 0;
+    virtual std::shared_ptr<Signal<double>> construct()      = 0;
+    virtual std::string                     signaltypename() = 0;
 };
 
 template <typename T>
@@ -29,9 +30,14 @@ public:
     {
     }
 
-    virtual std::shared_ptr<NaiveInstruments::UnknownOutputSignal> construct() override
+    std::shared_ptr<Signal<double>> construct() override
     {
         return std::make_shared<T>();
+    }
+
+    std::string signaltypename() override
+    {
+        return typeid( T ).name();
     }
 };
 
@@ -52,7 +58,7 @@ protected:
     }
 
 public:
-    std::shared_ptr<UnknownOutputSignal> construct( std::string shorthand )
+    std::shared_ptr<Signal<double>> construct( std::string shorthand )
     {
         if ( map.contains( shorthand ) )
             return map[shorthand]->construct();
@@ -62,6 +68,17 @@ public:
             // TODO: Use expections properly!
             throw 1;
         }
+    }
+
+    std::string recognise( std::shared_ptr<Signal<double>> signal )
+    {
+        auto name = typeid( *signal ).name();
+        for ( auto const& x : map )
+        {
+            if ( name == x.second->signaltypename() )
+                return x.second->shorthand;
+        }
+        return "?";
     }
 };
 
