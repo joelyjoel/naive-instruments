@@ -3,7 +3,6 @@
 class AbstractManagedAccessor
 {
 public:
-protected:
     bool has_been_set_manually = false;
     bool has_been_set          = false;
 };

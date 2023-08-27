@@ -95,3 +95,12 @@ TEST_CASE( "Constructing a sequence with constants" )
 
     CHECK_SIGNAL( mySequence, { 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 1, 1, 1, 1 } );
 }
+
+TEST_CASE( "Signal inputs aren't set automatically by the constructor, and the managed accessors are aware of this" )
+{
+    Sum<double> mySum;
+    CHECK( mySum.input1.has_been_set_manually == false );
+
+    mySum.input1 = 1;
+    CHECK( mySum.input1.has_been_set_manually == true );
+}
