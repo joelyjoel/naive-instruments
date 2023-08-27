@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../generative/Random.h"
+#include "./ManagedSetter.h"
 #include <cmath>
 #include <iostream>
 #include <memory>
@@ -20,7 +21,7 @@ public:
     typedef int    frame_position;
     frame_position t = -1;
 
-    std::vector<AbstractSignalReader*> inputs;
+    std::vector<AbstractManagedAccessor*> inputs;
 
     /**
      * Override this method to initialise state for your signal.
@@ -56,15 +57,6 @@ public:
     }
 };
 
-class AbstractSignalReader
-{
-public:
-    AbstractSignalReader( UnknownOutputSignal* owner = nullptr )
-    {
-        if ( owner )
-            owner->inputs.push_back( this );
-    }
-};
 
 template <typename T>
 class Signal : public UnknownOutputSignal
@@ -94,33 +86,38 @@ public:
 
 
 template <typename T>
-class SignalReader : public AbstractSignalReader
+class SignalReader : public ManagedAccessor<std::shared_ptr<Signal<T>>>
 {
-public:
+
     std::shared_ptr<Signal<T>> ptr;
 
-    using AbstractSignalReader::AbstractSignalReader;
+public:
+    SignalReader( UnknownOutputSignal* owner = nullptr )
+    : ManagedAccessor<std::shared_ptr<Signal<T>>>( ptr )
+    {
+        if ( owner )
+            owner->inputs.push_back( this );
+    }
 
     // Read a value by index from the signal
     T operator[]( UnknownOutputSignal::frame_position t )
     {
-        ptr->sync( t );
-        return ptr->output;
+        this->resource->sync( t );
+        return this->ptr->output;
     }
 
     /// Assigning another signal to a signal reader
     void operator=( std::shared_ptr<Signal<T>> newSignal )
     {
-        ptr = newSignal;
+        this->assign_manually( newSignal );
     }
 
     /// Assigning a constant to a signal reader
     void operator=( T constantValue )
     {
-
         std::shared_ptr<Signal<T>> newSignal = std::make_shared<Constant<T>>();
         newSignal->output                    = constantValue;
-        ptr                                  = newSignal;
+        this->assign_manually( newSignal );
     }
 };
 

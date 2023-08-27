@@ -91,14 +91,6 @@ inline mono operator+( double a, mono b )
 }
 
 /**
- * Add a signal to a SignalReader in place
- */
-inline void operator+=( SignalReader<double>& a, mono b )
-{
-    a = a.ptr + b;
-}
-
-/**
  * Subtract one signal from another. Creates a `Subtract` signal process
  * subtracting `b` from `a`.
  */
