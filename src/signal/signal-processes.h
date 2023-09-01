@@ -407,6 +407,58 @@ public:
     }
 };
 
+class Sequence : public Signal<double>
+{
+    class Step
+    {
+    public:
+        int                  duration;
+        SignalReader<double> input;
+        Step( Sequence* owner, int duration, std::shared_ptr<Signal<double>> inputSignal = nullptr )
+        : input( owner )
+        , duration( duration )
+        {
+            if ( inputSignal )
+                input = inputSignal;
+        }
+    };
+
+public:
+    std::vector<Step> steps;
+
+    void addStep( int duration = 0, std::shared_ptr<Signal<double>> input = nullptr )
+    {
+        if ( duration == 0 && steps.size() > 0 )
+            duration = steps[steps.size() - 1].duration;
+        steps.push_back( { this, duration, input } );
+    }
+
+
+protected:
+    /* bool looped = true; */
+    int phase = 0;
+    int currentStep;
+
+    void init() override
+    {
+        phase  = 0;
+        output = steps[currentStep].input[phase];
+    }
+    void action() override
+    {
+        ++phase;
+        if ( phase >= steps[currentStep].duration )
+        {
+            phase -= steps[currentStep].duration;
+            ++currentStep;
+            /* if ( looped ) */
+            currentStep %= steps.size();
+        }
+
+        output = steps[currentStep].input[phase];
+    }
+};
+
 
 // TODO: Clamp
 // TODO: Min

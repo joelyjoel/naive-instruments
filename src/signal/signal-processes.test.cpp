@@ -76,3 +76,22 @@ TEST_CASE( "Creating a Sampler using a contrived MonoBuffer" )
     std::shared_ptr<Signal<double>> sampler = std::make_shared<NaiveInstruments::Sampler>( &buffer );
     CHECK_SIGNAL( sampler, { 5, 4, 3, 2, 1 } );
 }
+
+TEST_CASE( "Constructing a sequence with constants" )
+{
+    auto mySequence = std::make_shared<Sequence>();
+    auto a          = std::make_shared<Constant<double>>();
+    a->output       = 1;
+    auto b          = std::make_shared<Constant<double>>();
+    b->output       = 2;
+    mySequence->addStep( 4, a );
+    mySequence->addStep( 4, b );
+
+    CHECK_SIGNAL( mySequence, { 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1 } );
+
+    auto c    = std::make_shared<Constant<double>>();
+    c->output = 3;
+    mySequence->addStep( 3, c );
+
+    CHECK_SIGNAL( mySequence, { 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 1, 1, 1, 1 } );
+}
