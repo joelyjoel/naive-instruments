@@ -470,12 +470,43 @@ public:
     }
 };
 
+class FixedDelay : public Signal<double>
+{
+private:
+    double* buffer;
+    int     playhead = 0;
+    int     durationInSamples;
+
+public:
+    SignalReader<double> input{ this };
+
+
+    FixedDelay( int durationInSamples )
+    : durationInSamples( durationInSamples )
+    {
+        buffer = new double[durationInSamples];
+        for ( int i = 0; i < durationInSamples; ++i )
+            buffer[i] = 0;
+    }
+
+    ~FixedDelay()
+    {
+        delete buffer;
+    }
+
+    void action() override
+    {
+        output           = buffer[playhead];
+        buffer[playhead] = input[t];
+        playhead         = ( playhead + 1 ) % durationInSamples;
+    }
+};
+
 
 // TODO: Clamp
 // TODO: Min
 // TODO: Max
 // TODO: Pace
-// TODO: Pipe delay
 // TODO: LinearRamp
 // TODO: LinearDecay
 // TODO: Decay using half life

@@ -212,6 +212,18 @@ TEST_CASE( "Hard clipping a mono signal" )
     CHECK_SIGNAL( clip( -t() / 4 ), { 00, -.25, -.5, -.75, -1, -1, -1, -1 } );
 }
 
+TEST_CASE( "Delaying a signal by fixed duration" )
+{
+    CHECK_SIGNAL( fixed_sample_delay( 10, t() ), { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } );
+
+    auto delayedSignal = fixed_delay( .01, t() );
+    CHECK_FRAME( delayedSignal, 0, 0 );
+    CHECK_FRAME( delayedSignal, 440, 0 );
+    CHECK_FRAME( delayedSignal, 441, 0 );
+    CHECK_FRAME( delayedSignal, 442, 1 );
+    CHECK_FRAME( delayedSignal, 443, 2 );
+}
+
 // TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
 /* TEST_CASE( "signal reader += operator" ) */
 /* { */
