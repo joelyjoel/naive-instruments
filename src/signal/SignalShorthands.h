@@ -590,6 +590,24 @@ inline mono fm_series(
     return current;
 }
 
+/**
+ * Delay signal by a fixed duration using a sample buffer.
+ */
+inline mono fixed_sample_delay( int durationInSamples, mono input )
+{
+    auto delayedSignal   = std::make_shared<FixedDelay>( durationInSamples );
+    delayedSignal->input = input;
+    return delayedSignal;
+}
+
+/**
+ * Delay signal by a fixed duration using a sample buffer.
+ */
+inline mono fixed_delay( double durationInSeconds, mono input )
+{
+    return fixed_sample_delay( durationInSeconds * 44100, input );
+}
+
 
 // TODO: /* inline mono fm( std::vector<std::vector<mono>> rows ) */
 
