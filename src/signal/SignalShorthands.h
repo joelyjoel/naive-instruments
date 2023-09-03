@@ -596,6 +596,23 @@ inline mono fm_series(
 
 // TODO: inline mono fm( mono fundamental, std::vector<mono> ratios, std::vector<mono> interactions );
 
+/**
+ * Create a sequence using steps of equal duration. Use `nullptr` to extend the duration of the previous step.
+ */
+inline mono step_sequence( double stepsPerMinute, std::vector<mono> steps )
+{
+    double step_duration = 60.0 / stepsPerMinute * 44100;
+    auto   sequence      = std::make_shared<Sequence>();
+    for ( auto step : steps )
+    {
+        if ( step == nullptr && sequence->numberOfSteps() )
+            sequence->lastStep().duration += step_duration;
+        else
+            sequence->addStep( step_duration, step );
+    }
+    return sequence;
+}
+
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
 
