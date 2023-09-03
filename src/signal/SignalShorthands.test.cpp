@@ -274,3 +274,12 @@ TEST_CASE( "Hard clipping a mono signal" )
 /* } */
 
 // TODO: Test Wait with stereo signals
+
+TEST_CASE( "Creating a step sequencer" )
+{
+    auto sequence = step_sequence( 60, { constant( 69 ), constant( 420 ), nullptr, constant( 0 ) } );
+    CHECK_FRAME( sequence, 0 * 44100, 69 );
+    CHECK_FRAME( sequence, 1 * 44100, 420 );
+    CHECK_FRAME( sequence, 2 * 44100, 420 );
+    CHECK_FRAME( sequence, 3 * 44100, 0 );
+}

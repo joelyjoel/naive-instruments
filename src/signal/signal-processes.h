@@ -457,6 +457,17 @@ protected:
 
         output = steps[currentStep].input[phase];
     }
+
+public:
+    Step& lastStep()
+    {
+        return steps[steps.size() - 1];
+    }
+
+    int numberOfSteps()
+    {
+        return steps.size();
+    }
 };
 
 
