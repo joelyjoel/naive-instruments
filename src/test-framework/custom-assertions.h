@@ -122,3 +122,11 @@ inline void AUDIO_TEST( const std::string&                                name,
         }
     }
 }
+
+inline std::string ask( std::string message )
+{
+    std::cout << message << ": ";
+    std::string response;
+    std::cin >> response;
+    return response;
+}

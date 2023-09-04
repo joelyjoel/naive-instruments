@@ -295,3 +295,8 @@ TEST_CASE( "Creating a step sequencer" )
     CHECK_FRAME( sequence, 2 * 44100, 420 );
     CHECK_FRAME( sequence, 3 * 44100, 0 );
 }
+
+TEST_CASE( "Using a prompt assertion" )
+{
+    REQUIRE( ask( "say something" ) == "yes" );
+}
