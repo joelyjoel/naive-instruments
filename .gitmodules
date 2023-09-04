@@ -1,3 +1,6 @@
 [submodule "dependencies/portaudio"]
 	path = dependencies/portaudio
 	url = https://github.com/PortAudio/portaudio.git
+[submodule "dependencies/ni-media"]
+	path = dependencies/ni-media
+	url = https://github.com/NativeInstruments/ni-media.git
