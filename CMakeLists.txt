@@ -134,3 +134,7 @@ TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${LIBSNDFILE_LIBRARIES} )
 add_subdirectory(./dependencies/portaudio)
 target_link_libraries( naive PRIVATE PortAudio)
 target_link_libraries( test_naive PRIVATE PortAudio)
+
+add_subdirectory(./dependencies/ni-media)
+target_link_libraries(naive PRIVATE ni-media)
+target_link_libraries(test_naive PRIVATE ni-media)
