@@ -11,3 +11,4 @@ stable-test-results/
 /build
 expected-samples/*.wav
 audition/*.wav
+tags
