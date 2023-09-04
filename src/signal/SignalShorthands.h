@@ -679,6 +679,21 @@ inline mono step_sequence( double stepsPerMinute, std::vector<mono> steps )
     return sequence;
 }
 
+inline mono frameRegion( mono input, int waitTimeInFrames, int durationInFrames )
+{
+    auto sequence = std::make_shared<Sequence>();
+    sequence->addStep( waitTimeInFrames, constant( 0 ) );
+    sequence->addStep( durationInFrames, input );
+    sequence->addStep( 1, constant( 0 ) );
+    sequence->dontLoop();
+    return sequence;
+}
+
+inline mono region( mono input, double waitTimeInSeconds, double durationInSeconds, double fadeIn = 0 )
+{
+    return frameRegion( input, waitTimeInSeconds * 44100, durationInSeconds * 44100 );
+}
+
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
 

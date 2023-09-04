@@ -308,3 +308,12 @@ TEST_CASE( "Panning a signal right to left using a control signal" )
 
     referenceToneTest( "panning sine wave", pan( sine( 440 ), triangle( constant( 2 ) ) ), 2 );
 }
+TEST_CASE( "Sequencing a signal region using frame counts" )
+{
+    CHECK_SIGNAL( frameRegion( constant( 1 ), 4, 4 ), { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 } );
+}
+
+TEST_CASE( "Sequencing a signal region using time values" )
+{
+    CHECK_SIGNAL( region( constant( 1 ), 4.0 / 44100.0, 4.0 / 44100.0 ), { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 } );
+}

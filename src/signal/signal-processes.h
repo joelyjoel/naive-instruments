@@ -481,9 +481,9 @@ public:
 
 
 protected:
-    /* bool looped = true; */
-    int phase = 0;
-    int currentStep;
+    bool looped = true;
+    int  phase  = 0;
+    int  currentStep;
 
     void init() override
     {
@@ -497,11 +497,12 @@ protected:
         {
             phase -= steps[currentStep].duration;
             ++currentStep;
-            /* if ( looped ) */
-            currentStep %= steps.size();
+            if ( looped )
+                currentStep %= steps.size();
         }
 
-        output = steps[currentStep].input[phase];
+        if ( currentStep < steps.size() )
+            output = steps[currentStep].input[phase];
     }
 
 public:
@@ -513,6 +514,16 @@ public:
     int numberOfSteps()
     {
         return steps.size();
+    }
+
+    void loop()
+    {
+        looped = true;
+    }
+
+    void dontLoop()
+    {
+        looped = false;
     }
 };
 
