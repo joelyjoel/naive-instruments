@@ -12,6 +12,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 project(naive VERSION 1.0)
 
 
@@ -138,3 +140,4 @@ target_link_libraries( test_naive PRIVATE PortAudio)
 add_subdirectory(./dependencies/ni-media)
 target_link_libraries(naive PRIVATE ni-media)
 target_link_libraries(test_naive PRIVATE ni-media)
+
