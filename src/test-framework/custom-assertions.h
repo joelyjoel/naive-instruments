@@ -62,7 +62,7 @@ inline std::string record_and_checksum( const std::string                       
                                         std::shared_ptr<NaiveInstruments::Signal<double>> signal,
                                         int                                               durationInSamples )
 {
-    WavWriter                              writer( outputPath, durationInSamples );
+    WavWriter                              writer( outputPath.c_str(), durationInSamples );
     NaiveInstruments::SignalReader<double> reader;
     reader = signal;
 

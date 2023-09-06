@@ -5,96 +5,130 @@
 #include <cstdint>
 #include <fstream>
 #include <iostream>
+#include <sndfile.h>
+#include <stdio.h>
 
 class WavWriter
 {
-    // TODO: Remove this limitation where numberOfFrames needs to be known in
-    // advance
+    const char* filepath;
+    SNDFILE*    file;
+    SF_INFO     info;
 
-    std::ostream& out;
-    int           numberOfFrames;
+    int numberOfSamplesWritten = 0;
 
 public:
-    WavWriter( const std::string& outfile, int numberOfFrames )
-    : numberOfFrames( numberOfFrames )
-    , out( *new std::ofstream( outfile, std::ios::binary ) )
+    WavWriter( const char* filepath, int numberOfFrames )
+    : filepath( filepath )
     {
-        writeHeader();
+        initialise_info( numberOfFrames );
+        file = sf_open( filepath, SFM_WRITE, &info );
+        check_file();
     }
 
-    WavWriter( std::ostream& outputStream, int numberOfFrames )
-    : numberOfFrames( numberOfFrames )
-    , out( outputStream )
+    WavWriter( FILE* fileStream, int numberOfFrames )
+    : filepath( "?" )
     {
-        writeHeader();
+        initialise_info( numberOfFrames );
+        int fileDescriptor = fileno( fileStream );
+        file               = sf_open_fd( fileDescriptor,
+                           SFM_WRITE,
+                           &info,
+                           // TODO: When should this be 1
+                           0 );
+        check_file();
     }
 
-    static WavWriter* cout( int numberOfFrames )
+    ~WavWriter()
     {
-        return new WavWriter( std::cout, numberOfFrames );
+        std::cerr << "WavWriter wrote " << numberOfSamplesWritten << " to " << filepath << std::endl;
+        sf_close( file );
     }
 
-    int dataSize()
+private:
+    void initialise_info( int numberOfFrames )
     {
-        return 2 * sizeof( int16_t ) * numberOfFrames;
+        info.frames     = numberOfFrames;
+        info.channels   = 1;
+        info.samplerate = 44100;
+        info.format     = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+        /* info.sections; ?  */
+        info.seekable = false;
     }
 
-    void writeHeader()
+    void check_file()
     {
-        WAV_HEADER header;
-
-        header.Subchunk2Size = dataSize();
-        header.ChunkSize     = dataSize() + sizeof( header ) - 8;
-        // -8 because of the "RIFF{uint32_t ChunkSize}" at the beginning
-
-        out.write( reinterpret_cast<const char*>( &header ), sizeof( header ) );
+        if ( !file )
+        {
+            std::cerr << "Unable to open wav file for writing: " << filepath << "\n";
+            // TODO: Use proper exceptions
+            throw 1;
+        }
     }
 
-    void write( int left, int right )
+public:
+    void write( MonoBuffer& audioData )
     {
-        int16_t l16bit = left;
-        int16_t r16bit = right;
-        out.write( reinterpret_cast<const char*>( &l16bit ), sizeof( l16bit ) );
-        out.write( reinterpret_cast<const char*>( &r16bit ), sizeof( r16bit ) );
+        int written = sf_write_double( file, audioData.data, audioData.numberOfSamples );
+        numberOfSamplesWritten += written;
+        if ( written != audioData.numberOfSamples )
+        {
+            std::cerr << "There was a problem recording a mono buffer to " << filepath << "\n";
+            // TODO: Use proper exceptions
+            throw 1;
+        }
     }
 
-    void write( int value )
+    void write( int sample )
     {
-        write( value, value );
-    }
-    void write( double value )
-    {
-        write( doubleToInt16_t( value ) );
-    }
-    void write( double left, double right )
-    {
-        write( doubleToInt16_t( left ), doubleToInt16_t( right ) );
+        int written = sf_write_int( file, &sample, 1 );
+        ++numberOfSamplesWritten;
+        if ( written != 1 )
+        {
+            std::cerr << "There was a problem writing a single (int) sample to " << filepath << "\n";
+            // TODO: Use proper exceptions
+            throw 1;
+        }
     }
 
-    int16_t doubleToInt16_t( double val )
+    void write( double sample )
+    {
+        int written = sf_write_double( file, &sample, 1 );
+        ++numberOfSamplesWritten;
+        if ( written != 1 )
+        {
+            std::cerr << "There was a problem writing a single (double) sample to " << filepath << "\n";
+            // TODO: Use proper exceptions
+            throw 1;
+        }
+    }
+
+    template <typename T>
+    void operator<<( T sample )
+    {
+        write( sample );
+    }
+
+
+    static int16_t doubleToInt16_t( double val )
     {
         // return 0;
         return INT16_MAX * val * .5;
     }
 
-public:
-    void operator<<( double signalPoint )
+
+    static void write( const char* filepath, MonoBuffer& audioData )
     {
-        write( signalPoint );
+        const double attenuation = .9;
+        WavWriter    recorder( filepath, audioData.numberOfFrames() );
+        recorder.write( audioData );
     }
 
-    static void write( std::ostream& outputStream, MonoBuffer& buffer )
+    [[deprecated(
+        "Writing wav files to a pipe is a bad idea because the duration must be specified in the header" )]] static void
+    writeToStdout( MonoBuffer& audioData )
     {
-        double    attenuation    = .9;
-        int       numberOfFrames = buffer.numberOfFrames();
-        WavWriter recorder( outputStream, numberOfFrames );
-        for ( int i = 0; i < numberOfFrames; ++i )
-            recorder << buffer[i] * attenuation;
-    }
-
-    static void write( const std::string& outputFilePath, MonoBuffer& buffer )
-    {
-        std::ofstream outputStream( outputFilePath, std::ios::binary );
-        write( outputStream, buffer );
+        const double attenuation = .9;
+        WavWriter    recorder( stdout, audioData.numberOfFrames() );
+        recorder.write( audioData );
     }
 };

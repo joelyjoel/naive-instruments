@@ -31,7 +31,7 @@ public:
 
         if ( stdoutIsAPipe() )
         {
-            WavWriter::write( std::cout, *buffer );
+            WavWriter::writeToStdout( *buffer );
         }
         else if ( outputPath().empty() )
         {
@@ -39,7 +39,7 @@ public:
         }
         else
         {
-            WavWriter::write( outputPath(), *buffer );
+            WavWriter::write( outputPath().c_str(), *buffer );
         }
     }
 
@@ -81,7 +81,7 @@ public:
         auto& path = outputPath();
         if ( stdoutIsAPipe() )
         {
-            record( std::cout, signal, duration() );
+            recordToStdout( signal, duration() );
         }
         else if ( path.empty() )
             BufferedPlayback::play( signal );

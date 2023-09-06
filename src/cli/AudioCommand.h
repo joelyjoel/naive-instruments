@@ -131,7 +131,7 @@ protected:
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {
-            record( std::cout, signal, outputDuration() );
+            recordToStdout( signal, outputDuration() );
         }
         else if ( interactiveModeEnabled() )
         {
@@ -151,7 +151,7 @@ protected:
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {
-            record( std::cout, signal, outputDuration() );
+            recordToStdout( signal, outputDuration() );
         }
         else if ( interactiveModeEnabled() )
         {
