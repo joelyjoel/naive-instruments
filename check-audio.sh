@@ -1,5 +1,7 @@
 #! /bin/bash
 
+touch ./checksums.yaml
+
 sample="$1"
 
 report=$(cat ./checksums.yaml | yq ".[\"$sample\"]")
@@ -8,6 +10,7 @@ stableChecksum=$(echo $report | yq ".checksum")
 checksum=$(ffmpeg -loglevel error -i "$sample" -map 0 -f hash -)
 
 if [ $checksum = $stableChecksum ]; then
+  echo -e " ✅ $sample is correct."
   exit 0;
 fi
 
@@ -35,6 +38,7 @@ if [ $stableChecksum = "null" ]; then
 
       "y" | "yes")
         yq -i ".[\"$sample\"].checksum = \"$checksum\"" checksums.yaml
+        echo -e " ✅ $sample confirmed by user.\n"
         break
         ;;
 
