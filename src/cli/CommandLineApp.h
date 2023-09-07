@@ -31,7 +31,6 @@ public:
 
         if ( stdoutIsAPipe() )
         {
-            std::cerr << "Piping to stdout\n";
             WavWriter::write( std::cout, *buffer );
         }
         else if ( outputPath().empty() )
@@ -82,7 +81,6 @@ public:
         auto& path = outputPath();
         if ( stdoutIsAPipe() )
         {
-            std::cerr << "Piping to stdout\n";
             record( std::cout, signal, duration() );
         }
         else if ( path.empty() )
