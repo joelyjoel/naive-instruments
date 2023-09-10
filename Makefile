@@ -6,4 +6,5 @@ default:
 
 test: 
 	cmake -S . -B build
-	cmake --build build && bin/test_naive && ./run-tests.sh
+	cmake --build build && bin/test_naive
+	bash ./tests/run-all.sh

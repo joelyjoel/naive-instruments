@@ -131,7 +131,6 @@ protected:
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {
-            std::cerr << "Piping to stdout\n";
             record( std::cout, signal, outputDuration() );
         }
         else if ( interactiveModeEnabled() )
@@ -152,7 +151,6 @@ protected:
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {
-            std::cerr << "Piping to stdout\n";
             record( std::cout, signal, outputDuration() );
         }
         else if ( interactiveModeEnabled() )

@@ -20,8 +20,7 @@ void record( std::ostream& outputFile, std::shared_ptr<FrameStream<double>> sign
 
     double attenuation = .5;
 
-    int numberOfFrames = duration * sampleRate;
-    std::cerr << "Number of frames: " << numberOfFrames << "\n";
+    int       numberOfFrames = duration * sampleRate;
     WavWriter recorder( outputFile, numberOfFrames );
     for ( int i = 0; i < numberOfFrames; ++i )
     {
@@ -34,8 +33,7 @@ void record( std::ostream& outputStream, NaiveInstruments::SignalShorthands::mon
 
     double attenuation = .5;
 
-    int numberOfFrames = duration * sampleRate;
-    std::cerr << "Number of frames: " << numberOfFrames << "\n";
+    int       numberOfFrames = duration * sampleRate;
     WavWriter recorder( outputStream, numberOfFrames );
 
     NaiveInstruments::SignalReader<double> reader;
