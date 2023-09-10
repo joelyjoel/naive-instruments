@@ -50,7 +50,7 @@ TEST_CASE( "signals all have the expected number of inputs" )
 
 TEST_CASE( "Creating a stereo vector signal" )
 {
-    auto buffer    = std::make_shared<std::vector<StereoFrame>>( 5 );
+    auto buffer    = std::make_shared<std::vector<NaiveInstruments::StereoFrame>>( 5 );
     ( *buffer )[0] = { 5, 0 };
     ( *buffer )[1] = { 4, 1 };
     ( *buffer )[2] = { 3, 2 };
@@ -58,8 +58,8 @@ TEST_CASE( "Creating a stereo vector signal" )
     ( *buffer )[4] = { 1, 4 };
 
 
-    std::shared_ptr<Signal<StereoFrame>> signal =
-        std::make_shared<NaiveInstruments::VectorSignal<StereoFrame>>( buffer );
+    std::shared_ptr<Signal<NaiveInstruments::StereoFrame>> signal =
+        std::make_shared<NaiveInstruments::VectorSignal<NaiveInstruments::StereoFrame>>( buffer );
 
     CHECK_SIGNAL( signal, { { 5, 0 }, { 4, 1 }, { 3, 2 }, { 2, 3 }, { 1, 4 } } );
 }

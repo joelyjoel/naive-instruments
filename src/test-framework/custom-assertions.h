@@ -1,6 +1,6 @@
 #include "../../dependencies/catch.hpp"
 #include "../file-io/WavWriter.h"
-#include "../signal/Signal.h"
+#include "../signal/SignalShorthands.h"
 #include <filesystem>
 #include <fstream>
 #include <math.h>
@@ -78,47 +78,20 @@ inline std::string record_and_checksum( const std::string                       
 }
 
 
-inline void AUDIO_TEST( const std::string&                                name,
-                        std::shared_ptr<NaiveInstruments::Signal<double>> signal,
-                        double                                            duration = .5 )
+inline const std::string referenceToneLocation = "./tests/results/";
+
+inline void referenceToneTest( const std::string&                                                       name,
+                               std::shared_ptr<NaiveInstruments::Signal<NaiveInstruments::StereoFrame>> signal,
+                               double                                                                   duration = .1 )
 {
-    std::filesystem::create_directory( "./expected-samples" );
-    std::string expectedChecksumPath = "./expected-samples/" + name + ".checksum.txt";
-    std::string expectedChecksum     = "?";
-    INFO( "expectedChecksumPath: " + expectedChecksumPath );
-    if ( std::filesystem::exists( expectedChecksumPath ) )
-    {
-        std::ifstream expectedChecksumFile( expectedChecksumPath );
-        getline( expectedChecksumFile, expectedChecksum );
-    }
-    INFO( "expectedChecksum: " + expectedChecksum );
+    std::string filepath = referenceToneLocation + name + ".wav";
+    WavWriter   writer( filepath.c_str(), duration * 44100 );
+    writer.write( signal, duration );
+}
 
-    std::string auditionSamplePath = "./audition/" + name + ".wav";
-    INFO( "auditionSamplePath: " + auditionSamplePath );
-    std::string expectedSamplePath = "./expected-samples/" + name + ".wav";
-    INFO( "expectedSamplePath: " + expectedSamplePath );
-    std::string actualChecksum = record_and_checksum( auditionSamplePath, signal, duration * 44100 );
-    INFO( "actualChecksum: " + actualChecksum );
-
-    if ( expectedChecksum == "?" )
-    {
-        std::filesystem::create_directory( "./audition" );
-        std::string auditionChecksumPath = "./audition/" + name + ".checksum.txt";
-        INFO( "auditionChecksumPath = " + auditionChecksumPath );
-        std::ofstream auditionChecksumFile( auditionChecksumPath );
-        auditionChecksumFile << actualChecksum;
-        FAIL( "No expected checksum for " + name + ". Please review `" + auditionChecksumPath
-              + "` and move to `./expected-samples` if satisfied." );
-    }
-    else
-    {
-        CHECK( actualChecksum == expectedChecksum );
-        if ( actualChecksum == expectedChecksum )
-
-        {
-            if ( !std::filesystem::exists( expectedSamplePath ) )
-                std::filesystem::rename( auditionSamplePath, expectedSamplePath );
-            std::filesystem::remove( auditionSamplePath );
-        }
-    }
+inline void referenceToneTest( const std::string&                                name,
+                               std::shared_ptr<NaiveInstruments::Signal<double>> signal,
+                               double                                            duration = .1 )
+{
+    return referenceToneTest( name, NaiveInstruments::SignalShorthands::monoToStereo( signal ), duration );
 }

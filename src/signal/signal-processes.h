@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../core/MonoBuffer.h"
 #include "./Signal.h"
 #include <algorithm>
