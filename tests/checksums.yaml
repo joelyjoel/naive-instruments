@@ -28,3 +28,5 @@ results/Trianglular boop.wav:
   checksum: SHA256=3318f896fb3ee1edfda62c34ddf1ea8747cd55723ae49fc54440c7fc4e075792
 results/Upward sine sweep accross entire grand piano range.wav:
   checksum: SHA256=eb3d8f787406d70b365038b6d3665e0ee3db5a89dfa6e7bcc61abf91a508bc4e
+results/440Hz stereo sine.wav.wav:
+  checksum: SHA256=05be7f4908b602cfb2ca5135fb2837447f002e85de8fdd21b48002175afb2f37
