@@ -524,6 +524,16 @@ inline mono decay( double duration )
 }
 
 /**
+ * Duplicate a mono signal on both channels of a stereo signal.
+ */
+inline stereo monoToStereo( mono input )
+{
+    auto signal   = std::make_shared<MonoToStereo>();
+    signal->input = input;
+    return signal;
+}
+
+/**
  * Hard clip a stereo 'input` signal within the range -1.0 to 1.0
  */
 inline stereo clip( stereo input )
