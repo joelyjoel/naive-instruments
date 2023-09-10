@@ -18,6 +18,9 @@ public:
     void init() override
     {
         output = 0;
+
+        // You must notify the upstream signals so that they will initialise.
+        frequency[0];
     }
 
     void action() override
@@ -174,7 +177,12 @@ public:
     Noise( u_int64_t seed = 1 )
     : random( seed )
     {
-        output = random.number( -1.0, 1.0 );
+    }
+
+    void init() override
+    {
+        random.reset();
+        action();
     }
 
     void action() override
@@ -397,6 +405,7 @@ public:
 
     void init() override
     {
+        phase  = 0;
         output = before[t] * ( 1 - phase ) + after[t] * phase;
     }
 

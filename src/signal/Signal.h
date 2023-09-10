@@ -18,7 +18,7 @@ class UnknownOutputSignal
 {
 public:
     typedef int    frame_position;
-    frame_position t = 0;
+    frame_position t = -1;
 
     std::vector<AbstractSignalReader*> inputs;
 
@@ -41,10 +41,13 @@ public:
      */
     virtual void action() = 0;
 
-    void sync( frame_position until )
+    virtual void sync( frame_position until )
     {
-        if ( t == 0 )
+        if ( t == -1 || until < t )
+        {
+            t = 0;
             init();
+        }
         while ( t < until )
         {
             ++t;
@@ -79,6 +82,12 @@ public:
 template <typename T>
 class Constant : public Signal<T>
 {
+public:
+    void sync( UnknownOutputSignal::frame_position until ) override
+    {
+        this->t = until;
+    }
+
     void action() override
     {
         // no-op, output should be set by the user of this class
