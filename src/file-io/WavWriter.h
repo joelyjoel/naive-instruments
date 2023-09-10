@@ -1,10 +1,12 @@
 #pragma once
 
 #include "../core.h"
+#include "../signal/Signal.h"
 #include "WAV_HEADER.h"
 #include <cstdint>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <sndfile.h>
 #include <stdio.h>
 
@@ -96,12 +98,17 @@ public:
         }
     }
 
+    void write( NaiveInstruments::StereoFrame& frame )
+    {
+        write( frame.left, frame.right );
+    }
+
     void write( double sample )
     {
         write( sample, sample );
     }
 
-    double write( double left, double right )
+    void write( double left, double right )
     {
         double data[2] = { left, right };
         int    written = sf_write_double( file, data, 2 );
@@ -118,6 +125,19 @@ public:
     void operator<<( T sample )
     {
         write( sample );
+    }
+
+    void write( std::shared_ptr<NaiveInstruments::Signal<NaiveInstruments::StereoFrame>> signal, double duration )
+    {
+        const int                                                     numberOfFrames = duration * info.samplerate;
+        NaiveInstruments::SignalReader<NaiveInstruments::StereoFrame> reader;
+        reader = signal;
+        std::cerr << "numbeOfFrames: " << numberOfFrames << std::endl;
+        for ( int i = 0; i < numberOfFrames; ++i )
+        {
+            auto frame = reader[i];
+            write( frame );
+        }
     }
 
 
