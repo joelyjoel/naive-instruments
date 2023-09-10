@@ -114,6 +114,19 @@ public:
     };
 };
 
+class StereoChannels : public StereoSignal
+{
+public:
+    SignalReader<double> left{ this };
+    SignalReader<double> right{ this };
+
+    void action() override
+    {
+        output.left  = left[t];
+        output.right = right[t];
+    }
+};
+
 template <typename T>
 class Repeater : public Signal<T>
 {

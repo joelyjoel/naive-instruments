@@ -534,6 +534,17 @@ inline stereo monoToStereo( mono input )
 }
 
 /**
+ * Combine `left` and `right` mono signals into a stereo signal.
+ */
+inline stereo stereoChannels( mono left, mono right )
+{
+    auto signal   = std::make_shared<StereoChannels>();
+    signal->left  = left;
+    signal->right = right;
+    return signal;
+}
+
+/**
  * Hard clip a stereo 'input` signal within the range -1.0 to 1.0
  */
 inline stereo clip( stereo input )
