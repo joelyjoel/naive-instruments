@@ -48,7 +48,7 @@ private:
     void initialise_info( int numberOfFrames )
     {
         info.frames     = numberOfFrames;
-        info.channels   = 1;
+        info.channels   = 2;
         info.samplerate = 44100;
         info.format     = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
         /* info.sections; ?  */
@@ -80,11 +80,17 @@ public:
 
     void write( int sample )
     {
-        int written = sf_write_int( file, &sample, 1 );
-        ++numberOfSamplesWritten;
-        if ( written != 1 )
+        write( sample, sample );
+    }
+
+    void write( int left, int right )
+    {
+        int data[2] = { left, right };
+        int written = sf_write_int( file, data, 2 );
+        numberOfSamplesWritten += 2;
+        if ( written != 2 )
         {
-            std::cerr << "There was a problem writing a single (int) sample to " << filepath << "\n";
+            std::cerr << "There was a problem writing a stereo frame (double[2]) sample to " << filepath << "\n";
             // TODO: Use proper exceptions
             throw 1;
         }
@@ -92,11 +98,17 @@ public:
 
     void write( double sample )
     {
-        int written = sf_write_double( file, &sample, 1 );
-        ++numberOfSamplesWritten;
-        if ( written != 1 )
+        write( sample, sample );
+    }
+
+    double write( double left, double right )
+    {
+        double data[2] = { left, right };
+        int    written = sf_write_double( file, data, 2 );
+        numberOfSamplesWritten += 2;
+        if ( written != 2 )
         {
-            std::cerr << "There was a problem writing a single (double) sample to " << filepath << "\n";
+            std::cerr << "There was a problem writing a stereo frame (double[2]) sample to " << filepath << "\n";
             // TODO: Use proper exceptions
             throw 1;
         }
