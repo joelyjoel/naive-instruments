@@ -23,6 +23,7 @@ jobs:
       - run: brew install libsndfile
       - run: brew install boost
       - run: brew install portaudio
+      - run: brew install ffmpeg
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -47,3 +48,8 @@ jobs:
         # Execute tests defined by the CMake configuration.
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ./bin/test_naive
+      - name: Add 'naive' executable to the path
+        run: echo "$PWD/bin" >> $GITHUB_PATH
+      - run: echo $PATH
+      - name: Run End-To-End tests
+        run: bash tests/run-all.sh
