@@ -12,4 +12,4 @@ stable-test-results/
 expected-samples/*.wav
 audition/*.wav
 tags
-tests/results
+reference-tones
