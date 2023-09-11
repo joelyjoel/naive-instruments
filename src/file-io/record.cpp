@@ -3,9 +3,8 @@
 void record( const std::string& outputFile, std::shared_ptr<FrameStream<double>> signal, float duration )
 {
 
-    double attenuation    = .5;
-    int    numberOfFrames = duration * sampleRate;
-    std::cerr << "Number of frames: " << numberOfFrames << "\n";
+    double    attenuation    = .5;
+    int       numberOfFrames = duration * sampleRate;
     WavWriter recorder( outputFile.c_str(), numberOfFrames );
     for ( int i = 0; i < numberOfFrames; ++i )
         recorder << ( *signal )[i] * attenuation;
@@ -16,8 +15,7 @@ void record( const std::string& outputFile, NaiveInstruments::SignalShorthands::
 
     double attenuation = .5;
 
-    int numberOfFrames = duration * sampleRate;
-    std::cerr << "Number of frames: " << numberOfFrames << "\n";
+    int       numberOfFrames = duration * sampleRate;
     WavWriter recorder( outputFile.c_str(), numberOfFrames );
 
     NaiveInstruments::SignalReader<double> reader;
@@ -30,9 +28,8 @@ void record( const std::string& outputFile, NaiveInstruments::SignalShorthands::
 [[deprecated( "Writing wav files to pipes is a bad idea because the duration must be specified in the header" )]] void
 recordToStdout( std::shared_ptr<FrameStream<double>> signal, float duration )
 {
-    double attenuation    = .5;
-    int    numberOfFrames = duration * sampleRate;
-    std::cerr << "Number of frames: " << numberOfFrames << "\n";
+    double    attenuation    = .5;
+    int       numberOfFrames = duration * sampleRate;
     WavWriter recorder( stdout, numberOfFrames );
     for ( int i = 0; i < numberOfFrames; ++i )
     {
@@ -45,8 +42,7 @@ void recordToStdout( NaiveInstruments::SignalShorthands::mono signal, float dura
     double attenuation = .5;
 
 
-    int numberOfFrames = duration * sampleRate;
-    std::cerr << "Number of frames: " << numberOfFrames << "\n";
+    int       numberOfFrames = duration * sampleRate;
     WavWriter recorder( stdout, numberOfFrames );
 
     NaiveInstruments::SignalReader<double> reader;

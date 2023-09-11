@@ -42,7 +42,6 @@ public:
 
     ~WavWriter()
     {
-        std::cerr << "WavWriter wrote " << numberOfSamplesWritten << " to " << filepath << std::endl;
         sf_close( file );
     }
 
@@ -132,7 +131,6 @@ public:
         const int                                                     numberOfFrames = duration * info.samplerate;
         NaiveInstruments::SignalReader<NaiveInstruments::StereoFrame> reader;
         reader = signal;
-        std::cerr << "numbeOfFrames: " << numberOfFrames << std::endl;
         for ( int i = 0; i < numberOfFrames; ++i )
         {
             auto frame = reader[i];
