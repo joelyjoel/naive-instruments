@@ -10,5 +10,7 @@
  */
 void record( const std::string& outputFile, std::shared_ptr<FrameStream<double>> signal, float duration );
 void record( const std::string& outputFile, NaiveInstruments::SignalShorthands::mono signal, float duration );
-void record( std::ostream& outputStream, std::shared_ptr<FrameStream<double>> signal, float duration );
-void record( std::ostream& outputStream, NaiveInstruments::SignalShorthands::mono, float duration );
+[[deprecated( "Writing wav files to pipes is a bad idea because the duration must be specified in the header" )]] void
+recordToStdout( std::shared_ptr<FrameStream<double>> signal, float duration );
+[[deprecated( "Writing wav files to pipes is a bad idea because the duration must be specified in the header" )]] void
+recordToStdout( NaiveInstruments::SignalShorthands::mono, float duration );

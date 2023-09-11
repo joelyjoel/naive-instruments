@@ -1,1195 +1,337 @@
 [
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/main.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/main.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/main.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/main.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/file-io/record.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/file-io/record.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/file-io/record.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/file-io/record.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/core/Signal.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/core/Signal.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/core/Signal.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/core/Signal.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/playback/BufferedPlayback.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/playback/BufferedPlayback.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/parsing/Parse.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/Parse.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/Parse.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/parsing/Parse.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/parsing/LazyRegex.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/parsing/LazyRegex.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/parsing/NumberPatterns.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/parsing/NumberPatterns.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/parsing/Units.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/Units.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/Units.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/parsing/Units.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/parsing/NumberWithUnit.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/parsing/NumberWithUnit.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/instruments/Add.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Add.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Add.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/instruments/Add.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/instruments/Multiply.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/instruments/Multiply.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/instruments/BreakpointEnvelope.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/instruments/BreakpointEnvelope.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/instruments/ControlString.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/instruments/ControlString.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/file-io/piping.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/file-io/piping.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/file-io/piping.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/file-io/piping.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/parsing/RegularExpressionSources.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/parsing/RegularExpressionSources.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/instruments/Rhythm.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/instruments/Rhythm.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/cli/SignalString.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/cli/SignalString.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/cli/SignalString.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/cli/SignalString.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-I/Users/joelle/code/naive-instruments/dependencies",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/naive.dir/src/instruments/Osc.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Osc.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Osc.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/naive.dir/src/instruments/Osc.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/catch-config.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/catch-config.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/catch-config.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/catch-config.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/file-io/record.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/file-io/record.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/file-io/record.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/file-io/record.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/core/Signal.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/core/Signal.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/core/Signal.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/core/Signal.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/playback/BufferedPlayback.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/playback/BufferedPlayback.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/Parse.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/Parse.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/Parse.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/Parse.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/LazyRegex.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/LazyRegex.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/NumberPatterns.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/NumberPatterns.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/Units.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/Units.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/Units.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/Units.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/NumberWithUnit.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/NumberWithUnit.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/Add.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Add.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Add.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/Add.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/Multiply.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/Multiply.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/BreakpointEnvelope.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/BreakpointEnvelope.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/ControlString.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/ControlString.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/file-io/piping.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/file-io/piping.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/file-io/piping.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/file-io/piping.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/RegularExpressionSources.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/RegularExpressionSources.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/Rhythm.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/Rhythm.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/cli/SignalString.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/cli/SignalString.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/cli/SignalString.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/cli/SignalString.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/Osc.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/Osc.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/Osc.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/Osc.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/generative/Random.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/generative/Random.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/generative/Random.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/generative/Random.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/BreakpointEnvelope.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/BreakpointEnvelope.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/instruments/ControlString.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/instruments/ControlString.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/instruments/ControlString.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/instruments/ControlString.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/LazyRegex.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/LazyRegex.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/NumberPatterns.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/NumberPatterns.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/NumberWithUnit.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/NumberWithUnit.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/core/Signal.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/core/Signal.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/core/Signal.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/core/Signal.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/core/Sample.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/core/Sample.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/core/Sample.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/core/Sample.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/parse.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/parse.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/parse.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/parse.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/RegularExpressionSources.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/RegularExpressionSources.test.cpp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang++",
-      "-DBOOST_PROGRAM_OPTIONS_DYN_LINK",
-      "-DBOOST_PROGRAM_OPTIONS_NO_LIB",
-      "-I/opt/homebrew/Cellar/portaudio/19.7.0/include",
-      "-isystem",
-      "/opt/homebrew/include",
-      "-std=c++20",
-      "-stdlib=libc++",
-      "-arch",
-      "arm64",
-      "-isysroot",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk",
-      "-fPIE",
-      "-std=gnu++20",
-      "-c",
-      "-o",
-      "CMakeFiles/test_naive.dir/src/parsing/Units.test.cpp.o",
-      "/Users/joelle/code/naive-instruments/src/parsing/Units.test.cpp"
-    ],
-    "directory": "/Users/joelle/code/naive-instruments/build",
-    "file": "/Users/joelle/code/naive-instruments/src/parsing/Units.test.cpp",
-    "output": "/Users/joelle/code/naive-instruments/build/CMakeFiles/test_naive.dir/src/parsing/Units.test.cpp.o"
-  }
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/main.cpp.o -c /Users/joelle/code/naive-instruments/src/main.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/main.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/file-io/record.cpp.o -c /Users/joelle/code/naive-instruments/src/file-io/record.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/file-io/record.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/core/Signal.cpp.o -c /Users/joelle/code/naive-instruments/src/core/Signal.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/core/Signal.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/playback/BufferedPlayback.cpp.o -c /Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/parsing/Parse.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/Parse.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/Parse.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/parsing/LazyRegex.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/parsing/NumberPatterns.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/parsing/Units.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/Units.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/Units.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/parsing/NumberWithUnit.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/instruments/Add.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Add.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Add.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/instruments/Multiply.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/instruments/BreakpointEnvelope.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/instruments/ControlString.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/file-io/piping.cpp.o -c /Users/joelle/code/naive-instruments/src/file-io/piping.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/file-io/piping.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/parsing/RegularExpressionSources.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/instruments/Rhythm.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/cli/SignalString.cpp.o -c /Users/joelle/code/naive-instruments/src/cli/SignalString.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/cli/SignalString.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/naive.dir/src/instruments/Osc.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Osc.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Osc.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/catch-config.test.cpp.o -c /Users/joelle/code/naive-instruments/src/catch-config.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/catch-config.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/file-io/record.cpp.o -c /Users/joelle/code/naive-instruments/src/file-io/record.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/file-io/record.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/core/Signal.cpp.o -c /Users/joelle/code/naive-instruments/src/core/Signal.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/core/Signal.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/playback/BufferedPlayback.cpp.o -c /Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/playback/BufferedPlayback.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/Parse.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/Parse.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/Parse.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/LazyRegex.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/NumberPatterns.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/Units.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/Units.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/Units.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/NumberWithUnit.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/Add.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Add.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Add.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/Multiply.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Multiply.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/BreakpointEnvelope.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/ControlString.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/ControlString.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/file-io/piping.cpp.o -c /Users/joelle/code/naive-instruments/src/file-io/piping.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/file-io/piping.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/RegularExpressionSources.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/Rhythm.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Rhythm.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/cli/SignalString.cpp.o -c /Users/joelle/code/naive-instruments/src/cli/SignalString.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/cli/SignalString.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/Osc.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/Osc.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/Osc.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/signal/naming.test.cpp.o -c /Users/joelle/code/naive-instruments/src/signal/naming.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/signal/naming.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/signal/Signal.test.cpp.o -c /Users/joelle/code/naive-instruments/src/signal/Signal.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/signal/Signal.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/signal/signal-processes.test.cpp.o -c /Users/joelle/code/naive-instruments/src/signal/signal-processes.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/signal/signal-processes.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/signal/SignalShorthands.test.cpp.o -c /Users/joelle/code/naive-instruments/src/signal/SignalShorthands.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/signal/SignalShorthands.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/generative/Random.test.cpp.o -c /Users/joelle/code/naive-instruments/src/generative/Random.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/generative/Random.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/BreakpointEnvelope.test.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/BreakpointEnvelope.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/instruments/ControlString.test.cpp.o -c /Users/joelle/code/naive-instruments/src/instruments/ControlString.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/instruments/ControlString.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/LazyRegex.test.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/LazyRegex.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/LazyRegex.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/NumberPatterns.test.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberPatterns.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/NumberWithUnit.test.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/NumberWithUnit.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/core/Signal.test.cpp.o -c /Users/joelle/code/naive-instruments/src/core/Signal.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/core/Signal.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/core/Sample.test.cpp.o -c /Users/joelle/code/naive-instruments/src/core/Sample.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/core/Sample.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/parse.test.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/parse.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/parse.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/RegularExpressionSources.test.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/RegularExpressionSources.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build",
+  "command": "/usr/bin/clang++ -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB -DPA_USE_COREAUDIO=1 -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIE -std=gnu++20 -o CMakeFiles/test_naive.dir/src/parsing/Units.test.cpp.o -c /Users/joelle/code/naive-instruments/src/parsing/Units.test.cpp",
+  "file": "/Users/joelle/code/naive-instruments/src/parsing/Units.test.cpp"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_allocation.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_allocation.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_allocation.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_converters.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_converters.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_converters.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_cpuload.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_cpuload.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_cpuload.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_debugprint.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_debugprint.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_debugprint.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_dither.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_dither.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_dither.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_front.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_front.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_front.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_process.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_process.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_process.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_ringbuffer.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_ringbuffer.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_ringbuffer.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_stream.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_stream.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_stream.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/common/pa_trace.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_trace.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common/pa_trace.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/os/unix/pa_unix_hostapis.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix/pa_unix_hostapis.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix/pa_unix_hostapis.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/os/unix/pa_unix_util.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix/pa_unix_util.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix/pa_unix_util.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/hostapi/coreaudio/pa_mac_core.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio/pa_mac_core.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio/pa_mac_core.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/hostapi/coreaudio/pa_mac_core_blocking.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio/pa_mac_core_blocking.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio/pa_mac_core_blocking.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/portaudio",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc -DPA_LITTLE_ENDIAN -DPA_USE_COREAUDIO=1 -DPortAudio_EXPORTS -I/opt/homebrew/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/include -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/common -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/os/unix -I/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -fPIC -std=gnu11 -o CMakeFiles/PortAudio.dir/src/hostapi/coreaudio/pa_mac_core_utilities.c.o -c /Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio/pa_mac_core_utilities.c",
+  "file": "/Users/joelle/code/naive-instruments/dependencies/portaudio/src/hostapi/coreaudio/pa_mac_core_utilities.c"
+},
+{
+  "directory": "/Users/joelle/code/naive-instruments/build/dependencies/ni-media/audiostream",
+  "command": "/usr/bin/clang++ -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_IOSTREAMS_DYN_LINK -DBOOST_IOSTREAMS_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -DNIMEDIA_ENABLE_AIFF_DECODING=1 -DNIMEDIA_ENABLE_FLAC_DECODING=1 -DNIMEDIA_ENABLE_ITUNES_DECODING=0 -DNIMEDIA_ENABLE_MP3_DECODING=1 -DNIMEDIA_ENABLE_MP4_DECODING=1 -DNIMEDIA_ENABLE_OGG_DECODING=1 -DNIMEDIA_ENABLE_WAV_DECODING=1 -DNIMEDIA_ENABLE_WAV_ENCODING=1 -DNIMEDIA_ENABLE_WMA_DECODING=0 -Daudiostream_EXPORTS -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/inc -I/Users/joelle/code/naive-instruments/dependencies/ni-media/audiostream/src -I/Users/joelle/code/naive-instruments/dependencies/ni-media/pcm/inc -isystem /opt/homebrew/include  -std=c++20 -stdlib=libc++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fPIC -std=gnu++14 -o CMakeFiles/audiostream.dir/Unity/unity_0_cxx.cxx.o -c /Users/joelle/code/naive-instruments/build/dependencies/ni-media/audiostream/CMakeFiles/audiostream.dir/Unity/unity_0_cxx.cxx",
+  "file": "/Users/joelle/code/naive-instruments/build/dependencies/ni-media/audiostream/CMakeFiles/audiostream.dir/Unity/unity_0_cxx.cxx"
+}
 ]

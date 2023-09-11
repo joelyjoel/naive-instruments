@@ -115,6 +115,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/signal/signal-processes.test.cpp
    src/signal/SignalShorthands.test.cpp
    src/generative/Random.test.cpp 
+   src/file-io/WavWriter.test.cpp
    src/instruments/BreakpointEnvelope.test.cpp 
    src/instruments/ControlString.test.cpp 
    src/parsing/LazyRegex.test.cpp 
@@ -134,3 +135,7 @@ TARGET_LINK_LIBRARIES( test_naive LINK_PUBLIC ${LIBSNDFILE_LIBRARIES} )
 add_subdirectory(./dependencies/portaudio)
 target_link_libraries( naive PRIVATE PortAudio)
 target_link_libraries( test_naive PRIVATE PortAudio)
+
+add_subdirectory(./dependencies/libsndfile)
+target_link_libraries( naive PRIVATE SndFile::sndfile)
+target_link_libraries(naive PRIVATE SndFile::sndfile)

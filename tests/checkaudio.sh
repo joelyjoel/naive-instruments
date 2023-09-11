@@ -50,6 +50,7 @@ function checkaudio {
     done
   else
     if [ $stableChecksum != checksum ]; then
+      echo " ❌ Checksums for $sample did not match.\nExpected $stableChecksum, got $checksum"
       return 1;
     fi
   fi

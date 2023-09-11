@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../core/MonoBuffer.h"
 #include "./Signal.h"
 #include <algorithm>
@@ -112,6 +114,19 @@ public:
         output.left  = input[t];
         output.right = input[t];
     };
+};
+
+class StereoChannels : public StereoSignal
+{
+public:
+    SignalReader<double> left{ this };
+    SignalReader<double> right{ this };
+
+    void action() override
+    {
+        output.left  = left[t];
+        output.right = right[t];
+    }
 };
 
 template <typename T>
