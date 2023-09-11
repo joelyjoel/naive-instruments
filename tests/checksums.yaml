@@ -112,3 +112,5 @@
   checksum: SHA256=c485fa7cd4d683b63ef5be70c88b38003426b270f8c1303fbd143a45bbbd4f0a
 ../reference-tones/harmonic_series( 950, 4).wav:
   checksum: SHA256=c17fb09079b2c311fbd5731199df2c4e913e8f87896e3201b723c859659e4a86
+../reference-tones/panning sine wave.wav:
+  checksum: SHA256=f39d2e9bf163d5dbb821cc7ed7e2a9fe1d0b685ee9ee3f270a67f5bed1d55613

@@ -545,6 +545,33 @@ inline stereo stereoChannels( mono left, mono right )
 }
 
 /**
+ * Pan audio to left & right channels
+ */
+inline stereo pan( stereo input, mono pan )
+{
+    auto signal   = std::make_shared<Pan>();
+    signal->input = input;
+    signal->pan   = pan;
+    return signal;
+}
+
+inline stereo pan( stereo input, double panAmount )
+{
+    return pan( input, constant( panAmount ) );
+}
+
+inline stereo pan( mono input, mono panValue )
+{
+    return pan( monoToStereo( input ), panValue );
+}
+
+inline stereo pan( mono input, double panAmount )
+{
+    return pan( input, constant( panAmount ) );
+}
+
+
+/**
  * Hard clip a stereo 'input` signal within the range -1.0 to 1.0
  */
 inline stereo clip( stereo input )
