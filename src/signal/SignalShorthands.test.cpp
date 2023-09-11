@@ -122,13 +122,12 @@ TEST_CASE( "Constructing a sineWavetable" )
     CHECK( table->output == sin( M_PI * 2 * 1 / 44100.0 ) );
 }
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "shorthand for sine waves" ) */
-/* { */
-/*     auto signal = sine( constant( 1 ) ); */
-/*     CHECK_FRAME( signal, 1, sin( M_PI * 2 * 1 / 44100.0 ) ); */
-/*     AUDIO_TEST( "440Hz Sine", sine( constant( 440 ) ), .1 ); */
-/* } */
+TEST_CASE( "shorthand for sine waves" )
+{
+    auto signal = sine( constant( 1 ) );
+    CHECK_FRAME( signal, 1, sin( M_PI * 2 * 1 / 44100.0 ) );
+    referenceToneTest( "440Hz Sine", sine( constant( 440 ) ), .1 );
+}
 
 TEST_CASE( "short hand for square waves" )
 {
@@ -138,11 +137,10 @@ TEST_CASE( "short hand for square waves" )
     CHECK_FRAME( signal, 44101, 1.0 );
 }
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "checksum test for square wave" ) */
-/* { */
-/*     AUDIO_TEST( "440Hz square wave", square( constant( 44 ) ), .1 ); */
-/* } */
+TEST_CASE( "checksum test for square wave" )
+{
+    referenceToneTest( "440Hz square wave", square( constant( 44 ) ), .1 );
+}
 
 // TODO: test saw()
 TEST_CASE( "shorthand for triangle waves" )
@@ -225,58 +223,37 @@ TEST_CASE( "Delaying a signal by fixed duration" )
     CHECK_FRAME( delayedSignal, 443, 2 );
 }
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "signal reader += operator" ) */
-/* { */
-/*     auto                                   fundamental         = 200; */
-/*     int                                    numberOfHarmonics   = 17; */
-/*     double                                 arpegiationInterval = .2; */
-/*     NaiveInstruments::SignalReader<double> reader; */
-/*     reader = sine( fundamental ); */
-/*     for ( int i = 1; i < numberOfHarmonics; ++i ) */
-/*     { */
-/*         reader += wait( i * arpegiationInterval, sine( fundamental * i ) ); */
-/*     } */
-/*     AUDIO_TEST( */
-/*         "17 harmonic series on 200Hz", reader.ptr / numberOfHarmonics, numberOfHarmonics * arpegiationInterval + 1.6
- * ); */
-/* } */
+TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" )
+{
+    auto freq = GENERATE( range( 100, 1000, 50 ) );
+    referenceToneTest( "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ) );
+}
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" ) */
-/* { */
-/*     auto freq = GENERATE( range( 100, 1000, 50 ) ); */
-/*     AUDIO_TEST( "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ) ); */
-/* } */
+TEST_CASE( "harmonic_spread()" )
+{
+    auto fundamental       = GENERATE( 200, 20, 50, 440, 30, 40 );
+    auto numberOfHarmonics = GENERATE( 9, 17, 65 );
+    auto step_duration     = .1;
+    referenceToneTest( std::to_string( numberOfHarmonics ) + " harmonic spread on " + std::to_string( fundamental )
+                           + "Hz",
+                       harmonic_spread( fundamental, numberOfHarmonics, step_duration ),
+                       2 );
+}
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "harmonic_spread()" ) */
-/* { */
-/*     auto fundamental       = GENERATE( 200, 20, 50, 440, 30, 40 ); */
-/*     auto numberOfHarmonics = GENERATE( 9, 17, 65 ); */
-/*     auto step_duration     = .1; */
-/*     AUDIO_TEST( std::to_string( numberOfHarmonics ) + " harmonic spread on " + std::to_string( fundamental ) + "Hz", */
-/*                 harmonic_spread( fundamental, numberOfHarmonics, step_duration ), */
-/*                 2 * numberOfHarmonics * step_duration ); */
-/* } */
+TEST_CASE( "ramp as an envelope" )
+{
+    referenceToneTest( "440Hz Sine boop", sine( constant( 440 ) ) * ramp( 1, 1, 0 ), 1 );
+}
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "ramp as an envelope" ) */
-/* { */
-/*     AUDIO_TEST( "440Hz Sine boop", sine( constant( 440 ) ) * ramp( 1, 1, 0 ), 1 ); */
-/* } */
+TEST_CASE( "Linear decay" )
+{
+    referenceToneTest( "Sine with linear decay envelope on amplitude", sine( 100 ) * decay( 2 ), 2 );
+}
 
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "Linear decay" ) */
-/* { */
-/*     AUDIO_TEST( "Sine with linear decay envelope on amplitude", sine( 100 ) * decay( 2 ), 2 ); */
-/* } */
-
-// TODO: Uncomment below test once AUDIO_TEST bug is resolved on the workflow
-/* TEST_CASE( "Frequency modulation in series" ) */
-/* { */
-/*     AUDIO_TEST( "440 into 220 fm series", fm_series( { constant( 440 ), constant( 6 ), constant( 220 ) } ), 1 ); */
-/* } */
+TEST_CASE( "Frequency modulation in series" )
+{
+    referenceToneTest( "440 into 220 fm series", fm_series( { constant( 440 ), constant( 6 ), constant( 220 ) } ), 1 );
+}
 
 TEST_CASE( "Various signals are resettable and repeat the same sequence" )
 {
