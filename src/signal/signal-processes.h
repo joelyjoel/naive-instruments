@@ -129,6 +129,28 @@ public:
     }
 };
 
+class Pan : public StereoSignal
+{
+public:
+    SignalReader<StereoFrame> input{ this };
+    SignalReader<double>      pan{ this };
+
+    double compensationInDecibels = 1.5;
+
+    void action() override
+    {
+        double compensation = dB( ( 1 - abs( pan[t] ) ) * compensationInDecibels );
+        output.left         = input[t].left * ( 1 - pan[t] ) / 2 * compensation;
+        output.right        = input[t].right * ( 1 + pan[t] ) / 2 * compensation;
+    }
+
+private:
+    double dB( double db )
+    { // decibel to scale factor (for amplitude calculations)
+        return pow( 10, db / 20 );
+    }
+};
+
 template <typename T>
 class Repeater : public Signal<T>
 {

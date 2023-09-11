@@ -302,3 +302,9 @@ TEST_CASE( "Creating a step sequencer" )
     CHECK_FRAME( sequence, 2 * 44100, 420 );
     CHECK_FRAME( sequence, 3 * 44100, 0 );
 }
+
+TEST_CASE( "Panning a signal right to left using a control signal" )
+{
+
+    referenceToneTest( "panning sine wave", pan( sine( 440 ), triangle( constant( 2 ) ) ), 2 );
+}
