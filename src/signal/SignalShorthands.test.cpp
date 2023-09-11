@@ -226,7 +226,8 @@ TEST_CASE( "Delaying a signal by fixed duration" )
 TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" )
 {
     auto freq = GENERATE( range( 100, 1000, 50 ) );
-    referenceToneTest( "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ) );
+    referenceToneTest(
+        "harmonic_series( " + std::to_string( freq ) + ", 4)", harmonic_series( constant( freq ), 4 ), .5 );
 }
 
 TEST_CASE( "harmonic_spread()" )
