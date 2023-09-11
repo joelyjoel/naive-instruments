@@ -30,3 +30,85 @@ results/Upward sine sweep accross entire grand piano range.wav:
   checksum: SHA256=eb3d8f787406d70b365038b6d3665e0ee3db5a89dfa6e7bcc61abf91a508bc4e
 results/440Hz stereo sine.wav.wav:
   checksum: SHA256=05be7f4908b602cfb2ca5135fb2837447f002e85de8fdd21b48002175afb2f37
+results/17 harmonic spread on 200Hz.wav:
+  checksum: SHA256=299e6db36c4c294118b9f1a506f02bdfece2574c324f227491a114aab8a59cb6
+results/17 harmonic spread on 20Hz.wav:
+  checksum: SHA256=8142909971098ee23e127790d457da9879f7a090cb555f7aa9822b18490c5af9
+results/17 harmonic spread on 30Hz.wav:
+  checksum: SHA256=12f5201885ed1c87a14f02b31cbc37b3e207832f8613656fc9a447f6b0b93837
+results/17 harmonic spread on 40Hz.wav:
+  checksum: SHA256=735bdfd9971dac43dc1b711566deff2bb69c83c12d008edf669408007e33bb27
+results/17 harmonic spread on 440Hz.wav:
+  checksum: SHA256=abcec8e17ad63a2ddc4d6da5c27cc618c07db0e618de297a8250a2787906a110
+results/17 harmonic spread on 50Hz.wav:
+  checksum: SHA256=ae819f152f9e26e0b24f8d9e96fa3c155da9a9dd600e559bb1467e7bd322a29b
+results/440 into 220 fm series.wav:
+  checksum: SHA256=b4b5343b8047ada225d6276db0b109d2acdf9ba4c8f9231b5eb64dd327a7d72c
+results/440Hz Sine boop.wav:
+  checksum: SHA256=671194e4a874fdb7fcdb15887aafee55b29eaa1734639a73e5a1809828489e9b
+results/440Hz Sine.wav:
+  checksum: SHA256=a814a5526802301931a4658f9e72f9423097845e0a8b79d0d1cd4efbf6ed1aaf
+results/440Hz square wave.wav:
+  checksum: SHA256=c1f1717b008797855c709167f11fad46e720c380a6385d0141b60ee399f430a6
+results/65 harmonic spread on 200Hz.wav:
+  checksum: SHA256=0c99c3645291f103ff9efaf208b8c31b2c95b3b0e0bb12cd8bdd43d32e434b1e
+results/65 harmonic spread on 20Hz.wav:
+  checksum: SHA256=1c60e8164a01ef30bf7bdf791279099a4211addf4a4a35b4c104b8f3c79e8665
+results/65 harmonic spread on 30Hz.wav:
+  checksum: SHA256=5f7aa236ec46f967735f1472b5380298a9414e4a96e251105b2e38c533214647
+results/65 harmonic spread on 40Hz.wav:
+  checksum: SHA256=f2d7a58eef03f02d147c2dd0e61439606dfb0f74fd99c5667a00cc792fa127db
+results/65 harmonic spread on 440Hz.wav:
+  checksum: SHA256=51b2a1a999dad5f77b40c6b346744171287e220a39e31fd18f4b79ac38cb577c
+results/65 harmonic spread on 50Hz.wav:
+  checksum: SHA256=1f1ace61faaee6159b5df693844edb0b4ced3c2411dc48b53c59d8f18e7342a0
+results/9 harmonic spread on 200Hz.wav:
+  checksum: SHA256=8c3d159ef260a577cd46a3a8486b6c25e2fddd26db58e530effe9c9ffb656dcd
+results/9 harmonic spread on 20Hz.wav:
+  checksum: SHA256=694bc3bf2e44e8814b6bb777816b4f6778045e48701fb48143d45483f846b0fe
+results/9 harmonic spread on 30Hz.wav:
+  checksum: SHA256=95b2ad5c3256859b0783e07d4ead866fbcbc96cd9131f25b893b6a0cd8a2095e
+results/9 harmonic spread on 40Hz.wav:
+  checksum: SHA256=3ff991cc68543ac9984a6c63c3198d9a3d7311266c5f1a4be0541ce86039062c
+results/9 harmonic spread on 440Hz.wav:
+  checksum: SHA256=b62d7af7a9e1b978ce75c379b4d2c28e7d9f8b46f6b631bcfcf2efaedc789465
+results/9 harmonic spread on 50Hz.wav:
+  checksum: SHA256=6fba9ce10495fe3902a7ae816c75639d46ebe28c6b029f274ad7324b26d1dbd6
+results/Sine with linear decay envelope on amplitude.wav:
+  checksum: SHA256=84063ff041d59d490ef1bb094c6c387aeec0e02d9a659396460b595987c3c0da
+results/harmonic_series( 100, 4).wav:
+  checksum: SHA256=b0b2d66222cfabd93ad43ef93e554acd54d2bcb6f09bee342c1fff152aba2cec
+results/harmonic_series( 150, 4).wav:
+  checksum: SHA256=c4f3daa0f8185bb6911f8a4dea1087c90ce662ba9a0e41f7a4434b5c4af617cc
+results/harmonic_series( 200, 4).wav:
+  checksum: SHA256=b0d701937a895192d626d5bc613ac6283ae3638c05db26399b9184cb80e1874c
+results/harmonic_series( 250, 4).wav:
+  checksum: SHA256=a46d94aa22def9b2fd58b535bc5fcb4b79b48514e844c1bce23abf3710a1829e
+results/harmonic_series( 300, 4).wav:
+  checksum: SHA256=676717e03c437055a9c37a62f5598484ea311c924a379e715ea7908312e68f75
+results/harmonic_series( 350, 4).wav:
+  checksum: SHA256=cc5a14810335de8909ad1c532a9d35d1719c4e29e079ea489bdcad593caf0913
+results/harmonic_series( 400, 4).wav:
+  checksum: SHA256=b98aee816b92ad51abaf755ccd095b419e8151b22f122ad8428d9fd34b468881
+results/harmonic_series( 450, 4).wav:
+  checksum: SHA256=ef388b1419ae114eab38b9e5b926902d4a71df2dbe7debac9a3949d9a1ef3db6
+results/harmonic_series( 500, 4).wav:
+  checksum: SHA256=31b962d8816dfd23c8cd032fbadee38c6fb93ad48663113bd1f9686fbd6205f0
+results/harmonic_series( 550, 4).wav:
+  checksum: SHA256=79649cfae5f72920f8b8fa2ba5ca5e2854269dd54982c510a0a83ccbc8f27821
+results/harmonic_series( 600, 4).wav:
+  checksum: SHA256=ad3a0cef6e30095bcf87cb3bd7e378b0e5cad807f6c45b16e9d7b1c558365a9f
+results/harmonic_series( 650, 4).wav:
+  checksum: SHA256=f988ef4f5589ac6a201dfe5f66a6c7073d0d491ce94c36138b64de84588dc148
+results/harmonic_series( 700, 4).wav:
+  checksum: SHA256=8032a687833b4df2fc3491b2f24bd25442f442ab4b1985d5e09957149c8ab121
+results/harmonic_series( 750, 4).wav:
+  checksum: SHA256=0d4670a6b54118a616d6be799380fdf8856aa0517ce4f7dddcb928a2fae7c8fb
+results/harmonic_series( 800, 4).wav:
+  checksum: SHA256=cfb1c1c21e47d3ff0c41c43e43779dd6be41fc7d80c16c389f488bd2bac96f44
+results/harmonic_series( 850, 4).wav:
+  checksum: SHA256=ff6ef8604732321a2b9fa6ce50894d4fa7041aa53ea439124a601c65f8f49b62
+results/harmonic_series( 900, 4).wav:
+  checksum: SHA256=c485fa7cd4d683b63ef5be70c88b38003426b270f8c1303fbd143a45bbbd4f0a
+results/harmonic_series( 950, 4).wav:
+  checksum: SHA256=c17fb09079b2c311fbd5731199df2c4e913e8f87896e3201b723c859659e4a86
