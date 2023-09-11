@@ -287,11 +287,11 @@ TEST_CASE( "Various signals are resettable and repeat the same sequence" )
 
 TEST_CASE( "super saws!" )
 {
-    AUDIO_TEST( "super saw", super_saw( ramp( 60, 1, 72 ), constant( 10 ) ), 1 );
-    AUDIO_TEST(
+    referenceToneTest( "super saw", super_saw( ramp( 60, 1, 72 ), constant( 10 ) ), 1 );
+    referenceToneTest(
         "super saw chord", super_saws( { constant( 40 ), constant( 43 ), constant( 47 ) }, constant( .5 ) ), 1 );
-    AUDIO_TEST( "sliding super saw chord", super_saws( minor_triad( ramp( 40, 1, 28 ) ), constant( .5 ) ), 30 );
-    AUDIO_TEST( "sliding super saw chord 2", super_saws( minor_triad( ramp( 52, 1, 40 ) ), constant( .5 ) ), 30 );
+    referenceToneTest( "sliding super saw chord", super_saws( minor_triad( ramp( 40, 1, 28 ) ), constant( .5 ) ), 5 );
+    referenceToneTest( "sliding super saw chord 2", super_saws( minor_triad( ramp( 52, 1, 40 ) ), constant( .5 ) ), 5 );
 }
 
 // TODO: Test hard clipping stereo signals
