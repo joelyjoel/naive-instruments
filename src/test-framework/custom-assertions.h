@@ -78,7 +78,7 @@ inline std::string record_and_checksum( const std::string                       
 }
 
 
-inline const std::string referenceToneLocation = "./tests/results/";
+inline const std::string referenceToneLocation = "./reference-tones/";
 
 inline void referenceToneTest( const std::string&                                                       name,
                                std::shared_ptr<NaiveInstruments::Signal<NaiveInstruments::StereoFrame>> signal,
