@@ -679,6 +679,20 @@ inline mono step_sequence( double stepsPerMinute, std::vector<mono> steps )
     return sequence;
 }
 
+inline mono left( stereo input )
+{
+    auto signal   = std::make_shared<SelectLeftChannel>();
+    signal->input = input;
+    return signal;
+}
+
+inline mono right( stereo input )
+{
+    auto signal   = std::make_shared<SelectRightChannel>();
+    signal->input = input;
+    return signal;
+}
+
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch
 

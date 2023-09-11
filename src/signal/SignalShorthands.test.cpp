@@ -308,3 +308,9 @@ TEST_CASE( "Panning a signal right to left using a control signal" )
 
     referenceToneTest( "panning sine wave", pan( sine( 440 ), triangle( constant( 2 ) ) ), 2 );
 }
+
+TEST_CASE( "Selecting channels from stereo signals" )
+{
+    CHECK_SIGNAL( left( stereoChannels( t(), -t() ) ), { 0, 1, 2, 3, 4, 5 } );
+    CHECK_SIGNAL( right( stereoChannels( t(), -t() ) ), { 0, -1, -2, -3, -4, -5 } );
+}
