@@ -84,6 +84,7 @@ inline void referenceToneTest( const std::string&                               
                                std::shared_ptr<NaiveInstruments::Signal<NaiveInstruments::StereoFrame>> signal,
                                double                                                                   duration = .1 )
 {
+    std::filesystem::create_directory( referenceToneLocation );
     std::string filepath = referenceToneLocation + name + ".wav";
     WavWriter   writer( filepath.c_str(), duration * 44100 );
     writer.write( signal, duration );
