@@ -706,7 +706,7 @@ inline mono fixed_delay( double durationInSeconds, mono input )
 /**
  * Evenly spaced sawtooth waves all summed together for a dramatic sound.
  */
-inline mono super_saw( mono pitch, mono width, int numberOfOscs = 3 )
+inline mono supersaw( mono pitch, mono width, int numberOfOscs = 3 )
 {
     // TODO: Add options for other waveforms
     // TODO: Add rall off
@@ -725,7 +725,7 @@ inline mono super_saws( std::vector<mono> pitches, mono width, int numberOfOscs 
     std::vector<mono> saws;
     for ( auto pitch : pitches )
     {
-        saws.push_back( super_saw( pitch, width, numberOfOscs ) );
+        saws.push_back( supersaw( pitch, width, numberOfOscs ) );
     }
 
     return mix( saws );
