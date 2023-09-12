@@ -13,7 +13,20 @@ TEST_CASE( "Can use StandardSignalConstructor to create Noise process" )
 
 TEST_CASE( "StandardSignalConstructor can recognise the signals it constructs" )
 {
-    auto                                        shorthand = GENERATE( "noise", "usaw", "sum" );
+    auto                                        shorthand = GENERATE( "usaw",
+                               "sum",
+                               "subtract",
+                               "signFlip",
+                               "multiply",
+                               "divide",
+                               "repeater",
+                               "clock",
+                               "accumulator",
+                               "modulo",
+                               "noise",
+                               "hardClip",
+                               "linearRamp",
+                               "sequence" );
     NaiveInstruments::StandardSignalConstructor constructor;
     auto                                        signal = constructor.construct( shorthand );
     CAPTURE( shorthand, typeid( signal ).name() );

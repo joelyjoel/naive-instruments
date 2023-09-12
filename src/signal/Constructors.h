@@ -91,10 +91,45 @@ public:
         add( noise );
         add( usaw );
         add( sum );
+        add( subtract );
+        add( signFlip );
+        add( multiply );
+        add( divide );
+        add( repeater );
+        add( clock );
+        add( accumulator );
+        add( modulo );
+        add( noise );
+        add( hardClip );
+        add( linearRamp );
+        add( sequence );
     }
 
-    SignalProcessConstructor<Noise>       noise{ "noise" };
-    SignalProcessConstructor<USaw>        usaw{ "usaw" };
-    SignalProcessConstructor<Sum<double>> sum{ "sum" };
+    SignalProcessConstructor<USaw>             usaw{ "usaw" };
+    SignalProcessConstructor<Sum<double>>      sum{ "sum" };
+    SignalProcessConstructor<Subtract<double>> subtract{ "subtract" };
+    SignalProcessConstructor<SignFlip>         signFlip{ "signFlip" };
+    SignalProcessConstructor<Multiply>         multiply{ "multiply" };
+    SignalProcessConstructor<Divide>           divide{ "divide" };
+    // TODO: Support stereo
+    /* SignalProcessConstructor<MonoToStereo>     monoToStereo{ "monoToStereo" }; */
+    /* SignalProcessConstructor<StereoChannels>   stereoChannels{ "stereoChannels" }; */
+    /* SignalProcessConstructor<Pan>              pan{ "pan" }; */
+    SignalProcessConstructor<Repeater<double>> repeater{ "repeater" };
+    SignalProcessConstructor<Clock<double>>    clock{ "clock" };
+    SignalProcessConstructor<Accumulator>      accumulator{ "accumulator" };
+    SignalProcessConstructor<Modulo>           modulo{ "modulo" };
+    SignalProcessConstructor<Noise>            noise{ "noise" };
+    /* SignalProcessConstructor<Sampler>          sampler{ "sampler" }; */
+    /* SignalProcessConstructor<Wavetable>        wavetable{ "wavetable" }; */
+    /* SignalProcessConstructor<Wait<double>> wait{ "wait" }; */
+    /* SignalProcessConstructor<Skip<double>> skip{ "skip" }; */
+    /* SignalProcessConstructor<Elapse<double>>   elapse{ "elapse" }; */
+    SignalProcessConstructor<IntervalToRatio> intervalToRatio{ "intervalToRatio" };
+    /* SignalProcessConstructor<BufferLooper>     bufferLooper{ "bufferLooper" }; */
+    SignalProcessConstructor<HardClip<double>> hardClip{ "hardClip" };
+    SignalProcessConstructor<LinearRamp>       linearRamp{ "linearRamp" };
+    SignalProcessConstructor<Sequence>         sequence{ "sequence" };
+    /* SignalProcessConstructor<FixedDelay>       fixedDelay{ "fixedDelay" }; */
 };
 } // namespace NaiveInstruments
