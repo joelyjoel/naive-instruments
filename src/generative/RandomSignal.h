@@ -55,7 +55,7 @@ public:
         map["worm"]          = [this]() {
             auto signal = create( "lfo" );
             int  count  = 1;
-            while ( random.boolean( .5 ) )
+            while ( random.boolean( .8 ) )
             {
                 ++count;
                 signal = signal + create( "lfo" );
