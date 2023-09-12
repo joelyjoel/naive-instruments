@@ -11,11 +11,11 @@ inline void CHECK_SIGNAL( std::shared_ptr<NaiveInstruments::Signal<double>> sign
 {
     NaiveInstruments::SignalReader<double> reader;
     reader = signal;
-    for ( int i = 0; i < expectedSequence.size(); ++i )
-        SECTION( "Comparing frame " + std::to_string( i ) )
-        {
-            CHECK( reader[i] == Approx( expectedSequence[i] ) );
-        }
+    for ( int frame = 0; frame < expectedSequence.size(); ++frame )
+    {
+        CAPTURE( frame );
+        CHECK( reader[frame] == Approx( expectedSequence[frame] ) );
+    }
 }
 
 inline void CHECK_SIGNAL( std::shared_ptr<NaiveInstruments::Signal<NaiveInstruments::StereoFrame>> signal,
@@ -23,21 +23,19 @@ inline void CHECK_SIGNAL( std::shared_ptr<NaiveInstruments::Signal<NaiveInstrume
 {
     NaiveInstruments::SignalReader<NaiveInstruments::StereoFrame> reader;
     reader = signal;
-    for ( int i = 0; i < expectedSequence.size(); ++i )
-        SECTION( "Comparing frame " + std::to_string( i ) )
-        {
-            CHECK( reader[i].left == Approx( expectedSequence[i].left ) );
-            CHECK( reader[i].right == Approx( expectedSequence[i].right ) );
-        }
+    for ( int frame = 0; frame < expectedSequence.size(); ++frame )
+    {
+        CAPTURE( frame );
+        CHECK( reader[frame].left == Approx( expectedSequence[frame].left ) );
+        CHECK( reader[frame].right == Approx( expectedSequence[frame].right ) );
+    }
 }
 
 inline void CHECK_FRAME( std::shared_ptr<NaiveInstruments::Signal<double>> signal, int frame, double expectedValue )
 {
-    SECTION( "Checking frame " + std::to_string( frame ) )
-    {
-        signal->sync( frame );
-        CHECK( signal->output == Approx( expectedValue ) );
-    }
+    CAPTURE( frame );
+    signal->sync( frame );
+    CHECK( signal->output == Approx( expectedValue ) );
 }
 
 class Hasher
