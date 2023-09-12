@@ -31,10 +31,10 @@ public:
         map["chaotic"]       = [this]() {
             return create( random( { "chaotic_sine", "chaotic_saw", "chaotic_square", "chaotic_triangle" } ) );
         };
-        map["chaotic_sine"]     = [this]() { return sine( midiPitch( 50 + 30 * create( "worm" ) ) ); };
-        map["chaotic_saw"]      = [this]() { return saw( midiPitch( 50 + 30 * create( "worm" ) ) ); };
-        map["chaotic_square"]   = [this]() { return square( midiPitch( 50 + 30 * create( "worm" ) ) ); };
-        map["chaotic_triangle"] = [this]() { return triangle( midiPitch( 50 + 30 * create( "worm" ) ) ); };
+        map["chaotic_sine"]     = [this]() { return sine( create( "worm_frequency" ) ); };
+        map["chaotic_saw"]      = [this]() { return saw( create( "worm_frequency" ) ); };
+        map["chaotic_square"]   = [this]() { return square( create( "worm_frequency" ) ); };
+        map["chaotic_triangle"] = [this]() { return triangle( create( "worm_frequency" ) ); };
 
 
         map["boop"]      = [this]() { return decay( create( "duration" ) ) * create( "tone" ); };
@@ -60,6 +60,7 @@ public:
             }
             return signal / count;
         };
+        map["worm_frequency"] = [this]() { return midiPitch( 50 + 30 * create( "worm" ) ); };
     }
 
     std::shared_ptr<NaiveInstruments::Signal<double>> create( std::string shorthand )
