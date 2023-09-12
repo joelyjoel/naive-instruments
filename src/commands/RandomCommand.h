@@ -25,7 +25,7 @@ public:
         if ( !args.count( "command" ) )
         {
             std::cerr << "A random what?\n";
-            NaiveInstruments::RandomSignal r;
+            NaiveInstruments::RandomSignal r( seed() );
             auto                           availableCommands = r.availableCommands();
             for ( auto command : availableCommands )
                 std::cerr << " - " << command << "\n";
@@ -35,7 +35,7 @@ public:
 
         try
         {
-            NaiveInstruments::RandomSignal r;
+            NaiveInstruments::RandomSignal r( seed() );
             auto                           signal = r.create( command );
             output( signal );
             return;

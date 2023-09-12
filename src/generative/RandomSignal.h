@@ -16,9 +16,11 @@ class RandomSignal
     Random random;
 
 public:
-    RandomSignal()
+    RandomSignal( uint64_t seed = Random::clockSeed() )
+    : random( seed )
     {
         using namespace NaiveInstruments::SignalShorthands;
+        std::cerr << "Random seed = " << seed << "\n";
         // sounds
         map["sound"] = [this]() { return create( random( { "tone", "boop", "chaotic" } ) ); };
         map["tone"]  = [this]() {
