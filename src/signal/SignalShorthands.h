@@ -2,6 +2,7 @@
 
 #include "../Waveforms.h"
 #include "./signal-processes.h"
+#include "Signal.h"
 #include <ctime>
 #include <memory>
 
@@ -20,6 +21,17 @@ inline mono constant( double value )
 {
     auto signal    = std::make_shared<Constant<double>>();
     signal->output = value;
+    return signal;
+}
+
+/**
+ * Constant stereo signal (every frame the same)
+ */
+inline stereo constant( double left, double right )
+{
+    auto signal          = std::make_shared<Constant<StereoFrame>>();
+    signal->output.left  = left;
+    signal->output.right = right;
     return signal;
 }
 
