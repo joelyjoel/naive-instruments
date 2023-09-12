@@ -70,7 +70,7 @@ public:
         }
     }
 
-    std::string recognise( std::shared_ptr<Signal<double>> signal )
+    std::string recognise( std::shared_ptr<UnknownOutputSignal> signal )
     {
         auto name = typeid( *signal ).name();
         for ( auto const& x : map )

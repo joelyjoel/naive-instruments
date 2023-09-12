@@ -151,7 +151,7 @@ protected:
 
     void output( NaiveInstruments::SignalShorthands::mono signal )
     {
-        std::cout << signalGraphStructureString( signal ) << "\n";
+        std::cout << SignalGraph::signalGraphStructureString( signal ) << "\n";
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {
