@@ -60,8 +60,12 @@ public:
         return create( shorthand );
     }
 
-    std::shared_ptr<NaiveInstruments::Signal<double>> boop()
+    std::vector<std::string> availableCommands()
     {
+        std::vector<std::string> list;
+        for ( auto i = map.begin(); i != map.end(); ++i )
+            list.push_back( i->first );
+        return list;
     }
 };
 

@@ -25,6 +25,10 @@ public:
         if ( !args.count( "command" ) )
         {
             std::cerr << "A random what?\n";
+            NaiveInstruments::RandomSignal r;
+            auto                           availableCommands = r.availableCommands();
+            for ( auto command : availableCommands )
+                std::cerr << " - " << command << "\n";
             return;
         }
         const std::string& command = args["command"].as<std::string>();
