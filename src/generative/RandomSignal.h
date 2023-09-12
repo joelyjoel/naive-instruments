@@ -20,11 +20,22 @@ public:
     {
         using namespace NaiveInstruments::SignalShorthands;
         // sounds
-        map["tone"]          = [this]() { return create( random( { "sine_wave", "square_wave", "triangle_wave" } ) ); };
+        map["sound"] = [this]() { return create( random( { "tone", "boop", "chaotic" } ) ); };
+        map["tone"]  = [this]() {
+            return create( random( { "sine_wave", "square_wave", "sawtooth_wave", "triangle_wave" } ) );
+        };
         map["sine_wave"]     = [this]() { return sine( create( "frequency" ) ); };
         map["square_wave"]   = [this]() { return square( create( "frequency" ) ); };
         map["sawtooth_wave"] = [this]() { return saw( create( "frequency" ) ); };
         map["triangle_wave"] = [this]() { return triangle( create( "frequency" ) ); };
+        map["chaotic"]       = [this]() {
+            return create( random( { "chaotic_sine", "chaotic_saw", "chaotic_square", "chaotic_triangle" } ) );
+        };
+        map["chaotic_sine"]     = [this]() { return sine( midiPitch( 50 + 30 * create( "worm" ) ) ); };
+        map["chaotic_saw"]      = [this]() { return saw( midiPitch( 50 + 30 * create( "worm" ) ) ); };
+        map["chaotic_square"]   = [this]() { return square( midiPitch( 50 + 30 * create( "worm" ) ) ); };
+        map["chaotic_triangle"] = [this]() { return triangle( midiPitch( 50 + 30 * create( "worm" ) ) ); };
+
 
         map["boop"]      = [this]() { return decay( create( "duration" ) ) * create( "tone" ); };
         map["sine_boop"] = [this]() { return decay( create( "duration" ) ) * create( "tone" ); };
@@ -34,9 +45,21 @@ public:
         map["attack_envelope"] = [this]() { return attack( create( "duration" ) ); };
         map["decay_envelope"]  = [this]() { return decay( create( "duration" ) ); };
         map["frequency"]       = [this]() { return midiPitch( create( "pitch" ) ); };
+        map["low_frequency"]   = [this]() { return constant( random( .1, 10 ) ); };
         map["constant_pitch"]  = [this]() { return constant( random( 20, 108 ) ); };
         map["sliding_pitch"] = [this]() { return ramp( create( "pitch" ), create( "duration" ), create( "pitch" ) ); };
         map["pitch"]         = [this]() { return create( random( { "constant_pitch", "sliding_pitch" } ) ); };
+        map["lfo"]           = [this]() { return lfo( constant( 0 ), constant( 1 ), create( "low_frequency" ) ); };
+        map["worm"]          = [this]() {
+            auto signal = create( "lfo" );
+            int  count  = 1;
+            while ( random.boolean( .5 ) )
+            {
+                ++count;
+                signal = signal + create( "lfo" );
+            }
+            return signal / count;
+        };
     }
 
     std::shared_ptr<NaiveInstruments::Signal<double>> create( std::string shorthand )

@@ -74,6 +74,12 @@ public:
         return number( max );
     }
 
+    bool boolean( float probabilityOfTrue = .5 )
+    {
+        return number( 1.0 ) < probabilityOfTrue;
+    }
+
+
     int integer( int max )
     {
         return number( max );
