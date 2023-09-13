@@ -114,3 +114,5 @@
   checksum: SHA256=c17fb09079b2c311fbd5731199df2c4e913e8f87896e3201b723c859659e4a86
 ../reference-tones/panning sine wave.wav:
   checksum: SHA256=f39d2e9bf163d5dbb821cc7ed7e2a9fe1d0b685ee9ee3f270a67f5bed1d55613
+../reference-tones/Using a breakpoint envelope to control frequence.wav:
+  checksum: SHA256=3e546fe3cbba63e8f425549ba19d679fd63aa56c68bf4305d909a4f904149647
