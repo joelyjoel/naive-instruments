@@ -5,6 +5,7 @@ default:
 	cmake --build build
 
 test: 
+	rm -rf reference-tones
 	cmake -S . -B build
 	cmake --build build && bin/test_naive
 	bash ./tests/run-all.sh
