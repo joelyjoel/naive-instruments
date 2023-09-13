@@ -511,6 +511,10 @@ inline mono ramp( mono before, mono duration, mono after )
     return signal;
 }
 
+inline mono ramp( mono before, double duration, mono after )
+{
+    return ramp( before, constant( duration ), after );
+}
 
 /**
  * Linear crossfade (no law) from `before` signal to `after` signal over the

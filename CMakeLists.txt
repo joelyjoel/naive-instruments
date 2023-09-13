@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+
 set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -115,6 +116,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/signal/signal-processes.test.cpp
    src/signal/SignalShorthands.test.cpp
    src/Signal/Constructors.test.cpp
+   src/Signal/BreakpointEnvelopeSequencer.test.cpp
    src/generative/Random.test.cpp 
    src/file-io/WavWriter.test.cpp
    src/instruments/BreakpointEnvelope.test.cpp 
