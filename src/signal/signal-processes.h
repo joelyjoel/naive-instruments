@@ -514,6 +514,16 @@ public:
     {
         return steps.size();
     }
+
+    int durationInSamples()
+    {
+        int totalDuration = 0;
+        for ( auto step : steps )
+        {
+            totalDuration += step.duration;
+        }
+        return totalDuration;
+    }
 };
 
 class FixedDelay : public Signal<double>

@@ -83,6 +83,7 @@ set(NaiveSourcFiles
   src/instruments/Multiply.cpp 
   src/instruments/BreakpointEnvelope.cpp 
   src/instruments/ControlString.cpp 
+  src/signal/BreakpointEnvelopeSequencer.cpp
   src/file-io/piping.cpp 
   src/parsing/RegularExpressionSources.cpp
   src/instruments/Rhythm.cpp

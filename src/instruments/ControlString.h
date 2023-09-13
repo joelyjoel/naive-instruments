@@ -9,7 +9,6 @@ using std::string;
 
 class ControlString : public BreakpointEnvelope
 {
-
 public:
     class TempoInstruction
     {
