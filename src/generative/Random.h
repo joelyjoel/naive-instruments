@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Random
 {
@@ -73,6 +74,21 @@ public:
         return number( max );
     }
 
+    bool boolean( float probabilityOfTrue = .5 )
+    {
+        return number( 1.0 ) < probabilityOfTrue;
+    }
+
+
+    int integer( int max )
+    {
+        return number( max );
+    }
+    int integer( int min, int max )
+    {
+        return int( number( min, max ) );
+    }
+
     float number( float min, float max )
     {
         return number() * ( max - min ) + min;
@@ -90,5 +106,13 @@ public:
     float pitch( float min = 21, float max = 108 )
     {
         return number( min, max );
+    }
+
+    /**
+     * Randomly select a string from a list of strings.
+     */
+    std::string operator()( const std::vector<std::string>& options )
+    {
+        return options[integer( options.size() )];
     }
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./CommandLineArguments.h"
 #include <boost/program_options.hpp>
 #include <iostream>
 
@@ -79,5 +80,11 @@ private:
         po::store( po::command_line_parser( argc, argv ).options( options ).positional( positionalOptions ).run(),
                    args );
         po::notify( args );
+    }
+
+protected:
+    MainArgs subCommandArguments()
+    {
+        return { argc - 1, argv + 1 };
     }
 };
