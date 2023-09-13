@@ -548,6 +548,28 @@ public:
     }
 };
 
+class SelectLeftChannel : public Signal<double>
+{
+public:
+    SignalReader<StereoFrame> input;
+
+    void action() override
+    {
+        output = input[t].left;
+    }
+};
+
+class SelectRightChannel : public Signal<double>
+{
+public:
+    SignalReader<StereoFrame> input;
+
+    void action() override
+    {
+        output = input[t].right;
+    }
+};
+
 
 // TODO: Clamp
 // TODO: Min
