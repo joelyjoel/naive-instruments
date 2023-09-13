@@ -232,6 +232,15 @@ inline mono operator/( double numerator, mono denominator )
 }
 
 /**
+ * Sum a vector of signals together, applying attenuation to avoid clipping.
+ * In other words, take the mean average (frame-by-frame) of a vector of signals.
+ */
+inline mono mix( std::vector<mono> signals )
+{
+    return add( signals ) / signals.size();
+}
+
+/**
  * Create a seeded white noise signal.
  */
 inline mono noise( uint64_t seed = 1 )
@@ -692,6 +701,39 @@ inline mono fixed_sample_delay( int durationInSamples, mono input )
 inline mono fixed_delay( double durationInSeconds, mono input )
 {
     return fixed_sample_delay( durationInSeconds * 44100, input );
+}
+
+/**
+ * Evenly spaced sawtooth waves all summed together for a dramatic sound.
+ */
+inline mono supersaw( mono pitch, mono width, int numberOfOscs = 3 )
+{
+    // TODO: Add options for other waveforms
+    // TODO: Add rall off
+    auto              spacing = width / numberOfOscs;
+    auto              bottom  = pitch - width / 2;
+    std::vector<mono> oscs;
+    for ( int i = 0; i < numberOfOscs; ++i )
+    {
+        oscs.push_back( saw( midiPitch( pitch + width * ( float( i ) / numberOfOscs - .5 ) ) ) );
+    }
+    return mix( oscs );
+}
+
+inline mono super_saws( std::vector<mono> pitches, mono width, int numberOfOscs = 3 )
+{
+    std::vector<mono> saws;
+    for ( auto pitch : pitches )
+    {
+        saws.push_back( supersaw( pitch, width, numberOfOscs ) );
+    }
+
+    return mix( saws );
+}
+
+inline std::vector<mono> minor_triad( mono rootNote )
+{
+    return { rootNote, rootNote + 3, rootNote + 7 };
 }
 
 

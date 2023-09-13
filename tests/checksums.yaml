@@ -114,3 +114,11 @@
   checksum: SHA256=c17fb09079b2c311fbd5731199df2c4e913e8f87896e3201b723c859659e4a86
 ../reference-tones/panning sine wave.wav:
   checksum: SHA256=f39d2e9bf163d5dbb821cc7ed7e2a9fe1d0b685ee9ee3f270a67f5bed1d55613
+../reference-tones/sliding super saw chord 2.wav:
+  checksum: SHA256=f86ee7920611d13dd499a2b7b6deda3066aa8ac0004bc478418263aee0f47272
+../reference-tones/sliding super saw chord.wav:
+  checksum: SHA256=50ba42f62186c5bb61d7c393789bfd98b6c259a7a6814728a68e5afff48ddcd4
+../reference-tones/super saw chord.wav:
+  checksum: SHA256=3cf3dd522612eaa1a66029df2c682cb92e563ea8bd817ad5d051e825a9db940b
+../reference-tones/super saw.wav:
+  checksum: SHA256=89bf8d8b8d73909cc8040ea0bed4506eeb817b9fa9f26c9854199148e592a474
