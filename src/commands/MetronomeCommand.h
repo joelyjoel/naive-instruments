@@ -9,7 +9,7 @@ class MetronomeCommand : public AudioCommand
     {
         describeOutputOptions();
         options.add_options()( "bpm,beats-per-minute",
-                               po::value<string>()->default_value( "139" ),
+                               po::value<double>()->default_value( 139 ),
                                "What beats per minute should the metronome play" )(
             "pattern", po::value<vector<string>>(), "Binary rhythmic pattern" );
     }
@@ -17,9 +17,12 @@ class MetronomeCommand : public AudioCommand
     void action() override
     {
 
-        std::shared_ptr<FrameStream<double>>         bpm = SignalString::parse( args["bpm"].as<string>() );
+        auto bpm = args["bpm"].as<double>();
+        cerr << "bpm: " << bpm << "\n";
+
         vector<std::shared_ptr<FrameStream<double>>> tracks;
-        const vector<string>&                        patternStrings =
+
+        const vector<string>& patternStrings =
             args.count( "pattern" ) ? args["pattern"].as<vector<string>>() : vector<string>( { "10" } );
 
         for ( int i = 0; i < patternStrings.size(); ++i )
