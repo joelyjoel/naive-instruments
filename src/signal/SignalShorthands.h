@@ -583,7 +583,7 @@ inline stereo stereoChannels( mono left, mono right )
 }
 
 /**
- * Pan audio to left & right channels
+ * Pan stereo audio to left & right channels using a control signal
  */
 inline stereo pan( stereo input, mono pan )
 {
@@ -593,16 +593,25 @@ inline stereo pan( stereo input, mono pan )
     return signal;
 }
 
+/**
+ * Pan stereo audio to left & right channels using a constant amount
+ */
 inline stereo pan( stereo input, double panAmount )
 {
     return pan( input, constant( panAmount ) );
 }
 
+/**
+ * Pan a mono signal into the lfet and right channels using a control signal.
+ */
 inline stereo pan( mono input, mono panValue )
 {
     return pan( monoToStereo( input ), panValue );
 }
 
+/**
+ * Pan a mono signal left & right into stereo by a fixed amount.
+ */
 inline stereo pan( mono input, double panAmount )
 {
     return pan( input, constant( panAmount ) );
