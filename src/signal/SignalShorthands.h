@@ -503,6 +503,7 @@ inline mono clip( mono input )
  */
 inline mono ramp( mono before, mono duration, mono after )
 {
+    // TODO: Fix this duration in the middle thing, its confusing
     auto signal      = std::make_shared<LinearRamp>();
     signal->before   = before;
     signal->duration = duration;
@@ -510,6 +511,10 @@ inline mono ramp( mono before, mono duration, mono after )
     return signal;
 }
 
+inline mono ramp( mono before, double duration, mono after )
+{
+    return ramp( before, constant( duration ), after );
+}
 
 /**
  * Linear crossfade (no law) from `before` signal to `after` signal over the
@@ -709,19 +714,45 @@ inline mono fixed_delay( double durationInSeconds, mono input )
 
 // TODO: inline mono fm( mono fundamental, std::vector<mono> ratios, std::vector<mono> interactions );
 
+inline std::shared_ptr<Sequence> emptySequence()
+{
+    return std::make_shared<Sequence>();
+}
+
 /**
  * Create a sequence using steps of equal duration. Use `nullptr` to extend the duration of the previous step.
  */
 inline mono step_sequence( double stepsPerMinute, std::vector<mono> steps )
 {
     double step_duration = 60.0 / stepsPerMinute * 44100;
-    auto   sequence      = std::make_shared<Sequence>();
+    auto   sequence      = emptySequence();
     for ( auto step : steps )
     {
         if ( step == nullptr && sequence->numberOfSteps() )
             sequence->lastStep().duration += step_duration;
         else
             sequence->addStep( step_duration, step );
+    }
+    return sequence;
+}
+
+typedef struct
+{
+    double start;
+    double end;
+    double duration;
+} RampConfig;
+
+inline mono breakpointEnvelope( std::vector<RampConfig> steps )
+{
+    auto sequence = emptySequence();
+    for ( auto& step : steps )
+    {
+        auto slide = ramp( step.start, step.duration, step.end );
+        sequence->addStep(
+            // TODO: I don't like how we are mixing durations in seconds alongside some in samples here
+            44100 * step.duration,
+            slide );
     }
     return sequence;
 }
@@ -745,6 +776,7 @@ inline mono right( stereo input )
     signal->input = input;
     return signal;
 }
+
 
 // TODO: ratioToInterval
 // TODO: frequencyToMidiPitch

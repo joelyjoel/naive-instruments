@@ -303,6 +303,14 @@ TEST_CASE( "Creating a step sequencer" )
     CHECK_FRAME( sequence, 3 * 44100, 0 );
 }
 
+TEST_CASE( "creating a simple breakpoint envelope" )
+{
+    auto signal = square( midiPitch( breakpointEnvelope(
+        { { .start = 30, .end = 37, .duration = .5 }, { .start = 30, .end = 25, .duration = .25 } } ) ) );
+
+    referenceToneTest( "Using a breakpoint envelope to control frequence", signal, 2 );
+}
+
 TEST_CASE( "Panning a signal right to left using a control signal" )
 {
 

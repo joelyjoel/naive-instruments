@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class BreakpointEnvelope : public FrameStream<double>
+class [[deprecated( "Use a Sequence with LinearRamps instead" )]] BreakpointEnvelope : public FrameStream<double>
 {
     void action() override
     {
@@ -113,7 +113,7 @@ protected:
 
 private:
     double startValue, endValue, progressPerSample, progress;
-    void   playSection( Section& section )
+    void   playSection( Section & section )
     {
         startValue        = section.startValue;
         endValue          = section.endValue;
