@@ -312,6 +312,8 @@ TEST_CASE( "Creating a step sequencer" )
     CHECK_FRAME( sequence, 3 * 44100, 0 );
 }
 
+// TODO: Test repeatedSound
+
 TEST_CASE( "Panning a signal right to left using a control signal" )
 {
 
