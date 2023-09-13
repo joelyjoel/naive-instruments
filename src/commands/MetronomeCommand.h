@@ -1,5 +1,9 @@
 #include "../lib.h"
 
+
+namespace NaiveInstruments
+{
+
 class MetronomeCommand : public AudioCommand
 {
 
@@ -16,34 +20,31 @@ class MetronomeCommand : public AudioCommand
 
     void action() override
     {
+        using namespace SignalShorthands;
 
         auto bpm = args["bpm"].as<double>();
-        cerr << "bpm: " << bpm << "\n";
 
-        vector<std::shared_ptr<FrameStream<double>>> tracks;
+        vector<mono> tracks;
 
         const vector<string>& patternStrings =
-            args.count( "pattern" ) ? args["pattern"].as<vector<string>>() : vector<string>( { "10" } );
+            args.count( "pattern" ) ? args["pattern"].as<vector<string>>() : vector<string>( { "1000" } );
 
         for ( int i = 0; i < patternStrings.size(); ++i )
         {
             const string& patternStr = patternStrings[i];
 
-            std::shared_ptr<FrameStream<double>> osc        = sine( ( i + 1 ) * 500.0 );
-            std::shared_ptr<ControlString>       envelope   = *ControlString::parse( "100ms:1~0" );
-            std::shared_ptr<FrameStream<double>> attenuator = osc * envelope;
+            auto boop = sine( ( i + 1 ) * 500.0 ) * decay( .1 );
 
-            cerr << "Pattern: " << patternStr << "\n";
-            std::shared_ptr<Rhythm> rhythm = Rhythm::parse( patternStr );
-            rhythm->bpm << bpm;
-            cerr << *rhythm << "\n";
-            std::shared_ptr<Resetter> resetter = Resetter::create();
-            resetter->input << attenuator;
-            resetter->trigger << rhythm;
+            auto  durationPattern = RhythmString::parse( patternStr );
+            float stepDuration    = 60.0 / bpm / 2;
+            for ( float& step : durationPattern )
+                step *= stepDuration;
 
-            tracks.push_back( resetter );
+            tracks.push_back( repeatedSound( boop, durationPattern ) );
         }
 
-        output( Add::many( tracks ) );
+        output( add( tracks ) / tracks.size() );
     }
 };
+
+} // namespace NaiveInstruments

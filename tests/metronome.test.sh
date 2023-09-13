@@ -1,5 +1,5 @@
 #! /usr/local/bin/bash
 
-naive metronome --bpm 120 --duration 30 > "120bpm metronome.wav"
+naive metronome --bpm 120 --duration 5 > "120bpm metronome.wav"
 
 

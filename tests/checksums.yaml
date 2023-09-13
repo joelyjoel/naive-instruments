@@ -1,5 +1,3 @@
-../reference-tones/120bpm metronome.wav:
-  checksum: SHA256=d51e00f4ea9c022d929aad501546c0841d82cc24e4db3cf5d109c189a6ddd3f6
 ../reference-tones/17 harmonic spread on 200Hz.wav:
   checksum: SHA256=299e6db36c4c294118b9f1a506f02bdfece2574c324f227491a114aab8a59cb6
 ../reference-tones/17 harmonic spread on 20Hz.wav:
@@ -122,3 +120,5 @@
   checksum: SHA256=3cf3dd522612eaa1a66029df2c682cb92e563ea8bd817ad5d051e825a9db940b
 ../reference-tones/super saw.wav:
   checksum: SHA256=89bf8d8b8d73909cc8040ea0bed4506eeb817b9fa9f26c9854199148e592a474
+../reference-tones/120bpm metronome.wav:
+  checksum: SHA256=688515800b3a9fcdd03fce31a0132caf4eef3af2089e888651b194c6b1c924cf
