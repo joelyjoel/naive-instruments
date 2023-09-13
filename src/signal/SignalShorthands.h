@@ -679,6 +679,9 @@ inline mono step_sequence( double stepsPerMinute, std::vector<mono> steps )
     return sequence;
 }
 
+/**
+ * Isolate the left hand channel of a stereo signal.
+ */
 inline mono left( stereo input )
 {
     auto signal   = std::make_shared<SelectLeftChannel>();
@@ -686,6 +689,9 @@ inline mono left( stereo input )
     return signal;
 }
 
+/**
+ * Isolate the right channel of a stereo signal.
+ */
 inline mono right( stereo input )
 {
     auto signal   = std::make_shared<SelectRightChannel>();
