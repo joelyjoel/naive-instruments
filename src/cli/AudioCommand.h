@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Waveforms.h"
 #include "../core.h"
 #include "../file-io/piping.h"
@@ -6,6 +8,7 @@
 #include "../parsing/Parse.h"
 #include "../playback/BufferedPlayback.h"
 #include "../playback/InteractivePlayback.h"
+#include "../signal/signalGraphStructureString.h"
 #include "./SignalString.h"
 #include "Command.h"
 
@@ -148,6 +151,7 @@ protected:
 
     void output( NaiveInstruments::SignalShorthands::mono signal )
     {
+        std::cout << SignalGraph::signalGraphStructureString( signal ) << "\n";
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {
