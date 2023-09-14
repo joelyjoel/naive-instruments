@@ -3,8 +3,9 @@
 #include "AbstractFrameStream.h"
 #include "constants.h"
 
+
 template <typename frame>
-class FrameStream : public AbstractFrameStream
+class [[deprecated( "Use NaiveInstruments::Signal instead" )]] FrameStream : public AbstractFrameStream
 {
 protected:
     frame* output = nullptr;
