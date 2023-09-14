@@ -2,7 +2,8 @@
 #include "../test-framework/custom-assertions.h"
 #include "SignalShorthands.h"
 
-using namespace NaiveInstruments::SignalShorthands;
+using namespace NaiveInstruments;
+using namespace SignalShorthands;
 
 TEST_CASE( "Can generate structure string for many kinds of signals without crashing" )
 {
