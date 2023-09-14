@@ -128,8 +128,8 @@ protected:
     }
 
 protected:
-    // TODO: Use a shared ptr?
-    void output( std::shared_ptr<FrameStream<double>> signal )
+    [[deprecated( "Output NaiveInstruments::Signal instead" )]] void output(
+        std::shared_ptr<FrameStream<double>> signal )
     {
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
