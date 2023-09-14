@@ -756,7 +756,7 @@ inline mono step_sequence( double stepsPerMinute, std::vector<mono> steps )
     for ( auto step : steps )
     {
         if ( step == nullptr && sequence->numberOfSteps() )
-            sequence->lastStep().duration += step_duration;
+            sequence->lastStep()->duration += step_duration;
         else
             sequence->addStep( step_duration, step );
     }
