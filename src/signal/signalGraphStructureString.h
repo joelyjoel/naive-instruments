@@ -5,6 +5,8 @@
 #include <boost/algorithm/string.hpp>
 #include <string>
 
+namespace NaiveInstruments
+{
 
 class SignalGraph
 {
@@ -18,13 +20,12 @@ class SignalGraph
     }
 
 
-    static std::string signalProcessName( std::shared_ptr<NaiveInstruments::UnknownOutputSignal> signal )
+    static std::string signalProcessName( std::shared_ptr<UnknownOutputSignal> signal )
     {
-        using namespace NaiveInstruments;
-        NaiveInstruments::UnknownOutputSignal& s = *signal;
-        std::string                            t = typeid( s ).name();
-        if ( t == typeid( NaiveInstruments::Constant<double> ).name() )
-            return std::to_string( ( (NaiveInstruments::Constant<double>*) &s )->output );
+        UnknownOutputSignal& s = *signal;
+        std::string          t = typeid( s ).name();
+        if ( t == typeid( Constant<double> ).name() )
+            return std::to_string( ( (Constant<double>*) &s )->output );
 
         auto recognised = StandardSignalConstructor().recognise( signal );
         if ( recognised != "?" )
@@ -35,7 +36,7 @@ class SignalGraph
     }
 
 public:
-    static std::string signalGraphStructureString( std::shared_ptr<NaiveInstruments::UnknownOutputSignal> signal )
+    static std::string signalGraphStructureString( std::shared_ptr<UnknownOutputSignal> signal )
     {
         std::string str = signalProcessName( signal );
         for ( auto input : signal->inputs )
@@ -45,3 +46,5 @@ public:
         return str;
     }
 };
+
+} // namespace NaiveInstruments
