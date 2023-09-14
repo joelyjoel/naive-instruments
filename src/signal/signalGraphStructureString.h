@@ -42,7 +42,7 @@ public:
             return std::to_string( ( (Constant<double>*) &s )->output );
 
         auto shortversion = inlineStructureString( signal );
-        if ( shortversion.size() <= 80 )
+        if ( shortversion.size() <= 80 && shortversion.find( "\n" ) == std::string::npos )
             return shortversion;
         else
             return multilineStructureString( signal );
