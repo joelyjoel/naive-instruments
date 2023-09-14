@@ -54,24 +54,16 @@
   checksum: SHA256=32c7cbc73523a9b54d899374931dab46a9ad3e4c840207c7d2de464304d814c4
 ../reference-tones/Simple FM tone.wav:
   checksum: SHA256=d2c7245877b033a6c34da38d6436020ee89af0f3a6a0287cddec04322890a6b2
-../reference-tones/Simple boop.wav:
-  checksum: SHA256=1bb99af0836ef075c02b088c33896876ade59d171e4e2a25bd565a789cb5e693
 ../reference-tones/Sine sweep accross entire grand piano range.wav:
   checksum: SHA256=c34515f0b4a31f7448e623c951f1f974a302b426e08099267aa46d497830ad60
 ../reference-tones/Sine wave on middle C lasting one second.wav:
   checksum: SHA256=0d24aa2a9d5c5d6b068cb004ed8ba972dda619938d2ef82dd07692eb2055398d
 ../reference-tones/Sine with linear decay envelope on amplitude.wav:
   checksum: SHA256=84063ff041d59d490ef1bb094c6c387aeec0e02d9a659396460b595987c3c0da
-../reference-tones/Sliding boop.wav:
-  checksum: SHA256=ddaee647475f5d4a9d5d21e455e0e70f4516901e6863546c0e2dbdacbe44404b
-../reference-tones/Slightly longer boop.wav:
-  checksum: SHA256=1f0f58b11cc6eda93a75a37c59a27cbedb80eb41ea82cec5e0df68be07eb9961
 ../reference-tones/Square wave on middle C lasting one second.wav:
   checksum: SHA256=c5949774cd1986721c185bbf365aa60c0e2dccad87511598985aa1c62caff6a8
 ../reference-tones/Triangle wave on middle C lasting one second.wav:
   checksum: SHA256=3d7b0625ad8e34705b8bcd0d55b8f5493782dd837760404411e88553388be341
-../reference-tones/Trianglular boop.wav:
-  checksum: SHA256=3318f896fb3ee1edfda62c34ddf1ea8747cd55723ae49fc54440c7fc4e075792
 ../reference-tones/Upward sine sweep accross entire grand piano range.wav:
   checksum: SHA256=eb3d8f787406d70b365038b6d3665e0ee3db5a89dfa6e7bcc61abf91a508bc4e
 ../reference-tones/harmonic_series( 100, 4).wav:
@@ -120,5 +112,11 @@
   checksum: SHA256=3cf3dd522612eaa1a66029df2c682cb92e563ea8bd817ad5d051e825a9db940b
 ../reference-tones/super saw.wav:
   checksum: SHA256=89bf8d8b8d73909cc8040ea0bed4506eeb817b9fa9f26c9854199148e592a474
+../reference-tones/Simple boop.wav:
+  checksum: SHA256=602ceab097a235c9302ea577a617bf79308e2f092a3915e6007cbeebbc9191d7
+../reference-tones/Slightly longer boop.wav:
+  checksum: SHA256=6cd4aa6b665346bb82a3e6c2c646c0867e7346b98a05cab4d8a8d74626c28ba7
+../reference-tones/Trianglular boop.wav:
+  checksum: SHA256=c3ed4e8ae9f6a319085edca6d012d300038572fad1b944f6c11da5641a1d73af
 ../reference-tones/120bpm metronome.wav:
   checksum: SHA256=688515800b3a9fcdd03fce31a0132caf4eef3af2089e888651b194c6b1c924cf

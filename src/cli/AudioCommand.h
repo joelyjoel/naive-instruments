@@ -54,7 +54,7 @@ protected:
     void addPitchOptions()
     {
         options.add_options()( "pitch",
-                               po::value<std::string>()->default_value( "50" ),
+                               po::value<double>()->default_value( 50 ),
                                "Frequency of the oscillator expressed as a midi pitch number." );
     }
 
@@ -63,12 +63,10 @@ protected:
         return SignalString::parse( args["pitch"].as<std::string>() );
     }
 
-    std::shared_ptr<FrameStream<double>> inputFrequency()
+    std::shared_ptr<NaiveInstruments::Signal<double>> inputFrequency()
     {
-        std::shared_ptr<FrameStream<double>> pitch     = inputPitch();
-        std::shared_ptr<PitchConverter>      converter = std::make_shared<PitchConverter>();
-        converter->pitch << pitch;
-        return converter;
+        double pitch = args["pitch"].as<double>();
+        return NaiveInstruments::SignalShorthands::midiPitch( pitch );
     }
 
     void addVibratoOptions()
