@@ -14,6 +14,8 @@
 #include "lib.h"
 #include <string>
 
+using namespace NaiveInstruments;
+
 int main( int argc, char** argv )
 {
     MainArgs args( argc - 1, argv + 1 );

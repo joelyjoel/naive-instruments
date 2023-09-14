@@ -470,13 +470,13 @@ class Sequence : public Signal<double>
     };
 
 public:
-    std::vector<Step> steps;
+    std::vector<std::shared_ptr<Step>> steps;
 
     void addStep( int duration = 0, std::shared_ptr<Signal<double>> input = nullptr )
     {
         if ( duration == 0 && steps.size() > 0 )
-            duration = steps[steps.size() - 1].duration;
-        steps.push_back( { this, duration, input } );
+            duration = steps[steps.size() - 1]->duration;
+        steps.push_back( std::make_shared<Step>( this, duration, input ) );
     }
 
 
@@ -488,24 +488,24 @@ protected:
     void init() override
     {
         phase  = 0;
-        output = steps[currentStep].input[phase];
+        output = steps[currentStep]->input[phase];
     }
     void action() override
     {
         ++phase;
-        if ( phase >= steps[currentStep].duration )
+        if ( phase >= steps[currentStep]->duration )
         {
-            phase -= steps[currentStep].duration;
+            phase -= steps[currentStep]->duration;
             ++currentStep;
             /* if ( looped ) */
             currentStep %= steps.size();
         }
 
-        output = steps[currentStep].input[phase];
+        output = steps[currentStep]->input[phase];
     }
 
 public:
-    Step& lastStep()
+    std::shared_ptr<Step> lastStep()
     {
         return steps[steps.size() - 1];
     }
