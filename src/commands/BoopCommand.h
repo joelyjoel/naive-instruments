@@ -13,17 +13,15 @@ class BoopCommand : public AudioCommand
 
     void action() override
     {
-        MonoBuffer&                     waveform       = *inputWaveform();
-        std::shared_ptr<Osc>            osc            = std::make_shared<Osc>( waveform );
-        std::shared_ptr<PitchConverter> pitchConverter = std::make_shared<PitchConverter>();
+        using namespace NaiveInstruments::SignalShorthands;
+        MonoBuffer* table = inputWaveform();
 
-        std::shared_ptr<FrameStream<double>> frequency = inputFrequency();
-        std::shared_ptr<Decay>               envelope  = std::make_shared<Decay>();
+        mono frequency = inputFrequency();
+        mono envelope  = decay( inputDuration() );
 
-        envelope->duration << inputDuration();
 
-        osc->frequency << frequency;
+        auto signal = envelope * oscWithWavetable( table, frequency );
 
-        output( ( osc * envelope ) );
+        output( signal );
     }
 };

@@ -355,6 +355,15 @@ inline mono oscWithWavetableFromFile( const std::string& filePath, mono frequenc
 }
 
 /**
+ * Create an oscillator using the given buffer as a wavetable".
+ */
+// TODO: use smart pointer
+inline mono oscWithWavetable( MonoBuffer* table, mono frequency )
+{
+    return wavetable( table, usaw( frequency ) );
+}
+
+/**
  * Create a low frequency oscillator (LFO) control signal which osciallates
  * ± `range` around a `centre` control signal at `frequency` times per second.
  */
@@ -476,6 +485,11 @@ inline mono interval( mono interval )
 inline mono midiPitch( mono pitch )
 {
     return 440 * interval( pitch - 69 );
+}
+
+inline mono midiPitch( double pitch )
+{
+    return midiPitch( constant( pitch ) );
 }
 
 /**

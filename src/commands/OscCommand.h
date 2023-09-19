@@ -9,7 +9,9 @@ class OscCommand : public AudioCommand
     void describeOptions() override
     {
         describeOutputOptions();
-        addPitchOptions();
+        options.add_options()( "pitch",
+                               po::value<std::string>()->default_value( "50" ),
+                               "Frequency of the oscillator expressed as a midi pitch number." );
         addWaveformOptions();
         addVibratoOptions();
         options.add_options()(
