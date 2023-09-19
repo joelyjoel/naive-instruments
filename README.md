@@ -4,6 +4,8 @@ A naive approach to audio signal processing.
 
 Provides a C++ library for audio synthesis and musical composition, and a command line tool for using manipulating audio.
 
+The name is spoonerism of Native Instruments and the naivety of many of its algorithms.
+
 I'm writing this to satisfy my curiosity about signal processing, to teach myself C++ and to demonstrate where I'm at with that to people I'd like to work with. As a result, potential users (and even potential use-cases) have taken a back seat. If you are looking for a well-supported C++ audio library to use in your project maybe try [JUCE](https://juce.com) or [Open Frameworks](https://openframeworks.cc).
 
 ## Structure of the library.
@@ -17,11 +19,22 @@ Many overrides of the `Signal<frame>` base class are provided to perform various
 ### Extra bits
 ### Deprecated bits
 
+### Design faults
+
+Spelling out the current flaws & limitations may help to show the way for future development.
+
+ - So far the signal processes all process one sample at a time, which is inefficient. While the core of the library could support chunked audio processing if it were added, this hasn't been done yet.
+ - The order of events in signal graphs is recalculated every frame.
+ - Some reference tone tests which run inside Catch2 never make any assertion. (The assertion happens later when the reference tone checksums are compared).
+ - CMake is being used incorrectly, it seems to be creating bad artifacts
+ - Makefile is being used as a test runner
+ - Broadly, everything is implemented within header files. `.cpp` files are barely used.
+
 ## Installation
 
 For now only Mac OS is supported. Although the library should work on other platforms too with a little encouragement. The best up-to-date record of dependencies and installation process is the GitHub workflow for running tests.
 
-You will need [boost](https://www.boost.org)!
+You will need [boost](https://www.boost.org)
 
 ```bash
 brew install boost
