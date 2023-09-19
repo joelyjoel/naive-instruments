@@ -55,14 +55,14 @@ private:
     /// return 1 frame of the signal as a stereo frame
     StereoFrame readNextFrame()
     {
-        if ( numberOfFrames() == 1 )
+        if ( numberOfChannels() == 1 )
         {
             double data[1];
             sf_read_double( file, data, 1 );
             ++framesRead;
             return { data[0], data[0] };
         }
-        else if ( numberOfFrames() == 2 )
+        else if ( numberOfChannels() == 2 )
         {
             double data[2];
             sf_read_double( file, data, 2 );
@@ -89,6 +89,11 @@ public:
     int numberOfFrames()
     {
         return info.frames;
+    }
+
+    int numberOfChannels()
+    {
+        return info.channels;
     }
 
     int numberOfFramesRemaining()

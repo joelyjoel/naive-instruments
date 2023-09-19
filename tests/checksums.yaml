@@ -122,3 +122,5 @@
   checksum: SHA256=89bf8d8b8d73909cc8040ea0bed4506eeb817b9fa9f26c9854199148e592a474
 ../reference-tones/120bpm metronome.wav:
   checksum: SHA256=688515800b3a9fcdd03fce31a0132caf4eef3af2089e888651b194c6b1c924cf
+../reference-tones/piano sample.wav:
+  checksum: SHA256=3a47a15daeba9cfdd8cf2009b9de40fac0b6fce0e33abe95031fae3757fefe1c
