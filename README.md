@@ -2,9 +2,7 @@
 
 A naive approach to audio signal processing. 
 
-Provides a C++ library for audio synthesis and musical composition, and a command line tool for using manipulating audio.
-
-The name is spoonerism of Native Instruments and the naivety of many of its algorithms.
+This repository provides a C++ library for audio synthesis and musical composition. It can be used via a C++ API, or via an interactive command line interface.
 
 I'm writing this to satisfy my curiosity about signal processing, to teach myself C++ and to demonstrate where I'm at with that to people I'd like to work with. As a result, potential users (and even potential use-cases) have taken a back seat. If you are looking for a well-supported C++ audio library to use in your project maybe try [JUCE](https://juce.com) or [Open Frameworks](https://openframeworks.cc).
 
@@ -12,23 +10,42 @@ I'm writing this to satisfy my curiosity about signal processing, to teach mysel
 
 [The most important file](src/signal/Signal.h) in the library defines the base class for signal processing. Signals behave as iterators over frames, and a signal may read one or more other signals as inputs. In this way complex graph-like structures may be assembled to perform modular synthesis, analysis or other processes.
 
-Many overrides of the `Signal<frame>` base class are provided to perform various operations on signals. These classes are called [Signal Processes](./src/signal/signal-processes.h). See the [guide to writing signal processes]()
+Many overrides of the `Signal<frame>` base class are provided to perform various operations on signals. These classes are called [Signal Processes](./src/signal/signal-processes.h). See the [guide to writing signal processes](#how-to-add-a-new-signal-process)
 
- - Signal shorthands
+Because assembling instances of signal process classes is quite verbose, a library of shorthand functions is provided under the `SignalShorthands` namespace. These deal with standard library smart-pointers to signal process classes. 
 
-### Extra bits
-### Deprecated bits
+```cpp
+using namespace NaiveInstrument::SignalShorthands;
+
+// Create a simple 440Hz sawtooth wave using a signal shorthand.
+mono sawtoothWave = saw(440);
+
+// Create a more complex signal, summing together multiple sine
+// waves. Operator overloads are also provided by the signal 
+// shorthand library.
+mono harmonics = sine(100) + sine(200) * .75 + sine(300) * .5 + sine(400) * .25;
+
+```
+
+The command line interface is composed by a series of subcommands which are found in the `src/commands` directory. See the [guide for writing audio commands](#how-to-add-a-new-command-to-the-command-line-interface) for more details.
+
+## Deprecated code
+
+This library has been a learning curve, and so there are some parts of it which have been reimplemented with the wisdom of hindsight. I'm trying to cut dependency on the older/jankier classes, but its taken time because its boring work. 
+
+The precursor to the `Signal` base template, was a similar but more complex class called `FrameStream`. These worked very similarly, but in a more convoluted way.
 
 ### Design faults
 
 Spelling out the current flaws & limitations may help to show the way for future development.
 
- - So far the signal processes all process one sample at a time, which is inefficient. While the core of the library could support chunked audio processing if it were added, this hasn't been done yet.
- - The order of events in signal graphs is recalculated every frame.
- - Some reference tone tests which run inside Catch2 never make any assertion. (The assertion happens later when the reference tone checksums are compared).
- - CMake is being used incorrectly, it seems to be creating bad artifacts
- - Makefile is being used as a test runner
- - Broadly, everything is implemented within header files. `.cpp` files are barely used.
+ - 👎 So far the signal processes all process one sample at a time, which is inefficient. While the core of the library could support chunked audio processing if it were added, this hasn't been done yet.
+ - 👎 The order of events in signal graphs is recalculated every frame.
+ - 👎 Some reference tone tests which run inside Catch2 never make any assertion. (The assertion happens later when the reference tone checksums are compared).
+ - 👎 CMake is being used incorrectly, it seems to be creating bad artefacts
+ - 👎 Makefile is being used as a test runner
+ - 👎 Broadly, everything is implemented within header files. `.cpp` files are barely used.
+ - 👎 Large portions of deprecated code still live on as dependencies of commands that have yet to be updated.
 
 ## Installation
 
