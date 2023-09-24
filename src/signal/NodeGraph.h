@@ -70,7 +70,7 @@ private:
 
     static std::string indentInPlace( std::string str )
     {
-        std::string prefix = " └";
+        std::string prefix = "  ";
         std::string spaces = "  ";
         boost::replace_all( str, "\n", "\n" + spaces );
         return prefix + str;
