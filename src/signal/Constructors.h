@@ -89,6 +89,7 @@ public:
     : SignalProcessConstructorGroup()
     {
         add( noise );
+        add( intervalToRatio );
         add( usaw );
         add( sum );
         add( subtract );
