@@ -13,11 +13,11 @@ TEST_CASE( "Can generate structure string for many kinds of signals without cras
     std::string str = SignalStructureAnalysis::signalGraphStructureString( signal );
 }
 
-/* TEST_CASE( "Generating a structure string for a signal with feedback" ) */
-/* { */
-/*     auto osc           = usaw( 30 ); */
-/*     osc->frequency     = 150 + 100 * osc; */
-/*     auto        signal = sineWavetable( osc ); */
-/*     std::string graph  = SignalStructureAnalysis::signalGraphStructureString( signal ); */
-/*     std::cerr << "GRAPH:\n" << graph << "\n"; */
-/* } */
+TEST_CASE( "Generating a structure string for a signal with feedback" )
+{
+    auto osc           = usaw( 30 );
+    osc->frequency     = 150 + 100 * osc;
+    auto        signal = sineWavetable( osc );
+    std::string graph  = SignalStructureAnalysis::signalGraphStructureString( signal );
+    std::cerr << "GRAPH:\n" << graph << "\n";
+}
