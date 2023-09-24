@@ -4,6 +4,7 @@
 #include "NodeGraph.h"
 #include "Signal.h"
 #include <memory>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -100,8 +101,10 @@ private:
     /// Turn a constant signal into a number string
     static std::string stringifyConstant( std::shared_ptr<UnknownOutputSignal> signal )
     {
-        auto constant = std::static_pointer_cast<Constant<double>>( signal );
-        return std::to_string( constant->output );
+        auto              constant = std::static_pointer_cast<Constant<double>>( signal );
+        std::stringstream s;
+        s << constant->output;
+        return s.str();
     }
 };
 
