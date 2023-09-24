@@ -39,23 +39,31 @@ public:
 
     std::string stringifyInline()
     {
-        std::string str = head + "(";
-        // TODO: Could refactor to use array methods
-        for ( int i = 0; i < inputs.size(); ++i )
+        std::string str = head;
+        if ( inputs.size() > 0 )
         {
-            if ( i != 0 )
-                str += ", ";
-            str += inputs[i]->stringifyInline();
+            str += "(";
+            // TODO: Could refactor to use array methods
+            for ( int i = 0; i < inputs.size(); ++i )
+            {
+                if ( i != 0 )
+                    str += ", ";
+                str += inputs[i]->stringifyInline();
+            }
+            str += ")";
         }
-        str += ")";
         return str;
     }
 
     std::string stringifyMultiline()
     {
-        std::string str = head + ":";
-        for ( auto input : inputs )
-            str += "\n" + indentInPlace( input->stringify() );
+        std::string str = head;
+        if ( inputs.size() > 0 )
+        {
+            str += ":";
+            for ( auto input : inputs )
+                str += "\n" + indentInPlace( input->stringify() );
+        }
         return str;
     }
 
