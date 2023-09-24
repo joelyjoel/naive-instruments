@@ -8,7 +8,7 @@
 #include "../parsing/Parse.h"
 #include "../playback/BufferedPlayback.h"
 #include "../playback/InteractivePlayback.h"
-#include "../signal/signalGraphStructureString.h"
+#include "../signal/SignalStructureAnalysis.h"
 #include "./SignalString.h"
 #include "Command.h"
 
@@ -149,7 +149,7 @@ protected:
 
     void output( NaiveInstruments::SignalShorthands::mono signal )
     {
-        std::cout << NaiveInstruments::SignalGraph::signalGraphStructureString( signal ) << "\n";
+        std::cout << NaiveInstruments::SignalStructureAnalysis::signalGraphStructureString( signal ) << "\n";
         auto& path = outputFile();
         if ( stdoutIsAPipe() )
         {

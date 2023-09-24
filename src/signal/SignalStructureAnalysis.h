@@ -1,3 +1,5 @@
+#pragma once
+
 #include "./Constructors.h"
 #include "NodeGraph.h"
 #include "Signal.h"
