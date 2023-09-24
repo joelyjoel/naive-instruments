@@ -36,10 +36,57 @@ class SignalGraph
 public:
     static std::string signalGraphStructureString( std::shared_ptr<UnknownOutputSignal> signal )
     {
+        SignalGraph instance;
+        return instance.graph( signal );
+    }
+
+
+private:
+    SignalGraph()
+    {
+        seenBefore.clear();
+    }
+
+    std::vector<std::shared_ptr<UnknownOutputSignal>> seenBefore;
+    bool                                              checkBreadcrumbs( std::shared_ptr<UnknownOutputSignal> signal )
+    {
+        for ( int i = 0; i < seenBefore.size(); ++i )
+        {
+            if ( seenBefore[i] == signal )
+                return true;
+        }
+        seenBefore.push_back( signal );
+        // otherwise
+        return false;
+    }
+
+
+    typedef struct NodeT
+    {
+        std::string                         head;
+        std::vector<std::shared_ptr<NodeT>> inputs;
+    } Node;
+
+
+    NodeT nodeGraph(){
+
+    };
+
+
+    std::string graph( std::shared_ptr<UnknownOutputSignal> signal )
+    {
+        if ( checkBreadcrumbs( signal ) )
+            return "feedback";
+
         UnknownOutputSignal& s = *signal;
         std::string          t = typeid( s ).name();
         if ( t == typeid( Constant<double> ).name() )
             return std::to_string( ( (Constant<double>*) &s )->output );
+
+
+        // FIXME: THE BUG IS BECAUSE we are running it twice, so every thing appears in breadcrumbs twice
+        // A solution could be to use an intermediate structure, for signal graph hierarchy
+
 
         auto shortversion = inlineStructureString( signal );
         if ( shortversion.size() <= 80 && shortversion.find( "\n" ) == std::string::npos )
@@ -48,27 +95,26 @@ public:
             return multilineStructureString( signal );
     }
 
-    static std::string multilineStructureString( std::shared_ptr<UnknownOutputSignal> signal )
+    std::string multilineStructureString( std::shared_ptr<UnknownOutputSignal> signal )
     {
         std::string str = signalProcessName( signal );
         str += ":";
         for ( auto input : signal->inputs )
         {
-            str += "\n" + indentInPlace( signalGraphStructureString( input->abstract_ptr() ) );
+            str += "\n" + indentInPlace( graph( input->abstract_ptr() ) );
         }
         return str;
     }
 
-    static std::string inlineStructureString( std::shared_ptr<UnknownOutputSignal> signal )
+    std::string inlineStructureString( std::shared_ptr<UnknownOutputSignal> signal )
     {
-        std::string str = signalProcessName( signal );
-        str += "(";
+        std::string str = signalProcessName( signal ) + "(";
         for ( int i = 0; i < signal->inputs.size(); ++i )
         {
             if ( i != 0 )
                 str += ", ";
             auto input = signal->inputs[i];
-            str += signalGraphStructureString( input->abstract_ptr() );
+            str += graph( input->abstract_ptr() );
         }
         str += ")";
         return str;

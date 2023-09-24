@@ -12,3 +12,12 @@ TEST_CASE( "Can generate structure string for many kinds of signals without cras
     INFO( typeid( *signal ).name() );
     std::string str = SignalGraph::signalGraphStructureString( signal );
 }
+
+TEST_CASE( "Generating a stricture string for a signal with feedback" )
+{
+    auto osc           = usaw( 30 );
+    osc->frequency     = 150 + 100 * osc;
+    auto        signal = sineWavetable( osc );
+    std::string graph  = SignalGraph::signalGraphStructureString( signal );
+    std::cerr << "GRAPH:\n" << graph << "\n";
+}
