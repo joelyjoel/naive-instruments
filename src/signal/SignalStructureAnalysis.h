@@ -44,13 +44,9 @@ public:
      */
     class NodeGraphExtracter
     {
-        /**
-         * These breadcrumb pointers are used to circuit break when analyising signals that contain feedback
-         */
+        /// These breadcrumb pointers are used to circuit break when analyising
+        /// signals that contain feedback
         Breadcrumbs<UnknownOutputSignal> breadcrumbs;
-
-        // TODO: there could be a separate class `Breadcrumbs<UnknownOutputSignal>` to make this behaviour a bit more
-        // standard
 
     public:
         std::shared_ptr<UnknownOutputSignal> startingPoint;
