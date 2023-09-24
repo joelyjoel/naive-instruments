@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../utility/Breadcrumbs.h"
 #include "./Constructors.h"
 #include "NodeGraph.h"
 #include "Signal.h"
@@ -46,14 +47,8 @@ public:
         /**
          * These breadcrumb pointers are used to circuit break when analyising signals that contain feedback
          */
-        std::vector<std::shared_ptr<UnknownOutputSignal>> breadcrumbs;
-        bool checkInWithBreadcrumbs( std::shared_ptr<UnknownOutputSignal> signal )
-        {
-            if ( find( breadcrumbs.begin(), breadcrumbs.end(), signal ) != breadcrumbs.end() )
-                return true;
-            else
-                breadcrumbs.push_back( signal );
-        }
+        Breadcrumbs<UnknownOutputSignal> breadcrumbs;
+
         // TODO: there could be a separate class `Breadcrumbs<UnknownOutputSignal>` to make this behaviour a bit more
         // standard
 
@@ -73,7 +68,7 @@ public:
         {
 
             // Check for for feedback
-            if ( checkInWithBreadcrumbs( signal ) )
+            if ( breadcrumbs.crumb( signal ) )
                 return std::make_shared<NodeGraph>( "FEEDBACK" );
 
             // Handle constants as a special case
