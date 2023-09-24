@@ -39,12 +39,11 @@ public:
         return node;
     }
 
-    StandardSignalConstructor constructor;
 
     /// Get the name (type) of the head signal process
     std::string signalProcessName( std::shared_ptr<NaiveInstruments::UnknownOutputSignal> signal )
     {
-        auto recognised = constructor.recognise( signal );
+        auto recognised = standardSignalConstructor.recognise( signal );
         if ( recognised != "?" )
             return recognised;
 

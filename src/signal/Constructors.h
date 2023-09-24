@@ -132,4 +132,6 @@ public:
     SignalProcessConstructor<Sequence>         sequence{ "sequence" };
     /* SignalProcessConstructor<FixedDelay>       fixedDelay{ "fixedDelay" }; */
 };
+
+extern StandardSignalConstructor standardSignalConstructor;
 } // namespace NaiveInstruments
