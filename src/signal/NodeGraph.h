@@ -45,7 +45,7 @@ public:
         {
             if ( i != 0 )
                 str += ", ";
-            str += inputs[i]->stringify();
+            str += inputs[i]->stringifyInline();
         }
         str += ")";
         return str;
@@ -55,7 +55,7 @@ public:
     {
         std::string str = head + ":";
         for ( auto input : inputs )
-            str += "\n" + indentInPlace( input->stringifyMultiline() );
+            str += "\n" + indentInPlace( input->stringify() );
         return str;
     }
 
