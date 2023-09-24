@@ -18,7 +18,7 @@ public:
     {
         NodeGraphExtracter instance( signal );
         auto               nodeGraph = instance.extractNodeGraph();
-        return nodeGraph->stringify();
+        return nodeGraph->toString();
     }
 
 

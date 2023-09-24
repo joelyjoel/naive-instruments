@@ -27,17 +27,18 @@ public:
         inputs.push_back( input );
     }
 
-    std::string stringify()
+    std::string toString()
     {
-        std::string shorthand = stringifyInline();
+        std::string shorthand = toInlineString();
         // TODO: Max width should be configurable
         if ( shorthand.size() < 80 )
             return shorthand;
         else
-            return stringifyMultiline();
+            return toMultilineString();
     }
 
-    std::string stringifyInline()
+private:
+    std::string toInlineString()
     {
         std::string str = head;
         if ( inputs.size() > 0 )
@@ -48,26 +49,25 @@ public:
             {
                 if ( i != 0 )
                     str += ", ";
-                str += inputs[i]->stringifyInline();
+                str += inputs[i]->toInlineString();
             }
             str += ")";
         }
         return str;
     }
 
-    std::string stringifyMultiline()
+    std::string toMultilineString()
     {
         std::string str = head;
         if ( inputs.size() > 0 )
         {
             str += ":";
             for ( auto input : inputs )
-                str += "\n" + indentInPlace( input->stringify() );
+                str += "\n" + indentInPlace( input->toString() );
         }
         return str;
     }
 
-private:
     static std::string indentInPlace( std::string str )
     {
         std::string prefix = " └";
