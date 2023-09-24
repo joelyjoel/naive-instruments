@@ -87,6 +87,7 @@ set(NaiveSourcFiles
   src/instruments/Rhythm.cpp
   src/cli/SignalString.cpp
   src/instruments/Osc.cpp
+  src/signal/Constructors.cpp
 )
 
 
@@ -114,7 +115,7 @@ target_include_directories(naive PUBLIC dependencies)
    src/signal/Signal.test.cpp
    src/signal/signal-processes.test.cpp
    src/signal/SignalShorthands.test.cpp
-   src/signal/signalGraphStructureString.test.cpp
+   src/signal/SignalStructureAnalysis.test.cpp
    src/Signal/Constructors.test.cpp
    src/generative/Random.test.cpp 
    src/file-io/WavWriter.test.cpp

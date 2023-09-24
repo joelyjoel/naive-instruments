@@ -47,11 +47,16 @@ inline mono t()
  * Create a `USaw` unsigned sawtooth wave signal with the given `frequency`.
  * Slides from 0 to 1 `frequency` times per second.
  */
-inline mono usaw( mono frequency )
+inline std::shared_ptr<USaw> usaw( mono frequency )
 {
     auto saw       = std::make_shared<USaw>();
     saw->frequency = frequency;
     return saw;
+}
+
+inline std::shared_ptr<USaw> usaw( double frequency )
+{
+    return usaw( constant( frequency ) );
 }
 
 /**

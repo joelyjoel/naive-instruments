@@ -89,6 +89,7 @@ public:
     : SignalProcessConstructorGroup()
     {
         add( noise );
+        add( intervalToRatio );
         add( usaw );
         add( sum );
         add( subtract );
@@ -132,4 +133,6 @@ public:
     SignalProcessConstructor<Sequence>         sequence{ "sequence" };
     /* SignalProcessConstructor<FixedDelay>       fixedDelay{ "fixedDelay" }; */
 };
+
+extern StandardSignalConstructor standardSignalConstructor;
 } // namespace NaiveInstruments
