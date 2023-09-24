@@ -16,16 +16,21 @@ protected:
 
     std::vector<std::shared_ptr<NodeGraph>> inputs;
 
+    NodeGraph* parent = nullptr;
+
 public:
     NodeGraph( std::string head )
     : head( head )
     {
     }
 
-    void addInput( std::shared_ptr<NodeGraph> input )
+    std::shared_ptr<NodeGraph> addInput( std::shared_ptr<NodeGraph> input = std::make_shared<NodeGraph>() )
     {
         inputs.push_back( input );
+        input->parent = this;
+        return input;
     }
+
 
     std::string toString()
     {
