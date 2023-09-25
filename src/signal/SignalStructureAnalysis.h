@@ -72,7 +72,7 @@ public:
             if ( breadcrumbs.crumb( signal ) )
             {
                 auto other      = map[signal.get()];
-                usingNode->head = other->absolutePath();
+                usingNode->head = NodeGraph::relativePath( usingNode.get(), other );
                 return usingNode;
             }
             else

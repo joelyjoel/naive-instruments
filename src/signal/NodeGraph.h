@@ -83,6 +83,7 @@ private:
     }
 
 
+    // TODO: Move all the path stuff into a separate class
 public:
     std::vector<NodeGraph*> backtrace()
     {
@@ -101,6 +102,13 @@ public:
         std::stringstream str;
         str << "~";
         auto bt = backtrace();
+        str << pathifyBacktrace( bt );
+        return str.str();
+    }
+
+    static std::string pathifyBacktrace( std::vector<NodeGraph*> bt )
+    {
+        std::stringstream str;
         for ( int i = bt.size() - 1; i > 0; --i )
         {
             auto P = bt[i], C = bt[i - 1];
@@ -109,6 +117,35 @@ public:
                 ++j;
             str << "/" << j;
         }
+
+        return str.str();
+    }
+
+    static std::string relativePath( NodeGraph* from, NodeGraph* to )
+    {
+        std::vector<NodeGraph*> fromBt = from->backtrace(), toBt = to->backtrace();
+
+        if ( fromBt[fromBt.size() - 1] != toBt[toBt.size() - 1] )
+            // TODO: Use proper exceptions
+            throw 1;
+
+        // Remove the shared root of the backtraces
+        while ( fromBt[fromBt.size() - 1] == toBt[toBt.size() - 1] )
+        {
+            fromBt.pop_back();
+            toBt.pop_back();
+        }
+
+        std::stringstream str;
+        for ( int i = 0; i < fromBt.size(); ++i )
+        {
+            if ( i != 0 )
+                str << "/";
+            str << "..";
+        }
+
+        str << pathifyBacktrace( toBt );
+
         return str.str();
     }
     // TODO: add parsing methods
