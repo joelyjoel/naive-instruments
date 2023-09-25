@@ -10,16 +10,17 @@
  */
 class NodeGraph
 {
-protected:
     /** The name of the node */
-    const std::string head;
+public:
+    std::string head;
 
+protected:
     std::vector<std::shared_ptr<NodeGraph>> inputs;
 
     NodeGraph* parent = nullptr;
 
 public:
-    NodeGraph( std::string head )
+    NodeGraph( std::string head = "unnamed node" )
     : head( head )
     {
     }
@@ -82,5 +83,33 @@ private:
     }
 
 
+public:
+    std::vector<NodeGraph*> backtrace()
+    {
+        std::vector<NodeGraph*> trace;
+        NodeGraph*              ptr = this;
+        while ( ptr )
+        {
+            trace.push_back( ptr );
+            ptr = ptr->parent;
+        }
+        return trace;
+    }
+
+    std::string absolutePath()
+    {
+        std::stringstream str;
+        str << "~";
+        auto bt = backtrace();
+        for ( int i = bt.size() - 1; i > 0; --i )
+        {
+            auto P = bt[i], C = bt[i - 1];
+            int  j = 0;
+            while ( j < P->inputs.size() && P->inputs[j].get() != C )
+                ++j;
+            str << "/" << j;
+        }
+        return str.str();
+    }
     // TODO: add parsing methods
 };
