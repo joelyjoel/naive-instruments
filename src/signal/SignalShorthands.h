@@ -717,6 +717,7 @@ inline mono fixed_sample_delay( int durationInSamples, mono input )
 /**
  * Delay signal by a fixed duration using a sample buffer.
  */
+// TODO: Switch order of args here
 inline mono fixed_delay( double durationInSeconds, mono input )
 {
     return fixed_sample_delay( durationInSeconds * 44100, input );
@@ -733,6 +734,11 @@ inline mono dynamicWriteHeadDelay( mono input, mono delayTimeInSeconds )
     delay->input = input;
     delay->delay = delayTimeInSeconds * 44100;
     return delay;
+};
+
+inline mono dynamicWriteHeadDelay( mono input, double delayTimeInSeconds )
+{
+    return dynamicWriteHeadDelay( input, constant( delayTimeInSeconds ) );
 };
 
 /**
