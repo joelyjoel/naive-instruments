@@ -552,7 +552,7 @@ public:
 /// A delay process where you can vary the delay duration by moving the writehead freely.
 class DynamicWriteHeadDelay : public Signal<double>
 {
-    DynamicWriteHeadDelay( int maxFrames );
+    DynamicWriteHeadDelay( int maxFrames = 2056 );
 
 
 public:
@@ -561,7 +561,34 @@ public:
 
 private:
     MonoBuffer buffer;
-    void       action() override;
+    int        readHead, writeHead;
+    void       init() override
+    {
+        // TODO: Maybe wipe the buffer?
+        readHead  = 0;
+        writeHead = readHead - delay[t];
+        // TODO: I think this overflow should be handled by MonoBuffer and possibly a special Playhead subclass!
+        while ( writeHead < 0 )
+            writeHead += buffer.numberOfFrames();
+        // TODO:  What about writeHead > buffer.numberOfFrames?
+    };
+
+    void action() override
+    {
+        ++readHead;
+        while ( writeHead != readHead - delay[t] )
+        {
+            // TODO: interpolate R.H.S
+            buffer[writeHead] = input[writeHead];
+            ++writeHead;
+            if ( writeHead == buffer.numberOfFrames() )
+                writeHead = 0;
+        }
+    }
+
+
+    // NOTE: The above was written in hospital by traumatised and drugged up version of me. Lets give it a thorough
+    // checking through next time!
 
     // TODO: Some careful thought is needed decide how to handle interpolation when delay jumps by more than 1 frame per
     // frame.
