@@ -32,10 +32,10 @@ public:
     /**
      * Create an empty sampled signal
      */
-    MonoBuffer( int numberOfSamples )
-    : numberOfSamples( numberOfSamples )
+    MonoBuffer( int numberOfFrames )
+    : numberOfSamples( numberOfFrames )
     {
-        data    = new double[numberOfSamples];
+        data    = new double[numberOfFrames];
         isAView = false;
     }
 
