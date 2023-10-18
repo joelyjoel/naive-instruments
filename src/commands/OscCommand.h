@@ -10,12 +10,12 @@ class OscCommand : public AudioCommand
     {
         describeOutputOptions();
         options.add_options()( "pitch",
-                               po::value<std::string>()->default_value( "50" ),
+                               po::value<double>()->default_value( 50.0 ),
                                "Frequency of the oscillator expressed as a midi pitch number." );
         addWaveformOptions();
         addVibratoOptions();
         options.add_options()(
-            "volume", po::value<std::string>()->default_value( "1" ), "Output level of the oscillator from 0-1" );
+            "volume", po::value<double>()->default_value( 1.0 ), "Output level of the oscillator from 0-1" );
     }
 
 public:
@@ -35,14 +35,14 @@ public:
 
         std::shared_ptr<FrameStream<double>> pitch = inputPitch();
 
-        vibrato->depth << args["vibrato-amount"].as<std::string>();
-        vibrato->frequency << args["vibrato-frequency"].as<std::string>();
+        vibrato->depth << args["vibrato-amount"].as<double>();
+        vibrato->frequency << args["vibrato-frequency"].as<double>();
         pitchSum->a << pitch;
         pitchSum->b << vibrato;
         pitchConverter->pitch << pitchSum;
         osc->frequency << pitchConverter;
         gain->a << osc;
-        gain->b << args["volume"].as<std::string>();
+        gain->b << args["volume"].as<double>();
 
         output( gain );
     }

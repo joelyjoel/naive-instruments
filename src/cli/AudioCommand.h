@@ -71,9 +71,8 @@ protected:
 
     void addVibratoOptions()
     {
-        options.add_options()(
-            "vibrato-frequency,vf", po::value<std::string>()->default_value( "5" ), "Vibrato frequency" )(
-            "vibrato-amount,va", po::value<std::string>()->default_value( "0" ), "Amount of vibrato (in semitones)" );
+        options.add_options()( "vibrato-frequency,vf", po::value<double>()->default_value( 5 ), "Vibrato frequency" )(
+            "vibrato-amount,va", po::value<double>()->default_value( 0 ), "Amount of vibrato (in semitones)" );
     }
 
     bool interactiveModeEnabled()
