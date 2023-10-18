@@ -548,6 +548,25 @@ public:
     }
 };
 
+
+/// A delay process where you can vary the delay duration by moving the writehead freely.
+class DynamicWriteHeadDelay : public Signal<double>
+{
+    DynamicWriteHeadDelay( int maxFrames );
+
+
+public:
+    SignalReader<double> input{ this };
+    SignalReader<int>    delay{ this }; // smp
+
+private:
+    MonoBuffer buffer;
+    void       action() override;
+
+    // TODO: Some careful thought is needed decide how to handle interpolation when delay jumps by more than 1 frame per
+    // frame.
+};
+
 class SelectLeftChannel : public Signal<double>
 {
 public:
