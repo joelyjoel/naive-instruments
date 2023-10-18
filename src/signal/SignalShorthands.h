@@ -723,6 +723,19 @@ inline mono fixed_delay( double durationInSeconds, mono input )
 }
 
 /**
+ * Construct a delay process where you can vary the duration between the
+ * readhead and the writehead using a control sequence.
+ **/
+inline mono dynamicWriteHeadDelay( mono input, mono delayTimeInSeconds )
+{
+    // for now max delay 1s
+    auto delay   = std::make_shared<DynamicWriteHeadDelay>( 44100 );
+    delay->input = input;
+    delay->delay = delayTimeInSeconds * 44100;
+    return delay;
+};
+
+/**
  * Evenly spaced sawtooth waves all summed together for a dramatic sound.
  */
 inline mono supersaw( mono pitch, mono width, int numberOfOscs = 3 )
