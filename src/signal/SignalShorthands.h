@@ -717,10 +717,29 @@ inline mono fixed_sample_delay( int durationInSamples, mono input )
 /**
  * Delay signal by a fixed duration using a sample buffer.
  */
+// TODO: Switch order of args here
 inline mono fixed_delay( double durationInSeconds, mono input )
 {
     return fixed_sample_delay( durationInSeconds * 44100, input );
 }
+
+/**
+ * Construct a delay process where you can vary the duration between the
+ * readhead and the writehead using a control sequence.
+ **/
+inline mono dynamicWriteHeadDelay( mono input, mono delayTimeInSeconds )
+{
+    // for now max delay 1s
+    auto delay   = std::make_shared<DynamicWriteHeadDelay>( 44100 );
+    delay->input = input;
+    delay->delay = delayTimeInSeconds * 44100;
+    return delay;
+};
+
+inline mono dynamicWriteHeadDelay( mono input, double delayTimeInSeconds )
+{
+    return dynamicWriteHeadDelay( input, constant( delayTimeInSeconds ) );
+};
 
 /**
  * Evenly spaced sawtooth waves all summed together for a dramatic sound.

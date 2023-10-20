@@ -223,6 +223,18 @@ TEST_CASE( "Delaying a signal by fixed duration" )
     CHECK_FRAME( delayedSignal, 443, 2 );
 }
 
+TEST_CASE( "Dynamical delay should be able to pass fixed delay test too" )
+{
+    CHECK_SIGNAL( dynamicWriteHeadDelay( t(), 10 ), { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } );
+
+    auto delayedSignal = dynamicWriteHeadDelay( t(), .01 );
+    CHECK_FRAME( delayedSignal, 0, 0 );
+    CHECK_FRAME( delayedSignal, 440, 0 );
+    CHECK_FRAME( delayedSignal, 441, 0 );
+    CHECK_FRAME( delayedSignal, 442, 1 );
+    CHECK_FRAME( delayedSignal, 443, 2 );
+}
+
 TEST_CASE( "harmonic_series(fundamental, numberOfHarmonics)" )
 {
     auto freq = GENERATE( range( 100, 1000, 50 ) );

@@ -552,40 +552,47 @@ public:
 /// A delay process where you can vary the delay duration by moving the writehead freely.
 class DynamicWriteHeadDelay : public Signal<double>
 {
-    DynamicWriteHeadDelay( int maxFrames = 2056 );
-
-
 public:
+    DynamicWriteHeadDelay( int maxFrames = 44100 )
+    : buffer( maxFrames ){};
+
+
     SignalReader<double> input{ this };
-    SignalReader<int>    delay{ this }; // smp
+    SignalReader<double> delay{ this }; // smp
 
 private:
     MonoBuffer buffer;
-    int        readHead, writeHead;
-    void       init() override
+    int        readhead;
+
+    void init() override
     {
-        // TODO: Maybe wipe the buffer?
-        readHead  = 0;
-        writeHead = readHead - delay[t];
-        // TODO: I think this overflow should be handled by MonoBuffer and possibly a special Playhead subclass!
-        while ( writeHead < 0 )
-            writeHead += buffer.numberOfFrames();
-        // TODO:  What about writeHead > buffer.numberOfFrames?
-    };
+        for ( int i = 0; i < buffer.numberOfFrames(); ++i )
+            buffer[i] = 0;
+
+        readhead               = 0;
+        output                 = 0;
+        buffer[(int) delay[t]] = input[t];
+    }
 
     void action() override
     {
-        ++readHead;
-        while ( writeHead != readHead - delay[t] )
+        if ( delay[t] > buffer.numberOfFrames() )
         {
-            // TODO: interpolate R.H.S
-            buffer[writeHead] = input[writeHead];
-            ++writeHead;
-            if ( writeHead == buffer.numberOfFrames() )
-                writeHead = 0;
+            std::cerr << "dynamic delay exceeds buffer size.\n";
+            // Use proper expections
+            throw 1;
         }
-    }
 
+        output = buffer[readhead];
+        if ( ++readhead >= buffer.numberOfFrames() )
+            readhead = 0;
+
+        int writehead = readhead + delay[t];
+        if ( writehead > buffer.numberOfFrames() )
+            writehead -= buffer.numberOfFrames();
+
+        buffer[writehead] = input[t];
+    };
 
     // NOTE: The above was written in hospital by traumatised and drugged up version of me. Lets give it a thorough
     // checking through next time!
