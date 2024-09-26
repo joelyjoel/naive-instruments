@@ -616,7 +616,6 @@ public:
     }
 };
 
-
 // TODO: Clamp
 // TODO: Min
 // TODO: Max
